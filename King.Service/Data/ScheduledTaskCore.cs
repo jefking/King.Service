@@ -1,10 +1,10 @@
-﻿namespace King.Service
+﻿namespace King.Service.Data
 {
     using System;
     using System.Diagnostics;
     using System.Linq;
-    using King.Service.Azure;
-    using King.Service.Model;
+    using King.Service.Data.Azure;
+    using King.Service.Data.Model;
 
     /// <summary>
     /// Scheduled Task Core

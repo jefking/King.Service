@@ -67,13 +67,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Azure\AzureStorage.cs" />
-    <Compile Include="Azure\TableStorage.cs" />
+    <Compile Include="Data\Azure\AzureStorage.cs" />
+    <Compile Include="Data\Azure\TableStorage.cs" />
     <Compile Include="Manager.cs" />
-    <Compile Include="Model\ScheduledTaskEntry.cs" />
+    <Compile Include="Data\Model\ScheduledTaskEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduledManager.cs" />
-    <Compile Include="ScheduledTaskCore.cs" />
+    <Compile Include="Data\ScheduledTaskCore.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

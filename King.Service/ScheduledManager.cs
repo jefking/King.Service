@@ -2,7 +2,8 @@
 {
     using System;
     using System.Diagnostics;
-    using King.Service.Model;
+    using King.Service.Data.Model;
+    using King.Service.Data;
 
     /// <summary>
     /// Scheduled Manager

@@ -1,4 +1,4 @@
-﻿namespace King.Service.Azure
+﻿namespace King.Service.Data.Azure
 {
     using System;
     using Microsoft.WindowsAzure;
