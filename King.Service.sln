@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service", "King.Service.csproj", "{E72D36E9-0849-498E-AC4F-B97FB632E112}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service", "King.Service\King.Service.csproj", "{E72D36E9-0849-498E-AC4F-B97FB632E112}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Tests", "..\King.Service.Tests\King.Service.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Tests", "King.Service.Tests\King.Service.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
