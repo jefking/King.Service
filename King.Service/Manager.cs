@@ -59,9 +59,9 @@
         /// Runs Service
         /// </summary>
         /// <returns>Running</returns>
-        public bool Run()
+        public bool Start()
         {
-            this.timer = new Timer(this.Execute, null, dueTime, period);
+            this.timer = new Timer(this.Run, null, dueTime, period);
 
             return true;
         }
@@ -85,11 +85,11 @@
         /// Execute the action
         /// </summary>
         /// <param name="state">State of Timer</param>
-        public virtual void Execute(object state)
+        public virtual void Run(object state)
         {
             try
             {
-                this.Execute();
+                this.Run();
             }
             catch (Exception ex)
             {
@@ -100,7 +100,7 @@
         /// <summary>
         /// Execute Action
         /// </summary>
-        public abstract void Execute();
+        public abstract void Run();
 
         /// <summary>
         /// Dispose

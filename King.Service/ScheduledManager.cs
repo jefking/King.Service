@@ -35,7 +35,7 @@
         /// Execute
         /// </summary>
         /// <param name="state">State</param>
-        public override async void Execute(object state)
+        public override async void Run(object state)
         {
             var startTime = DateTime.UtcNow;
             var completionTime = DateTime.UtcNow;
@@ -58,7 +58,7 @@
 
                     try
                     {
-                        this.Execute();
+                        this.Run();
                         entry.Successful = true;
                     }
                     catch (Exception ex)

@@ -12,7 +12,7 @@
         /// Execute the action
         /// </summary>
         /// <param name="state">State of Timer</param>
-        void Execute(object state);
+        void Run(object state);
 
         /// <summary>
         /// Stops Service
@@ -24,7 +24,7 @@
         /// Runs Service
         /// </summary>
         /// <returns>Running</returns>
-        bool Run();
+        bool Start();
         #endregion
     }
 
