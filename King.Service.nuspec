@@ -1,20 +1,28 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    <id>King.Service</id>
-    <version>1.0</version>
-    <authors>Jef King</authors>
-    <owners>Jef King</owners>
-    <licenseUrl>https://github.com/jefkingabc/King.Service</licenseUrl>
-    <projectUrl>https://github.com/jefkingabc/King.Service</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Repeatable services for Azure.</description>
-    <tags>Azure Queue Service Bus Service Bus Queuing Background Worker Work Data Processing</tags>
-    <dependencies>
-      <dependency id="WindowsAzure.Storage" version="4.0.1" />
-    </dependencies>
-  </metadata>
-	<files>
-		<file src="King.Service\bin\Release\*.dll" target="lib\net40" /> 
-	</files>
+    <metadata>
+        <id>King.Service</id>
+        <version>1.1</version>
+        <title>Repeatable Services for Worker Roles on Azure</title>
+        <authors>Jef King</authors>
+        <owners>Jef King</owners>
+        <licenseUrl>https://github.com/jefkingabc/King.Service</licenseUrl>
+        <projectUrl>https://github.com/jefkingabc/King.Service</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Repeatable services for Azure.</description>
+        <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing</tags>
+        <dependencies>
+            <dependency id="WindowsAzure.Storage" version="4.0.1" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="King.Service\bin\Release\King.Service.dll" target="lib\net40\King.Service.dll" />
+        <file src="King.Service\bin\Release\Microsoft.Data.Edm.dll" target="lib\net40\Microsoft.Data.Edm.dll" />
+        <file src="King.Service\bin\Release\Microsoft.Data.OData.dll" target="lib\net40\Microsoft.Data.OData.dll" />
+        <file src="King.Service\bin\Release\Microsoft.Data.Services.Client.dll" target="lib\net40\Microsoft.Data.Services.Client.dll" />
+        <file src="King.Service\bin\Release\Microsoft.WindowsAzure.Configuration.dll" target="lib\net40\Microsoft.WindowsAzure.Configuration.dll" />
+        <file src="King.Service\bin\Release\Microsoft.WindowsAzure.Storage.dll" target="lib\net40\Microsoft.WindowsAzure.Storage.dll" />
+        <file src="King.Service\bin\Release\Newtonsoft.Json.dll" target="lib\net40\Newtonsoft.Json.dll" />
+        <file src="King.Service\bin\Release\System.Spatial.dll" target="lib\net40\System.Spatial.dll" />
+    </files>
 </package>
