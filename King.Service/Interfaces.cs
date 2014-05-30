@@ -1,5 +1,7 @@
 ﻿namespace King.Service
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Runnable interface for Tasks
     /// </summary>
@@ -24,5 +26,14 @@
         /// <returns>Running</returns>
         bool Run();
         #endregion
+    }
+
+    /// <summary>
+    /// Service Factory
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IServiceFactory<T>
+    {
+        IEnumerable<IRunnable> Services(T passthrough);
     }
 }
