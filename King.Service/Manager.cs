@@ -7,7 +7,7 @@
     /// <summary>
     /// Service Manager
     /// </summary>
-    public abstract class Manager : IDisposable
+    public abstract class Manager : IRunnable, IDisposable
     {
         #region Members
         /// <summary>
@@ -82,7 +82,7 @@
         }
 
         /// <summary>
-        /// Execute
+        /// Execute the action
         /// </summary>
         /// <param name="state">State of Timer</param>
         protected virtual void Execute(object state)
