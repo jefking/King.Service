@@ -3,7 +3,7 @@
     /// <summary>
     /// Runnable interface for Tasks
     /// </summary>
-    public class IRunnable
+    public interface IRunnable
     {
         #region Methods
         /// <summary>

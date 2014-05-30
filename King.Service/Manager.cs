@@ -85,7 +85,7 @@
         /// Execute the action
         /// </summary>
         /// <param name="state">State of Timer</param>
-        protected virtual void Execute(object state)
+        public virtual void Execute(object state)
         {
             try
             {
