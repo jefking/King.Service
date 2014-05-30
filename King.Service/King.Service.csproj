@@ -69,6 +69,7 @@
   <ItemGroup>
     <Compile Include="Data\Azure\AzureStorage.cs" />
     <Compile Include="Data\Azure\TableStorage.cs" />
+    <Compile Include="Interfaces.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="Data\Model\ScheduledTaskEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
