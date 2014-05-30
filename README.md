@@ -1,4 +1,4 @@
 King.Service
 ============
 
-Simple Service Scheduling
+Simple Service Scheduling for Azure
