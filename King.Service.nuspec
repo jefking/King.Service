@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>King.Service</id>
+    <version>1.0</version>
+    <authors>Jef King</authors>
+    <owners>Jef King</owners>
+    <licenseUrl>https://github.com/jefkingabc/King.Service</licenseUrl>
+    <projectUrl>https://github.com/jefkingabc/King.Service</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Repeatable services for Azure.</description>
+    <tags>Azure Queue Service Bus Service Bus Queuing Background Worker Work Data Processing</tags>
+    <dependencies>
+      <dependency id="WindowsAzure.Storage" version="4.0.1" />
+    </dependencies>
+  </metadata>
+	<files>
+		<file src="King.Service\bin\Release\*.dll" target="lib\net40" /> 
+	</files>
+</package>
