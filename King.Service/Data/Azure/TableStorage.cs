@@ -34,8 +34,6 @@
             }
 
             this.tableName = tableName;
-
-            this.CreateIfNotExists().RunSynchronously();
         }
         #endregion
 
