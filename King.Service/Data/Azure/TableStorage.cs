@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.WindowsAzure.Storage.Table;
-
+    using Microsoft.WindowsAzure.Storage;
+    using Microsoft.WindowsAzure.Storage.Auth;
+    using Microsoft.WindowsAzure.Storage.Table;
     /// <summary>
     /// Table Storage
     /// </summary>
@@ -38,6 +40,17 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Create If Not Exists
+        /// </summary>
+        /// <returns></returns>
+        public async Task<bool> CreateIfNotExists()
+        {
+            var tableClient = base.account.CreateCloudTableClient();
+            var table = tableClient.GetTableReference(this.tableName);
+            return await table.CreateIfNotExistsAsync();
+        }
+
         /// <summary>
         /// Create Table
         /// </summary>

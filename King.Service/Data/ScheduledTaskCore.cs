@@ -13,6 +13,11 @@
     {
         #region Members
         /// <summary>
+        /// Table Name
+        /// </summary>
+        public const string TableName = "schedulingtasks";
+
+        /// <summary>
         /// Period of Timer
         /// </summary>
         private readonly TimeSpan period;
@@ -28,9 +33,9 @@
         /// Constructor
         /// </summary>
         /// <param name="period">Period</param>
-        /// <param name="connectionStringKey">Connection String Key</param>
-        public ScheduledTaskCore(TimeSpan period, string connectionStringKey)
-            : base("tasks", connectionStringKey)
+        /// <param name="connectionString">Connection String</param>
+        public ScheduledTaskCore(TimeSpan period, string connectionString)
+            : base(TableName, connectionString)
         {
             if (TimeSpan.Zero >= period)
             {
@@ -56,7 +61,7 @@
 
             var performTask = true;
 
-            Trace.WriteLine(string.Format("{0} [{1}] Querying scheduled tasks table for the latest task.", DateTime.UtcNow, entry.ServiceName));
+            Trace.TraceInformation(string.Format("{0} [{1}] Querying scheduled tasks table for the latest task.", DateTime.UtcNow, entry.ServiceName));
 
             // Peek the table first to determine if there's any task to execute
             // Query the table by partition key (type, year, month)
@@ -66,7 +71,7 @@
             {
                 var latest = records.OrderByDescending(x => x.StartTime).First();
 
-                Trace.WriteLine(string.Format("{0} [{1}] Latest task found in table: Partition: {2} Id: {3} StartTime: {4} CompletionTime: {5}", DateTime.UtcNow, entry.ServiceName, latest.PartitionKey, latest.Identifier, latest.StartTime, latest.CompletionTime));
+                Trace.TraceInformation(string.Format("{0} [{1}] Latest task found in table: Partition: {2} Id: {3} StartTime: {4} CompletionTime: {5}", DateTime.UtcNow, entry.ServiceName, latest.PartitionKey, latest.Identifier, latest.StartTime, latest.CompletionTime));
 
                 // 1. If the latest task has been completed, then perform task if
                 // - the latest task has been completed more than <period> ago, or
