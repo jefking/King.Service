@@ -10,14 +10,14 @@
         [TestMethod]
         public void Constructor()
         {
-            new ScheduledTaskCore(new TimeSpan(9000), "TestKey");
+            new ScheduledTaskCore(new TimeSpan(9000), "UseDevelopmentStorage=true");
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTimeSpanZero()
         {
-            new ScheduledTaskCore(new TimeSpan(0), "TestKey");
+            new ScheduledTaskCore(new TimeSpan(0), "UseDevelopmentStorage=true");
         }
     }
 }

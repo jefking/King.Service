@@ -10,7 +10,7 @@
         [TestMethod]
         public void Constructor()
         {
-            new AzureStorage("TestKey");
+            new AzureStorage("UseDevelopmentStorage=true");
         }
 
         [TestMethod]

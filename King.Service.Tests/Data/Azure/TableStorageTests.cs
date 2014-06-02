@@ -10,14 +10,14 @@
         [TestMethod]
         public void Constructor()
         {
-            new TableStorage("TestTable", "TestKey");
+            new TableStorage("TestTable", "UseDevelopmentStorage=true");
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTableNull()
         {
-            new TableStorage(null, "TestKey");
+            new TableStorage(null, "UseDevelopmentStorage=true");
         }
 
         [TestMethod]

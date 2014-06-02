@@ -20,15 +20,15 @@
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="connectionStringKey">Storage Account Key</param>
-        public AzureStorage(string connectionStringKey)
+        /// <param name="connectionString">Storage Account</param>
+        public AzureStorage(string connectionString)
         {
-            if (string.IsNullOrEmpty(connectionStringKey))
+            if (string.IsNullOrEmpty(connectionString))
             {
-                throw new ArgumentException("connectionStringKey");
+                throw new ArgumentException("connectionString");
             }
 
-            this.account = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting(connectionStringKey));
+            this.account = CloudStorageAccount.Parse(connectionString);
         }
         #endregion
     }
