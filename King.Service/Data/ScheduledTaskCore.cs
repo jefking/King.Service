@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading.Tasks;
     using King.Service.Data.Azure;
     using King.Service.Data.Model;
 
@@ -47,6 +48,14 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Initialize Table
+        /// </summary>
+        public async Task<bool> InitializeTable()
+        {
+            return await this.CreateIfNotExists();
+        }
+
         /// <summary>
         /// Determine whether a new task needs to be executed
         /// </summary>

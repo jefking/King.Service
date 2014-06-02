@@ -4,9 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Microsoft.WindowsAzure.Storage.Table;
-    using Microsoft.WindowsAzure.Storage;
-    using Microsoft.WindowsAzure.Storage.Auth;
-    using Microsoft.WindowsAzure.Storage.Table;
+
     /// <summary>
     /// Table Storage
     /// </summary>
@@ -36,6 +34,8 @@
             }
 
             this.tableName = tableName;
+
+            this.CreateIfNotExists().RunSynchronously();
         }
         #endregion
 
