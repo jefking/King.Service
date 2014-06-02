@@ -82,6 +82,7 @@
   <ItemGroup>
     <Compile Include="Data\Azure\AzureStorageTests.cs" />
     <Compile Include="Data\Azure\TableStorageTests.cs" />
+    <Compile Include="Data\ScheduledTaskCoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
