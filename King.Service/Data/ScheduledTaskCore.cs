@@ -10,7 +10,7 @@
     /// <summary>
     /// Scheduled Task Core
     /// </summary>
-    public class ScheduledTaskCore : TableStorage
+    public class ScheduledTaskCore : TableStorage, IScheduledTaskCore
     {
         #region Members
         /// <summary>

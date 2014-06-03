@@ -19,5 +19,11 @@
         {
             new ScheduledTaskCore(new TimeSpan(0), "UseDevelopmentStorage=true");
         }
+
+        [TestMethod]
+        public void IsIScheduledTaskCore()
+        {
+            Assert.IsNotNull(new ScheduledTaskCore(new TimeSpan(10), "UseDevelopmentStorage=true") as IScheduledTaskCore);
+        }
     }
 }

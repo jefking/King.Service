@@ -15,6 +15,12 @@
         }
 
         [TestMethod]
+        public void IsITableStorage()
+        {
+            Assert.IsNotNull(new TableStorage("TestTable", "UseDevelopmentStorage=true") as ITableStorage);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTableNull()
         {

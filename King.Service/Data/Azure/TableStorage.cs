@@ -11,7 +11,7 @@
     /// <remarks>
     /// http://www.windowsazure.com/en-us/develop/net/how-to-guides/table-services/
     /// </remarks>
-    public class TableStorage : AzureStorage
+    public class TableStorage : AzureStorage, ITableStorage
     {
         #region Members
         /// <summary>
