@@ -32,8 +32,9 @@
         [TestCategory("Integration")]
         public async Task CreateIfNotExists()
         {
-            var connectionString = "UseDevelopmentStorage=true";
-            var storage = new TableStorage("TestTable", connectionString);
+            var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
+            var connectionString = "UseDevelopmentStorage=true;";
+            var storage = new TableStorage(table, connectionString);
             var created = await storage.CreateIfNotExists();
 
             Assert.IsTrue(created);

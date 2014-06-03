@@ -15,9 +15,14 @@
     {
         #region Members
         /// <summary>
-        /// Table Name
+        /// Table Client
         /// </summary>
-        private readonly string tableName;
+        private CloudTableClient client;
+
+        /// <summary>
+        /// Table
+        /// </summary>
+        private CloudTable table;
         #endregion
 
         #region Constructors
@@ -33,7 +38,8 @@
                 throw new ArgumentException("tableName");
             }
 
-            this.tableName = tableName;
+            this.client = base.account.CreateCloudTableClient();
+            this.table = client.GetTableReference(tableName);
         }
         #endregion
 
@@ -44,9 +50,7 @@
         /// <returns></returns>
         public async Task<bool> CreateIfNotExists()
         {
-            var tableClient = base.account.CreateCloudTableClient();
-            var table = tableClient.GetTableReference(this.tableName);
-            return await table.CreateIfNotExistsAsync();
+            return await this.table.CreateIfNotExistsAsync();
         }
 
         /// <summary>
@@ -55,9 +59,7 @@
         /// <param name="tableName">Table Name</param>
         public async Task<bool> Create()
         {
-            var tableClient = account.CreateCloudTableClient();
-            var table = tableClient.GetTableReference(tableName);
-            return await table.CreateIfNotExistsAsync();
+            return await this.table.CreateIfNotExistsAsync();
         }
 
         /// <summary>
@@ -66,9 +68,7 @@
         /// <param name="tableName"></param>
         public async Task Delete()
         {
-            var tableClient = account.CreateCloudTableClient();
-            var table = tableClient.GetTableReference(tableName);
-            await table.DeleteAsync();
+            await this.table.DeleteAsync();
         }
 
         /// <summary>
@@ -77,10 +77,8 @@
         /// <param name="item">Scheduled Task Entry</param>
         public async Task<TableResult> InsertOrReplace(ITableEntity entry)
         {
-            var tableClient = account.CreateCloudTableClient();
-            var table = tableClient.GetTableReference(this.tableName);
             var insertOperation = TableOperation.InsertOrReplace(entry);
-            return await table.ExecuteAsync(insertOperation);
+            return await this.table.ExecuteAsync(insertOperation);
         }
 
         /// <summary>
@@ -89,19 +87,17 @@
         /// <param name="entities"></param>
         public async Task<IEnumerable<TableResult>> Insert(IEnumerable<TableEntity> entities)
         {
-            var tableClient = account.CreateCloudTableClient();
-            var table = tableClient.GetTableReference(this.tableName);
             var batchOperation = new TableBatchOperation();
             foreach (var entity in entities)
             {
                 batchOperation.InsertOrMerge(entity);
             }
 
-            return await table.ExecuteBatchAsync(batchOperation);
+            return await this.table.ExecuteBatchAsync(batchOperation);
         }
 
         /// <summary>
-        /// 
+        /// Query By Partition
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="partition"></param>
@@ -109,10 +105,8 @@
         public IEnumerable<T> QueryByPartition<T>(string partition)
             where T : ITableEntity, new()
         {
-            var tableClient = account.CreateCloudTableClient();
-            var table = tableClient.GetTableReference(this.tableName);
             var query = new TableQuery<T>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, partition));
-            return table.ExecuteQuery(query);
+            return this.table.ExecuteQuery(query);
         }
         #endregion
     }
