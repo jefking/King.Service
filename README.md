@@ -15,7 +15,7 @@ var connectionString = Configuration["Key"];
 var core = new ScheduledTaskCore(TimeSpan.FromHours(100), connectionString);
 core.InitializeTable();
 ```
-## Implement Scheduled Task
+### Implement Scheduled Task
 ```
 class MyTask : Manager
 {
