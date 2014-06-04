@@ -8,9 +8,24 @@ Simple Service Scheduling for Azure; meant to be used in background worker roles
 ```
 PM> Install-Package King.Service
 ```
-
 ## Examples
-### Coming Soon
+### Initialize
+var connectionString = Configuration["Key"];
+var core = new ScheduledTaskCore(TimeSpan.FromHours(100), connectionString);
+core.InitializeTable();
+
+## Implement Scheduled Task
+class MyTask : Manager
+{
+	public MyTask()
+		: base(15, 60)
+	{
+	}
+	public virtual void Run()
+	{
+		//Process background work here.
+	}
+}
 
 ## About the Author
 
