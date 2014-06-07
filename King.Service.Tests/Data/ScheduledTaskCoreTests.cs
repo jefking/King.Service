@@ -25,5 +25,13 @@
         {
             Assert.IsNotNull(new ScheduledTaskCore(new TimeSpan(10), "UseDevelopmentStorage=true") as IScheduledTaskCore);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CheckForTaskEntryNull()
+        {
+            var core = new ScheduledTaskCore(new TimeSpan(9000), "UseDevelopmentStorage=true");
+            core.CheckForTask(null);
+        }
     }
 }

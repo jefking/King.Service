@@ -34,6 +34,8 @@
     /// <typeparam name="T"></typeparam>
     public interface IServiceFactory<T>
     {
+        #region Methods
         IEnumerable<IRunnable> Services(T passthrough);
+        #endregion
     }
 }
