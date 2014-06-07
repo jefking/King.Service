@@ -19,7 +19,6 @@
         public ScheduledTaskEntry(Type service)
             :this(service.GetType().ToString())
         {
-
         }
 
         /// <summary>
