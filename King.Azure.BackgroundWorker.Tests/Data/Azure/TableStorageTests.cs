@@ -1,9 +1,9 @@
 ﻿namespace King.Service.Tests.Data.Azure
 {
+    using King.Azure.BackgroundWorker.Data.Azure;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System;
     using System.Threading.Tasks;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using King.Azure.BackgroundWorker.Data.Azure;
 
     [TestClass]
     public class TableStorageTests
