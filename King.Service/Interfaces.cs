@@ -1,4 +1,4 @@
-﻿namespace King.Service
+﻿namespace King.Azure.BackgroundWorker
 {
     using System.Collections.Generic;
 

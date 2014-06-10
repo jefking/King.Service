@@ -2,8 +2,8 @@
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using King.Service.Data.Model;
     using Microsoft.WindowsAzure.Storage.Table;
+    using King.Azure.BackgroundWorker.Data.Model;
 
     [TestClass]
     public class ScheduledTaskEntryTests

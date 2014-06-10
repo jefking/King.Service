@@ -1,4 +1,4 @@
-﻿namespace King.Service.Data.Model
+﻿namespace King.Azure.BackgroundWorker.Data.Model
 {
     using Microsoft.WindowsAzure.Storage.Table;
     using System;

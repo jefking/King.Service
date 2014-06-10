@@ -1,7 +1,7 @@
-﻿namespace King.Service.Data
+﻿namespace King.Azure.BackgroundWorker.Data
 {
+    using King.Azure.BackgroundWorker.Data.Model;
     using System.Threading.Tasks;
-    using King.Service.Data.Model;
 
     /// <summary>
     /// Scheduled Task Core for Mocking

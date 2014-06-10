@@ -1,4 +1,4 @@
-﻿namespace King.Service.Data.Azure
+﻿namespace King.Azure.BackgroundWorker.Data.Azure
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;

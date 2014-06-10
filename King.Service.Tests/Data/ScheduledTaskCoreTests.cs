@@ -1,8 +1,8 @@
 ﻿namespace King.Service.Tests.Data
 {
-    using System;
-    using King.Service.Data;
+    using King.Azure.BackgroundWorker.Data;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
 
     [TestClass]
     public class ScheduledTaskCoreTests

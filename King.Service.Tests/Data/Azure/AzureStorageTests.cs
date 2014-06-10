@@ -1,8 +1,8 @@
 ﻿namespace King.Service.Tests.Data.Azure
 {
     using System;
-    using King.Service.Data.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using King.Azure.BackgroundWorker.Data.Azure;
 
     [TestClass]
     public class AzureStorageTests

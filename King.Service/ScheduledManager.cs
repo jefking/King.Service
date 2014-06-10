@@ -1,9 +1,9 @@
-﻿namespace King.Service
+﻿namespace King.Azure.BackgroundWorker
 {
+    using King.Azure.BackgroundWorker.Data;
+    using King.Azure.BackgroundWorker.Data.Model;
     using System;
     using System.Diagnostics;
-    using King.Service.Data;
-    using King.Service.Data.Model;
 
     /// <summary>
     /// Scheduled Manager
