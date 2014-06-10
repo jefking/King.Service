@@ -2,8 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.Service</id>
-        <version>1.2.9</version>
-        <title>King.Service</title>
+        <version>1.3.0</version>
+        <title>King.Azure.BackgroundWorker</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
         <licenseUrl>https://github.com/jefkingabc/King.Service</licenseUrl>
@@ -11,7 +11,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Repeatable services for Azure worker roles.</description>
         <summary>Repeatable services for Azure worker roles.</summary>
-        <releaseNotes>More interfaces for mocking.</releaseNotes>
+        <releaseNotes>Changed the namespace to be much ore specific.</releaseNotes>
         <copyright>Jef King</copyright>
         <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing</tags>
         <dependencies>
@@ -19,13 +19,13 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="King.Service\bin\Release\King.Service.dll" target="lib\net40\King.Service.dll" />
-        <file src="King.Service\bin\Release\Microsoft.Data.Edm.dll" target="lib\net40\Microsoft.Data.Edm.dll" />
-        <file src="King.Service\bin\Release\Microsoft.Data.OData.dll" target="lib\net40\Microsoft.Data.OData.dll" />
-        <file src="King.Service\bin\Release\Microsoft.Data.Services.Client.dll" target="lib\net40\Microsoft.Data.Services.Client.dll" />
-        <file src="King.Service\bin\Release\Microsoft.WindowsAzure.Configuration.dll" target="lib\net40\Microsoft.WindowsAzure.Configuration.dll" />
-        <file src="King.Service\bin\Release\Microsoft.WindowsAzure.Storage.dll" target="lib\net40\Microsoft.WindowsAzure.Storage.dll" />
-        <file src="King.Service\bin\Release\Newtonsoft.Json.dll" target="lib\net40\Newtonsoft.Json.dll" />
-        <file src="King.Service\bin\Release\System.Spatial.dll" target="lib\net40\System.Spatial.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\King.Azure.BackgroundWorker.dll" target="lib\net40\King.Azure.BackgroundWorker.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.Data.Edm.dll" target="lib\net40\Microsoft.Data.Edm.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.Data.OData.dll" target="lib\net40\Microsoft.Data.OData.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.Data.Services.Client.dll" target="lib\net40\Microsoft.Data.Services.Client.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.WindowsAzure.Configuration.dll" target="lib\net40\Microsoft.WindowsAzure.Configuration.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.WindowsAzure.Storage.dll" target="lib\net40\Microsoft.WindowsAzure.Storage.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\Newtonsoft.Json.dll" target="lib\net40\Newtonsoft.Json.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\System.Spatial.dll" target="lib\net40\System.Spatial.dll" />
     </files>
 </package>
