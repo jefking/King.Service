@@ -3,7 +3,7 @@
     <metadata>
         <id>King.Service</id>
         <version>1.3.0</version>
-        <title>King.Azure.BackgroundWorker</title>
+        <title>Azure Background worker for scheduling syncronized tasks.</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
         <licenseUrl>https://github.com/jefkingabc/King.Service</licenseUrl>
