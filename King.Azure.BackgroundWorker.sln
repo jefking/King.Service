@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Azure.BackgroundWorker", "King.Azure.BackgroundWorker\King.Azure.BackgroundWorker.csproj", "{E72D36E9-0849-498E-AC4F-B97FB632E112}"
 EndProject
@@ -17,6 +17,8 @@ EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "Azure.Demo", "Azure.Demo\Azure.Demo.ccproj", "{7A944B51-4D5F-4CBD-A188-CE336FF932D7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker", "Worker\Worker.csproj", "{BCC0442F-E931-4D6E-A78C-1FEE6320D047}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,5 +45,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7A944B51-4D5F-4CBD-A188-CE336FF932D7} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
+		{BCC0442F-E931-4D6E-A78C-1FEE6320D047} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
 	EndGlobalSection
 EndGlobal
