@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceDefinition name="Azure.Demo" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-01.2.3">
+  <WorkerRole name="Worker" vmsize="Small">
+    <Imports>
+      <Import moduleName="Diagnostics" />
+    </Imports>
+    <ConfigurationSettings>
+      <Setting name="ConnectionStringKey" />
+    </ConfigurationSettings>
+  </WorkerRole>
+</ServiceDefinition>

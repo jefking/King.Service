@@ -66,7 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BackgroundWoker.cs" />
+    <Compile Include="RoleServiceManager.cs" />
     <Compile Include="Data\Azure\AzureStorage.cs" />
     <Compile Include="Data\Azure\Interfaces.cs" />
     <Compile Include="Data\Azure\TableStorage.cs" />
