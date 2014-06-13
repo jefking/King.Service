@@ -10,7 +10,7 @@
     /// <summary>
     /// Worker Role Service Manager
     /// </summary>
-    public class RoleServiceManager : RoleEntryPoint
+    public class RoleServiceManager
     {
         #region Members
         /// <summary>
@@ -36,14 +36,9 @@
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Run
-        /// </summary>
-        public override void Run()
+        public void Run()
         {
             Trace.TraceInformation("Run called");
-
-            base.Run();
 
             Trace.TraceInformation("Run finished");
         }
@@ -52,9 +47,11 @@
         /// On Start
         /// </summary>
         /// <returns>Started</returns>
-        public override bool OnStart()
+        public bool OnStart()
         {
             Trace.TraceInformation("On start called");
+
+            bool totalSuccess = true;
 
             if (null != services && 0 < services.Count())
             {
@@ -67,10 +64,14 @@
                         var success = s.Start();
 
                         Trace.WriteLine(string.Format("{0} Started: {1}", s.GetType(), success));
+
+                        totalSuccess &= success;
                     }
                     catch (Exception ex)
                     {
                         Trace.WriteLine(string.Format("{0}: {1}", s.GetType(), ex.Message));
+
+                        totalSuccess = false;
                     }
                 }
                 );
@@ -84,13 +85,13 @@
 
             Trace.TraceInformation("On start finished");
 
-            return base.OnStart();
+            return totalSuccess;
         }
 
         /// <summary>
         /// On Stop
         /// </summary>
-        public override void OnStop()
+        public void OnStop()
         {
             Trace.TraceInformation("On stop called");
 
@@ -119,8 +120,6 @@
             {
                 Trace.TraceInformation("No services to stopped.");
             }
-
-            base.OnStop();
 
             Trace.TraceInformation("On stop finished");
         }
