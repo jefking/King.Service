@@ -17,7 +17,7 @@ var connectionString = Configuration["Key"];
 var core = new ScheduledTaskCore(TimeSpan.FromHours(100), connectionString);
 core.InitializeTable();
 ```
-### Implement Scheduled Task
+### Implement Repetitive Task
 ```
 class MyTask : Manager
 {
@@ -31,9 +31,9 @@ class MyTask : Manager
 	}
 }
 ```
-### Implement CoordinatedManager Task
+### Implement Coordinated Task
 ```
-class MyTask : Manager
+class MyTask : CoordinatedManager
 {
 	public MyTask()
 		: base("Storage Account for Coordination between Instances", 60)
