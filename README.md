@@ -1,4 +1,4 @@
-King.Service
+King.Azure.BackgroundWorker
 ============
 
 Simple Service Scheduling for Azure; meant to be used in background worker roles.
