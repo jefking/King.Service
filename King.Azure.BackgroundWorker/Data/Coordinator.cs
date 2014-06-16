@@ -10,7 +10,7 @@
     /// <summary>
     /// Scheduled Task Core
     /// </summary>
-    public class ScheduledTaskCore : TableStorage, IScheduledTaskCore
+    public class Coordinator : TableStorage, IScheduledTaskCore
     {
         #region Members
         /// <summary>
@@ -35,7 +35,7 @@
         /// </summary>
         /// <param name="period">Period</param>
         /// <param name="connectionString">Connection String</param>
-        public ScheduledTaskCore(TimeSpan period, string connectionString)
+        public Coordinator(TimeSpan period, string connectionString)
             : base(TableName, connectionString)
         {
             if (TimeSpan.Zero >= period)

@@ -8,13 +8,13 @@
     /// <summary>
     /// Scheduled Manager
     /// </summary>
-    public abstract class ScheduledManager : Manager
+    public abstract class CoordinatedManager : Manager
     {
         #region Members
         /// <summary>
         /// Task Core
         /// </summary>
-        private readonly ScheduledTaskCore taskCore;
+        private readonly Coordinator taskCore;
         #endregion
 
         #region Constructors
@@ -23,10 +23,10 @@
         /// </summary>
         /// <param name="connectionStringKey">Connection String Key</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
-        protected ScheduledManager(string connectionStringKey, double periodInSeconds = 60)
+        protected CoordinatedManager(string connectionStringKey, double periodInSeconds = 60)
             : base(60, periodInSeconds)
         {
-            this.taskCore = new ScheduledTaskCore(TimeSpan.FromSeconds(periodInSeconds), connectionStringKey);
+            this.taskCore = new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionStringKey);
         }
         #endregion
 

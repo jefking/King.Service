@@ -2,10 +2,10 @@
 {
     using King.Azure.BackgroundWorker;
 
-    public class Task : Manager
+    public class SynchronizedTask : CoordinatedManager
     {
-        public Task()
-            : base(10, 60)
+        public SynchronizedTask()
+            : base("ConnectionStringKey", 30)
         {
         }
 

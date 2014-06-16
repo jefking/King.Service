@@ -75,8 +75,8 @@
     <Compile Include="Manager.cs" />
     <Compile Include="Data\Model\ScheduledTaskEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScheduledManager.cs" />
-    <Compile Include="Data\ScheduledTaskCore.cs" />
+    <Compile Include="CoordinatedManager.cs" />
+    <Compile Include="Data\Coordinator.cs" />
     <Compile Include="ServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
