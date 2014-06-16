@@ -1,7 +1,6 @@
 ﻿namespace Worker
 {
     using King.Azure.BackgroundWorker;
-    using System;
     using System.Collections.Generic;
 
     public class Factory : ServiceFactory
@@ -10,7 +9,10 @@
         {
             var services = new List<IRunnable>();
             services.Add(new Task());
+            services.Add(new SynchronizedTask());
+
             //Add More Tasks
+
             return services;
         }
     }

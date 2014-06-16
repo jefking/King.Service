@@ -11,7 +11,7 @@ Simple Service Scheduling for Azure; meant to be used in background worker roles
 PM> Install-Package King.Service
 ```
 ## Examples
-### Initialize ^(Used only by CoordinatedManager)^
+### Initialize <sub><sup>(Used only by CoordinatedManager)</sub></sup>
 ```
 var connectionString = Configuration["Key"];
 var core = new ScheduledTaskCore(TimeSpan.FromHours(100), connectionString);
@@ -45,6 +45,9 @@ class MyTask : CoordinatedManager
 	}
 }
 ```
+## Demo Project
+[GitHub](https://github.com/jefkingabc/King.Azure.BackgroundWorker/tree/master/Azure.Demo)
+
 ## About the Author
 
 Jef King has worked in the software industry for fourteen years. Over this time he has experienced a range of responsibilities in various industries. His passion for technology and motivating teams has kept his drive and focus strong. Early on in his career he showed an entrepreneurial spirit, starting multiple small companies. He departed from this to learn more about the software industry by working with larger companies, such as Microsoft. These diverse experiences have given a very unique perspective on teams and software engineering. Since moving back to Vancouver he has built several highly productive software development teams, and inspired others to try similar techniques.
