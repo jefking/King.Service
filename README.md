@@ -46,7 +46,8 @@ class MyTask : CoordinatedManager
 }
 ```
 ## Demo Project
-[GitHub](https://github.com/jefkingabc/King.Azure.BackgroundWorker/tree/master/Azure.Demo)
+[Azure Project](https://github.com/jefkingabc/King.Azure.BackgroundWorker/tree/master/Azure.Demo)
+[Worker Role](https://github.com/jefkingabc/King.Azure.BackgroundWorker/tree/master/Worker)
 
 ## About the Author
 
