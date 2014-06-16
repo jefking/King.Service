@@ -11,7 +11,7 @@ Simple Service Scheduling for Azure; meant to be used in background worker roles
 PM> Install-Package King.Service
 ```
 ## Examples
-### Initialize
+### Initialize ^(Used only by CoordinatedManager)^
 ```
 var connectionString = Configuration["Key"];
 var core = new ScheduledTaskCore(TimeSpan.FromHours(100), connectionString);
