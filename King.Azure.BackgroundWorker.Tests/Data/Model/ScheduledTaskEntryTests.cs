@@ -1,9 +1,9 @@
 ﻿namespace King.Service.Tests.Data.Model
 {
-    using System;
+    using King.Azure.BackgroundWorker.Data.Model;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Storage.Table;
-    using King.Azure.BackgroundWorker.Data.Model;
+    using System;
 
     [TestClass]
     public class ScheduledTaskEntryTests
