@@ -39,10 +39,19 @@
         {
             new ScheduledTaskEntry(this.GetType());
         }
+
         [TestMethod]
         public void IsTableEntity()
         {
             Assert.IsNotNull(new ScheduledTaskEntry() as TableEntity);
+        }
+
+        [TestMethod]
+        public void PartitionKey()
+        {
+            var expected = ScheduledTaskEntry.GenerateLogsPartitionKey(this.GetType().ToString());
+            var entity = new ScheduledTaskEntry(this.GetType());
+            Assert.AreEqual(expected, entity.PartitionKey);
         }
     }
 }
