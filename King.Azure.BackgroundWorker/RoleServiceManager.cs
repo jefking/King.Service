@@ -5,7 +5,6 @@
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-    using King.Azure.BackgroundWorker;
 
     /// <summary>
     /// Worker Role Service Manager

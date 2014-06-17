@@ -2,9 +2,6 @@ namespace Worker
 {
     using King.Azure.BackgroundWorker;
     using Microsoft.WindowsAzure.ServiceRuntime;
-    using System.Diagnostics;
-    using System.Net;
-    using System.Threading;
 
     public class WorkerRole : RoleEntryPoint
     {
