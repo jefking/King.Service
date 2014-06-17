@@ -62,13 +62,13 @@
                     {
                         var success = s.Start();
 
-                        Trace.WriteLine(string.Format("{0} Started: {1}", s.GetType(), success));
+                        Trace.WriteLine(string.Format("{0} Started: {1}", s.GetType().ToString(), success));
 
                         totalSuccess &= success;
                     }
                     catch (Exception ex)
                     {
-                        Trace.WriteLine(string.Format("{0}: {1}", s.GetType(), ex.Message));
+                        Trace.WriteLine(string.Format("{0}: {1}", s.GetType().ToString(), ex.Message));
 
                         totalSuccess = false;
                     }
@@ -104,11 +104,11 @@
                     {
                         var success = s.Stop();
 
-                        Trace.WriteLine(string.Format("{0} Stopped: {1}", s.GetType(), success));
+                        Trace.WriteLine(string.Format("{0} Stopped: {1}", s.GetType().ToString(), success));
                     }
                     catch (Exception ex)
                     {
-                        Trace.WriteLine(string.Format("{0}: {1}", s.GetType(), ex.Message));
+                        Trace.WriteLine(string.Format("{0}: {1}", s.GetType().ToString(), ex.Message));
                     }
                 }
                 );

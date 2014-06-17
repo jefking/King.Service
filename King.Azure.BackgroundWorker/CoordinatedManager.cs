@@ -63,7 +63,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError(string.Format("{0}:{1}", this.GetType(), ex.Message));
+                        Trace.TraceError(string.Format("{0}:{1}", this.GetType().ToString(), ex.Message));
                         entry.Successful = false;
                     }
                     finally
@@ -81,7 +81,7 @@
             }
             catch (Exception ex)
             {
-                Trace.TraceError(string.Format("{0}:{1}", this.GetType(), ex.Message));
+                Trace.TraceError(string.Format("{0}:{1}", this.GetType().ToString(), ex.Message));
                 entry.Successful = false;
             }
             finally

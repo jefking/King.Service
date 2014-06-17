@@ -1,11 +1,11 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
+    using King.Azure.BackgroundWorker.Data.Azure;
+    using King.Azure.BackgroundWorker.Data.Model;
     using System;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-    using King.Azure.BackgroundWorker.Data.Azure;
-    using King.Azure.BackgroundWorker.Data.Model;
 
     /// <summary>
     /// Scheduled Task Core
