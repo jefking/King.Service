@@ -21,12 +21,12 @@
         /// <summary>
         /// Scheduled Manager Constructor
         /// </summary>
-        /// <param name="connectionStringKey">Connection String Key</param>
+        /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
-        protected CoordinatedManager(string connectionStringKey, double periodInSeconds = 60)
+        protected CoordinatedManager(string connectionString, double periodInSeconds = 60)
             : base(60, periodInSeconds)
         {
-            this.taskCore = new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionStringKey);
+            this.taskCore = new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionString);
         }
         #endregion
 
