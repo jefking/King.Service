@@ -1,8 +1,7 @@
 ﻿namespace King.Azure.BackgroundWorker.Data.Azure
 {
-    using System;
-    using Microsoft.WindowsAzure;
     using Microsoft.WindowsAzure.Storage;
+    using System;
 
     /// <summary>
     /// Azure Storage
@@ -23,7 +22,7 @@
         /// <param name="connectionString">Storage Account</param>
         public AzureStorage(string connectionString)
         {
-            if (string.IsNullOrEmpty(connectionString))
+            if (string.IsNullOrWhiteSpace(connectionString))
             {
                 throw new ArgumentException("connectionString");
             }
