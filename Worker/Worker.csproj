@@ -80,11 +80,12 @@
   <ItemGroup>
     <Compile Include="Factory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SynchronizedTask.cs" />
+    <Compile Include="CoordinatedTask.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="WorkerRole.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

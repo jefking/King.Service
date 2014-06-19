@@ -21,9 +21,9 @@
         }
 
         [TestMethod]
-        public void IsIScheduledTaskCore()
+        public void IsICoordinator()
         {
-            Assert.IsNotNull(new Coordinator(new TimeSpan(10), "UseDevelopmentStorage=true") as IScheduledTaskCore);
+            Assert.IsNotNull(new Coordinator(new TimeSpan(10), "UseDevelopmentStorage=true") as ICoordinator);
         }
 
         [TestMethod]

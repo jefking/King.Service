@@ -9,7 +9,7 @@
         {
             var services = new List<IRunnable>();
             services.Add(new Task());
-            services.Add(new SynchronizedTask());
+            services.Add(new CoordinatedTask());
 
             //Add More Tasks
 

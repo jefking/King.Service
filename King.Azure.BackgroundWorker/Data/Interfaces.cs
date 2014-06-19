@@ -6,7 +6,7 @@
     /// <summary>
     /// Scheduled Task Core for Mocking
     /// </summary>
-    public interface IScheduledTaskCore
+    public interface ICoordinator
     {
         #region Methods
         /// <summary>

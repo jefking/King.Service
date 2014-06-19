@@ -10,7 +10,7 @@
     /// <summary>
     /// Scheduled Task Core
     /// </summary>
-    public class Coordinator : TableStorage, IScheduledTaskCore
+    public class Coordinator : TableStorage, ICoordinator
     {
         #region Members
         /// <summary>
