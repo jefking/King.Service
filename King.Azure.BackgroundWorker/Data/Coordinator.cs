@@ -5,7 +5,6 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
-    using Worker;
 
     /// <summary>
     /// Scheduled Task Core
@@ -53,7 +52,7 @@
         /// </summary>
         public Manager InitializeTask()
         {
-            return new InitializeTable(this);
+            return new InitializeTableTask(this);
         }
 
         /// <summary>

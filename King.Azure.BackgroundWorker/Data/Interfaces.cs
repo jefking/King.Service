@@ -12,7 +12,7 @@
         /// <summary>
         /// Initialize Table
         /// </summary>
-        Task<bool> InitializeTable();
+        Manager InitializeTask();
 
         /// <summary>
         /// Determine whether a new task needs to be executed
