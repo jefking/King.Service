@@ -5,7 +5,7 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
-    using System.Threading.Tasks;
+    using Worker;
 
     /// <summary>
     /// Scheduled Task Core
@@ -49,11 +49,11 @@
 
         #region Methods
         /// <summary>
-        /// Initialize Table
+        /// Initialize Table Task
         /// </summary>
-        public async Task<bool> InitializeTable()
+        public Manager InitializeTask()
         {
-            return await this.CreateIfNotExists();
+            return new InitializeTable(this);
         }
 
         /// <summary>

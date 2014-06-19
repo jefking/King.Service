@@ -32,6 +32,14 @@
 
         #region Methods
         /// <summary>
+        /// Initialize Table Task
+        /// </summary>
+        public Manager InitializeTask()
+        {
+            return this.taskCore.InitializeTask();
+        }
+
+        /// <summary>
         /// Execute
         /// </summary>
         /// <param name="state">State</param>
