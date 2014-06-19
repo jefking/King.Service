@@ -88,6 +88,7 @@
     <Compile Include="Data\Model\ScheduledTaskEntryTests.cs" />
     <Compile Include="Data\CoordinatorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleServiceManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\King.Azure.BackgroundWorker\King.Azure.BackgroundWorker.csproj">

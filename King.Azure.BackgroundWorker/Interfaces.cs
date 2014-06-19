@@ -38,4 +38,25 @@
         IEnumerable<IRunnable> Services(T passthrough);
         #endregion
     }
+
+    public interface IRoleServiceManager
+    {
+        #region Methods
+        /// <summary>
+        /// Run
+        /// </summary>
+        void Run();
+
+        /// <summary>
+        /// On Start
+        /// </summary>
+        /// <returns>Started</returns>
+        bool OnStart();
+
+        /// <summary>
+        /// On Stop
+        /// </summary>
+        void OnStop();
+        #endregion
+    }
 }

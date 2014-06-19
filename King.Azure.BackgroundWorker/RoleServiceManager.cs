@@ -9,7 +9,7 @@
     /// <summary>
     /// Worker Role Service Manager
     /// </summary>
-    public class RoleServiceManager
+    public class RoleServiceManager : IRoleServiceManager
     {
         #region Members
         /// <summary>
@@ -35,6 +35,9 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Run (Currently No-Op)
+        /// </summary>
         public void Run()
         {
             Trace.TraceInformation("Run called");
