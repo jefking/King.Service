@@ -13,7 +13,6 @@
         public override void Run()
         {
             //Task that you want to do
-            Trace.TraceInformation(this.GetType().ToString());
         }
     }
 }
