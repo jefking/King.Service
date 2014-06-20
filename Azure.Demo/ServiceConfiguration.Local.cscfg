@@ -4,7 +4,6 @@
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="ConnectionStringKey" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

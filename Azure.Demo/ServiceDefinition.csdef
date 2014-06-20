@@ -5,7 +5,6 @@
       <Import moduleName="Diagnostics" />
     </Imports>
     <ConfigurationSettings>
-      <Setting name="ConnectionStringKey" />
     </ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
