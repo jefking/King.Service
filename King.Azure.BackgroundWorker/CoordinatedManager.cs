@@ -45,22 +45,22 @@
         /// <param name="state">State</param>
         public override async void Run(object state)
         {
-            var startTime = DateTime.UtcNow;
-            var completionTime = DateTime.UtcNow;
+            var entry = new ScheduledTaskEntry(this.GetType())
+            {
+                StartTime = DateTime.UtcNow,
+            };
 
-            var entry = new ScheduledTaskEntry(this.GetType());
-
-            Trace.WriteLine(string.Format("{0} [{1}] Task Checking.", startTime, entry.ServiceName));
+            Trace.TraceInformation("{0}: Task Checking.", entry.ServiceName);
 
             try
             {
                 if (taskCore.CheckForTask(entry))
                 {
-                    Trace.WriteLine(string.Format("{0} [{1}] Task Started.", DateTime.UtcNow, entry.ServiceName));
+                    Trace.TraceInformation("{0}: Task Starting.", entry.ServiceName);
 
-                    // Insert a new backup entry to table
+                    // Insert a new entity to table
                     entry.Identifier = Guid.NewGuid();
-                    entry.StartTime = DateTime.UtcNow;
+                    entry.CompletionTime = null;
 
                     await taskCore.InsertOrReplace(entry);
 
@@ -71,7 +71,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError(string.Format("{0}:{1}", this.GetType().ToString(), ex.Message));
+                        Trace.TraceError("{0}: {1}", entry.ServiceName, ex.Message);
                         entry.Successful = false;
                     }
                     finally
@@ -84,20 +84,24 @@
                 }
                 else
                 {
-                    Trace.WriteLine(string.Format("{0} [{1}] No Action Required.", DateTime.UtcNow, entry.ServiceName));
+                    Trace.TraceInformation("{0}: Task not Started.", entry.ServiceName);
                 }
             }
             catch (Exception ex)
             {
-                Trace.TraceError(string.Format("{0}:{1}", this.GetType().ToString(), ex.Message));
+                Trace.TraceError("{0}: {1}", entry.ServiceName, ex.Message);
                 entry.Successful = false;
             }
             finally
             {
-                completionTime = DateTime.UtcNow;
+                if (!entry.CompletionTime.HasValue)
+                {
+                    entry.CompletionTime = DateTime.UtcNow;
+                }
             }
 
-            Trace.WriteLine(string.Format("{0} [{1}] Task Completed. Success: {2}", DateTime.UtcNow, entry.ServiceName, entry.Successful));
+            var duration = entry.CompletionTime.Value.Subtract(entry.StartTime);
+            Trace.TraceInformation("{0}: Task Completed (Duration: {1}). Success: {2}", entry.ServiceName, duration, entry.Successful);
         }
         #endregion
     }
