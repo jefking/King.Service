@@ -47,7 +47,7 @@
                 throw new ArgumentException("periodInSeconds");
             }
 
-            Trace.WriteLine(string.Format("{0} is due in seconds: {1}; Period in seconds: {2}.", this.GetType().ToString(), dueInSeconds, periodInSeconds));
+            Trace.TraceInformation("{0} is due in seconds: {1}; Period in seconds: {2}.", this.GetType().ToString(), dueInSeconds, periodInSeconds);
 
             this.dueTime = TimeSpan.FromSeconds(dueInSeconds);
             this.period = TimeSpan.FromSeconds(periodInSeconds);

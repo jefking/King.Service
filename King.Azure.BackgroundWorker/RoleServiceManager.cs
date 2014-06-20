@@ -55,7 +55,7 @@
         {
             Trace.TraceInformation("On start called");
 
-            bool totalSuccess = true;
+            var totalSuccess = true;
 
             if (null != services && 0 < services.Count())
             {
@@ -67,13 +67,13 @@
                     {
                         var success = s.Start();
 
-                        Trace.WriteLine(string.Format("{0} Started: {1}", s.GetType().ToString(), success));
+                        Trace.TraceInformation("{0} Started: {1}", s.GetType().ToString(), success);
 
                         totalSuccess &= success;
                     }
                     catch (Exception ex)
                     {
-                        Trace.WriteLine(string.Format("{0}: {1}", s.GetType().ToString(), ex.Message));
+                        Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.Message);
 
                         totalSuccess = false;
                     }
@@ -101,7 +101,7 @@
 
             if (null != services && 0 < services.Count())
             {
-                Trace.TraceInformation(string.Format("Stopping {0} services.", services.Count()));
+                Trace.TraceInformation("Stopping {0} services.", services.Count());
 
                 Parallel.ForEach(services, s =>
                 {
@@ -109,16 +109,16 @@
                     {
                         var success = s.Stop();
 
-                        Trace.WriteLine(string.Format("{0} Stopped: {1}", s.GetType().ToString(), success));
+                        Trace.TraceInformation("{0} Stopped, Success: {1}", s.GetType().ToString(), success);
                     }
                     catch (Exception ex)
                     {
-                        Trace.WriteLine(string.Format("{0}: {1}", s.GetType().ToString(), ex.Message));
+                        Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.Message);
                     }
                 }
                 );
 
-                Trace.TraceInformation("Finished stopping services");
+                Trace.TraceInformation("Stopped {0} services.", services.Count());
             }
             else
             {

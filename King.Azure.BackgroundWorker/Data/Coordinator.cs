@@ -25,7 +25,7 @@
         /// <summary>
         /// Maximum Duration before Retry
         /// </summary>
-        private readonly TimeSpan retryInterval = TimeSpan.FromMinutes(10);
+        private readonly TimeSpan retryInterval = TimeSpan.FromMinutes(5);
         #endregion
 
         #region Constructors
@@ -69,7 +69,7 @@
 
             var performTask = true;
 
-            Trace.TraceInformation(string.Format("{0} [{1}] Querying scheduled tasks table for the latest task.", DateTime.UtcNow, entry.ServiceName));
+            Trace.TraceInformation(string.Format("{0}: Querying scheduled tasks table for the latest task.", entry.ServiceName));
 
             // Peek the table first to determine if there's any task to execute
             // Query the table by partition key (type, year, month)
@@ -79,7 +79,7 @@
             {
                 var latest = records.OrderByDescending(x => x.StartTime).First();
 
-                Trace.TraceInformation(string.Format("{0} [{1}] Latest task found in table: Partition: {2} Id: {3} StartTime: {4} CompletionTime: {5}", DateTime.UtcNow, entry.ServiceName, latest.PartitionKey, latest.Identifier, latest.StartTime, latest.CompletionTime));
+                Trace.TraceInformation(string.Format("{0}: Latest task found in table: Partition: {2} Id: {3} StartTime: {4} CompletionTime: {5}", entry.ServiceName, latest.PartitionKey, latest.Identifier, latest.StartTime, latest.CompletionTime));
 
                 // 1. If the latest task has been completed, then perform task if
                 // - the latest task has been completed more than <period> ago, or

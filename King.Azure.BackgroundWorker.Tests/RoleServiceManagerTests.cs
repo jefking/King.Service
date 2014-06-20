@@ -1,8 +1,8 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests
 {
-    using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using NSubstitute;
+    using System;
 
     [TestClass]
     public class RoleServiceManagerTests
@@ -26,6 +26,14 @@
         {
             var factory = Substitute.For<IServiceFactory<object>>();
             Assert.IsNotNull(new RoleServiceManager(factory) as IRoleServiceManager);
+        }
+
+        [TestMethod]
+        public void Run()
+        {
+            var factory = Substitute.For<IServiceFactory<object>>();
+            var manager = new RoleServiceManager(factory);
+            manager.Run();
         }
     }
 }
