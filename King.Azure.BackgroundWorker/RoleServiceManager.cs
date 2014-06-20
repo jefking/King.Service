@@ -53,13 +53,13 @@
         /// <returns>Started</returns>
         public bool OnStart()
         {
-            Trace.TraceInformation("On start called");
+            Trace.TraceInformation("On start called.");
 
             var totalSuccess = true;
 
             if (null != services && 0 < services.Count())
             {
-                Trace.TraceInformation(string.Format("Starting {0} services.", services.Count()));
+                Trace.TraceInformation("Starting {0} services.", services.Count());
 
                 Parallel.ForEach(services, s =>
                 {
@@ -80,14 +80,14 @@
                 }
                 );
 
-                Trace.TraceInformation("Finished starting services");
+                Trace.TraceInformation("Finished starting services.");
             }
             else
             {
                 Trace.TraceInformation("No services to start up.");
             }
 
-            Trace.TraceInformation("On start finished");
+            Trace.TraceInformation("On start finished.");
 
             return totalSuccess;
         }
@@ -97,7 +97,7 @@
         /// </summary>
         public void OnStop()
         {
-            Trace.TraceInformation("On stop called");
+            Trace.TraceInformation("On stop called.");
 
             if (null != services && 0 < services.Count())
             {
@@ -109,11 +109,11 @@
                     {
                         var success = s.Stop();
 
-                        Trace.TraceInformation("{0} Stopped, Success: {1}", s.GetType().ToString(), success);
+                        Trace.TraceInformation("{0} Stopped, Success: {1}.", s.GetType().ToString(), success);
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.Message);
+                        Trace.TraceError("{0}: {1}.", s.GetType().ToString(), ex.Message);
                     }
                 }
                 );
@@ -125,7 +125,7 @@
                 Trace.TraceInformation("No services to stopped.");
             }
 
-            Trace.TraceInformation("On stop finished");
+            Trace.TraceInformation("On stop finished.");
         }
         #endregion
     }

@@ -47,10 +47,10 @@
                 throw new ArgumentException("periodInSeconds");
             }
 
-            Trace.TraceInformation("{0} is due in seconds: {1}; Period in seconds: {2}.", this.GetType().ToString(), dueInSeconds, periodInSeconds);
-
             this.dueTime = TimeSpan.FromSeconds(dueInSeconds);
             this.period = TimeSpan.FromSeconds(periodInSeconds);
+
+            Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.GetType().ToString(), dueInSeconds, periodInSeconds);
         }
         #endregion
 
@@ -93,7 +93,7 @@
             }
             catch (Exception ex)
             {
-                Trace.TraceError(string.Format("{0}", ex.Message));
+                Trace.TraceError("{0}", ex.Message);
             }
         }
 
