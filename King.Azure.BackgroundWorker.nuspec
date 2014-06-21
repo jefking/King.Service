@@ -6,8 +6,8 @@
         <title>King.Service</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
-        <licenseUrl>https://github.com/jefkingabc/King.Service</licenseUrl>
-        <projectUrl>https://github.com/jefkingabc/King.Service</projectUrl>
+        <licenseUrl>https://github.com/jefking/King.Service</licenseUrl>
+        <projectUrl>https://github.com/jefking/King.Service</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Repeatable services for Azure worker roles.</description>
         <summary>Azure Background worker for scheduling syncronized tasks.</summary>
@@ -20,12 +20,5 @@
     </metadata>
     <files>
         <file src="King.Azure.BackgroundWorker\bin\Release\King.Azure.BackgroundWorker.dll" target="lib\net40\King.Azure.BackgroundWorker.dll" />
-        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.Data.Edm.dll" target="lib\net40\Microsoft.Data.Edm.dll" />
-        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.Data.OData.dll" target="lib\net40\Microsoft.Data.OData.dll" />
-        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.Data.Services.Client.dll" target="lib\net40\Microsoft.Data.Services.Client.dll" />
-        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.WindowsAzure.Configuration.dll" target="lib\net40\Microsoft.WindowsAzure.Configuration.dll" />
-        <file src="King.Azure.BackgroundWorker\bin\Release\Microsoft.WindowsAzure.Storage.dll" target="lib\net40\Microsoft.WindowsAzure.Storage.dll" />
-        <file src="King.Azure.BackgroundWorker\bin\Release\Newtonsoft.Json.dll" target="lib\net40\Newtonsoft.Json.dll" />
-        <file src="King.Azure.BackgroundWorker\bin\Release\System.Spatial.dll" target="lib\net40\System.Spatial.dll" />
     </files>
 </package>
