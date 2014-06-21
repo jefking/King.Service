@@ -46,13 +46,13 @@ class MyTask : CoordinatedManager
 }
 ```
 ## Demo Project
-[Azure Project](https://github.com/jefkingabc/King.Azure.BackgroundWorker/tree/master/Azure.Demo)
+[Azure Project](https://github.com/jefking/King.Azure.BackgroundWorker/tree/master/Azure.Demo)
 
-[Worker Role](https://github.com/jefkingabc/King.Azure.BackgroundWorker/tree/master/Worker)
+[Worker Role](https://github.com/jefking/King.Azure.BackgroundWorker/tree/master/Worker)
 
 ## Contributing
 
-Contributions are always welcome. If you have find any issues, please report them to the [Github Issues Tracker](https://github.com/jefkingabc/King.Service/issues?sort=created&direction=desc&state=open).
+Contributions are always welcome. If you have find any issues, please report them to the [Github Issues Tracker](https://github.com/jefking/King.Service/issues?sort=created&direction=desc&state=open).
 
 ## About the Author
 
