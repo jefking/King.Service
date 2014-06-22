@@ -52,7 +52,7 @@ class MyTask : CoordinatedManager
 
 ## Contributing
 
-Contributions are always welcome. If you have find any issues, please report them to the [Github Issues Tracker](https://github.com/jefking/King.Service/issues?sort=created&direction=desc&state=open).
+Contributions are always welcome. If you have find any issues, please report them to the [Github Issues Tracker](https://github.com/jefking/King.Azure.BackgroundWorker/issues?sort=created&direction=desc&state=open).
 
 ## About the Author
 

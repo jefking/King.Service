@@ -6,8 +6,8 @@
         <title>King.Service</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
-        <licenseUrl>https://github.com/jefking/King.Service</licenseUrl>
-        <projectUrl>https://github.com/jefking/King.Service</projectUrl>
+        <licenseUrl>https://github.com/jefking/King.Azure.BackgroundWorker</licenseUrl>
+        <projectUrl>https://github.com/jefking/King.Azure.BackgroundWorker</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Repeatable services for Azure worker roles.</description>
         <summary>Azure Background worker for scheduling syncronized tasks.</summary>
