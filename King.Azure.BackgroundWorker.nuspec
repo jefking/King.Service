@@ -19,6 +19,6 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="King.Azure.BackgroundWorker\bin\Release\King.Azure.BackgroundWorker.dll" target="lib\net40\King.Azure.BackgroundWorker.dll" />
+        <file src="King.Azure.BackgroundWorker\bin\Release\King.Azure.BackgroundWorker.dll" target="lib\net451\King.Azure.BackgroundWorker.dll" />
     </files>
 </package>
