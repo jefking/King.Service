@@ -6,7 +6,7 @@
         <title>King.Service</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
-        <licenseUrl>https://github.com/jefking/King.Azure.BackgroundWorker</licenseUrl>
+        <licenseUrl>https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/jefking/King.Azure.BackgroundWorker</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Repeatable services for Azure worker roles.</description>
