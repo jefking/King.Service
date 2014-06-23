@@ -68,9 +68,8 @@
   <ItemGroup>
     <Compile Include="Data\InitializeTableTask.cs" />
     <Compile Include="RoleServiceManager.cs" />
-    <Compile Include="Data\Azure\AzureStorage.cs" />
-    <Compile Include="Data\Azure\Interfaces.cs" />
-    <Compile Include="Data\Azure\TableStorage.cs" />
+    <Compile Include="Data\AzureStorage.cs" />
+    <Compile Include="Data\TableStorage.cs" />
     <Compile Include="Data\Interfaces.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="Manager.cs" />

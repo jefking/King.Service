@@ -1,4 +1,4 @@
-﻿namespace King.Azure.BackgroundWorker.Data.Azure
+﻿namespace King.Azure.BackgroundWorker.Data
 {
     using System;
     using System.Collections.Generic;

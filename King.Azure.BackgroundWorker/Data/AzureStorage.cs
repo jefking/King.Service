@@ -1,4 +1,4 @@
-﻿namespace King.Azure.BackgroundWorker.Data.Azure
+﻿namespace King.Azure.BackgroundWorker.Data
 {
     using Microsoft.WindowsAzure.Storage;
     using System;

@@ -1,7 +1,6 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
     using King.Azure.BackgroundWorker;
-    using King.Azure.BackgroundWorker.Data.Azure;
     using System;
 
     /// <summary>

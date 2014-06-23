@@ -1,7 +1,6 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests.Data
 {
     using King.Azure.BackgroundWorker.Data;
-    using King.Azure.BackgroundWorker.Data.Azure;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using NSubstitute;
     using System;
