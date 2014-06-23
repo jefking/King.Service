@@ -1,4 +1,4 @@
-﻿namespace King.Service.Tests.Data.Azure
+﻿namespace King.Service.Tests.Data
 {
     using King.Azure.BackgroundWorker.Data;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
