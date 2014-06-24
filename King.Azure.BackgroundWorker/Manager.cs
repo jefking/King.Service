@@ -87,6 +87,8 @@
         /// <param name="state">State of Timer</param>
         public virtual void Run(object state)
         {
+            var startTime = DateTime.UtcNow;
+
             try
             {
                 this.Run();
@@ -95,6 +97,9 @@
             {
                 Trace.TraceError("{0}", ex.Message);
             }
+
+            var duration = DateTime.UtcNow.Subtract(startTime);
+            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.GetType().ToString(), duration);
         }
 
         /// <summary>

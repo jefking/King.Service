@@ -99,9 +99,6 @@
                     entry.CompletionTime = DateTime.UtcNow;
                 }
             }
-
-            var duration = entry.CompletionTime.Value.Subtract(entry.StartTime);
-            Trace.TraceInformation("{0}: Task Completed (Duration: {1}). Success: {2}", entry.ServiceName, duration, entry.Successful);
         }
         #endregion
     }
