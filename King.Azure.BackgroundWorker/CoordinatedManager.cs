@@ -58,7 +58,6 @@
                 {
                     Trace.TraceInformation("{0}: Task Starting.", entry.ServiceName);
 
-                    // Insert a new entity to table
                     entry.Identifier = Guid.NewGuid();
                     entry.CompletionTime = null;
 
@@ -79,7 +78,6 @@
                         entry.CompletionTime = DateTime.UtcNow;
                     }
 
-                    // Update entry in table
                     await taskCore.InsertOrReplace(entry);
                 }
                 else
