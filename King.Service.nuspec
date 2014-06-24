@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.Service</id>
-        <version>1.4.5</version>
+        <version>1.4.6</version>
         <title>King.Service</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
@@ -11,7 +11,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Repeatable services for Azure worker roles.</description>
         <summary>Azure Background worker for scheduling independant and coordinated tasks.</summary>
-        <releaseNotes />
+        <releaseNotes>Better Lifecycle of Worker Role.</releaseNotes>
         <copyright>Jef King</copyright>
         <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing</tags>
         <dependencies>
