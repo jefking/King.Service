@@ -1,6 +1,7 @@
 ﻿namespace Worker
 {
     using King.Azure.BackgroundWorker;
+    using System.Diagnostics;
 
     public class Task : Manager
     {
@@ -11,7 +12,7 @@
 
         public override void Run()
         {
-            //Task that you want to do
+            Trace.TraceInformation("Task that you want to do");
         }
     }
 }

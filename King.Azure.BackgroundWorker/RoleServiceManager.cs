@@ -15,7 +15,17 @@
         /// <summary>
         /// Services
         /// </summary>
-        private readonly IEnumerable<IRunnable> services;
+        private IEnumerable<IRunnable> services = null;
+
+        /// <summary>
+        /// Manager
+        /// </summary>
+        private readonly IServiceFactory<object> manager = null;
+
+        /// <summary>
+        /// Lock object for Mananger
+        /// </summary>
+        private readonly object managerLock = new object();
         #endregion
 
         #region Constructors
@@ -30,7 +40,10 @@
                 throw new ArgumentNullException("manager");
             }
 
-            this.services = manager.Services(this);
+            lock (this.managerLock)
+            {
+                this.manager = manager;
+            }
         }
         #endregion
 
@@ -41,21 +54,6 @@
         public void Run()
         {
             Trace.TraceInformation("Run called");
-
-            //Currently No-Op
-
-            Trace.TraceInformation("Run finished");
-        }
-
-        /// <summary>
-        /// On Start
-        /// </summary>
-        /// <returns>Started</returns>
-        public bool OnStart()
-        {
-            Trace.TraceInformation("On start called.");
-
-            var totalSuccess = true;
 
             if (null != services && 0 < services.Count())
             {
@@ -68,14 +66,10 @@
                         var success = s.Start();
 
                         Trace.TraceInformation("{0} Started: {1}", s.GetType().ToString(), success);
-
-                        totalSuccess &= success;
                     }
                     catch (Exception ex)
                     {
                         Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.Message);
-
-                        totalSuccess = false;
                     }
                 }
                 );
@@ -87,9 +81,32 @@
                 Trace.TraceInformation("No services to start up.");
             }
 
+            Trace.TraceInformation("Run finished");
+        }
+
+        /// <summary>
+        /// On Start
+        /// </summary>
+        /// <returns>Started</returns>
+        public bool OnStart()
+        {
+            Trace.TraceInformation("On start called.");
+
+            if (null == this.services)
+            {
+                Trace.TraceInformation("Loading Services.");
+
+                lock (this.managerLock)
+                {
+                    this.services = manager.Services(this);
+                }
+
+                Trace.TraceInformation("Services Loaded.");
+            }
+
             Trace.TraceInformation("On start finished.");
 
-            return totalSuccess;
+            return true;
         }
 
         /// <summary>
@@ -119,6 +136,8 @@
                 );
 
                 Trace.TraceInformation("Stopped {0} services.", services.Count());
+
+                services = null;
             }
             else
             {
