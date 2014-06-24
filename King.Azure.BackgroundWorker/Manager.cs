@@ -90,7 +90,7 @@
         /// <param name="state">State of Timer</param>
         public virtual void Run(object state)
         {
-            var startTime = DateTime.UtcNow;
+            Stopwatch overallTiming = Stopwatch.StartNew(); 
 
             try
             {
