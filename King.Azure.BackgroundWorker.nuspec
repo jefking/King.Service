@@ -10,7 +10,7 @@
         <projectUrl>https://github.com/jefking/King.Azure.BackgroundWorker</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Repeatable services for Azure worker roles.</description>
-        <summary>Azure Background worker for scheduling syncronized tasks.</summary>
+        <summary>Azure Background worker for scheduling independant and coordinated tasks.</summary>
         <releaseNotes />
         <copyright>Jef King</copyright>
         <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing</tags>
