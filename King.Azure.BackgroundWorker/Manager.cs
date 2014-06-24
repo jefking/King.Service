@@ -24,11 +24,6 @@
         /// Period of Timer
         /// </summary>
         private readonly TimeSpan period;
-
-        /// <summary>
-        /// Disposed
-        /// </summary>
-        private volatile bool disposed = false;
         #endregion
 
         #region Constructors
@@ -51,6 +46,14 @@
             this.period = TimeSpan.FromSeconds(periodInSeconds);
 
             Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.GetType().ToString(), dueInSeconds, periodInSeconds);
+        }
+
+        /// <summary>
+        /// Finalizer
+        /// </summary>
+        ~Manager() 
+        {
+            Dispose(false);
         }
         #endregion
 
@@ -123,15 +126,13 @@
         /// <param name="disposing">Disposing</param>
         protected virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (disposing)
             {
                 if (null != this.timer)
                 {
                     this.timer.Dispose();
+                    this.timer = null;
                 }
-
-                this.timer = null;
-                this.disposed = true;
             }
         }
         #endregion
