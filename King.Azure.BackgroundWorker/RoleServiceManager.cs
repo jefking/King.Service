@@ -63,9 +63,9 @@
                 {
                     try
                     {
-                        var success = s.Start();
+                       s.Run(this);
 
-                        Trace.TraceInformation("{0} Started: {1}", s.GetType().ToString(), success);
+                        Trace.TraceInformation("{0} Started.", s.GetType().ToString());
                     }
                     catch (Exception ex)
                     {
