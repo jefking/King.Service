@@ -1,6 +1,5 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
-    using King.Azure.BackgroundWorker.Data.Model;
     using Microsoft.WindowsAzure.Storage.Table;
     using System;
     using System.Collections.Generic;

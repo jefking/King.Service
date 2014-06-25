@@ -112,6 +112,15 @@
 
         public async Task Start(Type type, Guid identifier, DateTime start)
         {
+            if (null == type)
+            {
+                throw new ArgumentNullException("type");
+            }
+            if (Guid.Empty == identifier)
+            {
+                throw new ArgumentException("identifier");
+            }
+
             var entry = new ScheduledTaskEntry(type)
             {
                 Identifier = identifier,
@@ -123,6 +132,15 @@
 
         public async Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success)
         {
+            if (null == type)
+            {
+                throw new ArgumentNullException("type");
+            }
+            if (Guid.Empty == identifier)
+            {
+                throw new ArgumentException("identifier");
+            }
+
             var entry = new ScheduledTaskEntry(type)
             {
                 Identifier = identifier,
