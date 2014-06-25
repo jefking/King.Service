@@ -53,5 +53,17 @@
             var entity = new ScheduledTaskEntry(this.GetType());
             Assert.AreEqual(expected, entity.PartitionKey);
         }
+
+        [TestMethod]
+        public void Identifier()
+        {
+            var entity = new ScheduledTaskEntry(this.GetType());
+            Assert.IsNull(entity.Identifier);
+            var data = Guid.NewGuid();
+            entity.Identifier = data;
+            Assert.AreEqual(data, entity.Identifier);
+            entity.Identifier = null;
+            Assert.IsNull(entity.Identifier);
+        }
     }
 }
