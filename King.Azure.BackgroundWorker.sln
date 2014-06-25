@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Worker", "Worker\Worker.csp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{E515B3A3-A852-4DF1-AFF2-5941FD203E48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Azure.BackgroundWorker.Integration", "King.Azure.BackgroundWorker.Integration\King.Azure.BackgroundWorker.Integration.csproj", "{8B041949-3049-49DD-A2F5-74587FAD08FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,12 +46,18 @@ Global
 		{BCC0442F-E931-4D6E-A78C-1FEE6320D047}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BCC0442F-E931-4D6E-A78C-1FEE6320D047}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BCC0442F-E931-4D6E-A78C-1FEE6320D047}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B041949-3049-49DD-A2F5-74587FAD08FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B041949-3049-49DD-A2F5-74587FAD08FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B041949-3049-49DD-A2F5-74587FAD08FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B041949-3049-49DD-A2F5-74587FAD08FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{24B0BFED-62C1-48C3-AE4E-A503A007DE1A} = {E515B3A3-A852-4DF1-AFF2-5941FD203E48}
 		{7A944B51-4D5F-4CBD-A188-CE336FF932D7} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
 		{BCC0442F-E931-4D6E-A78C-1FEE6320D047} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
+		{8B041949-3049-49DD-A2F5-74587FAD08FB} = {E515B3A3-A852-4DF1-AFF2-5941FD203E48}
 	EndGlobalSection
 EndGlobal
