@@ -31,7 +31,16 @@
         public void CheckForTaskEntryNull()
         {
             var core = new Coordinator(new TimeSpan(9000), "UseDevelopmentStorage=true");
-            core.CheckForTask(null);
+            core.Check(null);
+        }
+
+        [TestMethod]
+        public void InitializeTask()
+        {
+            var core = new Coordinator(new TimeSpan(9000), "UseDevelopmentStorage=true");
+            var init = core.InitializeTask();
+            Assert.IsNotNull(init);
+            Assert.IsNotNull(init as InitializeTableTask);
         }
     }
 }

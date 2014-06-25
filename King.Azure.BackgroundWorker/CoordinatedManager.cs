@@ -46,59 +46,48 @@
         public override async void Run(object state)
         {
             var timing = Stopwatch.StartNew();
+            var type = this.GetType();
+            var serviceName = type.ToString();
+            var startTime = DateTime.UtcNow;
+            var successful = false;
 
-            var entry = new ScheduledTaskEntry(this.GetType())
-            {
-                StartTime = DateTime.UtcNow,
-            };
-
-            Trace.TraceInformation("{0}: Task Checking.", entry.ServiceName);
+            Trace.TraceInformation("{0}: Task Checking.", serviceName);
 
             try
             {
-                if (taskCore.CheckForTask(entry))
+                if (taskCore.Check(type))
                 {
-                    Trace.TraceInformation("{0}: Task Starting.", entry.ServiceName);
+                    Trace.TraceInformation("{0}: Task Starting.", serviceName);
 
-                    entry.Identifier = Guid.NewGuid();
-                    entry.CompletionTime = null;
+                    var identifier = Guid.NewGuid();
 
-                    await taskCore.InsertOrReplace(entry);
+                    await this.taskCore.Start(type, identifier, startTime);
 
                     try
                     {
                         this.Run();
-                        entry.Successful = true;
+                        successful = true;
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError("{0}: {1}", entry.ServiceName, ex.Message);
-                        entry.Successful = false;
-                    }
-                    finally
-                    {
-                        entry.CompletionTime = DateTime.UtcNow;
+                        Trace.TraceError("{0}: {1}", serviceName, ex.Message);
+                        successful = false;
                     }
 
-                    await taskCore.InsertOrReplace(entry);
+                    await this.taskCore.Complete(type, identifier, startTime, DateTime.UtcNow, successful);
                 }
                 else
                 {
-                    Trace.TraceInformation("{0}: Task not Started.", entry.ServiceName);
+                    Trace.TraceInformation("{0}: Task not Started.", serviceName);
                 }
             }
             catch (Exception ex)
             {
-                Trace.TraceError("{0}: {1}", entry.ServiceName, ex.Message);
-                entry.Successful = false;
+                Trace.TraceError("{0}: {1}", serviceName, ex.Message);
+                successful = false;
             }
             finally
             {
-                if (!entry.CompletionTime.HasValue)
-                {
-                    entry.CompletionTime = DateTime.UtcNow;
-                }
-
                 timing.Stop();
             }
 

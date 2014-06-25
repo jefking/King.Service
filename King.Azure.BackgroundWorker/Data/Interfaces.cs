@@ -2,6 +2,7 @@
 {
     using King.Azure.BackgroundWorker.Data.Model;
     using Microsoft.WindowsAzure.Storage.Table;
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -21,7 +22,9 @@
         /// </summary>
         /// <param name="entry">Scheduled Task Entry</param>
         /// <returns>True if need to execute, false if not</returns>
-        bool CheckForTask(ScheduledTaskEntry entry);
+        bool Check(Type type);
+        Task Start(Type type, Guid identifier, DateTime start);
+        Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success);
         #endregion
     }
 

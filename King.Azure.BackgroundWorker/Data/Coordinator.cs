@@ -4,11 +4,12 @@
     using System;
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Scheduled Task Core
     /// </summary>
-    public class Coordinator : TableStorage, ICoordinator
+    public class Coordinator : ICoordinator
     {
         #region Members
         /// <summary>
@@ -25,6 +26,11 @@
         /// Maximum Duration before Retry
         /// </summary>
         private readonly TimeSpan retryInterval = TimeSpan.FromMinutes(5);
+
+        /// <summary>
+        /// Table Storage
+        /// </summary>
+        private readonly ITableStorage storage = null;
         #endregion
 
         #region Constructors
@@ -34,14 +40,23 @@
         /// <param name="period">Period</param>
         /// <param name="connectionString">Connection String</param>
         public Coordinator(TimeSpan period, string connectionString)
-            : base(TableName, connectionString)
+            : this(new TableStorage(TableName, connectionString), period)
         {
+        }
+
+        public Coordinator(ITableStorage storage, TimeSpan period)
+        {
+            if (null == storage)
+            {
+                throw new ArgumentNullException("storage");
+            }
             if (TimeSpan.Zero >= period)
             {
                 throw new ArgumentException("period");
             }
-            
+
             this.period = period;
+            this.storage = storage;
         }
         #endregion
 
@@ -51,20 +66,22 @@
         /// </summary>
         public Manager InitializeTask()
         {
-            return new InitializeTableTask(this);
+            return new InitializeTableTask(this.storage);
         }
 
         /// <summary>
         /// Determine whether a new task needs to be executed
         /// </summary>
-        /// <param name="entry">Scheduled Task Entry</param>
+        /// <param name="type">Type</param>
         /// <returns>True if need to execute, false if not</returns>
-        public bool CheckForTask(ScheduledTaskEntry entry)
+        public bool Check(Type type)
         {
-            if (entry == null)
+            if (null == type)
             {
-                throw new ArgumentNullException("entry");
+                throw new ArgumentNullException("type");
             }
+
+            var entry = new ScheduledTaskEntry(type);
 
             var performTask = true;
 
@@ -72,7 +89,7 @@
 
             // Peek the table first to determine if there's any task to execute
             // Query the table by partition key (type, year, month)
-            var records = base.QueryByPartition<ScheduledTaskEntry>(entry.PartitionKey);
+            var records = this.storage.QueryByPartition<ScheduledTaskEntry>(entry.PartitionKey);
 
             if (records != null && records.Count() > 0)
             {
@@ -91,6 +108,30 @@
             }
 
             return performTask;
+        }
+
+        public async Task Start(Type type, Guid identifier, DateTime start)
+        {
+            var entry = new ScheduledTaskEntry(type)
+            {
+                Identifier = identifier,
+                StartTime = start,
+            };
+
+            await this.storage.InsertOrReplace(entry);
+        }
+
+        public async Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success)
+        {
+            var entry = new ScheduledTaskEntry(type)
+            {
+                Identifier = identifier,
+                StartTime = start,
+                CompletionTime = end,
+                Successful = success,
+            };
+
+            await this.storage.InsertOrReplace(entry);
         }
         #endregion
     }
