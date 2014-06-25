@@ -4,6 +4,7 @@
     using King.Azure.BackgroundWorker.Data.Model;
     using System;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Scheduled Manager
@@ -14,7 +15,7 @@
         /// <summary>
         /// Task Core
         /// </summary>
-        private readonly Coordinator taskCore;
+        private readonly ICoordinator taskCore;
         #endregion
 
         #region Constructors
@@ -24,9 +25,14 @@
         /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
         protected CoordinatedManager(string connectionString, double periodInSeconds = 60)
-            : base(60, periodInSeconds)
+            : this(new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionString))
         {
-            this.taskCore = new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionString);
+        }
+
+        public CoordinatedManager(ICoordinator coordinator)
+            :base(60, coordinator.PeriodInSeconds)
+        {
+            this.taskCore = coordinator;
         }
         #endregion
 
@@ -43,7 +49,7 @@
         /// Execute
         /// </summary>
         /// <param name="state">State</param>
-        public override async void Run(object state)
+        public override void Run(object state)
         {
             var timing = Stopwatch.StartNew();
             var type = this.GetType();
@@ -61,7 +67,8 @@
 
                     var identifier = Guid.NewGuid();
 
-                    await this.taskCore.Start(type, identifier, startTime);
+                    var task = this.taskCore.Start(type, identifier, startTime);
+                    task.Wait();
 
                     try
                     {
@@ -74,7 +81,8 @@
                         successful = false;
                     }
 
-                    await this.taskCore.Complete(type, identifier, startTime, DateTime.UtcNow, successful);
+                    task = this.taskCore.Complete(type, identifier, startTime, DateTime.UtcNow, successful);
+                    task.Wait();
                 }
                 else
                 {

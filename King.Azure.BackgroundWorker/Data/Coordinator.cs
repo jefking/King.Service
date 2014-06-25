@@ -152,5 +152,15 @@
             await this.storage.InsertOrReplace(entry);
         }
         #endregion
+
+        #region Properties
+        public int PeriodInSeconds
+        {
+            get
+            {
+                return this.period.Seconds;
+            }
+        }
+        #endregion
     }
 }

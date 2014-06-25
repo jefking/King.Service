@@ -1,6 +1,7 @@
 ﻿namespace King.Azure.BackgroundWorker
 {
     using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Runnable interface for Tasks

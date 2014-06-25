@@ -2,6 +2,7 @@
 {
     using King.Azure.BackgroundWorker;
     using System;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Initialize table for Coordination

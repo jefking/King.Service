@@ -25,6 +25,13 @@
         Task Start(Type type, Guid identifier, DateTime start);
         Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success);
         #endregion
+
+        #region Properties
+        int PeriodInSeconds
+        {
+            get;
+        }
+        #endregion
     }
 
     /// <summary>
