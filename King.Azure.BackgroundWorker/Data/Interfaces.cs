@@ -59,7 +59,7 @@
         /// Insert Batch
         /// </summary>
         /// <param name="entities"></param>
-        Task<IEnumerable<TableResult>> Insert(IEnumerable<TableEntity> entities);
+        Task<IEnumerable<TableResult>> Insert(IEnumerable<ITableEntity> entities);
 
         /// <summary>
         /// Query By Partition

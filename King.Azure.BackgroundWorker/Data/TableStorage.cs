@@ -85,7 +85,7 @@
         /// Insert Batch
         /// </summary>
         /// <param name="entities"></param>
-        public async Task<IEnumerable<TableResult>> Insert(IEnumerable<TableEntity> entities)
+        public async Task<IEnumerable<TableResult>> Insert(IEnumerable<ITableEntity> entities)
         {
             var batchOperation = new TableBatchOperation();
             foreach (var entity in entities)
