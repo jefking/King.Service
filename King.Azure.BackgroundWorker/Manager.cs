@@ -90,7 +90,7 @@
         /// <param name="state">State of Timer</param>
         public virtual void Run(object state)
         {
-            Stopwatch overallTiming = Stopwatch.StartNew(); 
+            var timing = Stopwatch.StartNew();
 
             try
             {
@@ -100,9 +100,12 @@
             {
                 Trace.TraceError("{0}", ex.Message);
             }
+            finally
+            {
+                timing.Stop();
+            }
 
-            var duration = DateTime.UtcNow.Subtract(startTime);
-            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.GetType().ToString(), duration);
+            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.GetType().ToString(), timing.Elapsed);
         }
 
         /// <summary>

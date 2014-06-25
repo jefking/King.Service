@@ -45,6 +45,8 @@
         /// <param name="state">State</param>
         public override async void Run(object state)
         {
+            var timing = Stopwatch.StartNew();
+
             var entry = new ScheduledTaskEntry(this.GetType())
             {
                 StartTime = DateTime.UtcNow,
@@ -96,7 +98,11 @@
                 {
                     entry.CompletionTime = DateTime.UtcNow;
                 }
+
+                timing.Stop();
             }
+
+            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.GetType().ToString(), timing.Elapsed);
         }
         #endregion
     }
