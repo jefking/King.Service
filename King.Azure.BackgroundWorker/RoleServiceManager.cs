@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -63,7 +64,7 @@
                 {
                     try
                     {
-                       s.Run(this);
+                       s.Start();
 
                         Trace.TraceInformation("{0} Started.", s.GetType().ToString());
                     }
@@ -73,6 +74,7 @@
                     }
                 }
                 );
+
 
                 Trace.TraceInformation("Finished starting services.");
             }
