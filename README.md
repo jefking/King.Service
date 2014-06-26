@@ -54,10 +54,6 @@ class MyTask : CoordinatedManager
 
 Contributions are always welcome. If you have find any issues, please report them to the [Github Issues Tracker](https://github.com/jefking/King.Azure.BackgroundWorker/issues?sort=created&direction=desc&state=open).
 
-## About the Author
-
-Jef King has worked in the software industry for fourteen years. Over this time he has experienced a range of responsibilities in various industries. His passion for technology and motivating teams has kept his drive and focus strong. Early on in his career he showed an entrepreneurial spirit, starting multiple small companies. He departed from this to learn more about the software industry by working with larger companies, such as Microsoft. These diverse experiences have given a very unique perspective on teams and software engineering. Since moving back to Vancouver he has built several highly productive software development teams, and inspired others to try similar techniques.
-
 ## Apache 2.0 License
 
 Copyright 2014 Jef King
