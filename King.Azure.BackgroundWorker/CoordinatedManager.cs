@@ -30,7 +30,7 @@
         }
 
         public CoordinatedManager(ICoordinator coordinator)
-            :base(60, coordinator.PeriodInSeconds)
+            :base(30, coordinator.PeriodInSeconds + 1)
         {
             this.taskCore = coordinator;
         }
@@ -99,7 +99,7 @@
                 timing.Stop();
             }
 
-            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.GetType().ToString(), timing.Elapsed);
+            Trace.TraceInformation("{0}: Coordinated Task Completed (Duration: {1}).", this.GetType().ToString(), timing.Elapsed);
         }
         #endregion
     }
