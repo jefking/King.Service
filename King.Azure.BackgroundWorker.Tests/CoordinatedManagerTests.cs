@@ -15,12 +15,10 @@
             public TestManager()
                 : base("UseDevelopmentStorage=true;")
             {
-
             }
             public TestManager(ICoordinator c)
                 : base(c)
             {
-
             }
 
             public bool Throw;
