@@ -34,7 +34,7 @@
         {
             var services = new List<IRunnable>();
             var service = Substitute.For<IRunnable>();
-            service.Run(Arg.Any<object>());
+            service.Start();
 
             services.Add(service);
 
@@ -45,7 +45,7 @@
             manager.OnStart();
             manager.Run();
 
-            service.Received().Run(Arg.Any<object>());
+            service.Received().Start();
             factory.Received().Services(Arg.Any<RoleServiceManager>());
         }
 
@@ -54,7 +54,7 @@
         {
             var services = new List<IRunnable>();
             var service = Substitute.For<IRunnable>();
-            service.When(s => s.Run(Arg.Any<object>())).Do(x => { throw new Exception(); });
+            service.When(s => s.Start()).Do(x => { throw new Exception(); });
 
             services.Add(service);
 
@@ -65,7 +65,7 @@
             manager.OnStart();
             manager.Run();
 
-            service.Received().Run(Arg.Any<object>());
+            service.Received().Start();
             factory.Received().Services(Arg.Any<RoleServiceManager>());
         }
 
