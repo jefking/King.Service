@@ -3,7 +3,7 @@ King.Azure.BackgroundWorker
 
 Simple Service Scheduling for Azure; meant to be used in background worker roles.
 - Create a task that runs every X amount of time per instance
-- Create a task that runs every X amount of time across instances
+- Create a task that runs every X amount of time across any number of instances
 
 ## NuGet
 [Add via NuGet](https://www.nuget.org/packages/King.Service)
