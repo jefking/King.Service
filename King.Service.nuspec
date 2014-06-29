@@ -1,27 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-  <metadata>
-    <id>King.Service</id>
-    <version>1.4.8</version>
-    <title>King.Service</title>
-    <authors>Jef King</authors>
-    <owners>Jef King</owners>
-    <licenseUrl>https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/jefking/King.Azure.BackgroundWorker</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Repeatable services for Azure worker roles.</description>
-    <summary>Azure Background worker for scheduling independant and coordinated tasks.</summary>
-    <releaseNotes>
-      Sensitivity of timing is greater. Coordinated Task will run within +1s of timing specified.
-      Threading issue, threads are starting properly now.
-    </releaseNotes>
-    <copyright>Jef King</copyright>
-    <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing</tags>
-    <dependencies>
-      <dependency id="WindowsAzure.Storage" version="4.0.1" />
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="King.Azure.BackgroundWorker\bin\Release\King.Azure.BackgroundWorker.dll" target="lib\net451\King.Azure.BackgroundWorker.dll" />
-  </files>
+    <metadata>
+        <id>King.Service</id>
+        <version>1.4.7</version>
+        <title>King.Service</title>
+        <authors>Jef King</authors>
+        <owners>Jef King</owners>
+        <licenseUrl>https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/jefking/King.Azure.BackgroundWorker</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Repeatable services for Azure worker roles.</description>
+        <summary>Azure Background worker for scheduling independant and coordinated tasks.</summary>
+        <releaseNotes>Adding references to NuGet for simple installation.</releaseNotes>
+        <copyright>Jef King</copyright>
+        <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing</tags>
+        <dependencies>
+            <dependency id="WindowsAzure.Storage" version="4.0.1" />
+        </dependencies>
+        <frameworkAssemblies>
+            <frameworkAssembly assemblyName="System" targetFramework="" />
+            <frameworkAssembly assemblyName="System.Data" targetFramework="" />
+        </frameworkAssemblies>
+    </metadata>
+    <files>
+        <file src="King.Azure.BackgroundWorker\bin\Release\King.Azure.BackgroundWorker.dll" target="lib\net451\King.Azure.BackgroundWorker.dll" />
+    </files>
 </package>
