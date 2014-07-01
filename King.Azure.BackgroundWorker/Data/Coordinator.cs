@@ -88,7 +88,6 @@
             Trace.TraceInformation(string.Format("{0}: Querying scheduled tasks for the latest.", entry.ServiceName));
 
             // Peek the table first to determine if there's any task to execute
-            // Query the table by partition key (type, year, month)
             var records = this.storage.QueryByPartition<ScheduledTaskEntry>(entry.PartitionKey);
 
             if (records != null && records.Count() > 0)
