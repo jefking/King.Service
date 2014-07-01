@@ -2,6 +2,7 @@ King.Azure.BackgroundWorker
 ============
 
 Simple Service Scheduling for Azure; meant to be used in background worker roles.
+- Create a task to initialize your environment
 - Create a task that runs every X amount of time per instance
 - Create a task that runs every X amount of time across any number of instances
 
@@ -11,6 +12,16 @@ Simple Service Scheduling for Azure; meant to be used in background worker roles
 PM> Install-Package King.Service
 ```
 ## Examples
+### Implement Initialization Task
+```
+class MyInitTask : InitializeTask
+{
+	public virtual void Run()
+	{
+		//Initialize one time resources
+	}
+}
+```
 ### Implement Repetitive Task
 ```
 class MyTask : TaskManager
