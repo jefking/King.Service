@@ -9,7 +9,7 @@
         <licenseUrl>https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/jefking/King.Azure.BackgroundWorker</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Task scheduling for Azure; use with worker roles.</description>
+        <description>Task scheduling for Azure; use with worker roles for running background processing tasks.</description>
         <summary>Easily create background tasks to be run on worker roles.</summary>
         <releaseNotes>Initialization Tasks</releaseNotes>
         <copyright>Jef King</copyright>
