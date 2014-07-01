@@ -8,7 +8,7 @@
     /// <summary>
     /// Service Manager
     /// </summary>
-    public abstract class Manager : IRunnable, IDisposable
+    public abstract class TaskManager : IRunnable, IDisposable
     {
         #region Members
         /// <summary>
@@ -31,7 +31,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        protected Manager(int dueInSeconds, double periodInSeconds)
+        protected TaskManager(int dueInSeconds, double periodInSeconds)
         {
             if (0 > dueInSeconds)
             {
@@ -52,7 +52,7 @@
         /// <summary>
         /// Finalizer
         /// </summary>
-        ~Manager() 
+        ~TaskManager() 
         {
             Dispose(false);
         }

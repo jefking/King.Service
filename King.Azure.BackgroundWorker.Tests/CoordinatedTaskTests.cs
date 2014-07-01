@@ -7,10 +7,10 @@
     using System.Threading.Tasks;
 
     [TestClass]
-    public class CoordinatedManagerTests
+    public class CoordinatedTaskTests
     {
         #region Class
-        public class TestManager : CoordinatedManager
+        public class TestManager : CoordinatedTask
         {
             public TestManager()
                 : base("UseDevelopmentStorage=true;")

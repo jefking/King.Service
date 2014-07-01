@@ -70,10 +70,10 @@
     <Compile Include="Data\TableStorage.cs" />
     <Compile Include="Data\Interfaces.cs" />
     <Compile Include="Interfaces.cs" />
-    <Compile Include="Manager.cs" />
+    <Compile Include="TaskManager.cs" />
     <Compile Include="Data\Model\ScheduledTaskEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CoordinatedManager.cs" />
+    <Compile Include="CoordinatedTask.cs" />
     <Compile Include="Data\Coordinator.cs" />
     <Compile Include="ServiceFactory.cs" />
   </ItemGroup>

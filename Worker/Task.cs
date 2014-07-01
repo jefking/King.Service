@@ -3,7 +3,7 @@
     using King.Azure.BackgroundWorker;
     using System.Diagnostics;
 
-    public class Task : Manager
+    public class Task : TaskManager
     {
         public Task()
             : base(10, 60)

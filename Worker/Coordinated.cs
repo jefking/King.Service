@@ -3,9 +3,9 @@
     using King.Azure.BackgroundWorker;
     using System.Diagnostics;
 
-    public class CoordinatedTask : CoordinatedManager
+    public class Coordinated : CoordinatedTask
     {
-        public CoordinatedTask()
+        public Coordinated()
             : base("UseDevelopmentStorage=true", 10)
         {
         }

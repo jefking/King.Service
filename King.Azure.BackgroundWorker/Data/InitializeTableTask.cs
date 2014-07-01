@@ -2,12 +2,11 @@
 {
     using King.Azure.BackgroundWorker;
     using System;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Initialize table for Coordination
     /// </summary>
-    public class InitializeTableTask : Manager
+    public class InitializeTableTask : TaskManager
     {
         #region Members
         /// <summary>

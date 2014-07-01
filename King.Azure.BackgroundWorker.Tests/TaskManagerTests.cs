@@ -4,10 +4,10 @@
     using System;
 
     [TestClass]
-    public class ManagerTests
+    public class TaskManagerTests
     {
         #region Helper
-        public class TestManager : Manager
+        public class TestManager : TaskManager
         {
             public TestManager(int dueInSeconds, double periodInSeconds)
                 : base(dueInSeconds, periodInSeconds)

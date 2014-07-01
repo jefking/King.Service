@@ -14,7 +14,7 @@
             services.Add(new Task());
 
             //Work coordinated between servers
-            var task = new CoordinatedTask();
+            var task = new Coordinated();
             // Add once to ensure that Table is created for Instances to communicate with
             services.Add(task.InitializeTask());
             // Add your coordinated task(s)

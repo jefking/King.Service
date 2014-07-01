@@ -9,7 +9,7 @@
     /// <summary>
     /// Scheduled Manager
     /// </summary>
-    public abstract class CoordinatedManager : Manager
+    public abstract class CoordinatedTask : TaskManager
     {
         #region Members
         /// <summary>
@@ -24,12 +24,12 @@
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
-        protected CoordinatedManager(string connectionString, double periodInSeconds = 60)
+        protected CoordinatedTask(string connectionString, double periodInSeconds = 60)
             : this(new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionString))
         {
         }
 
-        public CoordinatedManager(ICoordinator coordinator)
+        public CoordinatedTask(ICoordinator coordinator)
             :base(30, coordinator.PeriodInSeconds + 1)
         {
             this.taskCore = coordinator;
@@ -40,7 +40,7 @@
         /// <summary>
         /// Initialize Table Task
         /// </summary>
-        public Manager InitializeTask()
+        public TaskManager InitializeTask()
         {
             return this.taskCore.InitializeTask();
         }

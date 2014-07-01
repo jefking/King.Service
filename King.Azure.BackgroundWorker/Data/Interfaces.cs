@@ -14,7 +14,7 @@
         /// <summary>
         /// Initialize Table
         /// </summary>
-        Manager InitializeTask();
+        TaskManager InitializeTask();
 
         /// <summary>
         /// Determine whether a new task needs to be executed

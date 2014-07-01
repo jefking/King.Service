@@ -64,7 +64,7 @@
         /// <summary>
         /// Initialize Table Task
         /// </summary>
-        public Manager InitializeTask()
+        public TaskManager InitializeTask()
         {
             return new InitializeTableTask(this.storage);
         }
