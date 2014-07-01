@@ -16,6 +16,13 @@
         }
 
         [TestMethod]
+        public void Constructor()
+        {
+            var table = Substitute.For<ITableStorage>();
+            Assert.IsNotNull(new InitializeTableTask(table) as InitializeTask);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTableNull()
         {

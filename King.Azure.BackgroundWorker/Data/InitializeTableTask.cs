@@ -6,7 +6,7 @@
     /// <summary>
     /// Initialize table for Coordination
     /// </summary>
-    public class InitializeTableTask : TaskManager
+    public class InitializeTableTask : InitializeTask
     {
         #region Members
         /// <summary>
@@ -21,7 +21,6 @@
         /// </summary>
         /// <param name="table"></param>
         public InitializeTableTask(ITableStorage table)
-            : base(10, TimeSpan.FromDays(7).Seconds)
         {
             if (null == table)
             {
