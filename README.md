@@ -46,11 +46,11 @@ class MyTask : CoordinatedTask
 	}
 }
 ```
-### [Initialize Services](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Factory.cs)
+### [Initialize Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Factory.cs)
 ```
-class Factory : ServiceFactory
+class Factory : TaskFactory
 {
-    public override IEnumerable<IRunnable> Services(object passthrough)
+    public override IEnumerable<IRunnable> Tasks(object passthrough)
     {
         var services = new List<IRunnable>();
         // Initialization Services

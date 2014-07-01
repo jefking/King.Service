@@ -30,13 +30,13 @@
     }
 
     /// <summary>
-    /// Service Factory
+    /// Task Factory
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IServiceFactory<T>
+    public interface ITaskFactory<T>
     {
         #region Methods
-        IEnumerable<IRunnable> Services(T passthrough);
+        IEnumerable<IRunnable> Tasks(T passthrough);
         #endregion
     }
 

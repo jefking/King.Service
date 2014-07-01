@@ -20,7 +20,7 @@
         /// <summary>
         /// Manager
         /// </summary>
-        private readonly IServiceFactory<object> manager = null;
+        private readonly ITaskFactory<object> manager = null;
 
         /// <summary>
         /// Lock object for Mananger
@@ -33,7 +33,7 @@
         /// Pass Service Factory to run services
         /// </summary>
         /// <param name="services">Services</param>
-        public RoleServiceManager(IServiceFactory<object> manager)
+        public RoleServiceManager(ITaskFactory<object> manager)
         {
             if (null == manager)
             {
@@ -99,7 +99,7 @@
 
                 lock (this.managerLock)
                 {
-                    this.services = manager.Services(this);
+                    this.services = manager.Tasks(this);
                 }
 
                 Trace.TraceInformation("Services Loaded.");

@@ -76,7 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CoordinatedTask.cs" />
     <Compile Include="Data\Coordinator.cs" />
-    <Compile Include="ServiceFactory.cs" />
+    <Compile Include="TaskFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

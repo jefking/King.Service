@@ -92,7 +92,6 @@
     <Compile Include="TaskManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoleServiceManagerTests.cs" />
-    <Compile Include="ServiceFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\King.Azure.BackgroundWorker\King.Azure.BackgroundWorker.csproj">

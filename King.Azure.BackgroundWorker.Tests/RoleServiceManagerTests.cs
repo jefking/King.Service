@@ -11,7 +11,7 @@
         [TestMethod]
         public void Constructor()
         {
-            var factory = Substitute.For<IServiceFactory<object>>();
+            var factory = Substitute.For<ITaskFactory<object>>();
             new RoleServiceManager(factory);
         }
 
@@ -25,7 +25,7 @@
         [TestMethod]
         public void IsIRoleServiceManager()
         {
-            var factory = Substitute.For<IServiceFactory<object>>();
+            var factory = Substitute.For<ITaskFactory<object>>();
             Assert.IsNotNull(new RoleServiceManager(factory) as IRoleServiceManager);
         }
 
@@ -38,15 +38,15 @@
 
             services.Add(service);
 
-            var factory = Substitute.For<IServiceFactory<object>>();
-            factory.Services(Arg.Any<RoleServiceManager>()).Returns(services);
+            var factory = Substitute.For<ITaskFactory<object>>();
+            factory.Tasks(Arg.Any<RoleServiceManager>()).Returns(services);
 
             var manager = new RoleServiceManager(factory);
             manager.OnStart();
             manager.Run();
 
             service.Received().Start();
-            factory.Received().Services(Arg.Any<RoleServiceManager>());
+            factory.Received().Tasks(Arg.Any<RoleServiceManager>());
         }
 
         [TestMethod]
@@ -58,21 +58,21 @@
 
             services.Add(service);
 
-            var factory = Substitute.For<IServiceFactory<object>>();
-            factory.Services(Arg.Any<RoleServiceManager>()).Returns(services);
+            var factory = Substitute.For<ITaskFactory<object>>();
+            factory.Tasks(Arg.Any<RoleServiceManager>()).Returns(services);
 
             var manager = new RoleServiceManager(factory);
             manager.OnStart();
             manager.Run();
 
             service.Received().Start();
-            factory.Received().Services(Arg.Any<RoleServiceManager>());
+            factory.Received().Tasks(Arg.Any<RoleServiceManager>());
         }
 
         [TestMethod]
         public void RunNoServices()
         {
-            var factory = Substitute.For<IServiceFactory<object>>();
+            var factory = Substitute.For<ITaskFactory<object>>();
             var manager = new RoleServiceManager(factory);
             manager.Run();
         }
@@ -80,7 +80,7 @@
         [TestMethod]
         public void OnStart()
         {
-            var factory = Substitute.For<IServiceFactory<object>>();
+            var factory = Substitute.For<ITaskFactory<object>>();
             var manager = new RoleServiceManager(factory);
             manager.OnStart();
         }
@@ -88,13 +88,13 @@
         [TestMethod]
         public void OnStartNoServices()
         {
-            var factory = Substitute.For<IServiceFactory<object>>();
-            factory.Services(Arg.Any<RoleServiceManager>()).Returns((IEnumerable<IRunnable>)null);
+            var factory = Substitute.For<ITaskFactory<object>>();
+            factory.Tasks(Arg.Any<RoleServiceManager>()).Returns((IEnumerable<IRunnable>)null);
             
             var manager = new RoleServiceManager(factory);
             manager.OnStart();
 
-            factory.Received().Services(Arg.Any<RoleServiceManager>());
+            factory.Received().Tasks(Arg.Any<RoleServiceManager>());
         }
 
         [TestMethod]
@@ -106,15 +106,15 @@
 
             services.Add(service);
 
-            var factory = Substitute.For<IServiceFactory<object>>();
-            factory.Services(Arg.Any<RoleServiceManager>()).Returns(services);
+            var factory = Substitute.For<ITaskFactory<object>>();
+            factory.Tasks(Arg.Any<RoleServiceManager>()).Returns(services);
 
             var manager = new RoleServiceManager(factory);
             manager.OnStart();
             manager.OnStop();
 
             service.Received().Stop();
-            factory.Received().Services(Arg.Any<RoleServiceManager>());
+            factory.Received().Tasks(Arg.Any<RoleServiceManager>());
         }
 
         [TestMethod]
@@ -126,21 +126,21 @@
 
             services.Add(service);
 
-            var factory = Substitute.For<IServiceFactory<object>>();
-            factory.Services(Arg.Any<RoleServiceManager>()).Returns(services);
+            var factory = Substitute.For<ITaskFactory<object>>();
+            factory.Tasks(Arg.Any<RoleServiceManager>()).Returns(services);
 
             var manager = new RoleServiceManager(factory);
             manager.OnStart();
             manager.OnStop();
 
             service.Received().Stop();
-            factory.Received().Services(Arg.Any<RoleServiceManager>());
+            factory.Received().Tasks(Arg.Any<RoleServiceManager>());
         }
 
         [TestMethod]
         public void OnStopNoServices()
         {
-            var factory = Substitute.For<IServiceFactory<object>>();
+            var factory = Substitute.For<ITaskFactory<object>>();
             var manager = new RoleServiceManager(factory);
             manager.OnStop();
         }

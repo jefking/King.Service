@@ -5,10 +5,10 @@
     /// <summary>
     /// Service Factory
     /// </summary>
-    public abstract class ServiceFactory : IServiceFactory<object>
+    public abstract class TaskFactory : ITaskFactory<object>
     {
         #region Methods
-        public abstract IEnumerable<IRunnable> Services(object passthrough);
+        public abstract IEnumerable<IRunnable> Tasks(object passthrough);
         #endregion
     }
 }

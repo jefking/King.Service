@@ -3,27 +3,27 @@
     using King.Azure.BackgroundWorker;
     using System.Collections.Generic;
 
-    public class Factory : ServiceFactory
+    public class Factory : TaskFactory
     {
-        public override IEnumerable<IRunnable> Services(object passthrough)
+        public override IEnumerable<IRunnable> Tasks(object passthrough)
         {
-            var services = new List<IRunnable>();
+            var tasks = new List<IRunnable>();
             // Initialization Task(s)
-            services.Add(new InitTask());
+            tasks.Add(new InitTask());
 
             //Task(s)
-            services.Add(new Task());
+            tasks.Add(new Task());
 
             //Cordinated Tasks between Instances
 
             var task = new Coordinated();
             // Add once to ensure that Table is created for Instances to communicate with
-            services.Add(task.InitializeTask());
+            tasks.Add(task.InitializeTask());
 
             // Add your coordinated task(s)
-            services.Add(task);
+            tasks.Add(task);
             
-            return services;
+            return tasks;
         }
     }
 }
