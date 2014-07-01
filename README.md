@@ -52,23 +52,23 @@ class Factory : TaskFactory
 {
     public override IEnumerable<IRunnable> Tasks(object passthrough)
     {
-        var services = new List<IRunnable>();
-        // Initialization Services
-        services.Add(new InitializeTask());
+		var tasks = new List<IRunnable>();
+		// Initialization Task(s)
+		tasks.Add(new InitTask());
 
-        //Tasks
-        services.Add(new Task());
+		//Task(s)
+		tasks.Add(new Task());
 
-        //Cordinated Tasks between Instances
+		//Cordinated Tasks between Instances
 
-        var task = new Coordinated();
-        // Add once to ensure that Table is created for Instances to communicate with
-        services.Add(task.InitializeTask());
+		var task = new Coordinated();
+		// Add once to ensure that Table is created for Instances to communicate with
+		tasks.Add(task.InitializeTask());
 
-        // Add your Coordinated task(s)
-        services.Add(task);
+		// Add your coordinated task(s)
+		tasks.Add(task);
             
-        return services;
+		return tasks;
     }
 }
 ```
