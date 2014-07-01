@@ -22,7 +22,7 @@ class MyTask : InitializeTask
 	}
 }
 ```
-### (Implement Repetitive Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Task.cs)
+### [Implement Repetitive Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Task.cs)
 ```
 class MyTask : TaskManager
 {
