@@ -5,7 +5,7 @@ Task scheduling for Azure; use with worker roles for running background processi
 - Create a task to initialize your environment
 - Create a task that runs every X amount of time per instance
 - Create a task that runs every X amount of time across any number of instances
-- Demo Project: [Worker Role](https://github.com/jefking/King.Azure.BackgroundWorker/tree/master/Worker)
+- [Example Project](https://github.com/jefking/King.Azure.BackgroundWorker/tree/master/Worker)
 
 ## NuGet
 [Add via NuGet](https://www.nuget.org/packages/King.Service)
