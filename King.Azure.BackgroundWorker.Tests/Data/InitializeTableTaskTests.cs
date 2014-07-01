@@ -16,7 +16,7 @@
         }
 
         [TestMethod]
-        public void Constructor()
+        public void IsInitializeTask()
         {
             var table = Substitute.For<ITableStorage>();
             Assert.IsNotNull(new InitializeTableTask(table) as InitializeTask);
