@@ -12,7 +12,7 @@ Simple Service Scheduling for Azure; meant to be used in background worker roles
 PM> Install-Package King.Service
 ```
 ## Examples
-### Implement Initialization Task
+### [Implement Initialization Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/InitTask.cs)
 ```
 class MyTask : InitializeTask
 {
@@ -22,7 +22,7 @@ class MyTask : InitializeTask
 	}
 }
 ```
-### Implement Repetitive Task
+### (Implement Repetitive Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Task.cs)
 ```
 class MyTask : TaskManager
 {
@@ -32,7 +32,7 @@ class MyTask : TaskManager
 	}
 }
 ```
-### Implement Coordinated Task
+### [Implement Coordinated Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Coordinated.cs)
 ```
 class MyTask : CoordinatedTask
 {
@@ -46,7 +46,7 @@ class MyTask : CoordinatedTask
 	}
 }
 ```
-### Initialize Services
+### [Initialize Services](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Factory.cs)
 ```
 class Factory : ServiceFactory
 {
