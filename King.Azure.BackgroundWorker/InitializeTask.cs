@@ -12,7 +12,7 @@
         /// Default Constructor
         /// </summary>
         public InitializeTask()
-            :base(5, TimeSpan.FromDays(29.5d).TotalSeconds)
+            : base(7, TimeSpan.FromDays(88.5d).TotalSeconds)
         {
         }
         #endregion

@@ -3,7 +3,6 @@
     using System;
     using System.Diagnostics;
     using System.Threading;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Service Manager
@@ -31,7 +30,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        protected TaskManager(int dueInSeconds, double periodInSeconds)
+        protected TaskManager(int dueInSeconds = 15, double periodInSeconds = 60)
         {
             if (0 > dueInSeconds)
             {

@@ -14,7 +14,7 @@ PM> Install-Package King.Service
 ## Examples
 ### Implement Initialization Task
 ```
-class MyInitTask : InitializeTask
+class MyTask : InitializeTask
 {
 	public virtual void Run()
 	{
@@ -26,10 +26,6 @@ class MyInitTask : InitializeTask
 ```
 class MyTask : TaskManager
 {
-	public MyTask()
-		: base(15, 60)
-	{
-	}
 	public virtual void Run()
 	{
 		//Process background work here.
