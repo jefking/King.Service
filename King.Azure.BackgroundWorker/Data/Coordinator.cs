@@ -110,6 +110,13 @@
             return performTask;
         }
 
+        /// <summary>
+        /// Start
+        /// </summary>
+        /// <param name="type">Task Type</param>
+        /// <param name="identifier">Identifier</param>
+        /// <param name="start">Start</param>
+        /// <returns></returns>
         public async Task Start(Type type, Guid identifier, DateTime start)
         {
             if (null == type)
@@ -130,6 +137,15 @@
             await this.storage.InsertOrReplace(entry);
         }
 
+        /// <summary>
+        /// Complete
+        /// </summary>
+        /// <param name="type">Task Type</param>
+        /// <param name="identifier">Identifier</param>
+        /// <param name="start">Start</param>
+        /// <param name="end">End</param>
+        /// <param name="success">Success</param>
+        /// <returns></returns>
         public async Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success)
         {
             if (null == type)
