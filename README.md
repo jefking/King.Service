@@ -1,7 +1,7 @@
 King.Azure.BackgroundWorker
 ============
 
-Task scheduling for Azure; use with worker roles.
+Task scheduling for Azure; use with worker roles for running background processing tasks.
 - Create a task to initialize your environment
 - Create a task that runs every X amount of time per instance
 - Create a task that runs every X amount of time across any number of instances
