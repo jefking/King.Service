@@ -85,7 +85,7 @@
 
             var performTask = true;
 
-            Trace.TraceInformation(string.Format("{0}: Querying scheduled tasks table for the latest task.", entry.ServiceName));
+            Trace.TraceInformation(string.Format("{0}: Querying scheduled tasks for the latest.", entry.ServiceName));
 
             // Peek the table first to determine if there's any task to execute
             // Query the table by partition key (type, year, month)
@@ -95,7 +95,7 @@
             {
                 var latest = records.OrderByDescending(x => x.StartTime).First();
 
-                Trace.TraceInformation("{0}: Latest task found in table: StartTime: {1} CompletionTime: {2}", entry.ServiceName, latest.StartTime, latest.CompletionTime);
+                Trace.TraceInformation("{0}: Latest task found: StartTime: {1} CompletionTime: {2}", entry.ServiceName, latest.StartTime, latest.CompletionTime);
 
                 // 1. If the latest task has been completed, then perform task if
                 // - the latest task has been completed more than <period> ago, or
