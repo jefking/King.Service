@@ -1,7 +1,6 @@
 ﻿namespace Worker
 {
     using King.Azure.BackgroundWorker;
-    using King.Azure.BackgroundWorker.Data;
     using System.Collections.Generic;
 
     public class Factory : ServiceFactory
@@ -9,14 +8,18 @@
         public override IEnumerable<IRunnable> Services(object passthrough)
         {
             var services = new List<IRunnable>();
-            
-            //Independant work
+            // Initialization Task(s)
+            services.Add(new InitTask());
+
+            //Task(s)
             services.Add(new Task());
 
-            //Work coordinated between servers
+            //Cordinated Tasks between Instances
+
             var task = new Coordinated();
             // Add once to ensure that Table is created for Instances to communicate with
             services.Add(task.InitializeTask());
+
             // Add your coordinated task(s)
             services.Add(task);
             

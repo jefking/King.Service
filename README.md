@@ -11,15 +11,9 @@ Simple Service Scheduling for Azure; meant to be used in background worker roles
 PM> Install-Package King.Service
 ```
 ## Examples
-### Initialize <sub><sup>(Used only by CoordinatedManager)</sub></sup>
-```
-var connectionString = Configuration["Key"];
-var core = new ScheduledTaskCore(TimeSpan.FromHours(100), connectionString);
-core.InitializeTable();
-```
 ### Implement Repetitive Task
 ```
-class MyTask : Manager
+class MyTask : TaskManager
 {
 	public MyTask()
 		: base(15, 60)
@@ -33,7 +27,7 @@ class MyTask : Manager
 ```
 ### Implement Coordinated Task
 ```
-class MyTask : CoordinatedManager
+class MyTask : CoordinatedTask
 {
 	public MyTask()
 		: base("Storage Account for Coordination between Instances", 60)
@@ -43,6 +37,32 @@ class MyTask : CoordinatedManager
 	{
 		//Process background work here.
 	}
+}
+```
+### Initialize Services
+```
+class Factory : ServiceFactory
+{
+    public override IEnumerable<IRunnable> Services(object passthrough)
+    {
+        var services = new List<IRunnable>();
+        // Initialization Services
+        services.Add(new InitializeTask());
+
+        //Tasks
+        services.Add(new Task());
+
+        //Cordinated Tasks between Instances
+
+        var task = new Coordinated();
+        // Add once to ensure that Table is created for Instances to communicate with
+        services.Add(task.InitializeTask());
+
+        // Add your Coordinated task(s)
+        services.Add(task);
+            
+        return services;
+    }
 }
 ```
 ## Demo Project

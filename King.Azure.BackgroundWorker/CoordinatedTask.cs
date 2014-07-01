@@ -40,7 +40,7 @@
         /// <summary>
         /// Initialize Table Task
         /// </summary>
-        public TaskManager InitializeTask()
+        public IRunnable InitializeTask()
         {
             return this.taskCore.InitializeTask();
         }

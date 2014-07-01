@@ -95,7 +95,7 @@
             {
                 var latest = records.OrderByDescending(x => x.StartTime).First();
 
-                Trace.TraceInformation("{0}: Latest task found in table: Partition: {1} Id: {2} StartTime: {3} CompletionTime: {4}", entry.ServiceName, latest.PartitionKey, latest.Identifier, latest.StartTime, latest.CompletionTime);
+                Trace.TraceInformation("{0}: Latest task found in table: StartTime: {1} CompletionTime: {2}", entry.ServiceName, latest.StartTime, latest.CompletionTime);
 
                 // 1. If the latest task has been completed, then perform task if
                 // - the latest task has been completed more than <period> ago, or
