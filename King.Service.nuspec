@@ -9,11 +9,11 @@
         <licenseUrl>https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/LICENSE</licenseUrl>
         <projectUrl>https://github.com/jefking/King.Azure.BackgroundWorker</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Repeatable services for Azure worker roles.</description>
-        <summary>Azure Background worker for scheduling independant and coordinated tasks.</summary>
-        <releaseNotes>Adding references to NuGet for simple installation.</releaseNotes>
+        <description>Task scheduling for Azure; use with worker roles.</description>
+        <summary>Easily create background tasks to be run on worker roles.</summary>
+        <releaseNotes>Initialization Tasks</releaseNotes>
         <copyright>Jef King</copyright>
-        <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing</tags>
+        <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing</tags>
         <dependencies>
             <dependency id="WindowsAzure.Storage" version="4.0.1" />
         </dependencies>
