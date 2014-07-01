@@ -18,7 +18,7 @@ class MyTask : InitializeTask
 {
 	public virtual void Run()
 	{
-		//Initialize one time resources
+		//Initialize one time resource.
 	}
 }
 ```
