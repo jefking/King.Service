@@ -38,7 +38,7 @@ class MyTask : TaskManager
 class MyTask : CoordinatedTask
 {
 	public MyTask()
-		: base("Storage Account for Coordination between Instances", 60)
+		: base("Storage Account for Coordination between Instances")
 	{
 	}
 	public virtual void Run()

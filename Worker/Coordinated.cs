@@ -6,7 +6,7 @@
     public class Coordinated : CoordinatedTask
     {
         public Coordinated()
-            : base("UseDevelopmentStorage=true", 10)
+            : base("UseDevelopmentStorage=true")
         {
         }
 
