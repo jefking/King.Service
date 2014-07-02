@@ -47,7 +47,7 @@ class MyTask : CoordinatedTask
 	}
 }
 ```
-### [Initialize Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Factory.cs)
+### [Initialize Tasks](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Factory.cs)
 ```
 class Factory : TaskFactory
 {
