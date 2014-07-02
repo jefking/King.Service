@@ -18,29 +18,27 @@
         /// <summary>
         /// Due Time of Timer
         /// </summary>
-        private readonly TimeSpan dueTime;
+        private readonly int dueInSeconds;
 
         /// <summary>
         /// Period of Timer
         /// </summary>
-        private readonly TimeSpan period;
+        private readonly int periodInSeconds;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Default Constructor
         /// </summary>
-        protected TaskManager(int dueInSeconds = 15, double periodInSeconds = 60)
+        protected TaskManager(int dueInSeconds = 15, int periodInSeconds = 60)
         {
             if (0 > dueInSeconds)
             {
                 throw new ArgumentException("dueInSeconds");
             }
 
-            periodInSeconds = 0 > periodInSeconds ? -1 : periodInSeconds;
-
-            this.dueTime = TimeSpan.FromSeconds(dueInSeconds);
-            this.period = TimeSpan.FromSeconds(periodInSeconds);
+            this.dueInSeconds = dueInSeconds;
+            this.periodInSeconds = 0 > periodInSeconds ? -1 : periodInSeconds;
 
             Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.GetType().ToString(), dueInSeconds, periodInSeconds);
         }
@@ -61,7 +59,7 @@
         /// <returns>Running</returns>
         public bool Start()
         {
-            this.timer = new Timer(this.Run, null, dueTime, period);
+            this.timer = new Timer(this.Run, null, dueInSeconds, periodInSeconds);
 
             return true;
         }

@@ -9,7 +9,7 @@
         #region Helper
         public class TestManager : TaskManager
         {
-            public TestManager(int dueInSeconds, double periodInSeconds)
+            public TestManager(int dueInSeconds, int periodInSeconds)
                 : base(dueInSeconds, periodInSeconds)
             {
             }
