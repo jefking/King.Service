@@ -37,7 +37,7 @@
                 throw new ArgumentException("dueInSeconds");
             }
 
-            if (0 > periodInSeconds)
+            if (-1 > periodInSeconds)
             {
                 throw new ArgumentException("periodInSeconds");
             }
