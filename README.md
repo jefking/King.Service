@@ -77,7 +77,7 @@ class Factory : TaskFactory
 ```
 public class WorkerRole : RoleEntryPoint
 {
-    private RoleServiceManager manager = new RoleServiceManager(new Factory());
+    private RoleTaskManager manager = new RoleTaskManager(new Factory());
 
     public override void Run()
     {
