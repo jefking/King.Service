@@ -9,7 +9,7 @@
     /// <summary>
     /// Worker Role Service Manager
     /// </summary>
-    public class RoleServiceManager : IRoleServiceManager
+    public class RoleTaskManager : IRoleServiceManager
     {
         #region Members
         /// <summary>
@@ -33,7 +33,7 @@
         /// Pass Service Factory to run services
         /// </summary>
         /// <param name="services">Services</param>
-        public RoleServiceManager(ITaskFactory<object> manager)
+        public RoleTaskManager(ITaskFactory<object> manager)
         {
             if (null == manager)
             {

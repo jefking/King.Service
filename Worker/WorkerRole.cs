@@ -8,7 +8,7 @@ namespace Worker
         /// <summary>
         /// Role Service Manager
         /// </summary>
-        private RoleServiceManager manager = new RoleServiceManager(new Factory());
+        private RoleTaskManager manager = new RoleTaskManager(new Factory());
 
         /// <summary>
         /// Overloaded Role Entry Point Method
