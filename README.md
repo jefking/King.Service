@@ -12,7 +12,7 @@ Task scheduling for Azure; use with worker roles for running background processi
 ```
 PM> Install-Package King.Service
 ```
-## Examples
+## Sample Code
 ### [Initialization Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/InitTask.cs)
 ```
 class MyTask : InitializeTask
