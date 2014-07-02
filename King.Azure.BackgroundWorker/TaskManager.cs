@@ -37,10 +37,7 @@
                 throw new ArgumentException("dueInSeconds");
             }
 
-            if (-1 > periodInSeconds)
-            {
-                throw new ArgumentException("periodInSeconds");
-            }
+            periodInSeconds = 0 > periodInSeconds ? -1 : periodInSeconds;
 
             this.dueTime = TimeSpan.FromSeconds(dueInSeconds);
             this.period = TimeSpan.FromSeconds(periodInSeconds);

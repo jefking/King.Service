@@ -46,13 +46,6 @@
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ConstructorPeriodZero()
-        {
-            new TestManager(100, -10);
-        }
-
-        [TestMethod]
         public void Dispose()
         {
             using (var m = new TestManager(100, 100))
