@@ -53,23 +53,31 @@ class Factory : TaskFactory
 {
     public override IEnumerable<IRunnable> Tasks(object passthrough)
     {
-		var tasks = new List<IRunnable>();
-		// Initialization Task(s)
-		tasks.Add(new InitTask());
+        var tasks = new List<IRunnable>();
+        // Initialization Task(s)
+        tasks.Add(new InitTask());
 
-		//Task(s)
-		tasks.Add(new Task());
+        // Initialize Table; creates table if it doesn't already exist
+        var table = new TableStorage("table", "UseDevelopmentStorage=true;");
+        tasks.Add(new InitializeStorageTask(table));
 
-		//Cordinated Tasks between Instances
+        // Initialize Queue; creates queue if it doesn't already exist
+        var queue = new Queue("queue", "UseDevelopmentStorage=true;");
+        tasks.Add(new InitializeStorageTask(queue));
 
-		var task = new Coordinated();
-		// Add once to ensure that Table is created for Instances to communicate with
-		tasks.Add(task.InitializeTask());
+        //Task(s)
+        tasks.Add(new Task());
 
-		// Add your coordinated task(s)
-		tasks.Add(task);
+        //Cordinated Tasks between Instances
+
+        var task = new Coordinated();
+        // Add once to ensure that Table is created for Instances to communicate with
+        tasks.Add(task.InitializeTask());
+
+        // Add your coordinated task(s)
+        tasks.Add(task);
             
-		return tasks;
+        return tasks;
     }
 }
 ```
