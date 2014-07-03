@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="CoordinatedTaskTests.cs" />
     <Compile Include="Data\AzureStorageTests.cs" />
+    <Compile Include="Data\ContainerTests.cs" />
     <Compile Include="Data\QueueTests.cs" />
     <Compile Include="Data\TableStorageTests.cs" />
     <Compile Include="Data\InitializeStorageTaskTests.cs" />

@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\InitializeStorageTask.cs" />
+    <Compile Include="Data\Container.cs" />
     <Compile Include="Data\Queue.cs" />
     <Compile Include="InitializeTask.cs" />
     <Compile Include="RoleTaskManager.cs" />
