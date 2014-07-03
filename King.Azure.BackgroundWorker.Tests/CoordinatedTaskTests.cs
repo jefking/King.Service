@@ -51,7 +51,7 @@
             var m = new TestManager();
             var t = m.InitializeTask();
             Assert.IsNotNull(t);
-            Assert.IsNotNull(t as InitializeTableTask);
+            Assert.IsNotNull(t as InitializeStorageTask);
         }
 
         [TestMethod]

@@ -137,7 +137,7 @@
             var core = new Coordinator(table, new TimeSpan(9000));
             var init = core.InitializeTask();
             Assert.IsNotNull(init);
-            Assert.IsNotNull(init as InitializeTableTask);
+            Assert.IsNotNull(init as InitializeStorageTask);
         }
 
         [TestMethod]

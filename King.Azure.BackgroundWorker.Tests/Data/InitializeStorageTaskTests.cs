@@ -6,27 +6,27 @@
     using System;
 
     [TestClass]
-    public class InitializeTableTaskTests
+    public class InitializeStorageTaskTests
     {
         [TestMethod]
         public void Constructor()
         {
             var table = Substitute.For<ITableStorage>();
-            new InitializeTableTask(table);
+            new InitializeStorageTask(table);
         }
 
         [TestMethod]
         public void IsInitializeTask()
         {
             var table = Substitute.For<ITableStorage>();
-            Assert.IsNotNull(new InitializeTableTask(table) as InitializeTask);
+            Assert.IsNotNull(new InitializeStorageTask(table) as InitializeTask);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTableNull()
         {
-            new InitializeTableTask(null);
+            new InitializeStorageTask(null);
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@
             var table = Substitute.For<ITableStorage>();
             table.CreateIfNotExists();
 
-            var task = new InitializeTableTask(table);
+            var task = new InitializeStorageTask(table);
             task.Run();
 
             table.Received().CreateIfNotExists();

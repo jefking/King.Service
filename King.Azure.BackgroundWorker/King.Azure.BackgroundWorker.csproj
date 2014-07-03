@@ -65,7 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\InitializeTableTask.cs" />
+    <Compile Include="Data\InitializeStorageTask.cs" />
     <Compile Include="Data\Queue.cs" />
     <Compile Include="InitializeTask.cs" />
     <Compile Include="RoleTaskManager.cs" />

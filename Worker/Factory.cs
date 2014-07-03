@@ -13,8 +13,12 @@
             tasks.Add(new InitTask());
 
             // Initialize Table; creates table if it doesn't already exist
-            var table = new TableStorage("tablename", "UseDevelopmentStorage=true;");
-            tasks.Add(new InitializeTableTask(table));
+            var table = new TableStorage("table", "UseDevelopmentStorage=true;");
+            tasks.Add(new InitializeStorageTask(table));
+
+            // Initialize Queue; creates queue if it doesn't already exist
+            var queue = new Queue("queue", "UseDevelopmentStorage=true;");
+            tasks.Add(new InitializeStorageTask(queue));
 
             //Task(s)
             tasks.Add(new Task());
