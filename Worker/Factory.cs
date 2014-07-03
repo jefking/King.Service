@@ -20,6 +20,10 @@
             var queue = new Queue("queue", "UseDevelopmentStorage=true;");
             tasks.Add(new InitializeStorageTask(queue));
 
+            // Initialize Queue; creates queue if it doesn't already exist
+            var container = new Container("container", "UseDevelopmentStorage=true;");
+            tasks.Add(new InitializeStorageTask(container));
+
             //Task(s)
             tasks.Add(new Task());
 

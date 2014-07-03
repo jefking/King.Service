@@ -82,6 +82,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Initialization.cs" />
+    <Compile Include="ContainerTests.cs" />
     <Compile Include="QueueTests.cs" />
     <Compile Include="TableStorageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
