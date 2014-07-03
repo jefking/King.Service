@@ -32,5 +32,13 @@
         {
             new TableStorage("TestTable", null);
         }
+
+        [TestMethod]
+        public void Name()
+        {
+            var name = Guid.NewGuid().ToString();
+            var t = new TableStorage(name, "UseDevelopmentStorage=true");
+            Assert.AreEqual(name, t.Name);
+        }
     }
 }

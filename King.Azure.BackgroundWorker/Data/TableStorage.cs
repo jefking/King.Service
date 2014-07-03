@@ -1,9 +1,9 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
+    using Microsoft.WindowsAzure.Storage.Table;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Microsoft.WindowsAzure.Storage.Table;
 
     /// <summary>
     /// Table Storage
@@ -40,6 +40,19 @@
 
             this.client = base.account.CreateCloudTableClient();
             this.table = client.GetTableReference(tableName);
+        }
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Table Name
+        /// </summary>
+        public string Name
+        {
+            get
+            {
+                return this.table.Name;
+            }
         }
         #endregion
 
