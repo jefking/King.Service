@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("King.Service")]
-[assembly: AssemblyDescription("Simple Service Scheduling for Azure; meant to be used in background worker roles.")]
+[assembly: AssemblyDescription("Task Scheduling for Azure; use as engine for Worker Roles.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jef King")]
 [assembly: AssemblyProduct("King.Service")]
