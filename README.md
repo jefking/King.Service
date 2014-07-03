@@ -1,4 +1,4 @@
-King.Azure.BackgroundWorker
+King.Service
 ============
 
 Task scheduling for Azure; use with worker roles for running background processing tasks.
@@ -73,7 +73,6 @@ class Factory : TaskFactory
         tasks.Add(new Task());
 
         //Cordinated Tasks between Instances
-
         var task = new Coordinated();
         // Add once to ensure that Table is created for Instances to communicate with
         tasks.Add(task.InitializeTask());
