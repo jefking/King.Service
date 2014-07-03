@@ -2,6 +2,7 @@
 {
     using King.Azure.BackgroundWorker;
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Initialize table for Coordination
@@ -37,8 +38,12 @@
         /// </summary>
         public override void Run()
         {
+            Trace.TraceInformation("Creating Table: '{0}'.", this.table.Name);
+
             var task = this.table.CreateIfNotExists();
             task.Wait();
+
+            Trace.TraceInformation("Created Table: '{0}'; was created {1}.", this.table.Name, task.Result);
         }
         #endregion
     }

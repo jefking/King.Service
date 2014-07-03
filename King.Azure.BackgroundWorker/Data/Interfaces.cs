@@ -57,6 +57,13 @@
     /// </summary>
     public interface ITableStorage
     {
+        #region Properties
+        string Name
+        {
+            get;
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Create If Not Exists

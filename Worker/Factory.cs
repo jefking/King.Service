@@ -1,6 +1,7 @@
 ﻿namespace Worker
 {
     using King.Azure.BackgroundWorker;
+    using King.Azure.BackgroundWorker.Data;
     using System.Collections.Generic;
 
     public class Factory : TaskFactory
@@ -10,6 +11,10 @@
             var tasks = new List<IRunnable>();
             // Initialization Task(s)
             tasks.Add(new InitTask());
+
+            // Initialize Table; creates table if it doesn't already exist
+            var table = new TableStorage("tablename", "UseDevelopmentStorage=true;");
+            tasks.Add(new InitializeTableTask(table));
 
             //Task(s)
             tasks.Add(new Task());
