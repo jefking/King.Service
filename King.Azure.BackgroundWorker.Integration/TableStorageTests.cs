@@ -1,12 +1,12 @@
 ﻿namespace King.Azure.BackgroundWorker.Integration
 {
-    using System;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using System.Threading.Tasks;
     using King.Azure.BackgroundWorker.Data;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Microsoft.WindowsAzure.Storage.Table;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     [TestClass]
     public class TableStorageTests
