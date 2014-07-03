@@ -22,7 +22,7 @@
         /// <summary>
         /// Table
         /// </summary>
-        private CloudTable table;
+        private CloudTable reference;
         #endregion
 
         #region Constructors
@@ -39,7 +39,7 @@
             }
 
             this.client = base.account.CreateCloudTableClient();
-            this.table = client.GetTableReference(tableName);
+            this.reference = client.GetTableReference(tableName);
         }
         #endregion
 
@@ -51,7 +51,7 @@
         {
             get
             {
-                return this.table.Name;
+                return this.reference.Name;
             }
         }
         #endregion
@@ -63,7 +63,7 @@
         /// <returns></returns>
         public async Task<bool> CreateIfNotExists()
         {
-            return await this.table.CreateIfNotExistsAsync();
+            return await this.reference.CreateIfNotExistsAsync();
         }
 
         /// <summary>
@@ -72,7 +72,7 @@
         /// <param name="tableName">Table Name</param>
         public async Task<bool> Create()
         {
-            return await this.table.CreateIfNotExistsAsync();
+            return await this.reference.CreateIfNotExistsAsync();
         }
 
         /// <summary>
@@ -81,7 +81,7 @@
         /// <param name="tableName"></param>
         public async Task Delete()
         {
-            await this.table.DeleteAsync();
+            await this.reference.DeleteAsync();
         }
 
         /// <summary>
@@ -91,7 +91,7 @@
         public async Task<TableResult> InsertOrReplace(ITableEntity entry)
         {
             var insertOperation = TableOperation.InsertOrReplace(entry);
-            return await this.table.ExecuteAsync(insertOperation);
+            return await this.reference.ExecuteAsync(insertOperation);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@
                 batchOperation.InsertOrMerge(entity);
             }
 
-            return await this.table.ExecuteBatchAsync(batchOperation);
+            return await this.reference.ExecuteBatchAsync(batchOperation);
         }
 
         /// <summary>
@@ -119,7 +119,7 @@
             where T : ITableEntity, new()
         {
             var query = new TableQuery<T>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, partition));
-            return this.table.ExecuteQuery(query);
+            return this.reference.ExecuteQuery(query);
         }
         #endregion
     }

@@ -55,22 +55,9 @@
     /// <summary>
     /// Table Storage Interface
     /// </summary>
-    public interface ITableStorage
+    public interface ITableStorage : IAzureStorage
     {
-        #region Properties
-        string Name
-        {
-            get;
-        }
-        #endregion
-
         #region Methods
-        /// <summary>
-        /// Create If Not Exists
-        /// </summary>
-        /// <returns></returns>
-        Task<bool> CreateIfNotExists();
-
         /// <summary>
         /// Create Table
         /// </summary>
@@ -103,6 +90,27 @@
         /// <returns></returns>
         IEnumerable<T> QueryByPartition<T>(string partition)
             where T : ITableEntity, new();
+        #endregion
+    }
+
+    /// <summary>
+    /// Azure Storage
+    /// </summary>
+    public interface IAzureStorage
+    {
+        #region Properties
+        string Name
+        {
+            get;
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Create If Not Exists
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> CreateIfNotExists();
         #endregion
     }
 }
