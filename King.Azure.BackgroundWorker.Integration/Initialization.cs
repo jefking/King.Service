@@ -1,15 +1,15 @@
 ﻿namespace King.Azure.BackgroundWorker.Integration
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using System;
     using System.Configuration;
     using System.Diagnostics;
 
-    [TestClass]
+    [SetUpFixture]
     public class Initialization
     {
-        [AssemblyInitialize]
-        public static void Init(TestContext context)
+        [SetUp]
+        public static void Init()
         {
             var emulator = ConfigurationManager.AppSettings["AzureEmulator"];
 

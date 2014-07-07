@@ -1,19 +1,19 @@
 ﻿namespace King.Azure.BackgroundWorker.Integration
 {
     using King.Azure.BackgroundWorker.Data;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using Microsoft.WindowsAzure.Storage.Table;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
-    [TestClass]
+    [TestFixture]
     public class TableStorageTests
     {
         private readonly string ConnectionString = "UseDevelopmentStorage=true;";
 
-        [TestMethod]
+        [Test]
         public async Task CreateIfNotExists()
         {
             var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
@@ -23,7 +23,7 @@
             Assert.IsTrue(created);
         }
 
-        [TestMethod]
+        [Test]
         public async Task CreateIfNotExistsAlreadyExists()
         {
             var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
@@ -35,7 +35,7 @@
             Assert.IsFalse(created);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Create()
         {
             var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
@@ -45,7 +45,7 @@
             Assert.IsTrue(created);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Delete()
         {
             var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
@@ -60,7 +60,7 @@
             Assert.IsTrue(created);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Insert()
         {
             var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
@@ -80,13 +80,13 @@
 
             var returned = storage.QueryByPartition<TableEntity>("partition");
             Assert.IsNotNull(returned);
-            Assert.AreEqual<int>(1, returned.Count());
+            Assert.AreEqual(1, returned.Count());
             var e = returned.First();
-            Assert.AreEqual<string>(entity.PartitionKey, e.PartitionKey);
-            Assert.AreEqual<string>(entity.RowKey, e.RowKey);
+            Assert.AreEqual(entity.PartitionKey, e.PartitionKey);
+            Assert.AreEqual(entity.RowKey, e.RowKey);
         }
 
-        [TestMethod]
+        [Test]
         public async Task InsertOrReplace()
         {
             var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
@@ -107,10 +107,10 @@
 
             var returned = storage.QueryByPartition<TableEntity>("partition");
             Assert.IsNotNull(returned);
-            Assert.AreEqual<int>(1, returned.Count());
+            Assert.AreEqual(1, returned.Count());
             var e = returned.First();
-            Assert.AreEqual<string>(entity.PartitionKey, e.PartitionKey);
-            Assert.AreEqual<string>(entity.RowKey, e.RowKey);
+            Assert.AreEqual(entity.PartitionKey, e.PartitionKey);
+            Assert.AreEqual(entity.RowKey, e.RowKey);
         }
     }
 }

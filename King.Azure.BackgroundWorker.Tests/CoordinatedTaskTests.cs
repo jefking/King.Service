@@ -1,12 +1,12 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests
 {
     using King.Azure.BackgroundWorker.Data;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using NSubstitute;
     using System;
     using System.Threading.Tasks;
 
-    [TestClass]
+    [TestFixture]
     public class CoordinatedTaskTests
     {
         #region Class
@@ -32,20 +32,20 @@
         }
         #endregion
 
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             new TestManager();
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(NullReferenceException))]
         public void ConstructorCoordinatorNull()
         {
             new TestManager(null);
         }
 
-        [TestMethod]
+        [Test]
         public void InitializeTask()
         {
             var m = new TestManager();
@@ -54,7 +54,7 @@
             Assert.IsNotNull(t as InitializeStorageTask);
         }
 
-        [TestMethod]
+        [Test]
         public void RunCheckFalse()
         {
             var coordinator = Substitute.For<ICoordinator>();
@@ -67,7 +67,7 @@
             coordinator.Received().Check(Arg.Any<Type>());
         }
 
-        [TestMethod]
+        [Test]
         public void Run()
         {
             var coordinator = Substitute.For<ICoordinator>();
@@ -86,7 +86,7 @@
             coordinator.Received().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), true);
         }
 
-        [TestMethod]
+        [Test]
         public void RunCheckThrows()
         {
             var coordinator = Substitute.For<ICoordinator>();
@@ -103,7 +103,7 @@
             coordinator.DidNotReceive().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
         }
 
-        [TestMethod]
+        [Test]
         public void RunStartThrows()
         {
             var coordinator = Substitute.For<ICoordinator>();
@@ -120,7 +120,7 @@
             coordinator.DidNotReceive().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
         }
 
-        [TestMethod]
+        [Test]
         public async Task RunThrows()
         {
             var coordinator = Substitute.For<ICoordinator>();

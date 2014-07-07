@@ -1,39 +1,39 @@
 ﻿namespace King.Service.Tests.Data
 {
     using King.Azure.BackgroundWorker.Data;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using System;
 
-    [TestClass]
+    [TestFixture]
     public class TableStorageTests
     {
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             new TableStorage("TestTable", "UseDevelopmentStorage=true");
         }
 
-        [TestMethod]
+        [Test]
         public void IsITableStorage()
         {
             Assert.IsNotNull(new TableStorage("TestTable", "UseDevelopmentStorage=true") as ITableStorage);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTableNull()
         {
             new TableStorage(null, "UseDevelopmentStorage=true");
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorKeyNull()
         {
             new TableStorage("TestTable", null);
         }
 
-        [TestMethod]
+        [Test]
         public void Name()
         {
             var name = Guid.NewGuid().ToString();

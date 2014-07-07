@@ -1,35 +1,35 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests.Data
 {
     using King.Azure.BackgroundWorker.Data;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using NSubstitute;
     using System;
 
-    [TestClass]
+    [TestFixture]
     public class InitializeStorageTaskTests
     {
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             var table = Substitute.For<ITableStorage>();
             new InitializeStorageTask(table);
         }
 
-        [TestMethod]
+        [Test]
         public void IsInitializeTask()
         {
             var table = Substitute.For<ITableStorage>();
             Assert.IsNotNull(new InitializeStorageTask(table) as InitializeTask);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTableNull()
         {
             new InitializeStorageTask(null);
         }
 
-        [TestMethod]
+        [Test]
         public void Run()
         {
             var table = Substitute.For<ITableStorage>();

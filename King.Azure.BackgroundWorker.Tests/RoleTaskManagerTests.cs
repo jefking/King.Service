@@ -1,35 +1,35 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using NSubstitute;
     using System;
     using System.Collections.Generic;
 
-    [TestClass]
+    [TestFixture]
     public class RoleTaskManagerTests
     {
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
             new RoleTaskManager(factory);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorServiceFactoryNull()
         {
             new RoleTaskManager(null);
         }
 
-        [TestMethod]
+        [Test]
         public void IsIRoleServiceManager()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
             Assert.IsNotNull(new RoleTaskManager(factory) as IRoleServiceManager);
         }
 
-        [TestMethod]
+        [Test]
         public void Run()
         {
             var services = new List<IRunnable>();
@@ -49,7 +49,7 @@
             factory.Received().Tasks(Arg.Any<RoleTaskManager>());
         }
 
-        [TestMethod]
+        [Test]
         public void RunThrows()
         {
             var services = new List<IRunnable>();
@@ -69,7 +69,7 @@
             factory.Received().Tasks(Arg.Any<RoleTaskManager>());
         }
 
-        [TestMethod]
+        [Test]
         public void RunNoServices()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
@@ -77,7 +77,7 @@
             manager.Run();
         }
 
-        [TestMethod]
+        [Test]
         public void OnStart()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
@@ -85,7 +85,7 @@
             manager.OnStart();
         }
 
-        [TestMethod]
+        [Test]
         public void OnStartNoServices()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
@@ -97,7 +97,7 @@
             factory.Received().Tasks(Arg.Any<RoleTaskManager>());
         }
 
-        [TestMethod]
+        [Test]
         public void OnStop()
         {
             var services = new List<IRunnable>();
@@ -117,7 +117,7 @@
             factory.Received().Tasks(Arg.Any<RoleTaskManager>());
         }
 
-        [TestMethod]
+        [Test]
         public void OnStopThrows()
         {
             var services = new List<IRunnable>();
@@ -137,7 +137,7 @@
             factory.Received().Tasks(Arg.Any<RoleTaskManager>());
         }
 
-        [TestMethod]
+        [Test]
         public void OnStopNoServices()
         {
             var factory = Substitute.For<ITaskFactory<object>>();

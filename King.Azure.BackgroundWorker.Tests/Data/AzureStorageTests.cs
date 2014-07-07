@@ -1,19 +1,19 @@
 ﻿namespace King.Service.Tests.Data
 {
     using King.Azure.BackgroundWorker.Data;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using System;
 
-    [TestClass]
+    [TestFixture]
     public class AzureStorageTests
     {
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             new AzureStorage("UseDevelopmentStorage=true");
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorNull()
         {

@@ -2,29 +2,29 @@
 {
     using King.Azure.BackgroundWorker.Data;
     using King.Azure.BackgroundWorker.Data.Model;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using NSubstitute;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [TestClass]
+    [TestFixture]
     public class CoordinatorTests
     {
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             new Coordinator(new TimeSpan(9000), "UseDevelopmentStorage=true");
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTableNull()
         {
             var core = new Coordinator(null, new TimeSpan(9000));
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTimeSpanZero()
         {
@@ -32,14 +32,14 @@
             var core = new Coordinator(table, TimeSpan.Zero);
         }
 
-        [TestMethod]
+        [Test]
         public void IsICoordinator()
         {
             var table = Substitute.For<ITableStorage>();
             Assert.IsNotNull(new Coordinator(table, new TimeSpan(9000)) as ICoordinator);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CheckTypeNull()
         {
@@ -48,7 +48,7 @@
             core.Check(null);
         }
 
-        [TestMethod]
+        [Test]
         public void CheckNoRecords()
         {
             var table = Substitute.For<ITableStorage>();
@@ -62,7 +62,7 @@
             table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
         }
 
-        [TestMethod]
+        [Test]
         public void CheckCompletedFailure()
         {
             var records = new List<ScheduledTaskEntry>();
@@ -85,7 +85,7 @@
             table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
         }
 
-        [TestMethod]
+        [Test]
         public void CheckCompletedFailue()
         {
             var records = new List<ScheduledTaskEntry>();
@@ -108,7 +108,7 @@
             table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
         }
 
-        [TestMethod]
+        [Test]
         public void Check()
         {
             var records = new List<ScheduledTaskEntry>();
@@ -130,7 +130,7 @@
             table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
         }
 
-        [TestMethod]
+        [Test]
         public void InitializeTask()
         {
             var table = Substitute.For<ITableStorage>();
@@ -140,7 +140,7 @@
             Assert.IsNotNull(init as InitializeStorageTask);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task StartTypeNull()
         {
@@ -149,7 +149,7 @@
             await core.Start(null, Guid.NewGuid(), DateTime.UtcNow);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public async Task StartIdentifierEmpty()
         {
@@ -158,7 +158,7 @@
             await core.Start(this.GetType(), Guid.Empty, DateTime.UtcNow);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Start()
         {
             var table = Substitute.For<ITableStorage>();
@@ -170,7 +170,7 @@
             table.Received().InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task CompeleteTypeNull()
         {
@@ -179,7 +179,7 @@
             await core.Complete(null, Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow, true);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public async Task CompeleteIdentifierEmpty()
         {
@@ -188,7 +188,7 @@
             await core.Complete(this.GetType(), Guid.Empty, DateTime.UtcNow, DateTime.UtcNow, true);
         }
 
-        [TestMethod]
+        [Test]
         public async Task Compelete()
         {
             var table = Substitute.For<ITableStorage>();

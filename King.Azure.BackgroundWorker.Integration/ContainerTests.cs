@@ -1,16 +1,16 @@
 ﻿namespace King.Azure.BackgroundWorker.Integration
 {
     using King.Azure.BackgroundWorker.Data;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using System;
     using System.Threading.Tasks;
 
-    [TestClass]
+    [TestFixture]
     public class ContainerTests
     {
         private readonly string ConnectionString = "UseDevelopmentStorage=true;";
 
-        [TestMethod]
+        [Test]
         public async Task CreateIfNotExists()
         {
             var name = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');

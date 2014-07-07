@@ -1,8 +1,8 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
 
-    [TestClass]
+    [TestFixture]
     public class InitializeTaskTests
     {
         public class Helper : InitializeTask
@@ -12,13 +12,13 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             new Helper();
         }
 
-        [TestMethod]
+        [Test]
         public void IsTaskManager()
         {
             Assert.IsNotNull(new Helper() as TaskManager);

@@ -1,52 +1,52 @@
 ﻿namespace King.Service.Tests.Data.Model
 {
     using King.Azure.BackgroundWorker.Data.Model;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using Microsoft.WindowsAzure.Storage.Table;
     using System;
 
-    [TestClass]
+    [TestFixture]
     public class ScheduledTaskEntryTests
     {
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             new ScheduledTaskEntry();
         }
 
-        [TestMethod]
+        [Test]
         public void ConstructorServiceName()
         {
             new ScheduledTaskEntry(Guid.NewGuid().ToString());
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(NullReferenceException))]
         public void ConstructorTypeNull()
         {
             new ScheduledTaskEntry((Type)null);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorServiceNameNull()
         {
             new ScheduledTaskEntry((string)null);
         }
 
-        [TestMethod]
+        [Test]
         public void ConstructorType()
         {
             new ScheduledTaskEntry(this.GetType());
         }
 
-        [TestMethod]
+        [Test]
         public void IsTableEntity()
         {
             Assert.IsNotNull(new ScheduledTaskEntry() as TableEntity);
         }
 
-        [TestMethod]
+        [Test]
         public void PartitionKey()
         {
             var expected = ScheduledTaskEntry.GenerateLogsPartitionKey(this.GetType().ToString());
@@ -54,7 +54,7 @@
             Assert.AreEqual(expected, entity.PartitionKey);
         }
 
-        [TestMethod]
+        [Test]
         public void Identifier()
         {
             var entity = new ScheduledTaskEntry(this.GetType());

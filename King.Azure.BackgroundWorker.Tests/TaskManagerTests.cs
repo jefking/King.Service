@@ -1,9 +1,9 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests
 {
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NUnit.Framework;
     using System;
 
-    [TestClass]
+    [TestFixture]
     public class TaskManagerTests
     {
         #region Helper
@@ -32,20 +32,20 @@
         }
         #endregion
 
-        [TestMethod]
+        [Test]
         public void Constructor()
         {
             new TestManager(100, 100);
         }
 
-        [TestMethod]
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorDueZero()
         {
             new TestManager(-10, 100);
         }
 
-        [TestMethod]
+        [Test]
         public void Dispose()
         {
             using (var m = new TestManager(100, 100))
@@ -54,14 +54,14 @@
             }
         }
 
-        [TestMethod]
+        [Test]
         public void TestDispose()
         {
             var m = new TestManager(100, 100);
             m.TestDispose();
         }
 
-        [TestMethod]
+        [Test]
         public void TestDisposeTimer()
         {
             var m = new TestManager(100, 100);
@@ -69,21 +69,21 @@
             m.TestDispose();
         }
 
-        [TestMethod]
+        [Test]
         public void Run()
         {
             var m = new TestManager(100, 100);
             m.Run(this);
         }
 
-        [TestMethod]
+        [Test]
         public void RunStateNull()
         {
             var m = new TestManager(100, 100);
             m.Run(null);
         }
 
-        [TestMethod]
+        [Test]
         public void RunThrows()
         {
             var m = new TestManager(100, 100)
@@ -93,7 +93,7 @@
             m.Run(null);
         }
 
-        [TestMethod]
+        [Test]
         public void Start()
         {
             var m = new TestManager(100, 100);
@@ -101,7 +101,7 @@
             Assert.IsTrue(success);
         }
 
-        [TestMethod]
+        [Test]
         public void Stop()
         {
             var m = new TestManager(100, 100);
@@ -109,7 +109,7 @@
             Assert.IsTrue(success);
         }
 
-        [TestMethod]
+        [Test]
         public void StartStop()
         {
             var m = new TestManager(100, 100);
