@@ -88,9 +88,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\King.Azure.BackgroundWorker\King.Azure.BackgroundWorker.csproj">
+    <ProjectReference Include="..\King.Azure.BackgroundWorker\King.Service.csproj">
       <Project>{e72d36e9-0849-498e-ac4f-b97fb632e112}</Project>
-      <Name>King.Azure.BackgroundWorker</Name>
+      <Name>King.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

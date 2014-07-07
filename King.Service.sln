@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Azure.BackgroundWorker", "King.Azure.BackgroundWorker\King.Azure.BackgroundWorker.csproj", "{E72D36E9-0849-498E-AC4F-B97FB632E112}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service", "King.Azure.BackgroundWorker\King.Service.csproj", "{E72D36E9-0849-498E-AC4F-B97FB632E112}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Azure.BackgroundWorker.Tests", "King.Azure.BackgroundWorker.Tests\King.Azure.BackgroundWorker.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
 EndProject
