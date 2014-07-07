@@ -1,6 +1,3 @@
-King.Service
-============
-
 Task scheduling for Azure; use with worker roles for running background processing tasks.
 - Create a task to initialize your environment
 - Create a task that runs every X amount of time per instance
@@ -12,6 +9,7 @@ Task scheduling for Azure; use with worker roles for running background processi
 ```
 PM> Install-Package King.Service
 ```
+
 ## Sample Code
 ### [Initialization Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/InitTask.cs)
 ```
