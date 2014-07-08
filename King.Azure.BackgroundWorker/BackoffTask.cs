@@ -40,6 +40,11 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
+        /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
         public BackoffTask(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
             : this(new Timing(), minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
@@ -49,8 +54,10 @@
         /// Constructor for Mocking
         /// </summary>
         /// <param name="timing">Timing</param>
+        /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
+        /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
         public BackoffTask(ITiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
-            : base(minimumPeriodInSeconds, maximumPeriodInSeconds)
+            : base(minimumPeriodInSeconds, minimumPeriodInSeconds)
         {
             if (null == timing)
             {
