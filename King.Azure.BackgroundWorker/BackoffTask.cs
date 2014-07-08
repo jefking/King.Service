@@ -69,7 +69,7 @@
             bool workDone;
             this.Run(out workDone);
 
-            if (workDone && this.attempts > 0)//wromg
+            if (workDone && this.attempts > 0)//wrong;
             {
                 this.attempts++;
 
