@@ -81,6 +81,8 @@
             bool workWasDone;
             this.Run(out workWasDone);
 
+            Trace.TraceInformation("{0}: Work was {1}done.", this.GetType().ToString(), workWasDone ? string.Empty : "not ");
+
             this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
 
             var newTime = this.timing.Exponential(this.minimumPeriodInSeconds, this.maximumPeriodInSeconds, this.noWorkCount);
@@ -93,7 +95,7 @@
 
                 currentTime = ts.TotalSeconds;
 
-                Trace.TraceInformation("Changed timing to: {0}.", ts);
+                Trace.TraceInformation("{0}: Changed timing to: {1}.", this.GetType().ToString(), ts);
             }
         }
 
