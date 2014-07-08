@@ -29,6 +29,11 @@
             {
                 base.Dispose(true);
             }
+
+            public void Change(TimeSpan st)
+            {
+                base.ChangeTiming(st);
+            }
         }
         #endregion
 
@@ -117,6 +122,16 @@
             Assert.IsTrue(success);
             success = m.Stop();
             Assert.IsTrue(success);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ChangeZero()
+        {
+            using (var tm = new TestManager(1000, 100))
+            {
+                tm.Change(TimeSpan.Zero);
+            }
         }
     }
 }

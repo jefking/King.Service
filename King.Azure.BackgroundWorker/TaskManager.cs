@@ -107,8 +107,13 @@
         /// Change Timer to new interval
         /// </summary>
         /// <param name="newTime">New Time</param>
-        protected void Change(TimeSpan newTime)
+        protected void ChangeTiming(TimeSpan newTime)
         {
+            if (TimeSpan.Zero == newTime)
+            {
+                throw new ArgumentException("newTime Zero.");
+            }
+
             this.timer.Change(newTime, newTime);
         }
 

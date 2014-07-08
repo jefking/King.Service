@@ -83,14 +83,13 @@
 
             this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
 
-            //Can we get an exception if no work count is too great?
             var newTime = this.timing.Exponential(this.minimumPeriodInSeconds, this.maximumPeriodInSeconds, this.noWorkCount);
 
             if (currentTime != newTime)
             {
                 var ts = TimeSpan.FromSeconds(newTime);
                 
-                base.Change(ts);
+                base.ChangeTiming(ts);
 
                 currentTime = ts.TotalSeconds;
 
