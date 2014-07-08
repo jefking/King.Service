@@ -69,6 +69,8 @@
     /// </summary>
     public interface ITiming
     {
+        #region Methods
         double Exponential(int min = 0, int max = 60, ulong attempts = 0);
+        #endregion
     }
 }
