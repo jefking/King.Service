@@ -60,4 +60,9 @@
         void OnStop();
         #endregion
     }
+
+    public interface ITiming
+    {
+        double Exponential(int min = 0, int max = 60, int attempts = 0);
+    }
 }

@@ -5,7 +5,7 @@
     /// <summary>
     /// Timing Maths
     /// </summary>
-    public class Timing
+    public class Timing : ITiming
     {
         #region Methods
         /// <summary>
@@ -21,6 +21,7 @@
             {
                 return min;
             }
+
             var current = Math.Pow(2, attempts);
             return current < max ? current : max;
         }
