@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackoffTask.cs" />
     <Compile Include="Data\InitializeStorageTask.cs" />
     <Compile Include="Data\Container.cs" />
     <Compile Include="Data\Queue.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="CoordinatedTask.cs" />
     <Compile Include="Data\Coordinator.cs" />
     <Compile Include="TaskFactory.cs" />
+    <Compile Include="Timing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
