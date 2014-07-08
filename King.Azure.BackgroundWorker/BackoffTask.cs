@@ -26,7 +26,12 @@
         /// <summary>
         /// Attempts Made
         /// </summary>
-        private int noWorkCount = 0;
+        private ulong noWorkCount = 0;
+
+        /// <summary>
+        /// Current Time
+        /// </summary>
+        private double currentTime = 0;
 
         /// <summary>
         /// Timing Halper
@@ -61,6 +66,7 @@
             }
 
             this.timing = timing;
+            this.currentTime = minimumPeriodInSeconds;
             this.minimumPeriodInSeconds = minimumPeriodInSeconds;
             this.maximumPeriodInSeconds = maximumPeriodInSeconds;
         }
@@ -75,16 +81,18 @@
             bool workWasDone;
             this.Run(out workWasDone);
 
-            var workCount = workWasDone ? 0 : this.noWorkCount++;
+            this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
 
-            if (workCount != noWorkCount)
+            //Can we get an exception if no work count is too great?
+            var newTime = this.timing.Exponential(this.minimumPeriodInSeconds, this.maximumPeriodInSeconds, this.noWorkCount);
+
+            if (currentTime != newTime)
             {
-                //Can we get an exception if no work count is too great?
-                var newTime = this.timing.Exponential(this.minimumPeriodInSeconds, this.maximumPeriodInSeconds, this.noWorkCount);
                 var ts = TimeSpan.FromSeconds(newTime);
-
-                //Don't change if Maximum is hittinng maximum after the first time.
+                
                 base.Change(ts);
+
+                currentTime = ts.TotalSeconds;
 
                 Trace.TraceInformation("Changed timing to: {0}.", ts);
             }

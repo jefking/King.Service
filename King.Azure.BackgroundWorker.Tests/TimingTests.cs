@@ -35,7 +35,7 @@ using NUnit.Framework;
             var random = new Random();
             var max = random.Next(1, 60);
             var time = new Timing();
-            var ex = time.Exponential(0, max, random.Next(61, 500));
+            var ex = time.Exponential(0, max, (ulong)random.Next(61, 500));
             Assert.AreEqual(max, ex);
         }
 

@@ -63,6 +63,6 @@
 
     public interface ITiming
     {
-        double Exponential(int min = 0, int max = 60, int attempts = 0);
+        double Exponential(int min = 0, int max = 60, ulong attempts = 0);
     }
 }
