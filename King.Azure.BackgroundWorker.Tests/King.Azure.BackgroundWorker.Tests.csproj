@@ -82,6 +82,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BackoffTaskTests.cs" />
     <Compile Include="CoordinatedTaskTests.cs" />
     <Compile Include="Data\AzureStorageTests.cs" />
     <Compile Include="Data\ContainerTests.cs" />

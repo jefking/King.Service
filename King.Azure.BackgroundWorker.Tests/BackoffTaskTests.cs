@@ -1,6 +1,8 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests
 {
+    using NSubstitute;
     using NUnit.Framework;
+    using System;
 
     [TestFixture]
     public class BackoffTaskTests
@@ -35,9 +37,29 @@
         }
 
         [Test]
-        public void Constructor()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorTimingNull()
         {
             new BackoffTest(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorMinMaxZero()
+        {
+            var random = new Random();
+            var time = Substitute.For<ITiming>();
+            new BackoffTest(time, random.Next(0));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorMinMaxSwitched()
+        {
+            var random = new Random();
+            var value = random.Next(0, 1024);
+            var time = Substitute.For<ITiming>();
+            new BackoffTest(time, value + 1, value - 1);
         }
     }
 }
