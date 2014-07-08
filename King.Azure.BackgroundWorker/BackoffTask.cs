@@ -8,7 +8,7 @@
     /// </summary>
     /// <remarks>
     /// When a run is made and no work done, the task backs off.
-    /// - Perfect for dequeuing when there might not be work items in the queue
+    /// - Perfect for dequeuing when there might not be work items in the queue.
     /// </remarks>
     public abstract class BackoffTask : TaskManager
     {
@@ -26,7 +26,7 @@
         /// <summary>
         /// Attempts Made
         /// </summary>
-        private int attempts = 0;
+        private int noWorkCount = 0;
 
         /// <summary>
         /// Timing Halper
@@ -53,11 +53,11 @@
             }
             if (0 >= minimumPeriodInSeconds)
             {
-                throw new ArgumentException("minimumPeriodInSeconds must be greater than 0.");
+                throw new ArgumentException("Minimum Period In Seconds must be greater than 0.");
             }
             if (minimumPeriodInSeconds >= maximumPeriodInSeconds)
             {
-                throw new ArgumentException("minimumPeriodInSeconds must be less than maximumPeriodInSeconds");
+                throw new ArgumentException("Mminimum Period In Seconds must be less than Maximum Period In Seconds");
             }
 
             this.timing = timing;
@@ -75,18 +75,18 @@
             bool workWasDone;
             this.Run(out workWasDone);
 
-            var workCount = workWasDone ? 0 : this.attempts + 1;
+            var workCount = workWasDone ? 0 : this.noWorkCount++;
 
-            if (workCount != attempts)
+            if (workCount != noWorkCount)
             {
-                var newTime = this.timing.Exponential(minimumPeriodInSeconds, maximumPeriodInSeconds, workCount);
+                //Can we get an exception if no work count is too great?
+                var newTime = this.timing.Exponential(this.minimumPeriodInSeconds, this.maximumPeriodInSeconds, this.noWorkCount);
                 var ts = TimeSpan.FromSeconds(newTime);
 
+                //Don't change if Maximum is hittinng maximum after the first time.
                 base.Change(ts);
 
                 Trace.TraceInformation("Changed timing to: {0}.", ts);
-
-                this.attempts = workCount;
             }
         }
 
