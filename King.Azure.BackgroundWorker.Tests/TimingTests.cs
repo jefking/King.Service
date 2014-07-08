@@ -12,6 +12,12 @@ using NUnit.Framework;
         {
             new Timing();
         }
+        
+        [Test]
+        public void IsITiming()
+        {
+            Assert.IsNotNull(new Timing() as ITiming);
+        }
 
         [Test]
         public void Attempt()
