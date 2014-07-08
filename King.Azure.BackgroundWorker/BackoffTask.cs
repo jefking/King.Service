@@ -7,7 +7,8 @@
     /// Exponential Backoff Task
     /// </summary>
     /// <remarks>
-    /// When an attempt is made and no work done, the tasks can be backed off.
+    /// When a run is made and no work done, the task backs off.
+    /// - Perfect for dequeuing when there might not be work items in the queue
     /// </remarks>
     public abstract class BackoffTask : TaskManager
     {
