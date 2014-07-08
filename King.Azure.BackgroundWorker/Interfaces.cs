@@ -40,6 +40,9 @@
         #endregion
     }
 
+    /// <summary>
+    /// Role Service Manager Interface
+    /// </summary>
     public interface IRoleServiceManager
     {
         #region Methods
@@ -61,6 +64,9 @@
         #endregion
     }
 
+    /// <summary>
+    /// Timing interface for Timing Maths
+    /// </summary>
     public interface ITiming
     {
         double Exponential(int min = 0, int max = 60, ulong attempts = 0);
