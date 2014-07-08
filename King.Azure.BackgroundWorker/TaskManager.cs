@@ -104,6 +104,15 @@
         }
 
         /// <summary>
+        /// Change Timer to new interval
+        /// </summary>
+        /// <param name="newTime">New Time</param>
+        protected void Change(TimeSpan newTime)
+        {
+            this.timer.Change(newTime, newTime);
+        }
+
+        /// <summary>
         /// Execute Action
         /// </summary>
         public abstract void Run();
