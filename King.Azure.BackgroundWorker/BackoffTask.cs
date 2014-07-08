@@ -13,14 +13,14 @@
     {
         #region Members
         /// <summary>
-        /// Minimum Timeframe (starting timeframe)
+        /// Minimum Timeframe (seconds) (starting timeframe)
         /// </summary>
-        private readonly int min = 60;
+        private readonly int minimumPeriodInSeconds = 60;
 
         /// <summary>
-        /// Maximum Timeframe to backoff too.
+        /// Maximum Timeframe (seconds) to backoff too.
         /// </summary>
-        private readonly int max = 300;
+        private readonly int maximumPeriodInSeconds = 300;
 
         /// <summary>
         /// Attempts Made
@@ -34,8 +34,8 @@
         #endregion
 
         #region Constructors
-        public BackoffTask(int min = 60, int max = 300)
-            : this(new Timing(), min, max)
+        public BackoffTask(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
+            : this(new Timing(), minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
 
@@ -43,27 +43,32 @@
         /// Constructor for Mocking
         /// </summary>
         /// <param name="timing">Timing</param>
-        public BackoffTask(ITiming timing, int min = 60, int max = 300)
-            : base(min, min)
+        public BackoffTask(ITiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
+            : base(minimumPeriodInSeconds, minimumPeriodInSeconds)
         {
-            if (0 == min)
-            {
-
-            }
-            if (min >= max)
-            {
-
-            }
             if (null == timing)
             {
-
+                throw new ArgumentNullException("");
+            }
+            if (0 == minimumPeriodInSeconds)
+            {
+                throw new ArgumentException("");
+            }
+            if (minimumPeriodInSeconds >= maximumPeriodInSeconds)
+            {
+                throw new ArgumentException("");
             }
 
             this.timing = timing;
+            this.minimumPeriodInSeconds = minimumPeriodInSeconds;
+            this.maximumPeriodInSeconds = maximumPeriodInSeconds;
         }
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Run
+        /// </summary>
         public override void Run()
         {
             bool workDone;
@@ -73,7 +78,7 @@
             {
                 this.attempts++;
 
-                var newTime = this.timing.Exponential(min, max, attempts);
+                var newTime = this.timing.Exponential(minimumPeriodInSeconds, maximumPeriodInSeconds, attempts);
                 var ts = TimeSpan.FromSeconds(newTime);
 
                 base.Change(ts);
@@ -82,6 +87,10 @@
             }
         }
 
+        /// <summary>
+        /// Run
+        /// </summary>
+        /// <param name="workDone"></param>
         public abstract void Run(out bool workDone);
         #endregion
     }
