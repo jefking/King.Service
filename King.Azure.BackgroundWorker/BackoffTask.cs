@@ -71,12 +71,12 @@
         /// </summary>
         public override void Run()
         {
-            bool workDone;
-            this.Run(out workDone);
+            bool workWasDone;
+            this.Run(out workWasDone);
 
-            this.attempts = workDone ? 0 : this.attempts + 1;
+            var workCount = workWasDone ? 0 : this.attempts + 1;
 
-            if (!workDone)
+            if (!workWasDone)
             {
                 this.attempts++;
 
@@ -87,13 +87,15 @@
 
                 Trace.TraceInformation("Changed timing to: {0}.", ts);
             }
+
+            this.attempts = workCount;
         }
 
         /// <summary>
         /// Run
         /// </summary>
-        /// <param name="workDone"></param>
-        public abstract void Run(out bool workDone);
+        /// <param name="workWasDone">Work Was Done</param>
+        public abstract void Run(out bool workWasDone);
         #endregion
     }
 }
