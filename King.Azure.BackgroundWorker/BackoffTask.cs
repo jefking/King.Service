@@ -48,15 +48,15 @@
         {
             if (null == timing)
             {
-                throw new ArgumentNullException("");
+                throw new ArgumentNullException("timing");
             }
-            if (0 == minimumPeriodInSeconds)
+            if (0 >= minimumPeriodInSeconds)
             {
-                throw new ArgumentException("");
+                throw new ArgumentException("minimumPeriodInSeconds must be greater than 0.");
             }
             if (minimumPeriodInSeconds >= maximumPeriodInSeconds)
             {
-                throw new ArgumentException("");
+                throw new ArgumentException("minimumPeriodInSeconds must be less than maximumPeriodInSeconds");
             }
 
             this.timing = timing;
@@ -74,7 +74,9 @@
             bool workDone;
             this.Run(out workDone);
 
-            if (workDone && this.attempts > 0)//wrong;
+            this.attempts = workDone ? 0 : this.attempts + 1;
+
+            if (!workDone)
             {
                 this.attempts++;
 
@@ -83,7 +85,7 @@
 
                 base.Change(ts);
 
-                Trace.TraceInformation("Changed time to: {0}.", ts);
+                Trace.TraceInformation("Changed timing to: {0}.", ts);
             }
         }
 
