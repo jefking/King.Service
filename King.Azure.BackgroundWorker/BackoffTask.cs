@@ -14,12 +14,12 @@
         /// <summary>
         /// Minimum Timeframe (starting timeframe)
         /// </summary>
-        private readonly int min = 15;
+        private readonly int min = 60;
 
         /// <summary>
         /// Maximum Timeframe to backoff too.
         /// </summary>
-        private readonly int max = 60;
+        private readonly int max = 300;
 
         /// <summary>
         /// Attempts Made
@@ -33,6 +33,33 @@
         #endregion
 
         #region Constructors
+        public BackoffTask(int min = 60, int max = 300)
+            : this(new Timing(), min, max)
+        {
+        }
+
+        /// <summary>
+        /// Constructor for Mocking
+        /// </summary>
+        /// <param name="timing">Timing</param>
+        public BackoffTask(ITiming timing, int min = 60, int max = 300)
+            : base(min, min)
+        {
+            if (0 == min)
+            {
+
+            }
+            if (min >= max)
+            {
+
+            }
+            if (null == timing)
+            {
+
+            }
+
+            this.timing = timing;
+        }
         #endregion
 
         #region Methods
