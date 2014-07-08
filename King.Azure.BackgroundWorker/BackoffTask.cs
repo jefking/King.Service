@@ -1,6 +1,7 @@
 ﻿namespace King.Azure.BackgroundWorker
 {
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Exponential Backoff Task
@@ -68,12 +69,17 @@
             bool workDone;
             this.Run(out workDone);
 
-            this.attempts = workDone ? 0 : this.attempts++;
+            if (workDone && this.attempts > 0)//wromg
+            {
+                this.attempts++;
 
-            var newTime = this.timing.Exponential(min, max, attempts);
-            var ts = TimeSpan.FromSeconds(newTime);
+                var newTime = this.timing.Exponential(min, max, attempts);
+                var ts = TimeSpan.FromSeconds(newTime);
 
-            base.Change(ts);
+                base.Change(ts);
+
+                Trace.TraceInformation("Changed time to: {0}.", ts);
+            }
         }
 
         public abstract void Run(out bool workDone);
