@@ -76,19 +76,17 @@
 
             var workCount = workWasDone ? 0 : this.attempts + 1;
 
-            if (!workWasDone)
+            if (workCount != attempts)
             {
-                this.attempts++;
-
-                var newTime = this.timing.Exponential(minimumPeriodInSeconds, maximumPeriodInSeconds, attempts);
+                var newTime = this.timing.Exponential(minimumPeriodInSeconds, maximumPeriodInSeconds, workCount);
                 var ts = TimeSpan.FromSeconds(newTime);
 
                 base.Change(ts);
 
                 Trace.TraceInformation("Changed timing to: {0}.", ts);
-            }
 
-            this.attempts = workCount;
+                this.attempts = workCount;
+            }
         }
 
         /// <summary>
