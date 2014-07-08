@@ -126,11 +126,30 @@
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void ChangeZero()
+        public void ChangeTimingZero()
         {
             using (var tm = new TestManager(1000, 100))
             {
                 tm.Change(TimeSpan.Zero);
+            }
+        }
+
+        [Test]
+        public void ChangeTimingWithoutStart()
+        {
+            using (var tm = new TestManager(1000, 100))
+            {
+                tm.Change(TimeSpan.FromSeconds(100));
+            }
+        }
+
+        [Test]
+        public void ChangeTiming()
+        {
+            using (var tm = new TestManager(1000, 100))
+            {
+                tm.Start();
+                tm.Change(TimeSpan.FromSeconds(100));
             }
         }
     }

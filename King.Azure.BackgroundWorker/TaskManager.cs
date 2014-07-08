@@ -114,7 +114,10 @@
                 throw new ArgumentException("newTime Zero.");
             }
 
-            this.timer.Change(newTime, newTime);
+            if (null != this.timer)
+            {
+                this.timer.Change(newTime, newTime);
+            }
         }
 
         /// <summary>
