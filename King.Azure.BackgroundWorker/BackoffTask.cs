@@ -50,7 +50,7 @@
         /// </summary>
         /// <param name="timing">Timing</param>
         public BackoffTask(ITiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
-            : base(minimumPeriodInSeconds, minimumPeriodInSeconds)
+            : base(minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
             if (null == timing)
             {

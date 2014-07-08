@@ -15,7 +15,7 @@
             {
             }
             public BackoffTest(ITiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
-                : base(timing, minimumPeriodInSeconds, minimumPeriodInSeconds)
+                : base(timing, minimumPeriodInSeconds, maximumPeriodInSeconds)
             {
             }
             public bool Work
@@ -33,7 +33,9 @@
         [Test]
         public void Constructor()
         {
-            new BackoffTest();
+            using (new BackoffTest())
+            {
+            }
         }
 
         [Test]
@@ -49,7 +51,9 @@
         {
             var random = new Random();
             var time = Substitute.For<ITiming>();
-            new BackoffTest(time, random.Next(0));
+            using (new BackoffTest(time, random.Next(0)))
+            {
+            }
         }
 
         [Test]
@@ -59,7 +63,44 @@
             var random = new Random();
             var value = random.Next(0, 1024);
             var time = Substitute.For<ITiming>();
-            new BackoffTest(time, value + 1, value - 1);
+            using (new BackoffTest(time, value + 1, value - 1))
+            {
+            }
+        }
+
+        [Test]
+        public void Run()
+        {
+            var random = new Random();
+            var min = random.Next(1, 30);
+            var max = random.Next(90, 1024);
+            var time = Substitute.For<ITiming>();
+            time.Exponential(min, max, 1).Returns(4);
+
+            using (var task = new BackoffTest(time, min, max))
+            {
+                task.Run();
+            }
+
+            time.Received().Exponential(min, max, 1);
+        }
+
+        [Test]
+        public void RunWorkDone()
+        {
+            var random = new Random();
+            var min = random.Next(1, 30);
+            var max = random.Next(90, 1024);
+            var time = Substitute.For<ITiming>();
+            time.Exponential(min, max, 0).Returns(99);
+
+            using (var task = new BackoffTest(time, min, max))
+            {
+                task.Work = true;
+                task.Run();
+            }
+
+            time.Received().Exponential(min, max, 0);
         }
     }
 }
