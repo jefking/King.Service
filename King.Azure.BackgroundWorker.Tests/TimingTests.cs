@@ -47,11 +47,19 @@
             var max = random.Next(60, 120);
 
             var time = new Timing();
-            for (ulong i = 0; i < 10; i++)
+            for (ulong i = 1; i < 10; i++)
             {
-                var ex = time.Exponential(i , max, min);
+                var calc = time.Exponential(i, max, min);
 
-                Assert.AreEqual(2, ex);
+                var expected = ((Math.Pow(2, i) * .1d) * min) + min;
+                if (expected > max)
+                {
+                    break;// Not testing max
+                }
+                else
+                {
+                    Assert.AreEqual(expected, calc);
+                }
             }
         }
 
@@ -63,11 +71,19 @@
             var max = random.Next(28800, 86400);
 
             var time = new Timing();
-            for (ulong i = 0; i < 10; i++)
+            for (ulong i = 1; i < 10; i++)
             {
-                var ex = time.Exponential(i, max, min);
+                var calc = time.Exponential(i, max, min);
 
-                Assert.AreEqual(2, ex);
+                var expected = ((Math.Pow(2, i) * .1d) * min) + min;
+                if (expected > max)
+                {
+                    break;// Not testing max
+                }
+                else
+                {
+                    Assert.AreEqual(expected, calc);
+                }
             }
         }
     }
