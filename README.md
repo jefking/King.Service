@@ -39,8 +39,10 @@ class MyTask : BackoffTask
 	public override void Run(out bool workWasDone)
 	{
 		workWasDone = false
+		
 		//Process background work here.
-		//When work was done
+
+		//If work is done
 		workWasDone = true;
 	}
 }
