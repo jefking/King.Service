@@ -75,14 +75,14 @@
             var min = random.Next(1, 30);
             var max = random.Next(90, 1024);
             var time = Substitute.For<ITiming>();
-            time.Exponential(min, max, 1).Returns(4);
+            time.Exponential(1, max, min).Returns(4);
 
             using (var task = new BackoffTest(time, min, max))
             {
                 task.Run();
             }
 
-            time.Received().Exponential(min, max, 1);
+            time.Received().Exponential(1, max, min);
         }
 
         [Test]
@@ -92,7 +92,7 @@
             var min = random.Next(1, 30);
             var max = random.Next(90, 1024);
             var time = Substitute.For<ITiming>();
-            time.Exponential(min, max, 0).Returns(99);
+            time.Exponential(0, max, min).Returns(99);
 
             using (var task = new BackoffTest(time, min, max))
             {
@@ -100,7 +100,7 @@
                 task.Run();
             }
 
-            time.Received().Exponential(min, max, 0);
+            time.Received().Exponential(0, max, min);
         }
     }
 }

@@ -11,11 +11,11 @@
         /// <summary>
         /// Exponential Backoff strategy, within bounds
         /// </summary>
-        /// <param name="min">lower bound</param>
-        /// <param name="max">upper bound</param>
         /// <param name="attempts">attempts</param>
+        /// <param name="max">upper bound</param>
+        /// <param name="min">lower bound</param>
         /// <returns>timing</returns>
-        public double Exponential(int min = 0, int max = 60, ulong attempts = 0)
+        public double Exponential(ulong attempts, int max, int min = 1)
         {
             if (0 == attempts)
             {

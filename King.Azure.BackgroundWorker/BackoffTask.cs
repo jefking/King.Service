@@ -92,7 +92,7 @@
 
             this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
 
-            var newTime = this.timing.Exponential(this.minimumPeriodInSeconds, this.maximumPeriodInSeconds, this.noWorkCount);
+            var newTime = this.timing.Exponential(this.noWorkCount, this.maximumPeriodInSeconds, this.minimumPeriodInSeconds);
 
             if (currentTime != newTime)
             {
