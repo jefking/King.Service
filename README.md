@@ -15,7 +15,7 @@ PM> Install-Package King.Service
 ```
 class MyTask : InitializeTask
 {
-	public virtual void Run()
+	public override void Run()
 	{
 		//Initialize one time resource.
 	}
@@ -25,7 +25,7 @@ class MyTask : InitializeTask
 ```
 class MyTask : TaskManager
 {
-	public virtual void Run()
+	public override void Run()
 	{
 		//Process background work here.
 	}
@@ -35,7 +35,7 @@ class MyTask : TaskManager
 ```
 class MyTask : BackoffTask
 {
-	public virtual void Run()
+	public override void Run(out bool workWasDone)
 	{
 		//Process background work here.
 	}
@@ -49,7 +49,7 @@ class MyTask : CoordinatedTask
 		: base("Storage Account for Coordination between Instances")
 	{
 	}
-	public virtual void Run()
+	public override void Run()
 	{
 		//Process background work here.
 	}
