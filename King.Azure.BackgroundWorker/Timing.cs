@@ -22,8 +22,7 @@
                 return min;
             }
 
-            var percent = Math.Pow(2, attempts) * .1d;
-            var current = (percent * min) + min;
+            var current = ((Math.Pow(2, attempts) * .1d) * min) + min;
             return current < max ? current : max;
         }
         #endregion
