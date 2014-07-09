@@ -45,25 +45,11 @@
         {
             get
             {
-                if (string.IsNullOrEmpty(this.RowKey))
-                {
-                    return null;
-                }
-                else
-                {
-                    return Guid.Parse(this.RowKey);
-                }
+                return string.IsNullOrEmpty(this.RowKey) ? (Guid?)null : Guid.Parse(this.RowKey);
             }
             set
             {
-                if (value == null)
-                {
-                    this.RowKey = null;
-                }
-                else
-                {
-                    this.RowKey = value.ToString();
-                }
+                this.RowKey = null == value ? null : value.ToString();
             }
         }
 
