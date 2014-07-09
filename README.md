@@ -31,25 +31,22 @@ class MyTask : TaskManager
 	}
 }
 ```
-### [Coordinated Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Coordinated.cs)
+### [Backoff Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Backoff.cs)
 ```
-class MyTask : CoordinatedTask
+class MyTask : BackoffTask
 {
-	public MyTask()
-		: base("Storage Account for Coordination between Instances")
-	{
-	}
 	public virtual void Run()
 	{
 		//Process background work here.
 	}
 }
 ```
-### [Backoff Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Backoff.cs)
+### [Coordinated Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Coordinated.cs)
 ```
-class MyTask : BackoffTask
+class MyTask : CoordinatedTask
 {
 	public MyTask()
+		: base("Storage Account for Coordination between Instances")
 	{
 	}
 	public virtual void Run()
