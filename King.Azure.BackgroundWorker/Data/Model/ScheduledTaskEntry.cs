@@ -39,7 +39,7 @@
 
         #region Properties
         /// <summary>
-        /// Gets and sets Identifier
+        /// Identifier
         /// </summary>
         public Guid? Identifier
         {
@@ -54,7 +54,7 @@
         }
 
         /// <summary>
-        /// Gets and sets Start Time
+        /// Start Time
         /// </summary>
         public DateTime StartTime
         {
@@ -63,7 +63,7 @@
         }
 
         /// <summary>
-        /// Gets and sets Completion Time
+        /// Completion Time
         /// </summary>
         public DateTime? CompletionTime
         {
@@ -72,7 +72,7 @@
         }
 
         /// <summary>
-        /// Gets and sets the Service Name
+        /// the Service Name
         /// </summary>
         public string ServiceName
         {
@@ -81,7 +81,7 @@
         }
 
         /// <summary>
-        /// Gets and sets Successful
+        /// Successful
         /// </summary>
         public bool Successful
         {
