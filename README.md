@@ -1,4 +1,4 @@
-Task scheduling for Azure; use with worker roles for running background processing tasks.
+Task scheduling for Azure; use with worker roles for running background data processing tasks.
 - Create a task to initialize your environment
 - Create a task that runs every X amount of time per instance
 - Create a task that runs every X; and when work lessens backs off to Y
