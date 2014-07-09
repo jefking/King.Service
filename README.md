@@ -45,6 +45,19 @@ class MyTask : CoordinatedTask
 	}
 }
 ```
+### [Backoff Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Backoff.cs)
+```
+class MyTask : BackoffTask
+{
+	public MyTask()
+	{
+	}
+	public virtual void Run()
+	{
+		//Process background work here.
+	}
+}
+```
 ### [Initialize Tasks](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Factory.cs)
 ```
 class Factory : TaskFactory
