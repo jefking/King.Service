@@ -7,7 +7,7 @@
     /// <summary>
     /// Queue
     /// </summary>
-    public class Queue : AzureStorage, IAzureStorage
+    public class Queue : AzureStorage, IQueue
     {
         #region Members
         /// <summary>
@@ -60,6 +60,30 @@
         public async Task<bool> CreateIfNotExists()
         {
             return await this.reference.CreateIfNotExistsAsync();
+        }
+
+        /// <summary>
+        /// Pop Cloud Queue Message
+        /// </summary>
+        /// <returns>Message</returns>
+        public async Task<CloudQueueMessage> Get()
+        {
+            return await this.reference.GetMessageAsync();
+        }
+
+        /// <summary>
+        /// Delete Message from Queue
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <returns>Task</returns>
+        public async Task Delete(CloudQueueMessage message)
+        {
+            if (null == message)
+            {
+                throw new ArgumentNullException("message");
+            }
+
+            await this.reference.DeleteMessageAsync(message);
         }
         #endregion
     }

@@ -1,5 +1,6 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
+    using Microsoft.WindowsAzure.Storage.Queue;
     using Microsoft.WindowsAzure.Storage.Table;
     using System;
     using System.Collections.Generic;
@@ -90,6 +91,24 @@
         /// <returns></returns>
         IEnumerable<T> QueryByPartition<T>(string partition)
             where T : ITableEntity, new();
+        #endregion
+    }
+
+    public interface IQueue : IAzureStorage
+    {
+        #region Methods
+        /// <summary>
+        /// Pop Cloud Queue Message
+        /// </summary>
+        /// <returns>Message</returns>
+        Task<CloudQueueMessage> Get();
+
+        /// <summary>
+        /// Delete Message from Queue
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <returns>Task</returns>
+        Task Delete(CloudQueueMessage message);
         #endregion
     }
 

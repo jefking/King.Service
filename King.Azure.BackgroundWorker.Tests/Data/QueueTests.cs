@@ -3,6 +3,7 @@
     using King.Azure.BackgroundWorker.Data;
     using NUnit.Framework;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class QueueTests
@@ -14,31 +15,40 @@
         }
 
         [Test]
-        public void IsIAzureStorage()
+        public void IQueue()
         {
-            Assert.IsNotNull(new Queue("test", "UseDevelopmentStorage=true") as IAzureStorage);
+            Assert.IsNotNull(new Queue("test", "UseDevelopmentStorage=true") as IQueue);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTableNull()
         {
-            new TableStorage(null, "UseDevelopmentStorage=true");
+            new Queue(null, "UseDevelopmentStorage=true");
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorKeyNull()
         {
-            new TableStorage("test", null);
+            new Queue("test", null);
         }
 
         [Test]
         public void Name()
         {
             var name = Guid.NewGuid().ToString();
-            var t = new TableStorage(name, "UseDevelopmentStorage=true");
+            var t = new Queue(name, "UseDevelopmentStorage=true");
             Assert.AreEqual(name, t.Name);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task DeleteNull()
+        {
+            var name = Guid.NewGuid().ToString();
+            var t = new Queue(name, "UseDevelopmentStorage=true");
+            await t.Delete(null);
         }
     }
 }
