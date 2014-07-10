@@ -63,12 +63,27 @@
         }
 
         /// <summary>
-        /// Pop Cloud Queue Message
+        /// Get Cloud Queue Message
         /// </summary>
         /// <returns>Message</returns>
         public async Task<CloudQueueMessage> Get()
         {
             return await this.reference.GetMessageAsync();
+        }
+
+        /// <summary>
+        /// Save Message to Queue
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <returns>Task</returns>
+        public async Task Save(CloudQueueMessage message)
+        {
+            if (null == message)
+            {
+                throw new ArgumentNullException("message");
+            }
+
+            await this.reference.AddMessageAsync(message);
         }
 
         /// <summary>

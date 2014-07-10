@@ -8,23 +8,25 @@
     [TestFixture]
     public class QueueTests
     {
+        private const string ConnectionString = "UseDevelopmentStorage=true;";
+
         [Test]
         public void Constructor()
         {
-            new Queue("test", "UseDevelopmentStorage=true");
+            new Queue("test", ConnectionString);
         }
 
         [Test]
         public void IQueue()
         {
-            Assert.IsNotNull(new Queue("test", "UseDevelopmentStorage=true") as IQueue);
+            Assert.IsNotNull(new Queue("test", ConnectionString) as IQueue);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTableNull()
         {
-            new Queue(null, "UseDevelopmentStorage=true");
+            new Queue(null, ConnectionString);
         }
 
         [Test]
@@ -38,7 +40,7 @@
         public void Name()
         {
             var name = Guid.NewGuid().ToString();
-            var t = new Queue(name, "UseDevelopmentStorage=true");
+            var t = new Queue(name, ConnectionString);
             Assert.AreEqual(name, t.Name);
         }
 
@@ -47,7 +49,7 @@
         public async Task DeleteNull()
         {
             var name = Guid.NewGuid().ToString();
-            var t = new Queue(name, "UseDevelopmentStorage=true");
+            var t = new Queue(name, ConnectionString);
             await t.Delete(null);
         }
     }

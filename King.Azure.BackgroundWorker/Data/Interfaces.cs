@@ -109,6 +109,13 @@
         /// <param name="message">Message</param>
         /// <returns>Task</returns>
         Task Delete(CloudQueueMessage message);
+
+        /// <summary>
+        /// Save Message to Queue
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <returns>Task</returns>
+        Task Save(CloudQueueMessage message);
         #endregion
     }
 
