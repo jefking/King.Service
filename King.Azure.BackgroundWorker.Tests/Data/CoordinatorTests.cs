@@ -63,7 +63,7 @@
         }
 
         [Test]
-        public void CheckCompletedFailure()
+        public void CheckCompletedFailureOld()
         {
             var records = new List<ScheduledTaskEntry>();
             var record = new ScheduledTaskEntry()
@@ -86,7 +86,7 @@
         }
 
         [Test]
-        public void CheckCompletedFailue()
+        public void CheckCompletedFailure()
         {
             var records = new List<ScheduledTaskEntry>();
             var record = new ScheduledTaskEntry()
