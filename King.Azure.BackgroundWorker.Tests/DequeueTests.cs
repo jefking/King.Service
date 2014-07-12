@@ -14,18 +14,30 @@
         }
 
         [Test]
-        public void IsBackoffTask()
+        public void IsIBackoffRuns()
         {
-            Assert.IsNotNull(new Dequeue() as BackoffTask);
+            Assert.IsNotNull(new Dequeue() as IBackoffRuns);
         }
 
         [Test]
-        [ExpectedException(typeof(NotImplementedException))]
         public void Run()
         {
-            var work = false;
             var d = new Dequeue();
-            d.Run(out work);
+            Assert.IsFalse(d.Run());
+        }
+
+        [Test]
+        public void MinimumPeriodInSeconds()
+        {
+            var d = new Dequeue();
+            Assert.AreEqual(100, d.MinimumPeriodInSeconds);
+        }
+
+        [Test]
+        public void MaximumPeriodInSeconds()
+        {
+            var d = new Dequeue();
+            Assert.AreEqual(100, d.MaximumPeriodInSeconds);
         }
     }
 }
