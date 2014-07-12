@@ -16,7 +16,7 @@
         {
             get
             {
-                return 100;
+                return 1;
             }
         }
 
@@ -24,7 +24,7 @@
         {
             get
             {
-                return 100;
+                return 600;
             }
         }
     }

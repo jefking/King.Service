@@ -30,14 +30,14 @@
         public void MinimumPeriodInSeconds()
         {
             var d = new Dequeue();
-            Assert.AreEqual(100, d.MinimumPeriodInSeconds);
+            Assert.AreEqual(1, d.MinimumPeriodInSeconds);
         }
 
         [Test]
         public void MaximumPeriodInSeconds()
         {
             var d = new Dequeue();
-            Assert.AreEqual(100, d.MaximumPeriodInSeconds);
+            Assert.AreEqual(600, d.MaximumPeriodInSeconds);
         }
     }
 }

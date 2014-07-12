@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackoffRunner.cs" />
     <Compile Include="BackoffTask.cs" />
     <Compile Include="Data\Dequeue.cs" />
     <Compile Include="Data\InitializeStorageTask.cs" />
