@@ -139,4 +139,24 @@
         Task<bool> CreateIfNotExists();
         #endregion
     }
+
+    /// <summary>
+    /// IDeququePoll
+    /// </summary>
+    public interface IDequeueProcessor<T> : IDequeuePoller<CloudQueueMessage>
+    {
+        #region Methods
+        Task<bool> Process(T data);
+        #endregion
+    }
+
+    /// <summary>
+    /// IDequeuePoll
+    /// </summary>
+    public interface IDequeuePoller<T>
+    {
+        #region Methods
+        Task<T> Poll();
+        #endregion
+    }
 }

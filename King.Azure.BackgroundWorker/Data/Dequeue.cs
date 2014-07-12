@@ -1,12 +1,15 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
+    using Newtonsoft.Json;
     using System;
 
     /// <summary>
     /// Dequeue Task for Queues
     /// </summary>
-    public class Dequeue : IBackoffRuns
+    public class Dequeue<T> : IBackoffRuns
     {
+        private readonly IDequeueProcessor<T> poller;
+
         #region Constructors
         /// <summary>
         /// Default Constructor
@@ -33,6 +36,37 @@
         public bool Run()
         {
             var worked = false;
+            var task = poller.Poll();
+            task.Wait();
+            
+            var data = task.Result;
+            if (null != data)
+            {
+                worked = true;
+
+                var converted = JsonConvert.DeserializeObject<T>(data.AsString);
+
+                if (null != converted)
+                {
+                    var processing = this.poller.Process(converted);
+                    processing.Wait();
+
+                    var successful = processing.Result;
+                    if (successful)
+                    {
+                        // Delete Message
+                    }
+                    else
+                    {
+                        // Bad mojo
+                    }
+                }
+                else
+                {
+                    // Bad mojo.
+                }
+            }
+
             return worked;
         }
         #endregion
