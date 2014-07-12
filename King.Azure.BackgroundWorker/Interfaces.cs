@@ -30,6 +30,27 @@
     }
 
     /// <summary>
+    /// Runner
+    /// </summary>
+    public interface IBackoffRuns
+    {
+        #region Methods
+        bool Run();
+        #endregion
+
+        #region Properties
+        int MinimumPeriodInSeconds
+        {
+            get;
+        }
+        int MaximumPeriodInSeconds
+        {
+            get;
+        }
+        #endregion
+    }
+
+    /// <summary>
     /// Task Factory
     /// </summary>
     /// <typeparam name="T"></typeparam>
