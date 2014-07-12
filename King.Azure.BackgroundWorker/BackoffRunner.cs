@@ -31,7 +31,12 @@
         /// <param name="workWasDone">Work Was Done</param>
         public override void Run(out bool workWasDone)
         {
-            workWasDone = this.run.Run();
+            workWasDone = false;
+            
+            var task = this.run.Run();
+            task.Wait();
+
+            workWasDone = task.Result;
         }
         #endregion
     }

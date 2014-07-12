@@ -35,7 +35,7 @@
     public interface IBackoffRuns
     {
         #region Methods
-        bool Run();
+        Task<bool> Run();
         #endregion
 
         #region Properties
