@@ -1,8 +1,10 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests
 {
     using King.Azure.BackgroundWorker.Data;
+    using NSubstitute;
     using NUnit.Framework;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class DequeueTests
@@ -10,50 +12,59 @@
         [Test]
         public void Constructor()
         {
-            new Dequeue();
+            var processor = Substitute.For<IDequeueProcessor<object>>();
+            new Dequeue<object>(processor);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinMaxZero()
         {
+            var processor = Substitute.For<IDequeueProcessor<object>>();
             var random = new Random();
-            new Dequeue(random.Next(0));
+            new Dequeue<object>(processor, random.Next(0));
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinMaxSwitched()
         {
+            var processor = Substitute.For<IDequeueProcessor<object>>();
             var random = new Random();
-            var value = random.Next(0, 1024);
-            new Dequeue(value + 1, value - 1);
+            var value = random.Next(2, 1024);
+            new Dequeue<object>(processor, value + 1, value - 1);
         }
 
         [Test]
         public void IsIBackoffRuns()
         {
-            Assert.IsNotNull(new Dequeue() as IBackoffRuns);
+            var processor = Substitute.For<IDequeueProcessor<object>>();
+            var d = new Dequeue<object>(processor);
+            Assert.IsNotNull(d as IBackoffRuns);
         }
 
         [Test]
-        public void Run()
+        public async Task Run()
         {
-            var d = new Dequeue();
-            Assert.IsFalse(d.Run());
+            var processor = Substitute.For<IDequeueProcessor<object>>();
+            var d = new Dequeue<object>(processor);
+            var result = await d.Run();
+            Assert.IsFalse(result);
         }
 
         [Test]
         public void MinimumPeriodInSeconds()
         {
-            var d = new Dequeue();
+            var processor = Substitute.For<IDequeueProcessor<object>>();
+            var d = new Dequeue<object>(processor);
             Assert.AreEqual(15, d.MinimumPeriodInSeconds);
         }
 
         [Test]
         public void MaximumPeriodInSeconds()
         {
-            var d = new Dequeue();
+            var processor = Substitute.For<IDequeueProcessor<object>>();
+            var d = new Dequeue<object>(processor);
             Assert.AreEqual(300, d.MaximumPeriodInSeconds);
         }
     }

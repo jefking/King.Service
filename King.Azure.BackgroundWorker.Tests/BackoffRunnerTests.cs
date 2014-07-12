@@ -3,6 +3,7 @@
     using NSubstitute;
     using NUnit.Framework;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class BackoffRunnerTests
@@ -33,7 +34,7 @@
             var runs = Substitute.For<IBackoffRuns>();
             runs.MinimumPeriodInSeconds.Returns(1);
             runs.MaximumPeriodInSeconds.Returns(100);
-            runs.Run().Returns(false);
+            runs.Run().Returns(Task.FromResult(false));
 
             var task = new BackoffRunner(runs);
             task.Run();
