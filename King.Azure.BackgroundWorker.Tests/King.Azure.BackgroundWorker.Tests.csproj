@@ -91,6 +91,7 @@
     <Compile Include="Data\InitializeStorageTaskTests.cs" />
     <Compile Include="Data\Model\ScheduledTaskEntryTests.cs" />
     <Compile Include="Data\CoordinatorTests.cs" />
+    <Compile Include="DequeueTests.cs" />
     <Compile Include="InitializeTaskTests.cs" />
     <Compile Include="TaskManagerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
