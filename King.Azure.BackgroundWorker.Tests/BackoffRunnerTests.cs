@@ -26,5 +26,21 @@
         {
             new BackoffRunner(null);
         }
+
+        [Test]
+        public void Run()
+        {
+            var runs = Substitute.For<IBackoffRuns>();
+            runs.MinimumPeriodInSeconds.Returns(1);
+            runs.MaximumPeriodInSeconds.Returns(100);
+            runs.Run().Returns(false);
+
+            var task = new BackoffRunner(runs);
+            task.Run();
+
+            var min = runs.Received().MinimumPeriodInSeconds;
+            var max = runs.Received().MaximumPeriodInSeconds;
+            runs.Received().Run();
+        }
     }
 }
