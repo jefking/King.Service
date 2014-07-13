@@ -102,7 +102,7 @@
     {
         #region Methods
         /// <summary>
-        /// Pop Cloud Queue Message
+        /// Get Cloud Queue Message
         /// </summary>
         /// <returns>Message</returns>
         Task<T> Get();
