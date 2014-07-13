@@ -52,5 +52,14 @@
             var t = new StorageQueue(name, ConnectionString);
             await t.Delete(null);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public async Task SaveNull()
+        {
+            var name = Guid.NewGuid().ToString();
+            var t = new StorageQueue(name, ConnectionString);
+            await t.Save(null);
+        }
     }
 }
