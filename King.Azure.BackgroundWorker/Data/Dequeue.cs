@@ -69,7 +69,7 @@
             {
                 worked = true;
 
-                var data = message.Data;
+                var data = await message.Data();
                 if (null != data)
                 {
                     var successful = await this.processor.Process(data);

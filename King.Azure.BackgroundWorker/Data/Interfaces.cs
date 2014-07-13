@@ -182,16 +182,11 @@
         /// </summary>
         /// <returns>Task</returns>
         Task Abandon();
-        #endregion
-
-        #region Properties
         /// <summary>
         /// Data
         /// </summary>
-        T Data
-        {
-            get;
-        }
+        /// <returns>Data</returns>
+        Task<T> Data();
         #endregion
     }
 }

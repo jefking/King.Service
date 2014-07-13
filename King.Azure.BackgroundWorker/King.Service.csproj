@@ -72,6 +72,9 @@
     <Compile Include="Data\InitializeStorageTask.cs" />
     <Compile Include="Data\Container.cs" />
     <Compile Include="Data\Queue.cs" />
+    <Compile Include="Data\QueuedMessage.cs" />
+    <Compile Include="Data\QueuePoller.cs" />
+    <Compile Include="Data\StorageDequeue.cs" />
     <Compile Include="InitializeTask.cs" />
     <Compile Include="RoleTaskManager.cs" />
     <Compile Include="Data\AzureStorage.cs" />
