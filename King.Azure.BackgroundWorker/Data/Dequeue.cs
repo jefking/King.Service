@@ -1,6 +1,7 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
     using System;
+    using System.Diagnostics;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -44,6 +45,10 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Run
+        /// </summary>
+        /// <returns>Work was done</returns>
         public async Task<bool> Run()
         {
             var worked = false;
@@ -72,18 +77,28 @@
                     await message.Abandon();
                 }
             }
+            else
+            {
+                Trace.TraceInformation("No message was dequeued.");
+            }
 
             return worked;
         }
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Minimum Period In Seconds
+        /// </summary>
         public int MinimumPeriodInSeconds
         {
             get;
             private set;
         }
 
+        /// <summary>
+        /// Maximum Period In Seconds
+        /// </summary>
         public int MaximumPeriodInSeconds
         {
             get;

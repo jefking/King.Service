@@ -47,6 +47,7 @@
         public async Task Run()
         {
             var processor = Substitute.For<IDequeueProcessor<object>>();
+            processor.Poll().Returns(Task.FromResult((IQueued<object>)null));
             var d = new Dequeue<object>(processor);
             var result = await d.Run();
             Assert.IsFalse(result);
