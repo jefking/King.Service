@@ -17,7 +17,7 @@
             tasks.Add(new InitializeStorageTask(table));
 
             // Initialize Queue; creates queue if it doesn't already exist
-            var queue = new Queue("queue", "UseDevelopmentStorage=true;");
+            var queue = new StorageQueue("queue", "UseDevelopmentStorage=true;");
             tasks.Add(new InitializeStorageTask(queue));
 
             // Initialize Queue; creates queue if it doesn't already exist

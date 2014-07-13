@@ -8,12 +8,12 @@
     public class QueuedMessage<T> : IQueued<T>
     {
         #region Members
-        private readonly IQueue queue = null;
+        private readonly IStorageQueue queue = null;
         private readonly CloudQueueMessage message = null;
         #endregion
 
         #region Constructors
-        public QueuedMessage(IQueue queue, CloudQueueMessage message)
+        public QueuedMessage(IStorageQueue queue, CloudQueueMessage message)
         {
             if (null == queue)
             {

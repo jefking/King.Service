@@ -15,7 +15,7 @@
         public async Task CreateIfNotExists()
         {
             var name = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
-            var storage = new Queue(name, ConnectionString);
+            var storage = new StorageQueue(name, ConnectionString);
             var created = await storage.CreateIfNotExists();
 
             Assert.IsTrue(created);
@@ -25,7 +25,7 @@
         public async Task RoundTrip()
         {
             var name = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
-            var storage = new Queue(name, ConnectionString);
+            var storage = new StorageQueue(name, ConnectionString);
             await storage.CreateIfNotExists();
             
             var msg = new CloudQueueMessage(Guid.NewGuid().ToByteArray());
@@ -39,7 +39,7 @@
         public async Task Delete()
         {
             var name = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
-            var storage = new Queue(name, ConnectionString);
+            var storage = new StorageQueue(name, ConnectionString);
             await storage.CreateIfNotExists();
 
             var msg = new CloudQueueMessage(Guid.NewGuid().ToByteArray());

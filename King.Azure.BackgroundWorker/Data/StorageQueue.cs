@@ -7,7 +7,7 @@
     /// <summary>
     /// Queue
     /// </summary>
-    public class Queue : AzureStorage, IQueue
+    public class StorageQueue : AzureStorage, IStorageQueue
     {
         #region Members
         /// <summary>
@@ -26,7 +26,7 @@
         /// Queue
         /// </summary>
         /// <param name="name">Name</param>
-        public Queue(string name, string connectionStringKey)
+        public StorageQueue(string name, string connectionStringKey)
             : base(connectionStringKey)
         {
             if (string.IsNullOrWhiteSpace(name))

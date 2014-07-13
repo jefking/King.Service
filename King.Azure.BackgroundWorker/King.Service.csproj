@@ -71,7 +71,7 @@
     <Compile Include="Data\Dequeue.cs" />
     <Compile Include="Data\InitializeStorageTask.cs" />
     <Compile Include="Data\Container.cs" />
-    <Compile Include="Data\Queue.cs" />
+    <Compile Include="Data\StorageQueue.cs" />
     <Compile Include="Data\QueuedMessage.cs" />
     <Compile Include="Data\QueuePoller.cs" />
     <Compile Include="Data\StorageDequeue.cs" />

@@ -13,7 +13,7 @@
         /// <summary>
         /// Queue
         /// </summary>
-        private readonly IQueue queue = null;
+        private readonly IStorageQueue queue = null;
         #endregion
 
         #region Constructors
@@ -23,7 +23,7 @@
         /// <param name="queueName">Queue Name</param>
         /// <param name="connectionString">Connection String</param>
         public QueuePoller(string queueName, string connectionString)
-            : this(new Queue(queueName, connectionString))
+            : this(new StorageQueue(queueName, connectionString))
         {
         }
 
@@ -31,7 +31,7 @@
         /// Constructor for Mocking
         /// </summary>
         /// <param name="queue">Queue</param>
-        public QueuePoller(IQueue queue)
+        public QueuePoller(IStorageQueue queue)
         {
             if (null == queue)
             {

@@ -94,29 +94,33 @@
         #endregion
     }
 
-    public interface IQueue : IAzureStorage
+    public interface IQueue<T>
     {
         #region Methods
         /// <summary>
         /// Pop Cloud Queue Message
         /// </summary>
         /// <returns>Message</returns>
-        Task<CloudQueueMessage> Get();
+        Task<T> Get();
 
         /// <summary>
         /// Delete Message from Queue
         /// </summary>
         /// <param name="message">Message</param>
         /// <returns>Task</returns>
-        Task Delete(CloudQueueMessage message);
+        Task Delete(T message);
 
         /// <summary>
         /// Save Message to Queue
         /// </summary>
         /// <param name="message">Message</param>
         /// <returns>Task</returns>
-        Task Save(CloudQueueMessage message);
+        Task Save(T message);
         #endregion
+    }
+
+    public interface IStorageQueue : IQueue<CloudQueueMessage>, IAzureStorage
+    {
     }
 
     /// <summary>
@@ -141,11 +145,16 @@
     }
 
     /// <summary>
-    /// IDeququePoll
+    /// IProcessor
     /// </summary>
     public interface IProcessor<T>
     {
         #region Methods
+        /// <summary>
+        /// Process Data
+        /// </summary>
+        /// <param name="data">Data to Process</param>
+        /// <returns>Successful</returns>
         Task<bool> Process(T data);
         #endregion
     }
