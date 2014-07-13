@@ -5,10 +5,21 @@
     using System;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Queued Message
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public class QueuedMessage<T> : IQueued<T>
     {
         #region Members
+        /// <summary>
+        /// Storage Queue
+        /// </summary>
         private readonly IStorageQueue queue = null;
+
+        /// <summary>
+        /// Cloud Queue Message
+        /// </summary>
         private readonly CloudQueueMessage message = null;
         #endregion
 
