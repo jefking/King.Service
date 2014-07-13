@@ -143,7 +143,7 @@
     /// <summary>
     /// IDeququePoll
     /// </summary>
-    public interface IDequeueProcessor<T> : IDequeuePoller<T>
+    public interface IProcessor<T>
     {
         #region Methods
         Task<bool> Process(T data);
@@ -153,7 +153,7 @@
     /// <summary>
     /// IDequeuePoll
     /// </summary>
-    public interface IDequeuePoller<T>
+    public interface IPoller<T>
     {
         #region Methods
         /// <summary>

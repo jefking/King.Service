@@ -48,6 +48,7 @@
                 throw new ArgumentException("Mminimum Period In Seconds must be less than Maximum Period In Seconds");
             }
 
+            this.poller = poller;
             this.processor = processor;
             this.MinimumPeriodInSeconds = minimumPeriodInSeconds;
             this.MaximumPeriodInSeconds = maximumPeriodInSeconds;
@@ -69,7 +70,6 @@
                 worked = true;
 
                 var data = message.Data;
-
                 if (null != data)
                 {
                     var successful = await this.processor.Process(data);

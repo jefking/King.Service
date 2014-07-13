@@ -12,60 +12,93 @@
         [Test]
         public void Constructor()
         {
-            var processor = Substitute.For<IDequeueProcessor<object>>();
-            new Dequeue<object>(processor);
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+            new Dequeue<object>(poller, processor);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorPollerNull()
+        {
+            var processor = Substitute.For<IProcessor<object>>();
+            new Dequeue<object>(null, processor);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorProcessorNull()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            new Dequeue<object>(poller, null);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinMaxZero()
         {
-            var processor = Substitute.For<IDequeueProcessor<object>>();
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+
             var random = new Random();
-            new Dequeue<object>(processor, random.Next(0));
+            new Dequeue<object>(poller, processor, random.Next(0));
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinMaxSwitched()
         {
-            var processor = Substitute.For<IDequeueProcessor<object>>();
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+
             var random = new Random();
             var value = random.Next(2, 1024);
-            new Dequeue<object>(processor, value + 1, value - 1);
+            new Dequeue<object>(poller, processor, value + 1, value - 1);
         }
 
         [Test]
         public void IsIBackoffRuns()
         {
-            var processor = Substitute.For<IDequeueProcessor<object>>();
-            var d = new Dequeue<object>(processor);
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new Dequeue<object>(poller, processor);
             Assert.IsNotNull(d as IBackoffRuns);
         }
 
         [Test]
         public async Task Run()
         {
-            var processor = Substitute.For<IDequeueProcessor<object>>();
-            processor.Poll().Returns(Task.FromResult((IQueued<object>)null));
-            var d = new Dequeue<object>(processor);
+            var poller = Substitute.For<IPoller<object>>();
+            poller.Poll().Returns(Task.FromResult<IQueued<object>>(null));
+
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new Dequeue<object>(poller, processor);
             var result = await d.Run();
+
             Assert.IsFalse(result);
+
+            poller.Received().Poll();
         }
 
         [Test]
         public void MinimumPeriodInSeconds()
         {
-            var processor = Substitute.For<IDequeueProcessor<object>>();
-            var d = new Dequeue<object>(processor);
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new Dequeue<object>(poller, processor);
             Assert.AreEqual(15, d.MinimumPeriodInSeconds);
         }
 
         [Test]
         public void MaximumPeriodInSeconds()
         {
-            var processor = Substitute.For<IDequeueProcessor<object>>();
-            var d = new Dequeue<object>(processor);
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new Dequeue<object>(poller, processor);
             Assert.AreEqual(300, d.MaximumPeriodInSeconds);
         }
     }
