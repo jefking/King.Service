@@ -94,6 +94,10 @@
         #endregion
     }
 
+    /// <summary>
+    /// IQueue
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IQueue<T>
     {
         #region Methods
@@ -119,6 +123,9 @@
         #endregion
     }
 
+    /// <summary>
+    /// IStorage Queue
+    /// </summary>
     public interface IStorageQueue : IQueue<CloudQueueMessage>, IAzureStorage
     {
     }

@@ -7,6 +7,9 @@
     /// <summary>
     /// Dequeue Task for Queues
     /// </summary>
+    /// <remarks>
+    /// Generic, built for any dequeuing infrastructure
+    /// </remarks>
     public class Dequeue<T> : IBackoffRuns
     {
         #region Members

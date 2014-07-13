@@ -9,7 +9,7 @@
     /// Queued Message
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class QueuedMessage<T> : IQueued<T>
+    public class StorageQueuedMessage<T> : IQueued<T>
     {
         #region Members
         /// <summary>
@@ -24,7 +24,12 @@
         #endregion
 
         #region Constructors
-        public QueuedMessage(IStorageQueue queue, CloudQueueMessage message)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="queue"></param>
+        /// <param name="message"></param>
+        public StorageQueuedMessage(IStorageQueue queue, CloudQueueMessage message)
         {
             if (null == queue)
             {
