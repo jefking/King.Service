@@ -3,6 +3,7 @@ Task scheduling for Azure; use with worker roles for running background data pro
 - Create a task that runs every X amount of time per instance
 - Create a task that runs every X; and when work lessens backs off to Y
 - Create a task that runs every X amount of time across any number of instances
+- [View Wiki](https://github.com/jefking/King.Azure.BackgroundWorker/wiki)
 - [Example Project](https://github.com/jefking/King.Azure.BackgroundWorker/tree/master/Worker)
 
 ## NuGet
