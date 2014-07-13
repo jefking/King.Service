@@ -17,10 +17,20 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="queueName">Queue Name</param>
+        /// <param name="connectionString">Connection String</param>
         public QueuePoller(string queueName, string connectionString)
             : this(new Queue(queueName, connectionString))
         {
         }
+
+        /// <summary>
+        /// Constructor for Mocking
+        /// </summary>
+        /// <param name="queue">Queue</param>
         public QueuePoller(IQueue queue)
         {
             if (null == queue)
@@ -33,6 +43,10 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Poll for Queued Message
+        /// </summary>
+        /// <returns>Queued Item</returns>
         public async Task<IQueued<T>> Poll()
         {
             var msg = await this.queue.Get();

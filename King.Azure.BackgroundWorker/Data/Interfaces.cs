@@ -151,7 +151,7 @@
     }
 
     /// <summary>
-    /// IDequeuePoll
+    /// IPoller
     /// </summary>
     public interface IPoller<T>
     {
@@ -159,7 +159,7 @@
         /// <summary>
         /// Poll for Queued Message
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Queued Item</returns>
         Task<IQueued<T>> Poll();
         #endregion
     }
@@ -182,6 +182,7 @@
         /// </summary>
         /// <returns>Task</returns>
         Task Abandon();
+
         /// <summary>
         /// Data
         /// </summary>
