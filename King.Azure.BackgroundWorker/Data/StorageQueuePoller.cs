@@ -7,7 +7,7 @@
     /// Queue Poller
     /// </summary>
     /// <typeparam name="T">Type</typeparam>
-    public class QueuePoller<T> : IPoller<T>
+    public class StorageQueuePoller<T> : IPoller<T>
     {
         #region Members
         /// <summary>
@@ -22,7 +22,7 @@
         /// </summary>
         /// <param name="queueName">Queue Name</param>
         /// <param name="connectionString">Connection String</param>
-        public QueuePoller(string queueName, string connectionString)
+        public StorageQueuePoller(string queueName, string connectionString)
             : this(new StorageQueue(queueName, connectionString))
         {
         }
@@ -31,7 +31,7 @@
         /// Constructor for Mocking
         /// </summary>
         /// <param name="queue">Queue</param>
-        public QueuePoller(IStorageQueue queue)
+        public StorageQueuePoller(IStorageQueue queue)
         {
             if (null == queue)
             {
