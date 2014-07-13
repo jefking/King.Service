@@ -1,6 +1,5 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
-    using Newtonsoft.Json;
     using System;
     using System.Threading.Tasks;
 
@@ -49,28 +48,28 @@
         {
             var worked = false;
             
-            var data = await this.processor.Poll();
-            if (null != data)
+            var message = await this.processor.Poll();
+            if (null != message)
             {
                 worked = true;
 
-                var converted = JsonConvert.DeserializeObject<T>(data.AsString);
+                var data = message.Data;
 
-                if (null != converted)
+                if (null != data)
                 {
-                    var successful = await this.processor.Process(converted);
+                    var successful = await this.processor.Process(data);
                     if (successful)
                     {
-                        // Delete Message
+                        await message.Delete();
                     }
                     else
                     {
-                        // Bad mojo
+                        await message.Abandon();
                     }
                 }
                 else
                 {
-                    // Bad mojo.
+                    await message.Abandon();
                 }
             }
 

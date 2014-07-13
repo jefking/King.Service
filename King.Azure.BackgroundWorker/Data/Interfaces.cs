@@ -143,7 +143,7 @@
     /// <summary>
     /// IDeququePoll
     /// </summary>
-    public interface IDequeueProcessor<T> : IDequeuePoller<CloudQueueMessage>
+    public interface IDequeueProcessor<T> : IDequeuePoller<T>
     {
         #region Methods
         Task<bool> Process(T data);
@@ -156,7 +156,42 @@
     public interface IDequeuePoller<T>
     {
         #region Methods
-        Task<T> Poll();
+        /// <summary>
+        /// Poll for Queued Message
+        /// </summary>
+        /// <returns></returns>
+        Task<IQueued<T>> Poll();
+        #endregion
+    }
+
+    /// <summary>
+    /// IQueued
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IQueued<T>
+    {
+        #region Methods
+        /// <summary>
+        /// Delete Message
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Delete();
+
+        /// <summary>
+        /// Abandon Message
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Abandon();
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Data
+        /// </summary>
+        T Data
+        {
+            get;
+        }
         #endregion
     }
 }
