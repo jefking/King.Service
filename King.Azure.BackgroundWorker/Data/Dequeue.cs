@@ -11,9 +11,14 @@
     {
         #region Members
         /// <summary>
-        /// Dequeue Processor
+        /// Processor
         /// </summary>
-        private readonly IDequeueProcessor<T> processor = null;
+        private readonly IProcessor<T> processor = null;
+
+        /// <summary>
+        /// Poller
+        /// </summary>
+        private readonly IPoller<T> poller = null;
         #endregion
 
         #region Constructors
@@ -21,10 +26,15 @@
         /// Default Constructor
         /// </summary>
         /// <param name="processor">Processor</param>
+        /// <param name="poller">Poller</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public Dequeue(IDequeueProcessor<T> processor, int minimumPeriodInSeconds = 15, int maximumPeriodInSeconds = 300)
+        public Dequeue(IPoller<T> poller, IProcessor<T> processor, int minimumPeriodInSeconds = 15, int maximumPeriodInSeconds = 300)
         {
+            if (null == poller)
+            {
+                throw new ArgumentNullException("poller");
+            }
             if (null == processor)
             {
                 throw new ArgumentNullException("processor");
@@ -53,7 +63,7 @@
         {
             var worked = false;
             
-            var message = await this.processor.Poll();
+            var message = await this.poller.Poll();
             if (null != message)
             {
                 worked = true;
