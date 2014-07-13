@@ -3,9 +3,16 @@
     using System;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Queue Poller
+    /// </summary>
+    /// <typeparam name="T">Type</typeparam>
     public class QueuePoller<T> : IPoller<T>
     {
         #region Members
+        /// <summary>
+        /// Queue
+        /// </summary>
         private readonly IQueue queue = null;
         #endregion
 
