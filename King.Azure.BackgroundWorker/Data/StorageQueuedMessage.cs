@@ -8,7 +8,7 @@
     /// <summary>
     /// Queued Message
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Type</typeparam>
     public class StorageQueuedMessage<T> : IQueued<T>
     {
         #region Members
@@ -25,10 +25,10 @@
 
         #region Constructors
         /// <summary>
-        /// 
+        /// Default Constructor
         /// </summary>
-        /// <param name="queue"></param>
-        /// <param name="message"></param>
+        /// <param name="queue">Queue</param>
+        /// <param name="message">Cloud Queue Message</param>
         public StorageQueuedMessage(IStorageQueue queue, CloudQueueMessage message)
         {
             if (null == queue)
@@ -46,16 +46,28 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Delete Message
+        /// </summary>
+        /// <returns>Task</returns>
         public async Task Delete()
         {
             await this.queue.Delete(this.message);
         }
 
+        /// <summary>
+        /// Abandon Message
+        /// </summary>
+        /// <returns>Task</returns>
         public Task Abandon()
         {
             return null; //No Abandon?
         }
 
+        /// <summary>
+        /// Data
+        /// </summary>
+        /// <returns>Data</returns>
         public async Task<T> Data()
         {
             return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(this.message.AsString));
