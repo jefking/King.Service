@@ -11,56 +11,7 @@ Task scheduling for Azure; use with worker roles for running background data pro
 PM> Install-Package King.Service
 ```
 
-## Sample Code
-### [Initialization Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/InitTask.cs)
-```
-class MyTask : InitializeTask
-{
-	public override void Run()
-	{
-		//Initialize one time resource.
-	}
-}
-```
-### [Repetitive Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Task.cs)
-```
-class MyTask : TaskManager
-{
-	public override void Run()
-	{
-		//Process background work here.
-	}
-}
-```
-### [Backoff Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Backoff.cs)
-```
-class MyTask : BackoffTask
-{
-	public override void Run(out bool workWasDone)
-	{
-		workWasDone = false;
-		
-		//Process background work here.
-
-		//If work is done
-		workWasDone = true;
-	}
-}
-```
-### [Coordinated Task](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Coordinated.cs)
-```
-class MyTask : CoordinatedTask
-{
-	public MyTask()
-		: base("Storage Account for Coordination between Instances")
-	{
-	}
-	public override void Run()
-	{
-		//Process background work here.
-	}
-}
-```
+## Get Started
 ### [Initialize Tasks](https://github.com/jefking/King.Azure.BackgroundWorker/blob/master/Worker/Factory.cs)
 ```
 class Factory : TaskFactory
