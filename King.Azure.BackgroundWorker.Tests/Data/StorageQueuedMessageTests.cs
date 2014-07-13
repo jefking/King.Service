@@ -31,5 +31,38 @@
             var queue = Substitute.For<IStorageQueue>();
             new StorageQueuedMessage<object>(queue, null);
         }
+
+        [Test]
+        public void Delete()
+        {
+            var queue = Substitute.For<IStorageQueue>();
+            var message = new CloudQueueMessage("ship");
+            
+            var sqm = new StorageQueuedMessage<object>(queue, message);
+
+            queue.Received().Delete(message);
+        }
+
+        [Test]
+        public void Abandon()
+        {
+            var queue = Substitute.For<IStorageQueue>();
+            var message = new CloudQueueMessage("ship");
+
+            var sqm = new StorageQueuedMessage<object>(queue, message);
+
+            var returned = sqm.Abandon();
+            Assert.IsNull(returned);
+        }
+
+        [Test]
+        public void Data()
+        {
+            var queue = Substitute.For<IStorageQueue>();
+            var message = new CloudQueueMessage("ship");
+
+            var sqm = new StorageQueuedMessage<object>(queue, message);
+            
+        }
     }
 }
