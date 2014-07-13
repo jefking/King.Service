@@ -2,13 +2,24 @@
 {
     using King.Azure.BackgroundWorker.Data;
     using Microsoft.WindowsAzure.Storage.Queue;
+    using Newtonsoft.Json;
     using NSubstitute;
     using NUnit.Framework;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class StorageQueuedMessageTests
     {
+        public class Helper
+        {
+            public Guid Test
+            {
+                get;
+                set;
+            }
+        }
+
         [Test]
         public void Constructor()
         {
@@ -33,36 +44,44 @@
         }
 
         [Test]
-        public void Delete()
+        public async Task Delete()
         {
             var queue = Substitute.For<IStorageQueue>();
             var message = new CloudQueueMessage("ship");
+            queue.Delete(message);
             
             var sqm = new StorageQueuedMessage<object>(queue, message);
+            await sqm.Delete();
 
             queue.Received().Delete(message);
         }
 
         [Test]
-        public void Abandon()
+        public async Task Abandon()
         {
             var queue = Substitute.For<IStorageQueue>();
             var message = new CloudQueueMessage("ship");
 
             var sqm = new StorageQueuedMessage<object>(queue, message);
-
-            var returned = sqm.Abandon();
-            Assert.IsNull(returned);
+            await sqm.Abandon();
         }
 
         [Test]
-        public void Data()
+        public async Task Data()
         {
+            var expected = new Helper()
+            {
+                Test = Guid.NewGuid(),
+            };
+            var json = await JsonConvert.SerializeObjectAsync(expected);
             var queue = Substitute.For<IStorageQueue>();
-            var message = new CloudQueueMessage("ship");
+            var message = new CloudQueueMessage(json);
 
-            var sqm = new StorageQueuedMessage<object>(queue, message);
-            
+            var sqm = new StorageQueuedMessage<Helper>(queue, message);
+            var data = await sqm.Data();
+
+            Assert.IsNotNull(data);
+            Assert.AreEqual(expected.Test, data.Test);
         }
     }
 }
