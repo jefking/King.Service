@@ -50,7 +50,7 @@
         public async Task<IQueued<T>> Poll()
         {
             var msg = await this.queue.Get();
-            return null != msg ? new StorageQueuedMessage<T>(this.queue, msg) : null;
+            return null == msg ? null : new StorageQueuedMessage<T>(this.queue, msg);
         }
         #endregion
     }
