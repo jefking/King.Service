@@ -17,6 +17,14 @@
         }
 
         [Test]
+        public void IsIBackoffRuns()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+            Assert.IsNotNull(new Dequeue<object>(poller, processor) as IBackoffRuns);
+        }
+
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorPollerNull()
         {
