@@ -31,5 +31,26 @@
             var poller = Substitute.For<IPoller<object>>();
             new Dequeue<object>(poller, null);
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorMinMaxZero()
+        {
+            var random = new Random();
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+            new Dequeue<object>(poller, processor, random.Next(0));
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorMinMaxSwitched()
+        {
+            var random = new Random();
+            var value = random.Next(0, 1024);
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+            new Dequeue<object>(poller, processor, value + 1, value - 1);
+        }
     }
 }
