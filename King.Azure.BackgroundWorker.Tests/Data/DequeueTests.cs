@@ -4,6 +4,7 @@
     using NSubstitute;
     using NUnit.Framework;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class DequeueTests
@@ -77,6 +78,32 @@
             var processor = Substitute.For<IProcessor<object>>();
             var d = new Dequeue<object>(poller, processor);
             Assert.AreEqual(300, d.MaximumPeriodInSeconds);
+        }
+
+        [Test]
+        public async Task Run()
+        {
+            var data = new object();
+            
+            var message = Substitute.For<IQueued<object>>();
+            message.Data().Returns(Task.FromResult(data));
+            message.Delete();
+
+            var poller = Substitute.For<IPoller<object>>();
+            poller.Poll().Returns(Task.FromResult(message));
+
+            var processor = Substitute.For<IProcessor<object>>();
+            processor.Process(data).Returns(Task.FromResult(true));
+
+            var d = new Dequeue<object>(poller, processor);
+
+            var result = await d.Run();
+            Assert.IsTrue(result);
+
+            message.Received().Data();
+            message.Received().Delete();
+            poller.Received().Poll();
+            processor.Received().Process(data);
         }
     }
 }
