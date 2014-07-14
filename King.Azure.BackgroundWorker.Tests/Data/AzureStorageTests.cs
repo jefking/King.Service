@@ -7,10 +7,12 @@
     [TestFixture]
     public class AzureStorageTests
     {
+        const string ConnectionString = "UseDevelopmentStorage=true";
+
         [Test]
         public void Constructor()
         {
-            new AzureStorage("UseDevelopmentStorage=true");
+            new AzureStorage(ConnectionString);
         }
 
         [Test]
