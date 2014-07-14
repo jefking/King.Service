@@ -60,5 +60,23 @@
             var processor = Substitute.For<IProcessor<object>>();
             new Dequeue<object>(poller, processor, value + 1, value - 1);
         }
+
+        [Test]
+        public void MinimumPeriodInSeconds()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+            var d = new Dequeue<object>(poller, processor);
+            Assert.AreEqual(15, d.MinimumPeriodInSeconds);
+        }
+
+        [Test]
+        public void MaximumPeriodInSeconds()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+            var d = new Dequeue<object>(poller, processor);
+            Assert.AreEqual(300, d.MaximumPeriodInSeconds);
+        }
     }
 }
