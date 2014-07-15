@@ -2,7 +2,7 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("King.Service Worker Role Demo Project")]
-[assembly: AssemblyDescription("King.Service examples to helpy you get started.")]
+[assembly: AssemblyDescription("King.Service examples to help you get started.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jef King")]
 [assembly: AssemblyProduct("King.Service.Demo")]
