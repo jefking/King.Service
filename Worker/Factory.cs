@@ -3,12 +3,15 @@
     using King.Azure.BackgroundWorker;
     using King.Azure.BackgroundWorker.Data;
     using System.Collections.Generic;
+    using Worker.Queue;
 
     public class Factory : TaskFactory
     {
         public override IEnumerable<IRunnable> Tasks(object passthrough)
         {
+            //Build a manifest of Tasks to run
             var tasks = new List<IRunnable>();
+
             // Initialization Task(s)
             tasks.Add(new InitTask());
 
@@ -37,6 +40,9 @@
             
             //Backoff Tasks
             tasks.Add(new Backoff());
+
+            //Dequeue Tasks
+            tasks.Add(new BackoffRunner(new CompanyDequeuer()));
 
             return tasks;
         }
