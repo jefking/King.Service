@@ -5,7 +5,7 @@
     public class CompanyDequeuer : StorageDequeue<CompanyModel>
     {
         public CompanyDequeuer(string connectionString)
-            : base("company", connectionString, new CompanyProcessor())
+            : base("queue", connectionString, new CompanyProcessor(), 15, 45)
         {
         }
     }
