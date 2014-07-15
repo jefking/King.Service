@@ -1,10 +1,8 @@
 ﻿namespace King.Azure.BackgroundWorker
 {
     using King.Azure.BackgroundWorker.Data;
-    using King.Azure.BackgroundWorker.Data.Model;
     using System;
     using System.Diagnostics;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Scheduled Manager
@@ -29,8 +27,12 @@
         {
         }
 
+        /// <summary>
+        /// Constructor for Mocking
+        /// </summary>
+        /// <param name="coordinator">Coordinator</param>
         public CoordinatedTask(ICoordinator coordinator)
-            :base(30, coordinator.PeriodInSeconds + 1)
+            : base(15, coordinator.PeriodInSeconds + 1)
         {
             this.taskCore = coordinator;
         }

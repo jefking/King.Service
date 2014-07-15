@@ -25,7 +25,7 @@
         /// <summary>
         /// Maximum Duration before Retry
         /// </summary>
-        private readonly TimeSpan retryInterval = TimeSpan.FromMinutes(5);
+        private readonly TimeSpan retryInterval;
 
         /// <summary>
         /// Table Storage
@@ -44,6 +44,11 @@
         {
         }
 
+        /// <summary>
+        /// Constructor for Mocking
+        /// </summary>
+        /// <param name="storage">Storage</param>
+        /// <param name="period">Period</param>
         public Coordinator(ITableStorage storage, TimeSpan period)
         {
             if (null == storage)
@@ -56,6 +61,7 @@
             }
 
             this.period = period;
+            this.retryInterval = TimeSpan.FromSeconds(period.TotalSeconds * 2.5);
             this.storage = storage;
         }
         #endregion
@@ -173,7 +179,7 @@
         {
             get
             {
-                return this.period.Seconds;
+                return (int)this.period.TotalSeconds;
             }
         }
         #endregion

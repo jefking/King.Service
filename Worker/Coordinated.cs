@@ -5,8 +5,8 @@
 
     public class Coordinated : CoordinatedTask
     {
-        public Coordinated()
-            : base("UseDevelopmentStorage=true")
+        public Coordinated(string connectionString)
+            : base(connectionString)
         {
         }
 

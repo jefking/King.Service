@@ -122,7 +122,7 @@
             var table = Substitute.For<ITableStorage>();
             table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(records);
 
-            var core = new Coordinator(table, TimeSpan.FromHours(1));
+            var core = new Coordinator(table, TimeSpan.FromSeconds(1));
             var perform = core.Check(this.GetType());
 
             Assert.IsTrue(perform);

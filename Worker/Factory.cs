@@ -34,7 +34,8 @@
             tasks.Add(new Task());
 
             //Cordinated Tasks between Instances
-            var task = new Coordinated();
+            var task = new Coordinated(connectionString);
+
             // Add once to ensure that Table is created for Instances to communicate with
             tasks.Add(task.InitializeTask());
 
