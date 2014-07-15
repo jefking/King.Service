@@ -38,7 +38,7 @@
             }
 
             this.due = TimeSpan.FromSeconds(dueInSeconds);
-            this.periodInSeconds = TimeSpan.FromSeconds(0 > periodInSeconds ? -1 : periodInSeconds);
+            this.periodInSeconds = 0 > periodInSeconds ? TimeSpan.Zero : TimeSpan.FromSeconds(periodInSeconds);
 
             Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.GetType().ToString(), dueInSeconds, periodInSeconds);
         }
@@ -61,9 +61,17 @@
         {
             if (this.Stop())
             {
-                this.timer = new Timer(this.Run, this, this.due, this.periodInSeconds);
+                if (TimeSpan.Zero == this.periodInSeconds)
+                {
+                    this.timer = new Timer(this.Run, this, (int)this.due.TotalSeconds, Timeout.Infinite);
+                }
+                else
+                {
+                    this.timer = new Timer(this.Run, this, this.due, this.periodInSeconds);
+
+                }
             }
-            
+
             return true;
         }
 
