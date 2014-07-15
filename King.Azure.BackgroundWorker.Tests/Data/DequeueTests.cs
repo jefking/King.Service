@@ -169,8 +169,7 @@
 
             var d = new Dequeue<object>(poller, processor);
 
-            var result = await d.Run();
-            Assert.IsTrue(result);
+            await d.Run();
         }
 
         [Test]
@@ -213,13 +212,7 @@
 
             var d = new Dequeue<object>(poller, processor);
 
-            var result = await d.Run();
-            Assert.IsTrue(result);
-
-            message.Received().Data();
-            message.Received().Abandon();
-            poller.Received().Poll();
-            processor.Received().Process(data);
+            await d.Run();
         }
     }
 }
