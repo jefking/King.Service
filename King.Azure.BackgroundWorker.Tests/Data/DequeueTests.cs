@@ -172,5 +172,54 @@
             var result = await d.Run();
             Assert.IsTrue(result);
         }
+
+        [Test]
+        public async Task RunProcessFalse()
+        {
+            var data = new object();
+            var message = Substitute.For<IQueued<object>>();
+            message.Data().Returns(Task.FromResult<object>(data));
+
+            var poller = Substitute.For<IPoller<object>>();
+            poller.Poll().Returns(Task.FromResult(message));
+
+            var processor = Substitute.For<IProcessor<object>>();
+            processor.Process(data).Returns(Task.FromResult(false));
+
+            var d = new Dequeue<object>(poller, processor);
+
+            var result = await d.Run();
+            Assert.IsTrue(result);
+
+            message.Received().Data();
+            message.Received().Abandon();
+            poller.Received().Poll();
+            processor.Received().Process(data);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ApplicationException))]
+        public async Task RunProcessThrows()
+        {
+            var data = new object();
+            var message = Substitute.For<IQueued<object>>();
+            message.Data().Returns(Task.FromResult<object>(data));
+
+            var poller = Substitute.For<IPoller<object>>();
+            poller.Poll().Returns(Task.FromResult(message));
+
+            var processor = Substitute.For<IProcessor<object>>();
+            processor.Process(data).Returns(x => { throw new ApplicationException(); });
+
+            var d = new Dequeue<object>(poller, processor);
+
+            var result = await d.Run();
+            Assert.IsTrue(result);
+
+            message.Received().Data();
+            message.Received().Abandon();
+            poller.Received().Poll();
+            processor.Received().Process(data);
+        }
     }
 }
