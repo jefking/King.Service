@@ -4,8 +4,8 @@
 
     public class CompanyDequeuer : StorageDequeue<CompanyModel>
     {
-        public CompanyDequeuer()
-            :base("company", "UseDevelopmentStorage=true", new CompanyProcessor())
+        public CompanyDequeuer(string connectionString)
+            : base("company", connectionString, new CompanyProcessor())
         {
         }
     }
