@@ -72,22 +72,32 @@
             {
                 worked = true;
 
-                var data = await message.Data();
-                if (null != data)
+                try
                 {
-                    var successful = await this.processor.Process(data);
-                    if (successful)
+                    var data = await message.Data();
+                    if (null != data)
                     {
-                        await message.Delete();
+                        var successful = await this.processor.Process(data);
+                        if (successful)
+                        {
+                            await message.Delete();
+                        }
+                        else
+                        {
+                            await message.Abandon();
+                        }
                     }
                     else
                     {
                         await message.Abandon();
                     }
                 }
-                else
+                catch
                 {
-                    await message.Abandon();
+                    var task = message.Abandon();
+                    task.Wait();
+
+                    throw;
                 }
             }
             else
