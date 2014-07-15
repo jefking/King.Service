@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.Service</id>
-        <version>1.5.3</version>
+        <version>1.5.4</version>
         <title>King.Service</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
@@ -12,7 +12,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Task scheduling for Azure; use with worker roles for running background processing tasks.</description>
         <summary>Easily create background tasks to be run on worker roles.</summary>
-        <releaseNotes>Backoff Task, when work is not being done occurs less frequently.</releaseNotes>
+        <releaseNotes>Timing issues resolved, inclusion of dequeue framework (beta)</releaseNotes>
         <copyright>Jef King</copyright>
         <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing</tags>
         <dependencies>
