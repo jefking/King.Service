@@ -59,7 +59,7 @@
         /// <returns>Running</returns>
         public bool Start()
         {
-            this.timer = new Timer(this.Run, null, dueInSeconds, periodInSeconds);
+            this.timer = new Timer(this.Run, this, dueInSeconds, periodInSeconds);
 
             return true;
         }
@@ -114,9 +114,9 @@
                 throw new ArgumentException("newTime Zero.");
             }
 
-            if (null != this.timer)
+            if (this.Stop())
             {
-                this.timer.Change(newTime, newTime);
+                this.timer = new Timer(this.Run, this, newTime, newTime);
             }
         }
 
