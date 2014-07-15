@@ -84,7 +84,7 @@
         public async Task Run()
         {
             var data = new object();
-            
+
             var message = Substitute.For<IQueued<object>>();
             message.Data().Returns(Task.FromResult(data));
             message.Delete();
@@ -104,6 +104,35 @@
             message.Received().Delete();
             poller.Received().Poll();
             processor.Received().Process(data);
+        }
+
+        [Test]
+        public async Task RunPollNull()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            poller.Poll().Returns(Task.FromResult<IQueued<object>>(null));
+
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new Dequeue<object>(poller, processor);
+
+            var result = await d.Run();
+            Assert.IsFalse(result);
+
+            poller.Received().Poll();
+        }
+
+        [Test]
+        [ExpectedException(typeof(ApplicationException))]
+        public async Task RunPollThrows()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            poller.Poll().Returns(x => { throw new ApplicationException(); });
+
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new Dequeue<object>(poller, processor);
+            await d.Run();
         }
     }
 }
