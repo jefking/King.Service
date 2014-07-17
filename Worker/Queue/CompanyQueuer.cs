@@ -5,8 +5,10 @@
     using Microsoft.WindowsAzure.Storage.Queue;
     using Newtonsoft.Json;
     using System;
-    using Worker.Queue;
 
+    /// <summary>
+    /// Example of Task class which adds a company to a queue
+    /// </summary>
     public class CompanyQueuer : TaskManager
     {
         private int id = 0;

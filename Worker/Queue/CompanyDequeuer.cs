@@ -2,6 +2,9 @@
 {
     using King.Azure.BackgroundWorker.Data;
 
+    /// <summary>
+    /// Dequeue Task, for company model
+    /// </summary>
     public class CompanyDequeuer : StorageDequeue<CompanyModel>
     {
         public CompanyDequeuer(string connectionString)

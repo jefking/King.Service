@@ -4,6 +4,9 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Company Processor, post dequeue action
+    /// </summary>
     public class CompanyProcessor : IProcessor<CompanyModel>
     {
         public Task<bool> Process(CompanyModel data)

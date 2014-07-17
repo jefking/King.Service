@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Example model for queuing
+    /// </summary>
     [Serializable]
     public class CompanyModel
     {
