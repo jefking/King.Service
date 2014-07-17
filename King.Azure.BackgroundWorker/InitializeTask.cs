@@ -12,7 +12,7 @@
         /// Default Constructor
         /// </summary>
         public InitializeTask()
-            : base(7, -1)
+            : base(10, -1)
         {
         }
         #endregion

@@ -127,7 +127,7 @@
                     {
                         var success = s.Stop();
 
-                        Trace.TraceInformation("{0} Stopped, Success: {1}.", s.GetType().ToString(), success);
+                        Trace.TraceInformation("{0} Stopped; Success: {1}.", s.GetType().ToString(), success);
                     }
                     catch (Exception ex)
                     {
