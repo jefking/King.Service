@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Backoff.cs" />
+    <Compile Include="CompanyQueuer.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="InitTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -48,6 +48,9 @@
             //Dequeue Tasks
             tasks.Add(new BackoffRunner(new CompanyDequeuer(connectionString)));
 
+            //Task for Queuing
+            tasks.Add(new CompanyQueuer());
+
             return tasks;
         }
     }
