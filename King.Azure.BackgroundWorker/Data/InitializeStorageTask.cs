@@ -40,10 +40,9 @@
         {
             Trace.TraceInformation("Creating: '{0}'.", this.storage.Name);
 
-            var task = this.storage.CreateIfNotExists();
-            task.Wait();
+            var result = this.storage.CreateIfNotExists().Result;
 
-            Trace.TraceInformation("Created: '{0}'; was created {1}.", this.storage.Name, task.Result);
+            Trace.TraceInformation("Created: '{0}'; was created {1}.", this.storage.Name, result);
         }
         #endregion
     }
