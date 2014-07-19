@@ -51,7 +51,7 @@
         /// Delete Message
         /// </summary>
         /// <returns>Task</returns>
-        public async Task Delete()
+        public async Task Complete()
         {
             await this.queue.Delete(this.message);
         }

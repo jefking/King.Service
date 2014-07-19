@@ -44,14 +44,14 @@
         }
 
         [Test]
-        public async Task Delete()
+        public async Task Complete()
         {
             var queue = Substitute.For<IStorageQueue>();
             var message = new CloudQueueMessage("ship");
             queue.Delete(message);
             
             var sqm = new StorageQueuedMessage<object>(queue, message);
-            await sqm.Delete();
+            await sqm.Complete();
 
             queue.Received().Delete(message);
         }

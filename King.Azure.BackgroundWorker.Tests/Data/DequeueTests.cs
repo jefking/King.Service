@@ -87,7 +87,7 @@
 
             var message = Substitute.For<IQueued<object>>();
             message.Data().Returns(Task.FromResult(data));
-            message.Delete();
+            message.Complete();
 
             var poller = Substitute.For<IPoller<object>>();
             poller.Poll().Returns(Task.FromResult(message));
@@ -101,7 +101,7 @@
             Assert.IsTrue(result);
 
             message.Received().Data();
-            message.Received().Delete();
+            message.Received().Complete();
             poller.Received().Poll();
             processor.Received().Process(data);
         }
@@ -160,7 +160,7 @@
         {
             var message = Substitute.For<IQueued<object>>();
             message.Data().Returns(x => { throw new ApplicationException(); });
-            message.Delete();
+            message.Complete();
 
             var poller = Substitute.For<IPoller<object>>();
             poller.Poll().Returns(Task.FromResult(message));

@@ -80,7 +80,7 @@
                         var successful = await this.processor.Process(data);
                         if (successful)
                         {
-                            await message.Delete();
+                            await message.Complete();
                         }
                         else
                         {

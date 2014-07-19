@@ -191,7 +191,7 @@
         /// Delete Message
         /// </summary>
         /// <returns>Task</returns>
-        Task Delete();
+        Task Complete();
 
         /// <summary>
         /// Abandon Message
