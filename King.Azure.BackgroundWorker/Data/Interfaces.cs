@@ -108,6 +108,14 @@
         /// <param name="obj">Object</param>
         /// <returns>Task</returns>
         Task Save(string blobName, object obj);
+
+        /// <summary>
+        /// Get Object from Blob Storage
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="blobName">Blob Name</param>
+        /// <returns>Object</returns>
+        Task<T> Get<T>(string blobName);
         #endregion
     }
 
