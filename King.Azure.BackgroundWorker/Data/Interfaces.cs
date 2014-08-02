@@ -95,6 +95,23 @@
     }
 
     /// <summary>
+    /// Blob Container
+    /// </summary>
+    public interface IContainer : IAzureStorage
+    {
+        #region Methods
+        /// <summary>
+        /// Save Object as Json to Blob Storage
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="blobName">Blob Name</param>
+        /// <param name="obj">Object</param>
+        /// <returns>Task</returns>
+        Task Save(string blobName, object obj);
+        #endregion
+    }
+
+    /// <summary>
     /// IQueue
     /// </summary>
     /// <typeparam name="T"></typeparam>

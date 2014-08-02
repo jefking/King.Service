@@ -3,6 +3,7 @@
     using King.Azure.BackgroundWorker.Data;
     using NUnit.Framework;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class ContainerTests
@@ -14,9 +15,9 @@
         }
 
         [Test]
-        public void IsIAzureStorage()
+        public void IsIContainer()
         {
-            Assert.IsNotNull(new Container("test", "UseDevelopmentStorage=true") as IAzureStorage);
+            Assert.IsNotNull(new Container("test", "UseDevelopmentStorage=true") as IContainer);
         }
 
         [Test]
@@ -39,6 +40,22 @@
             var name = Guid.NewGuid().ToString();
             var t = new Container(name, "UseDevelopmentStorage=true");
             Assert.AreEqual(name, t.Name);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task GetBlobNameNull()
+        {
+            var c = new Container("test", "UseDevelopmentStorage=true");
+            await c.Get<object>(null);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public async Task SaveBlobNameNull()
+        {
+            var c = new Container("test", "UseDevelopmentStorage=true");
+            await c.Save(null, new object());
         }
     }
 }
