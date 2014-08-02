@@ -1,14 +1,14 @@
 ﻿namespace King.Azure.BackgroundWorker.Data
 {
     using Microsoft.WindowsAzure.Storage.Blob;
-    using Microsoft.WindowsAzure.Storage.Queue;
+    using Newtonsoft.Json;
     using System;
     using System.Threading.Tasks;
 
     /// <summary>
     /// Queue
     /// </summary>
-    public class Container : AzureStorage, IAzureStorage
+    public class Container : AzureStorage, IContainer
     {
         #region Members
         /// <summary>
@@ -61,6 +61,44 @@
         public async Task<bool> CreateIfNotExists()
         {
             return await this.reference.CreateIfNotExistsAsync();
+        }
+
+        /// <summary>
+        /// Save Object as Json to Blob Storage
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="blobName">Blob Name</param>
+        /// <param name="obj">Object</param>
+        /// <returns>Task</returns>
+        public async Task Save(string blobName, object obj)
+        {
+            if (string.IsNullOrWhiteSpace(blobName))
+            {
+                throw new ArgumentException("blobName");
+            }
+
+            var json = JsonConvert.SerializeObject(obj);
+
+            var blob = this.reference.GetBlockBlobReference(blobName);
+            await blob.UploadTextAsync(json);
+        }
+
+        /// <summary>
+        /// Get Object from Blob Storage
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="blobName">Blob Name</param>
+        /// <returns>Object</returns>
+        public async Task<T> Get<T>(string blobName)
+        {
+            if (string.IsNullOrWhiteSpace(blobName))
+            {
+                throw new ArgumentException("blobName");
+            }
+
+            var blob = this.reference.GetBlockBlobReference(blobName);
+            var json = await blob.DownloadTextAsync();
+            return JsonConvert.DeserializeObject<T>(json);
         }
         #endregion
     }
