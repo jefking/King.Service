@@ -11,8 +11,19 @@
     [TestFixture]
     public class TableStorageTests
     {
+        #region Members
         private readonly string ConnectionString = "UseDevelopmentStorage=true;";
-        ITableStorage storage = null;
+        private ITableStorage storage = null;
+        #endregion
+
+        public class Helper : TableEntity
+        {
+            public Guid Id
+            {
+                get;
+                set;
+            }
+        }
 
         [SetUp]
         public void Init()
@@ -122,6 +133,105 @@
             var e = returned.First();
             Assert.AreEqual(entity.PartitionKey, e.PartitionKey);
             Assert.AreEqual(entity.RowKey, e.RowKey);
+        }
+
+        [Test]
+        public async Task QueryByPartition()
+        {
+            var random = new Random();
+            var count = random.Next(1, 25);
+            var entities = new List<Helper>();
+            var partition = Guid.NewGuid().ToString();
+            for (var i = 0; i < count; i++)
+            {
+                var h = new Helper()
+                {
+                    PartitionKey = partition,
+                    RowKey = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid(),
+                };
+                entities.Add(h);
+            }
+
+            await storage.Insert(entities);
+
+            var returned = storage.QueryByPartition<Helper>(partition);
+            Assert.IsNotNull(returned);
+            Assert.AreEqual(count, returned.Count());
+            foreach (var r in returned)
+            {
+                var exists = (from e in entities
+                              where e.RowKey == r.RowKey
+                              && e.Id == r.Id
+                              select true).FirstOrDefault();
+                Assert.IsTrue(exists);
+            }
+        }
+
+        [Test]
+        public async Task QueryByRow()
+        {
+            var random = new Random();
+            var count = random.Next(1, 25);
+            var entities = new List<Helper>();
+            var rowKey = Guid.NewGuid().ToString();
+            for (var i = 0; i < count; i++)
+            {
+                var h = new Helper()
+                {
+                    PartitionKey = Guid.NewGuid().ToString(),
+                    RowKey = rowKey,
+                    Id = Guid.NewGuid(),
+                };
+                entities.Add(h);
+
+                await storage.InsertOrReplace(h);
+            }
+
+            var returned = storage.QueryByRow<Helper>(rowKey);
+            Assert.IsNotNull(returned);
+            Assert.AreEqual(count, returned.Count());
+            foreach (var r in returned)
+            {
+                var exists = (from e in entities
+                              where e.RowKey == r.RowKey
+                              && e.Id == r.Id
+                              select true).FirstOrDefault();
+                Assert.IsTrue(exists);
+            }
+        }
+
+        [Test]
+        public async Task QueryByPartitionAndRow()
+        {
+            var random = new Random();
+            var count = random.Next(1, 25);
+            var entities = new List<Helper>();
+            var partition = Guid.NewGuid().ToString();
+            for (var i = 0; i < count; i++)
+            {
+                var h = new Helper()
+                {
+                    PartitionKey = partition,
+                    RowKey = Guid.NewGuid().ToString(),
+                    Id = Guid.NewGuid(),
+                };
+                entities.Add(h);
+            }
+
+            var z = new Helper()
+            {
+                PartitionKey = partition,
+                RowKey = Guid.NewGuid().ToString(),
+                Id = Guid.NewGuid(),
+            };
+            entities.Add(z);
+
+            await storage.Insert(entities);
+
+            var returned = storage.QueryByPartitionAndRow<Helper>(z.PartitionKey, z.RowKey);
+            Assert.IsNotNull(returned);
+            Assert.AreEqual(z.Id, returned.Id);
         }
     }
 }
