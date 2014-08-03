@@ -12,6 +12,21 @@
     public class TableStorageTests
     {
         private readonly string ConnectionString = "UseDevelopmentStorage=true;";
+        ITableStorage storage = null;
+
+        [SetUp]
+        public void Init()
+        {
+            var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
+            this.storage = new TableStorage(table, ConnectionString);
+            storage.CreateIfNotExists().Wait();
+        }
+        
+        [TearDown]
+        public void Dispose()
+        {
+            storage.Delete().Wait();
+        }
 
         [Test]
         public async Task CreateIfNotExists()
@@ -63,12 +78,6 @@
         [Test]
         public async Task Insert()
         {
-            var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
-            var storage = new TableStorage(table, ConnectionString);
-            var created = await storage.Create();
-
-            Assert.IsTrue(created);
-
             var entity = new TableEntity()
             {
                 PartitionKey = "partition",
@@ -89,12 +98,6 @@
         [Test]
         public async Task InsertOrReplace()
         {
-            var table = 'a' + Guid.NewGuid().ToString().ToLowerInvariant().Replace('-', 'a');
-            var storage = new TableStorage(table, ConnectionString);
-            var created = await storage.Create();
-
-            Assert.IsTrue(created);
-
             var entity = new TableEntity()
             {
                 PartitionKey = "partition",
