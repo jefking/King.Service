@@ -91,6 +91,10 @@
         /// <returns></returns>
         IEnumerable<T> QueryByPartition<T>(string partition)
             where T : ITableEntity, new();
+        IEnumerable<T> QueryByRow<T>(string rowKey)
+            where T : ITableEntity, new();
+        T QueryByPartitionAndRow<T>(string partitionKey, string rowKey)
+            where T : ITableEntity, new();
         #endregion
     }
 
