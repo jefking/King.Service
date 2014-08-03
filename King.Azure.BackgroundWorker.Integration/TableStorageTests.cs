@@ -36,6 +36,8 @@
             var created = await storage.CreateIfNotExists();
 
             Assert.IsTrue(created);
+
+            await storage.Delete();
         }
 
         [Test]
@@ -48,6 +50,8 @@
             Assert.IsTrue(created);
             created = await storage.CreateIfNotExists();
             Assert.IsFalse(created);
+
+            await storage.Delete();
         }
 
         [Test]
@@ -58,6 +62,8 @@
             var created = await storage.Create();
 
             Assert.IsTrue(created);
+
+            await storage.Delete();
         }
 
         [Test]
@@ -73,6 +79,8 @@
 
             created = await storage.Create();
             Assert.IsTrue(created);
+
+            await storage.Delete();
         }
 
         [Test]
