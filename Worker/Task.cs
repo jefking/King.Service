@@ -1,6 +1,6 @@
 ﻿namespace Worker
 {
-    using King.Azure.BackgroundWorker;
+    using King.Service;
     using System.Diagnostics;
 
     public class Task : TaskManager

@@ -1,4 +1,4 @@
-﻿namespace King.Azure.BackgroundWorker.Integration
+﻿namespace King.Service.Integration
 {
     using NUnit.Framework;
     using System;

@@ -1,6 +1,6 @@
 ﻿namespace King.Service.Tests.Data
 {
-    using King.Azure.BackgroundWorker.Data;
+    using King.Service.Data;
     using NUnit.Framework;
     using System;
 

@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Tests.Data
 {
-    using King.Azure.BackgroundWorker.Data;
-    using King.Azure.BackgroundWorker.Data.Model;
+    using King.Service.Data;
+    using King.Service.Data.Model;
     using NUnit.Framework;
     using NSubstitute;
     using System;

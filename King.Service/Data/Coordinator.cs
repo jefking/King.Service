@@ -1,6 +1,6 @@
-﻿namespace King.Azure.BackgroundWorker.Data
+﻿namespace King.Service.Data
 {
-    using King.Azure.BackgroundWorker.Data.Model;
+    using King.Service.Data.Model;
     using System;
     using System.Diagnostics;
     using System.Linq;

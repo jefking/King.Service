@@ -1,7 +1,7 @@
 ﻿namespace Worker
 {
-    using King.Azure.BackgroundWorker;
-    using King.Azure.BackgroundWorker.Data;
+    using King.Service;
+    using King.Service.Data;
     using System.Collections.Generic;
     using Worker.Queue;
 

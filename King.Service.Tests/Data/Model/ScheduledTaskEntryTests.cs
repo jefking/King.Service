@@ -1,6 +1,6 @@
 ﻿namespace King.Service.Tests.Data.Model
 {
-    using King.Azure.BackgroundWorker.Data.Model;
+    using King.Service.Data.Model;
     using NUnit.Framework;
     using Microsoft.WindowsAzure.Storage.Table;
     using System;

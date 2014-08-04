@@ -1,6 +1,6 @@
 ﻿namespace Worker.Queue
 {
-    using King.Azure.BackgroundWorker.Data;
+    using King.Service.Data;
 
     /// <summary>
     /// Dequeue Task, for company model

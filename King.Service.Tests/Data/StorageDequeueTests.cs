@@ -1,4 +1,4 @@
-﻿namespace King.Azure.BackgroundWorker.Tests.Data
+﻿namespace King.Service.Tests.Data
 {
     using System;
     using System.Collections.Generic;
@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
     using NUnit.Framework;
     using NSubstitute;
-    using King.Azure.BackgroundWorker.Data;
+    using King.Service.Data;
 
     [TestFixture]
     public class StorageDequeueTests

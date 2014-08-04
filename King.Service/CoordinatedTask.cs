@@ -1,6 +1,6 @@
-﻿namespace King.Azure.BackgroundWorker
+﻿namespace King.Service
 {
-    using King.Azure.BackgroundWorker.Data;
+    using King.Service.Data;
     using System;
     using System.Diagnostics;
 

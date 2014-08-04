@@ -1,7 +1,7 @@
 ﻿namespace Worker.Queue
 {
-    using King.Azure.BackgroundWorker;
-    using King.Azure.BackgroundWorker.Data;
+    using King.Service;
+    using King.Service.Data;
     using Microsoft.WindowsAzure.Storage.Queue;
     using Newtonsoft.Json;
     using System;

@@ -1,4 +1,4 @@
-﻿namespace King.Azure.BackgroundWorker.Data
+﻿namespace King.Service.Data
 {
     /// <summary>
     /// Storage Dequeue

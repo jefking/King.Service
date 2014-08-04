@@ -1,4 +1,4 @@
-﻿namespace King.Azure.BackgroundWorker
+﻿namespace King.Service
 {
     using System;
 

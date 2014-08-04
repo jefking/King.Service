@@ -1,5 +1,6 @@
-﻿namespace King.Azure.BackgroundWorker.Tests
+﻿namespace King.Service.Tests
 {
+    using King.Service;
     using NSubstitute;
     using NUnit.Framework;
     using System;

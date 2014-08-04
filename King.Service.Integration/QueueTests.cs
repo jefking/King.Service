@@ -1,6 +1,6 @@
-﻿namespace King.Azure.BackgroundWorker.Integration
+﻿namespace King.Service.Integration
 {
-    using King.Azure.BackgroundWorker.Data;
+    using King.Service.Data;
     using Microsoft.WindowsAzure.Storage.Queue;
     using NUnit.Framework;
     using System;

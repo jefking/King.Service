@@ -1,6 +1,6 @@
-﻿namespace King.Azure.BackgroundWorker.Tests.Data
+﻿namespace King.Service.Tests.Data
 {
-    using King.Azure.BackgroundWorker.Data;
+    using King.Service.Data;
     using Microsoft.WindowsAzure.Storage.Queue;
     using Newtonsoft.Json;
     using NSubstitute;
