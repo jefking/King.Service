@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}</ProjectGuid>
+    <ProjectGuid>{8B041949-3049-49DD-A2F5-74587FAD08FB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>King.Azure.BackgroundWorker.Tests</RootNamespace>
-    <AssemblyName>King.Azure.BackgroundWorker.Tests</AssemblyName>
+    <RootNamespace>King.Azure.BackgroundWorker.Integration</RootNamespace>
+    <AssemblyName>King.Azure.BackgroundWorker.Integration</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,7 +50,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.2\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.WindowsAzure.Configuration">
+    <Reference Include="Microsoft.WindowsAzure.Configuration, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.2.0.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Storage, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -61,13 +61,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NSubstitute">
-      <HintPath>..\packages\NSubstitute.1.7.2.0\lib\NET45\NSubstitute.dll</HintPath>
-    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Spatial, Version=5.6.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -83,36 +81,21 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
-    <Compile Include="BackoffRunnerTests.cs" />
-    <Compile Include="BackoffTaskTests.cs" />
-    <Compile Include="CoordinatedTaskTests.cs" />
-    <Compile Include="Data\AzureStorageTests.cs" />
-    <Compile Include="Data\ContainerTests.cs" />
-    <Compile Include="Data\DequeueTests.cs" />
-    <Compile Include="Data\StorageDequeueTests.cs" />
-    <Compile Include="Data\StorageQueuedMessageTests.cs" />
-    <Compile Include="Data\StorageQueuePollerTests.cs" />
-    <Compile Include="Data\StorageQueueTests.cs" />
-    <Compile Include="Data\TableStorageTests.cs" />
-    <Compile Include="Data\InitializeStorageTaskTests.cs" />
-    <Compile Include="Data\Model\ScheduledTaskEntryTests.cs" />
-    <Compile Include="Data\CoordinatorTests.cs" />
-    <Compile Include="DequeueTests.cs" />
-    <Compile Include="InitializeTaskTests.cs" />
-    <Compile Include="TaskManagerTests.cs" />
+    <Compile Include="Initialization.cs" />
+    <Compile Include="ContainerTests.cs" />
+    <Compile Include="QueueTests.cs" />
+    <Compile Include="TableStorageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleTaskManagerTests.cs" />
-    <Compile Include="TimingTests.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\King.Azure.BackgroundWorker\King.Service.csproj">
-      <Project>{e72d36e9-0849-498e-ac4f-b97fb632e112}</Project>
-      <Name>King.Service</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\King.Service\King.Service.csproj">
+      <Project>{e72d36e9-0849-498e-ac4f-b97fb632e112}</Project>
+      <Name>King.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
