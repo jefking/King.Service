@@ -41,11 +41,14 @@
 
             // Add your coordinated task(s)
             tasks.Add(task);
-            
-            //Backoff Tasks
+
+            //Backoff task(s)
             tasks.Add(new Backoff());
 
-            //Dequeue Tasks
+            //Self Governing task(s)
+            tasks.Add(new SelfGoverning());
+
+            //Dequeue task(s)
             tasks.Add(new BackoffRunner(new CompanyDequeuer(connectionString)));
 
             //Task for Queuing

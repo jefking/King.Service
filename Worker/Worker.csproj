@@ -90,6 +90,7 @@
     <Compile Include="Queue\CompanyDequeuer.cs" />
     <Compile Include="Queue\CompanyModel.cs" />
     <Compile Include="Queue\CompanyProcessor.cs" />
+    <Compile Include="SelfGoverning.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="WorkerRole.cs" />
   </ItemGroup>
