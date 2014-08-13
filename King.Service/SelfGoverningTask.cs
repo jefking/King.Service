@@ -15,7 +15,7 @@
     /// If there is no work to be done then the task backs off
     /// - The result should be that the task is working at a needed capacity.
     /// </remarks>
-    public class SelfGoverningTask : TaskManager
+    public abstract class SelfGoverningTask : TaskManager
     {
         #region Members
         /// <summary>
@@ -31,7 +31,7 @@
         /// <summary>
         /// Attempts Made
         /// </summary>
-        private ulong noWorkCount = 0;
+        private long noWorkCount = 0;
 
         /// <summary>
         /// Current Time
@@ -39,7 +39,7 @@
         private double currentTime = 0;
 
         /// <summary>
-        /// Timing Halper
+        /// Timing Helper
         /// </summary>
         private readonly ITiming timing = null;
         #endregion
@@ -95,7 +95,7 @@
 
             Trace.TraceInformation("{0}: Work was {1}done. (Time: {2})", this.GetType().ToString(), workWasDone ? string.Empty : "not ", DateTime.UtcNow);
 
-            this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
+            this.noWorkCount = workWasDone ? this.noWorkCount-- : this.noWorkCount++;
 
             var newTime = this.timing.Exponential(this.noWorkCount, this.maximumPeriodInSeconds, this.minimumPeriodInSeconds);
 
