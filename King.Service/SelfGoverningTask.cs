@@ -1,11 +1,7 @@
 ﻿namespace King.Service
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// A task that determines its frequency through actions taken
@@ -95,9 +91,16 @@
 
             Trace.TraceInformation("{0}: Work was {1}done. (Time: {2})", this.GetType().ToString(), workWasDone ? string.Empty : "not ", DateTime.UtcNow);
 
-            if (0 < this.noWorkCount)
+            if (workWasDone)
             {
-                this.noWorkCount = workWasDone ? this.noWorkCount - 1 : this.noWorkCount + 1;
+                if (0 < this.noWorkCount)
+                {
+                    this.noWorkCount--;
+                }
+            }
+            else
+            {
+                this.noWorkCount++;
             }
 
             var newTime = this.timing.Exponential(this.noWorkCount, this.maximumPeriodInSeconds, this.minimumPeriodInSeconds);
