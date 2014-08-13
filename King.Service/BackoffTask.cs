@@ -36,7 +36,7 @@
         /// <summary>
         /// Timing Halper
         /// </summary>
-        private readonly ITiming timing = new Timing();
+        private readonly ITiming timing = null;
         #endregion
 
         #region Constructors
