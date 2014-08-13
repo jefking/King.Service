@@ -135,6 +135,8 @@
             var max = random.Next(90, 1024);
             var time = Substitute.For<ITiming>();
             time.Exponential(-1, max, min).Returns(99);
+            time.Exponential(-2, max, min).Returns(99);
+            time.Exponential(-3, max, min).Returns(99);
 
             using (var task = new SelfGoverningTest(time, min, max))
             {
@@ -144,7 +146,9 @@
                 task.Run();
             }
 
-            time.Received(3).Exponential(-1, max, min);
+            time.Received().Exponential(-1, max, min);
+            time.Received().Exponential(-2, max, min);
+            time.Received().Exponential(-3, max, min);
         }
     }
 }
