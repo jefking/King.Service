@@ -8,7 +8,8 @@
     {
         public override void Run(out bool workWasDone)
         {
-            workWasDone = (DateTime.Now.Ticks % 2) == 0;
+            var random = new Random();
+            workWasDone = (random.Next() % 2) == 0;
 
             Trace.TraceInformation("Work was done: {0}", workWasDone);
         }
