@@ -84,6 +84,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="BackoffRunnerTests.cs" />
+    <Compile Include="SelfGoverningTaskTests.cs" />
     <Compile Include="BackoffTaskTests.cs" />
     <Compile Include="CoordinatedTaskTests.cs" />
     <Compile Include="Data\AzureStorageTests.cs" />

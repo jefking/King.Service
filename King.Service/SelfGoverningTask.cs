@@ -95,7 +95,7 @@
 
             Trace.TraceInformation("{0}: Work was {1}done. (Time: {2})", this.GetType().ToString(), workWasDone ? string.Empty : "not ", DateTime.UtcNow);
 
-            this.noWorkCount = workWasDone ? this.noWorkCount-- : this.noWorkCount++;
+            this.noWorkCount = workWasDone ? this.noWorkCount - 1 : this.noWorkCount + 1;
 
             var newTime = this.timing.Exponential(this.noWorkCount, this.maximumPeriodInSeconds, this.minimumPeriodInSeconds);
 
