@@ -26,7 +26,7 @@
         /// <summary>
         /// Attempts Made
         /// </summary>
-        private long noWorkCount = 0;
+        private ulong noWorkCount = 0;
 
         /// <summary>
         /// Current Time

@@ -91,7 +91,7 @@
     public interface ITiming
     {
         #region Methods
-        double Exponential(long attempts, int max, int min = 1);
+        double Exponential(ulong attempts, int max, int min = 1);
         #endregion
     }
 }

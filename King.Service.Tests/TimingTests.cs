@@ -30,22 +30,12 @@
         }
 
         [Test]
-        public void AttemptNegative()
-        {
-            var random = new Random();
-            var min = random.Next();
-            var time = new Timing();
-            var ex = time.Exponential(random.Next() * -1, 60, min);
-            Assert.AreEqual(min, ex);
-        }
-
-        [Test]
         public void AttemptMaximmum()
         {
             var random = new Random();
             var max = random.Next(1, 60);
             var time = new Timing();
-            var ex = time.Exponential((long)random.Next(61, 500), max);
+            var ex = time.Exponential((ulong)random.Next(61, 500), max);
             Assert.AreEqual(max, ex);
         }
 
@@ -57,7 +47,7 @@
             var max = random.Next(60, 120);
 
             var time = new Timing();
-            for (long i = 1; i < 10; i++)
+            for (ulong i = 1; i < 10; i++)
             {
                 var calc = time.Exponential(i, max, min);
 
@@ -81,7 +71,7 @@
             var max = random.Next(28800, 86400);
 
             var time = new Timing();
-            for (long i = 1; i < 10; i++)
+            for (ulong i = 1; i < 10; i++)
             {
                 var calc = time.Exponential(i, max, min);
 

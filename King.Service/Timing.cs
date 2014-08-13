@@ -15,9 +15,9 @@
         /// <param name="max">upper bound</param>
         /// <param name="min">lower bound</param>
         /// <returns>timing</returns>
-        public double Exponential(long attempts, int max, int min = 1)
+        public double Exponential(ulong attempts, int max, int min = 1)
         {
-            if (0 >= attempts)
+            if (0 == attempts)
             {
                 return min;
             }
