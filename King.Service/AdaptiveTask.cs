@@ -11,7 +11,7 @@
     /// If there is no work to be done then the task backs off
     /// - The result should be that the task is working at a needed capacity.
     /// </remarks>
-    public abstract class SelfGoverningTask : TaskManager
+    public abstract class AdaptiveTask : TaskManager
     {
         #region Members
         /// <summary>
@@ -46,7 +46,7 @@
         /// </summary>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public SelfGoverningTask(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
+        public AdaptiveTask(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
             : this(new Timing(), minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
@@ -57,7 +57,7 @@
         /// <param name="timing">Timing</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public SelfGoverningTask(ITiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
+        public AdaptiveTask(ITiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
             : base(minimumPeriodInSeconds, minimumPeriodInSeconds)
         {
             if (null == timing)

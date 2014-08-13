@@ -6,16 +6,16 @@
     using System;
 
     [TestFixture]
-    public class SelfGoverningTaskTests
+    public class AdaptiveTaskTests
     {
         #region Helper
-        public class SelfGoverningTest : SelfGoverningTask
+        public class AdaptiveTest : AdaptiveTask
         {
-            public SelfGoverningTest(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
+            public AdaptiveTest(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
                 : base(minimumPeriodInSeconds, maximumPeriodInSeconds)
             {
             }
-            public SelfGoverningTest(ITiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
+            public AdaptiveTest(ITiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
                 : base(timing, minimumPeriodInSeconds, maximumPeriodInSeconds)
             {
             }
@@ -34,7 +34,7 @@
         [Test]
         public void Constructor()
         {
-            using (new SelfGoverningTest())
+            using (new AdaptiveTest())
             {
             }
         }
@@ -43,7 +43,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTimingNull()
         {
-            new SelfGoverningTest(null);
+            new AdaptiveTest(null);
         }
 
         [Test]
@@ -52,7 +52,7 @@
         {
             var random = new Random();
             var time = Substitute.For<ITiming>();
-            using (new SelfGoverningTest(time, random.Next(0)))
+            using (new AdaptiveTest(time, random.Next(0)))
             {
             }
         }
@@ -64,7 +64,7 @@
             var random = new Random();
             var value = random.Next(0, 1024);
             var time = Substitute.For<ITiming>();
-            using (new SelfGoverningTest(time, value + 1, value - 1))
+            using (new AdaptiveTest(time, value + 1, value - 1))
             {
             }
         }
@@ -78,7 +78,7 @@
             var time = Substitute.For<ITiming>();
             time.Exponential(1, max, min).Returns(4);
 
-            using (var task = new SelfGoverningTest(time, min, max))
+            using (var task = new AdaptiveTest(time, min, max))
             {
                 task.Run();
             }
@@ -97,7 +97,7 @@
             time.Exponential(2, max, min).Returns(99);
             time.Exponential(3, max, min).Returns(99);
 
-            using (var task = new SelfGoverningTest(time, min, max))
+            using (var task = new AdaptiveTest(time, min, max))
             {
                 task.Run();
                 task.Run();
@@ -118,7 +118,7 @@
             var time = Substitute.For<ITiming>();
             time.Exponential(0, max, min).Returns(99);
 
-            using (var task = new SelfGoverningTest(time, min, max))
+            using (var task = new AdaptiveTest(time, min, max))
             {
                 task.Work = true;
                 task.Run();
@@ -136,7 +136,7 @@
             var time = Substitute.For<ITiming>();
             time.Exponential(0, max, min).Returns(99);
             
-            using (var task = new SelfGoverningTest(time, min, max))
+            using (var task = new AdaptiveTest(time, min, max))
             {
                 task.Work = true;
                 task.Run();

@@ -84,7 +84,7 @@
     <Compile Include="Data\TableStorage.cs" />
     <Compile Include="Data\Interfaces.cs" />
     <Compile Include="Interfaces.cs" />
-    <Compile Include="SelfGoverningTask.cs" />
+    <Compile Include="AdaptiveTask.cs" />
     <Compile Include="TaskManager.cs" />
     <Compile Include="Data\Model\ScheduledTaskEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

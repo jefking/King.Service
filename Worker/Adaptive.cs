@@ -4,7 +4,7 @@
     using System;
     using System.Diagnostics;
 
-    public class SelfGoverning : SelfGoverningTask
+    public class Adaptive : AdaptiveTask
     {
         public override void Run(out bool workWasDone)
         {

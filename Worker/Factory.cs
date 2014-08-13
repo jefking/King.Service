@@ -46,7 +46,7 @@
             //tasks.Add(new Backoff());
 
             //Self Governing task(s)
-            tasks.Add(new SelfGoverning());
+            tasks.Add(new Adaptive());
 
             //Dequeue task(s)
             //tasks.Add(new BackoffRunner(new CompanyDequeuer(connectionString)));
