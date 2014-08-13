@@ -79,7 +79,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError("{0}: {1}", serviceName, ex.Message);
+                        Trace.TraceError("{0}: {1}", serviceName, ex.ToString());
                         successful = false;
                     }
 
@@ -93,7 +93,7 @@
             }
             catch (Exception ex)
             {
-                Trace.TraceError("{0}: {1}", serviceName, ex.Message);
+                Trace.TraceError("{0}: {1}", serviceName, ex.ToString());
                 successful = false;
             }
             finally

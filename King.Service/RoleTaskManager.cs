@@ -69,7 +69,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.Message);
+                        Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.ToString());
                     }
                 }
                 );
@@ -131,7 +131,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError("{0}: {1}.", s.GetType().ToString(), ex.Message);
+                        Trace.TraceError("{0}: {1}.", s.GetType().ToString(), ex.ToString());
                     }
                 }
                 );
