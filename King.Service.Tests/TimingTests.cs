@@ -30,6 +30,16 @@
         }
 
         [Test]
+        public void AttemptNegative()
+        {
+            var random = new Random();
+            var min = random.Next();
+            var time = new Timing();
+            var ex = time.Exponential(random.Next() * -1, 60, min);
+            Assert.AreEqual(min, ex);
+        }
+
+        [Test]
         public void AttemptMaximmum()
         {
             var random = new Random();
