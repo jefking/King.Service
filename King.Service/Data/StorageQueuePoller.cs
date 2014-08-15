@@ -13,7 +13,7 @@
         /// <summary>
         /// Queue
         /// </summary>
-        private readonly IStorageQueue queue = null;
+        protected readonly IStorageQueue queue = null;
         #endregion
 
         #region Constructors
@@ -47,7 +47,7 @@
         /// Poll for Queued Message
         /// </summary>
         /// <returns>Queued Item</returns>
-        public async Task<IQueued<T>> Poll()
+        public virtual async Task<IQueued<T>> Poll()
         {
             var msg = await this.queue.Get();
             return null == msg ? null : new StorageQueuedMessage<T>(this.queue, msg);

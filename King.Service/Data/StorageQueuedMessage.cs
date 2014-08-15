@@ -16,12 +16,12 @@
         /// <summary>
         /// Storage Queue
         /// </summary>
-        private readonly IStorageQueue queue = null;
+        protected readonly IStorageQueue queue = null;
 
         /// <summary>
         /// Cloud Queue Message
         /// </summary>
-        private readonly CloudQueueMessage message = null;
+        protected readonly CloudQueueMessage message = null;
         #endregion
 
         #region Constructors
@@ -51,7 +51,7 @@
         /// Delete Message
         /// </summary>
         /// <returns>Task</returns>
-        public async Task Complete()
+        public virtual async Task Complete()
         {
             await this.queue.Delete(this.message);
         }
@@ -60,7 +60,7 @@
         /// Abandon Message
         /// </summary>
         /// <returns>Task</returns>
-        public async Task Abandon()
+        public virtual async Task Abandon()
         {
             await Task.Factory.StartNew(() => { Trace.TraceInformation("Abandon"); });
             //No Abandon?
@@ -70,7 +70,7 @@
         /// Data
         /// </summary>
         /// <returns>Data</returns>
-        public async Task<T> Data()
+        public virtual async Task<T> Data()
         {
             return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<T>(this.message.AsString));
         }

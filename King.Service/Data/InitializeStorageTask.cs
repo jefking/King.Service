@@ -13,7 +13,7 @@
         /// <summary>
         /// Azure Storage
         /// </summary>
-        private readonly IAzureStorage storage = null;
+        protected readonly IAzureStorage storage = null;
         #endregion
 
         #region Constructors

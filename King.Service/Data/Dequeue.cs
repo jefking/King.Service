@@ -16,12 +16,12 @@
         /// <summary>
         /// Processor
         /// </summary>
-        private readonly IProcessor<T> processor = null;
+        protected readonly IProcessor<T> processor = null;
 
         /// <summary>
         /// Poller
         /// </summary>
-        private readonly IPoller<T> poller = null;
+        protected readonly IPoller<T> poller = null;
         #endregion
 
         #region Constructors
@@ -63,7 +63,7 @@
         /// Run
         /// </summary>
         /// <returns>Work was done</returns>
-        public async Task<bool> Run()
+        public virtual async Task<bool> Run()
         {
             var worked = false;
             

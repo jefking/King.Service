@@ -14,12 +14,12 @@
         /// <summary>
         /// Client
         /// </summary>
-        private CloudBlobClient client;
+        protected readonly CloudBlobClient client;
 
         /// <summary>
         /// Reference
         /// </summary>
-        private CloudBlobContainer reference;
+        protected readonly CloudBlobContainer reference;
         #endregion
 
         #region Constructors
@@ -27,8 +27,8 @@
         /// Queue
         /// </summary>
         /// <param name="name">Name</param>
-        public Container(string name, string connectionStringKey)
-            : base(connectionStringKey)
+        public Container(string name, string connectionString)
+            : base(connectionString)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -58,7 +58,7 @@
         /// Create If Not Exists
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> CreateIfNotExists()
+        public virtual async Task<bool> CreateIfNotExists()
         {
             return await this.reference.CreateIfNotExistsAsync();
         }
@@ -70,7 +70,7 @@
         /// <param name="blobName">Blob Name</param>
         /// <param name="obj">Object</param>
         /// <returns>Task</returns>
-        public async Task Save(string blobName, object obj)
+        public virtual async Task Save(string blobName, object obj)
         {
             if (string.IsNullOrWhiteSpace(blobName))
             {
@@ -89,7 +89,7 @@
         /// <typeparam name="T">Type</typeparam>
         /// <param name="blobName">Blob Name</param>
         /// <returns>Object</returns>
-        public async Task<T> Get<T>(string blobName)
+        public virtual async Task<T> Get<T>(string blobName)
         {
             if (string.IsNullOrWhiteSpace(blobName))
             {

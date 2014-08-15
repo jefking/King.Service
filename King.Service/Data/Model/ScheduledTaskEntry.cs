@@ -16,6 +16,10 @@
         {
         }
         
+        /// <summary>
+        /// Service Type
+        /// </summary>
+        /// <param name="service">Type</param>
         public ScheduledTaskEntry(Type service)
             :this(service.ToString())
         {

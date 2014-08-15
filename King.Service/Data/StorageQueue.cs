@@ -13,12 +13,12 @@
         /// <summary>
         /// Client
         /// </summary>
-        private CloudQueueClient client;
+        protected readonly CloudQueueClient client;
 
         /// <summary>
         /// Reference
         /// </summary>
-        private CloudQueue reference;
+        protected readonly CloudQueue reference;
         #endregion
 
         #region Constructors
@@ -26,8 +26,8 @@
         /// Queue
         /// </summary>
         /// <param name="name">Name</param>
-        public StorageQueue(string name, string connectionStringKey)
-            : base(connectionStringKey)
+        public StorageQueue(string name, string connectionString)
+            : base(connectionString)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -57,7 +57,7 @@
         /// Create If Not Exists
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> CreateIfNotExists()
+        public virtual async Task<bool> CreateIfNotExists()
         {
             return await this.reference.CreateIfNotExistsAsync();
         }
@@ -66,7 +66,7 @@
         /// Get Cloud Queue Message
         /// </summary>
         /// <returns>Message</returns>
-        public async Task<CloudQueueMessage> Get()
+        public virtual async Task<CloudQueueMessage> Get()
         {
             return await this.reference.GetMessageAsync();
         }
@@ -76,7 +76,7 @@
         /// </summary>
         /// <param name="message">Message</param>
         /// <returns>Task</returns>
-        public async Task Save(CloudQueueMessage message)
+        public virtual async Task Save(CloudQueueMessage message)
         {
             if (null == message)
             {
@@ -91,7 +91,7 @@
         /// </summary>
         /// <param name="message">Message</param>
         /// <returns>Task</returns>
-        public async Task Delete(CloudQueueMessage message)
+        public virtual async Task Delete(CloudQueueMessage message)
         {
             if (null == message)
             {

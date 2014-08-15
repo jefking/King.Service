@@ -20,17 +20,17 @@
         /// <summary>
         /// Period of Timer
         /// </summary>
-        private readonly TimeSpan period;
+        protected readonly TimeSpan period;
 
         /// <summary>
         /// Maximum Duration before Retry
         /// </summary>
-        private readonly TimeSpan retryInterval;
+        protected readonly TimeSpan retryInterval;
 
         /// <summary>
         /// Table Storage
         /// </summary>
-        private readonly ITableStorage storage = null;
+        protected readonly ITableStorage storage = null;
         #endregion
 
         #region Constructors
@@ -70,7 +70,7 @@
         /// <summary>
         /// Initialize Table Task
         /// </summary>
-        public TaskManager InitializeTask()
+        public virtual TaskManager InitializeTask()
         {
             return new InitializeStorageTask(this.storage);
         }
@@ -80,7 +80,7 @@
         /// </summary>
         /// <param name="type">Type</param>
         /// <returns>True if need to execute, false if not</returns>
-        public bool Check(Type type)
+        public virtual bool Check(Type type)
         {
             if (null == type)
             {
@@ -122,7 +122,7 @@
         /// <param name="identifier">Identifier</param>
         /// <param name="start">Start</param>
         /// <returns></returns>
-        public async Task Start(Type type, Guid identifier, DateTime start)
+        public virtual async Task Start(Type type, Guid identifier, DateTime start)
         {
             if (null == type)
             {
@@ -151,7 +151,7 @@
         /// <param name="end">End</param>
         /// <param name="success">Success</param>
         /// <returns></returns>
-        public async Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success)
+        public virtual async Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success)
         {
             if (null == type)
             {

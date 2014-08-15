@@ -18,12 +18,12 @@
         /// <summary>
         /// Table Client
         /// </summary>
-        private CloudTableClient client;
+        protected readonly CloudTableClient client;
 
         /// <summary>
         /// Table
         /// </summary>
-        private CloudTable reference;
+        protected readonly CloudTable reference;
         #endregion
 
         #region Constructors
@@ -62,7 +62,7 @@
         /// Create If Not Exists
         /// </summary>
         /// <returns></returns>
-        public async Task<bool> CreateIfNotExists()
+        public virtual async Task<bool> CreateIfNotExists()
         {
             return await this.reference.CreateIfNotExistsAsync();
         }
@@ -71,7 +71,7 @@
         /// Create Table
         /// </summary>
         /// <param name="tableName">Table Name</param>
-        public async Task<bool> Create()
+        public virtual async Task<bool> Create()
         {
             return await this.reference.CreateIfNotExistsAsync();
         }
@@ -80,7 +80,7 @@
         /// Delete Table
         /// </summary>
         /// <param name="tableName"></param>
-        public async Task Delete()
+        public virtual async Task Delete()
         {
             await this.reference.DeleteAsync();
         }
@@ -89,7 +89,7 @@
         /// Insert or update the record in table
         /// </summary>
         /// <param name="item">Scheduled Task Entry</param>
-        public async Task<TableResult> InsertOrReplace(ITableEntity entry)
+        public virtual async Task<TableResult> InsertOrReplace(ITableEntity entry)
         {
             var insertOperation = TableOperation.InsertOrReplace(entry);
             return await this.reference.ExecuteAsync(insertOperation);
@@ -99,7 +99,7 @@
         /// Insert Batch
         /// </summary>
         /// <param name="entities"></param>
-        public async Task<IEnumerable<TableResult>> Insert(IEnumerable<ITableEntity> entities)
+        public virtual async Task<IEnumerable<TableResult>> Insert(IEnumerable<ITableEntity> entities)
         {
             var batchOperation = new TableBatchOperation();
             foreach (var entity in entities)
@@ -116,7 +116,7 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="partitionKey"></param>
         /// <returns></returns>
-        public IEnumerable<T> QueryByPartition<T>(string partitionKey)
+        public virtual IEnumerable<T> QueryByPartition<T>(string partitionKey)
             where T : ITableEntity, new()
         {
             var query = new TableQuery<T>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, partitionKey));
@@ -126,10 +126,13 @@
         /// <summary>
         /// Query By Partition
         /// </summary>
+        /// <remarks>
+        /// Without providing the partion this query may not perform well.
+        /// </remarks>
         /// <typeparam name="T"></typeparam>
         /// <param name="rowKey"></param>
         /// <returns></returns>
-        public IEnumerable<T> QueryByRow<T>(string rowKey)
+        public virtual IEnumerable<T> QueryByRow<T>(string rowKey)
             where T : ITableEntity, new()
         {
             var query = new TableQuery<T>().Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, rowKey));
@@ -142,7 +145,7 @@
         /// <typeparam name="T"></typeparam>
         /// <param name="rowKey"></param>
         /// <returns></returns>
-        public T QueryByPartitionAndRow<T>(string partitionKey, string rowKey)
+        public virtual T QueryByPartitionAndRow<T>(string partitionKey, string rowKey)
             where T : ITableEntity, new()
         {
             var partitionFilter = TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, partitionKey);
