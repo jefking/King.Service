@@ -16,12 +16,12 @@
         /// <summary>
         /// Minimum Timeframe (seconds) (starting timeframe)
         /// </summary>
-        private readonly int minimumPeriodInSeconds = 60;
+        protected readonly int minimumPeriodInSeconds = 60;
 
         /// <summary>
         /// Maximum Timeframe (seconds) to backoff too.
         /// </summary>
-        private readonly int maximumPeriodInSeconds = 300;
+        protected readonly int maximumPeriodInSeconds = 300;
 
         /// <summary>
         /// Attempts Made
@@ -36,7 +36,7 @@
         /// <summary>
         /// Timing Halper
         /// </summary>
-        private readonly ITiming timing = null;
+        protected readonly ITiming timing = null;
         #endregion
 
         #region Constructors

@@ -9,7 +9,7 @@
         /// <summary>
         /// Backoff Runs
         /// </summary>
-        private readonly IBackoffRuns run = null;
+        protected readonly IBackoffRuns run = null;
         #endregion
 
         #region Constructors

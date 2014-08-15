@@ -15,17 +15,17 @@
         /// <summary>
         /// Services
         /// </summary>
-        private IEnumerable<IRunnable> services = null;
+        protected IEnumerable<IRunnable> services = null;
 
         /// <summary>
         /// Manager
         /// </summary>
-        private readonly ITaskFactory<object> manager = null;
+        protected readonly ITaskFactory<object> manager = null;
 
         /// <summary>
         /// Lock object for Mananger
         /// </summary>
-        private readonly object managerLock = new object();
+        protected readonly object managerLock = new object();
         #endregion
 
         #region Constructors
@@ -49,9 +49,9 @@
 
         #region Methods
         /// <summary>
-        /// Run (Currently No-Op)
+        /// Run
         /// </summary>
-        public void Run()
+        public virtual void Run()
         {
             Trace.TraceInformation("Run called");
 
@@ -89,7 +89,7 @@
         /// On Start
         /// </summary>
         /// <returns>Started</returns>
-        public bool OnStart()
+        public virtual bool OnStart()
         {
             Trace.TraceInformation("On start called.");
 
@@ -113,7 +113,7 @@
         /// <summary>
         /// On Stop
         /// </summary>
-        public void OnStop()
+        public virtual void OnStop()
         {
             Trace.TraceInformation("On stop called.");
 

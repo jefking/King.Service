@@ -13,7 +13,7 @@
         /// <summary>
         /// Task Core
         /// </summary>
-        private readonly ICoordinator taskCore;
+        protected readonly ICoordinator taskCore;
         #endregion
 
         #region Constructors
@@ -42,7 +42,7 @@
         /// <summary>
         /// Initialize Table Task
         /// </summary>
-        public IRunnable InitializeTask()
+        public virtual IRunnable InitializeTask()
         {
             return this.taskCore.InitializeTask();
         }

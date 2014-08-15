@@ -57,7 +57,7 @@
         /// Runs Service
         /// </summary>
         /// <returns>Running</returns>
-        public bool Start()
+        public virtual bool Start()
         {
             if (this.Stop())
             {
@@ -79,7 +79,7 @@
         /// Stops Service
         /// </summary>
         /// <returns>Stopped</returns>
-        public bool Stop()
+        public virtual bool Stop()
         {
             if (null != this.timer)
             {
@@ -118,7 +118,7 @@
         /// Change Timer to new interval
         /// </summary>
         /// <param name="newTime">New Time</param>
-        protected void ChangeTiming(TimeSpan newTime)
+        protected virtual void ChangeTiming(TimeSpan newTime)
         {
             if (TimeSpan.Zero == newTime)
             {
