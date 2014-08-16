@@ -114,8 +114,7 @@
                 throw new ArgumentException("newTime Zero.");
             }
 
-            this.StartIn =
-                this.Every = newTime;
+            this.StartIn = this.Every = newTime;
 
             this.Start();
         }

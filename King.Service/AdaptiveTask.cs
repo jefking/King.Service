@@ -30,11 +30,6 @@
         private ulong noWorkCount = 0;
 
         /// <summary>
-        /// Current Time
-        /// </summary>
-        private double currentTime = 0;
-
-        /// <summary>
         /// Timing Helper
         /// </summary>
         protected readonly ITiming timing = null;
@@ -74,7 +69,6 @@
             }
 
             this.timing = timing;
-            this.currentTime = minimumPeriodInSeconds;
             this.minimumPeriodInSeconds = minimumPeriodInSeconds;
             this.maximumPeriodInSeconds = maximumPeriodInSeconds;
         }
@@ -105,13 +99,11 @@
 
             var newTime = this.timing.Exponential(this.noWorkCount, this.maximumPeriodInSeconds, this.minimumPeriodInSeconds);
 
-            if (currentTime != newTime)
+            if (base.Every.TotalSeconds != newTime)
             {
                 var ts = TimeSpan.FromSeconds(newTime);
                 
                 base.ChangeTiming(ts);
-
-                currentTime = ts.TotalSeconds;
 
                 Trace.TraceInformation("{0}: Changed timing to: {1}. (@ {2})", this.GetType().ToString(), ts, DateTime.UtcNow);
             }
