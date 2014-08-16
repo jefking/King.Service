@@ -11,10 +11,6 @@
         #region Helper
         public class BackoffTest : BackoffTask
         {
-            public BackoffTest(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
-                : base(minimumPeriodInSeconds, maximumPeriodInSeconds)
-            {
-            }
             public bool Work
             {
                 get;
@@ -36,23 +32,20 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ConstructorMinMaxZero()
+        public void StartIn()
         {
-            var random = new Random();
-            using (new BackoffTest(random.Next(0)))
+            using (var t = new BackoffTest())
             {
+                Assert.AreEqual(45, t.StartIn.TotalSeconds);
             }
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ConstructorMinMaxSwitched()
+        public void Every()
         {
-            var random = new Random();
-            var value = random.Next(0, 1024);
-            using (new BackoffTest(value + 1, value - 1))
+            using (var t = new BackoffTest())
             {
+                Assert.AreEqual(45, t.Every.TotalSeconds);
             }
         }
     }

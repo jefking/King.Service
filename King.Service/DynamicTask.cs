@@ -9,17 +9,16 @@
 
     public abstract class DynamicTask : TaskManager
     {
-        
         #region Members
         /// <summary>
         /// Minimum Timeframe (seconds) (starting timeframe)
         /// </summary>
-        protected readonly int minimumPeriodInSeconds = 30;
+        protected readonly int minimumPeriodInSeconds;
 
         /// <summary>
         /// Maximum Timeframe (seconds) to backoff too.
         /// </summary>
-        protected readonly int maximumPeriodInSeconds = 300;
+        protected readonly int maximumPeriodInSeconds;
 
         /// <summary>
         /// Timing Helper
@@ -34,7 +33,7 @@
         /// <param name="timing">Timing</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public DynamicTask(IDynamicTiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
+        public DynamicTask(IDynamicTiming timing, int minimumPeriodInSeconds = 45, int maximumPeriodInSeconds = 300)
             : base(minimumPeriodInSeconds, minimumPeriodInSeconds)
         {
             if (null == timing)
