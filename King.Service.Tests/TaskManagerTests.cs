@@ -75,6 +75,24 @@
         }
 
         [Test]
+        public void StartIn()
+        {
+            var random = new Random();
+            var expected = random.Next();
+            var m = new TestManager(expected, 100);
+            Assert.AreEqual(expected, m.StartIn.TotalSeconds);
+        }
+
+        [Test]
+        public void Every()
+        {
+            var random = new Random();
+            var expected = random.Next();
+            var m = new TestManager(100, expected);
+            Assert.AreEqual(expected, m.Every.TotalSeconds);
+        }
+
+        [Test]
         public void Run()
         {
             var m = new TestManager(100, 100);
