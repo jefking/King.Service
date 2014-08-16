@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdaptiveTiming.cs" />
     <Compile Include="BackoffRunner.cs" />
     <Compile Include="BackoffTask.cs" />
     <Compile Include="Data\Dequeue.cs" />
@@ -78,6 +79,8 @@
     <Compile Include="Data\StorageQueuedMessage.cs" />
     <Compile Include="Data\StorageQueuePoller.cs" />
     <Compile Include="Data\StorageDequeue.cs" />
+    <Compile Include="BackoffTiming.cs" />
+    <Compile Include="DynamicTask.cs" />
     <Compile Include="InitializeTask.cs" />
     <Compile Include="RoleTaskManager.cs" />
     <Compile Include="Data\AzureStorage.cs" />
