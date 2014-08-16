@@ -83,7 +83,35 @@
 
             Assert.AreEqual(expected, value);
 
-            timing.Received().Exponential(0, max, min);
+            timing.Received(6).Exponential(0, max, min);
+        }
+
+        [Test]
+        public void GetNoWorkMultiple()
+        {
+            var random = new Random();
+            var min = random.Next();
+            var max = random.Next();
+            var expected = random.NextDouble();
+            var timing = Substitute.For<ITiming>();
+            timing.Exponential(6, max, min).Returns(expected);
+
+            var t = new BackoffTiming(timing);
+            t.Get(false, max, min);
+            t.Get(false, max, min);
+            t.Get(false, max, min);
+            t.Get(false, max, min);
+            t.Get(false, max, min);
+            var value = t.Get(false, max, min);
+
+            Assert.AreEqual(expected, value);
+
+            timing.Received().Exponential(1, max, min);
+            timing.Received().Exponential(2, max, min);
+            timing.Received().Exponential(3, max, min);
+            timing.Received().Exponential(4, max, min);
+            timing.Received().Exponential(5, max, min);
+            timing.Received().Exponential(6, max, min);
         }
     }
 }
