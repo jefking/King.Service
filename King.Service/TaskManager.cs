@@ -14,16 +14,6 @@
         /// Timer
         /// </summary>
         private Timer timer = null;
-
-        /// <summary>
-        /// Due Time of Timer
-        /// </summary>
-        private TimeSpan due;
-
-        /// <summary>
-        /// Period of Timer
-        /// </summary>
-        private TimeSpan periodInSeconds;
         #endregion
 
         #region Constructors
@@ -37,8 +27,8 @@
                 throw new ArgumentException("dueInSeconds");
             }
 
-            this.due = TimeSpan.FromSeconds(dueInSeconds);
-            this.periodInSeconds = 0 > periodInSeconds ? TimeSpan.Zero : TimeSpan.FromSeconds(periodInSeconds);
+            this.StartIn = TimeSpan.FromSeconds(dueInSeconds);
+            this.Every = 0 > periodInSeconds ? TimeSpan.Zero : TimeSpan.FromSeconds(periodInSeconds);
 
             Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.GetType().ToString(), dueInSeconds, periodInSeconds);
         }
@@ -61,14 +51,13 @@
         {
             if (this.Stop())
             {
-                if (TimeSpan.Zero == this.periodInSeconds)
+                if (TimeSpan.Zero == this.Every)
                 {
-                    this.timer = new Timer(this.Run, this, (int)this.due.TotalSeconds, Timeout.Infinite);
+                    this.timer = new Timer(this.Run, null, (int)this.StartIn.TotalSeconds, Timeout.Infinite);
                 }
                 else
                 {
-                    this.timer = new Timer(this.Run, this, this.due, this.periodInSeconds);
-
+                    this.timer = new Timer(this.Run, null, this.StartIn, this.Every);
                 }
             }
 
@@ -104,7 +93,7 @@
             }
             catch (Exception ex)
             {
-                Trace.TraceError("{0}", ex.Message);
+                Trace.TraceError("{0}", ex.ToString());
             }
             finally
             {
@@ -125,8 +114,8 @@
                 throw new ArgumentException("newTime Zero.");
             }
 
-            this.due =
-                this.periodInSeconds = newTime;
+            this.StartIn =
+                this.Every = newTime;
 
             this.Start();
         }
@@ -160,6 +149,26 @@
                     this.timer = null;
                 }
             }
+        }
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Due Time of Timer
+        /// </summary>
+        public TimeSpan StartIn
+        {
+            get;
+            private set;
+        }
+
+        /// <summary>
+        /// Period of Timer
+        /// </summary>
+        public TimeSpan Every
+        {
+            get;
+            private set;
         }
         #endregion
     }
