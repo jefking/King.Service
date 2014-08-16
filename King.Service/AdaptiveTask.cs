@@ -89,7 +89,7 @@
             bool workWasDone;
             this.Run(out workWasDone);
 
-            Trace.TraceInformation("{0}: Work was {1}done. (Time: {2})", this.GetType().ToString(), workWasDone ? string.Empty : "not ", DateTime.UtcNow);
+            Trace.TraceInformation("{0}: {1}Work done. (@ {2})", this.GetType().ToString(), workWasDone ? string.Empty : "No ", DateTime.UtcNow);
 
             if (workWasDone)
             {
@@ -113,7 +113,7 @@
 
                 currentTime = ts.TotalSeconds;
 
-                Trace.TraceInformation("{0}: Changed timing to: {1}. (Time: {2})", this.GetType().ToString(), ts, DateTime.UtcNow);
+                Trace.TraceInformation("{0}: Changed timing to: {1}. (@ {2})", this.GetType().ToString(), ts, DateTime.UtcNow);
             }
         }
 
