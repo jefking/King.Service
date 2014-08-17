@@ -19,7 +19,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
         public AdaptiveTask(int minimumPeriodInSeconds = 45, int maximumPeriodInSeconds = 300)
-            : base(new AdaptiveTiming(), minimumPeriodInSeconds, maximumPeriodInSeconds)
+            : base(new AdaptiveTiming(minimumPeriodInSeconds, maximumPeriodInSeconds), minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
         #endregion

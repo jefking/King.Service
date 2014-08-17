@@ -17,10 +17,10 @@
         #endregion
 
         #region Constructors
-        public AdaptiveTiming()
-            :this(new CalculateTiming())
-        { }
-
+        public AdaptiveTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
+            : this(new CalculateTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
+        {
+        }
         public AdaptiveTiming(ICalculateTiming timing)
         {
             if (null == timing)
@@ -33,7 +33,7 @@
         #endregion
 
         #region Methods
-        public virtual double Get(bool workWasDone, int max, int min)
+        public virtual double Get(bool workWasDone)
         {
             if (workWasDone)
             {
@@ -47,7 +47,7 @@
                 this.noWorkCount++;
             }
 
-            return this.timing.Exponential(this.noWorkCount, max, min);
+            return this.timing.Exponential(this.noWorkCount);
         }
         #endregion
     }

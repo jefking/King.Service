@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Tests.Timing
 {
     using King.Service.Timing;
+    using NSubstitute;
     using NUnit.Framework;
     using System;
 
@@ -10,22 +11,40 @@
         [Test]
         public void Constructor()
         {
-            new CalculateTiming();
+            var random = new Random();
+            new CalculateTiming(random.Next(1, 100), random.Next(100, 1000));
         }
 
         [Test]
         public void IsITiming()
         {
-            Assert.IsNotNull(new CalculateTiming() as ICalculateTiming);
+            var random = new Random();
+            Assert.IsNotNull(new CalculateTiming(random.Next(1, 100), random.Next(100, 1000)) as ICalculateTiming);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorMinMaxZero()
+        {
+            var random = new Random();
+            new CalculateTiming(0, 0);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorMinMaxSwitched()
+        {
+            var random = new Random();
+            new CalculateTiming(random.Next(100, 100), random.Next(1, 10));
         }
 
         [Test]
         public void AttemptMinimum()
         {
             var random = new Random();
-            var min = random.Next();
-            var time = new CalculateTiming();
-            var ex = time.Exponential(0, 60, min);
+            var min = random.Next(1, 10);
+            var time = new CalculateTiming(min, random.Next(100, 1000));
+            var ex = time.Exponential(0);
             Assert.AreEqual(min, ex);
         }
 
@@ -33,9 +52,9 @@
         public void AttemptMaximmum()
         {
             var random = new Random();
-            var max = random.Next(1, 60);
-            var time = new CalculateTiming();
-            var ex = time.Exponential((ulong)random.Next(61, 500), max);
+            var max = random.Next(100, 1000);
+            var time = new CalculateTiming(random.Next(1, 10), max);
+            var ex = time.Exponential((ulong)random.Next(61, 500));
             Assert.AreEqual(max, ex);
         }
 
@@ -46,10 +65,10 @@
             var min = random.Next(1, 30);
             var max = random.Next(60, 120);
 
-            var time = new CalculateTiming();
+            var time = new CalculateTiming(min, max);
             for (ulong i = 1; i < 10; i++)
             {
-                var calc = time.Exponential(i, max, min);
+                var calc = time.Exponential(i);
 
                 var expected = ((Math.Pow(2, i) * .1d) * min) + min;
                 if (expected > max)
@@ -70,10 +89,10 @@
             var min = random.Next(3600, 4000);
             var max = random.Next(28800, 86400);
 
-            var time = new CalculateTiming();
+            var time = new CalculateTiming(min, max);
             for (ulong i = 1; i < 10; i++)
             {
-                var calc = time.Exponential(i, max, min);
+                var calc = time.Exponential(i);
 
                 var expected = ((Math.Pow(2, i) * .1d) * min) + min;
                 if (expected > max)

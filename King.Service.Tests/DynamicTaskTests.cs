@@ -13,7 +13,7 @@
         public class DynamicTest : DynamicTask
         {
             public DynamicTest(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
-                : this(new BackoffTiming(), minimumPeriodInSeconds, maximumPeriodInSeconds)
+                : this(new BackoffTiming(minimumPeriodInSeconds, maximumPeriodInSeconds), minimumPeriodInSeconds, maximumPeriodInSeconds)
             {
             }
             public DynamicTest(IDynamicTiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
@@ -48,66 +48,39 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ConstructorMinMaxZero()
-        {
-            var random = new Random();
-            var time = Substitute.For<IDynamicTiming>();
-            using (new DynamicTest(time, random.Next(0)))
-            {
-            }
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ConstructorMinMaxSwitched()
-        {
-            var random = new Random();
-            var value = random.Next(0, 1024);
-            var time = Substitute.For<IDynamicTiming>();
-            using (new DynamicTest(time, value + 1, value - 1))
-            {
-            }
-        }
-
-        [Test]
         public void Run()
         {
             var random = new Random();
-            var min = random.Next(1, 30);
-            var max = random.Next(90, 1024);
             var time = Substitute.For<IDynamicTiming>();
-            time.Get(false, max, min).Returns(4);
+            time.Get(false).Returns(4);
 
-            using (var task = new DynamicTest(time, min, max))
+            using (var task = new DynamicTest(time))
             {
                 task.Run();
             }
 
-            time.Received().Get(false, max, min);
+            time.Received().Get(false);
         }
 
         [Test]
         public void RunStepDown()
         {
             var random = new Random();
-            var min = random.Next(1, 30);
-            var max = random.Next(90, 1024);
             var time = Substitute.For<IDynamicTiming>();
-            time.Get(false, max, min).Returns(99);
-            time.Get(false, max, min).Returns(99);
-            time.Get(false, max, min).Returns(99);
+            time.Get(false).Returns(99);
+            time.Get(false).Returns(99);
+            time.Get(false).Returns(99);
 
-            using (var task = new DynamicTest(time, min, max))
+            using (var task = new DynamicTest(time))
             {
                 task.Run();
                 task.Run();
                 task.Run();
             }
 
-            time.Get(false, max, min).Returns(99);
-            time.Get(false, max, min).Returns(99);
-            time.Get(false, max, min).Returns(99);
+            time.Get(false).Returns(99);
+            time.Get(false).Returns(99);
+            time.Get(false).Returns(99);
         }
 
         [Test]
@@ -117,7 +90,7 @@
             var min = random.Next(1, 30);
             var max = random.Next(90, 1024);
             var time = Substitute.For<IDynamicTiming>();
-            time.Get(true, max, min).Returns(99);
+            time.Get(true).Returns(99);
 
             using (var task = new DynamicTest(time, min, max))
             {
@@ -125,7 +98,7 @@
                 task.Run();
             }
 
-            time.Received().Get(true, max, min);
+            time.Received().Get(true);
         }
 
         [Test]
@@ -135,9 +108,9 @@
             var min = random.Next(1, 30);
             var max = random.Next(90, 1024);
             var time = Substitute.For<IDynamicTiming>();
-            time.Get(true, max, min).Returns(99);
+            time.Get(true).Returns(99);
             
-            using (var task = new DynamicTest(time, min, max))
+            using (var task = new DynamicTest(time))
             {
                 task.Work = true;
                 task.Run();
@@ -145,7 +118,7 @@
                 task.Run();
             }
 
-            time.Received(3).Get(true, max, min);
+            time.Received(3).Get(true);
         }
     }
 }

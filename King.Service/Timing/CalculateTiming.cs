@@ -7,6 +7,35 @@
     /// </summary>
     public class CalculateTiming : ICalculateTiming
     {
+        #region Members
+        /// <summary>
+        /// Minimum Timeframe (seconds) (starting timeframe)
+        /// </summary>
+        protected readonly int minimumPeriodInSeconds;
+
+        /// <summary>
+        /// Maximum Timeframe (seconds) to backoff too.
+        /// </summary>
+        protected readonly int maximumPeriodInSeconds;
+        #endregion
+        
+        #region Constructors
+        public CalculateTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
+        {
+            if (0 >= minimumPeriodInSeconds)
+            {
+                throw new ArgumentException("Minimum Period In Seconds must be greater than 0.");
+            }
+            if (minimumPeriodInSeconds >= maximumPeriodInSeconds)
+            {
+                throw new ArgumentException("Mminimum Period In Seconds must be less than Maximum Period In Seconds");
+            }
+
+            this.minimumPeriodInSeconds = minimumPeriodInSeconds;
+            this.maximumPeriodInSeconds = maximumPeriodInSeconds;
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Exponential Backoff strategy, within bounds
@@ -15,15 +44,15 @@
         /// <param name="max">upper bound</param>
         /// <param name="min">lower bound</param>
         /// <returns>timing</returns>
-        public virtual double Exponential(ulong attempts, int max, int min = 1)
+        public virtual double Exponential(ulong attempts)
         {
             if (0 == attempts)
             {
-                return min;
+                return this.minimumPeriodInSeconds;
             }
 
-            var current = ((Math.Pow(2, attempts) * .1d) * min) + min;
-            return current < max ? current : max;
+            var current = ((Math.Pow(2, attempts) * .1d) * this.minimumPeriodInSeconds) + this.minimumPeriodInSeconds;
+            return current < this.maximumPeriodInSeconds ? current : this.maximumPeriodInSeconds;
         }
         #endregion
     }

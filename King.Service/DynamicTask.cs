@@ -2,25 +2,14 @@
 {
     using King.Service.Timing;
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
+    /// <summary>
+    /// Dynamic Task, base class for Tasks which change their own timing based on quantity of work
+    /// </summary>
     public abstract class DynamicTask : TaskManager
     {
         #region Members
-        /// <summary>
-        /// Minimum Timeframe (seconds) (starting timeframe)
-        /// </summary>
-        protected readonly int minimumPeriodInSeconds;
-
-        /// <summary>
-        /// Maximum Timeframe (seconds) to backoff too.
-        /// </summary>
-        protected readonly int maximumPeriodInSeconds;
-
         /// <summary>
         /// Timing Helper
         /// </summary>
@@ -41,18 +30,8 @@
             {
                 throw new ArgumentNullException("timing");
             }
-            if (0 >= minimumPeriodInSeconds)
-            {
-                throw new ArgumentException("Minimum Period In Seconds must be greater than 0.");
-            }
-            if (minimumPeriodInSeconds >= maximumPeriodInSeconds)
-            {
-                throw new ArgumentException("Mminimum Period In Seconds must be less than Maximum Period In Seconds");
-            }
 
             this.timing = timing;
-            this.minimumPeriodInSeconds = minimumPeriodInSeconds;
-            this.maximumPeriodInSeconds = maximumPeriodInSeconds;
         }
         #endregion
 
@@ -67,7 +46,7 @@
 
             Trace.TraceInformation("{0}: {1}Work done. (@ {2})", this.GetType().ToString(), workWasDone ? string.Empty : "No ", DateTime.UtcNow);
 
-            var newTime = this.timing.Get(workWasDone, this.maximumPeriodInSeconds, this.minimumPeriodInSeconds);
+            var newTime = this.timing.Get(workWasDone);
 
             if (base.Every.TotalSeconds != newTime)
             {

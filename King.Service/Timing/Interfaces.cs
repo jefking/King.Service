@@ -10,10 +10,8 @@
         /// Exponential Timing
         /// </summary>
         /// <param name="attempts">Attempts</param>
-        /// <param name="max">Maximum Time Frame</param>
-        /// <param name="min">Minimum Time Frame</param>
         /// <returns>Timing</returns>
-        double Exponential(ulong attempts, int max, int min = 1);
+        double Exponential(ulong attempts);
         #endregion
     }
 
@@ -27,10 +25,8 @@
         /// Get Timing
         /// </summary>
         /// <param name="workWasDone">Work Was Done</param>
-        /// <param name="max">Maximum Time Frame</param>
-        /// <param name="min">Minimum Time Frame</param>
         /// <returns>Timing</returns>
-        double Get(bool workWasDone, int max, int min);
+        double Get(bool workWasDone);
         #endregion
     }
 }

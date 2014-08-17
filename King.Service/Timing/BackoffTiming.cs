@@ -17,9 +17,10 @@
         #endregion
 
         #region Constructors
-        public BackoffTiming()
-            :this(new CalculateTiming())
-        { }
+        public BackoffTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
+            :this(new CalculateTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
+        {
+        }
 
         public BackoffTiming(ICalculateTiming timing)
         {
@@ -33,11 +34,11 @@
         #endregion
 
         #region Methods
-        public virtual double Get(bool workWasDone, int max, int min = 1)
+        public virtual double Get(bool workWasDone)
         {
             this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
 
-            return this.timing.Exponential(this.noWorkCount, max, min);
+            return this.timing.Exponential(this.noWorkCount);
         }
         #endregion
     }
