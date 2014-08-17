@@ -1,5 +1,6 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;

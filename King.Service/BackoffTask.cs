@@ -1,5 +1,7 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
+
     /// <summary>
     /// Exponential Backoff Task
     /// </summary>

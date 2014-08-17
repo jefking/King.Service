@@ -1,5 +1,7 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
+
     /// <summary>
     /// A task that determines its frequency through actions taken
     /// </summary>

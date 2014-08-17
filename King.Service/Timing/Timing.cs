@@ -1,4 +1,4 @@
-﻿namespace King.Service
+﻿namespace King.Service.Timing
 {
     using System;
 

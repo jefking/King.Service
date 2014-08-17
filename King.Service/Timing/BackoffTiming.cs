@@ -1,8 +1,8 @@
-﻿namespace King.Service
+﻿namespace King.Service.Timing
 {
     using System;
 
-    public class AdaptiveTiming : IDynamicTiming
+    public class BackoffTiming : IDynamicTiming
     {
         #region Members
         /// <summary>
@@ -17,11 +17,11 @@
         #endregion
 
         #region Constructors
-        public AdaptiveTiming()
+        public BackoffTiming()
             :this(new Timing())
         { }
 
-        public AdaptiveTiming(ITiming timing)
+        public BackoffTiming(ITiming timing)
         {
             if (null == timing)
             {
@@ -33,19 +33,9 @@
         #endregion
 
         #region Methods
-        public virtual double Get(bool workWasDone, int max, int min)
+        public virtual double Get(bool workWasDone, int max, int min = 1)
         {
-            if (workWasDone)
-            {
-                if (0 < this.noWorkCount)
-                {
-                    this.noWorkCount--;
-                }
-            }
-            else
-            {
-                this.noWorkCount++;
-            }
+            this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
 
             return this.timing.Exponential(this.noWorkCount, max, min);
         }

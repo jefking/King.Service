@@ -69,7 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdaptiveTiming.cs" />
+    <Compile Include="Timing\AdaptiveTiming.cs" />
     <Compile Include="BackoffRunner.cs" />
     <Compile Include="BackoffTask.cs" />
     <Compile Include="Data\Dequeue.cs" />
@@ -79,7 +79,7 @@
     <Compile Include="Data\StorageQueuedMessage.cs" />
     <Compile Include="Data\StorageQueuePoller.cs" />
     <Compile Include="Data\StorageDequeue.cs" />
-    <Compile Include="BackoffTiming.cs" />
+    <Compile Include="Timing\BackoffTiming.cs" />
     <Compile Include="DynamicTask.cs" />
     <Compile Include="InitializeTask.cs" />
     <Compile Include="RoleTaskManager.cs" />
@@ -94,7 +94,8 @@
     <Compile Include="CoordinatedTask.cs" />
     <Compile Include="Data\Coordinator.cs" />
     <Compile Include="TaskFactory.cs" />
-    <Compile Include="Timing.cs" />
+    <Compile Include="Timing\Interfaces.cs" />
+    <Compile Include="Timing\Timing.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
