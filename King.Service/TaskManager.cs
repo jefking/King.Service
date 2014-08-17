@@ -14,6 +14,11 @@
         /// Timer
         /// </summary>
         private Timer timer = null;
+
+        /// <summary>
+        /// Service Name
+        /// </summary>
+        protected readonly string serviceName;
         #endregion
 
         #region Constructors
@@ -29,8 +34,9 @@
 
             this.StartIn = TimeSpan.FromSeconds(dueInSeconds);
             this.Every = 0 > periodInSeconds ? TimeSpan.Zero : TimeSpan.FromSeconds(periodInSeconds);
+            this.serviceName = this.GetType().ToString();
 
-            Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.GetType().ToString(), dueInSeconds, periodInSeconds);
+            Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.serviceName, dueInSeconds, periodInSeconds);
         }
 
         /// <summary>
@@ -93,14 +99,14 @@
             }
             catch (Exception ex)
             {
-                Trace.TraceError("{0}", ex.ToString());
+                Trace.TraceError("{0}: {1}", this.serviceName, ex.ToString());
             }
             finally
             {
                 timing.Stop();
             }
 
-            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.GetType().ToString(), timing.Elapsed);
+            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.serviceName, timing.Elapsed);
         }
 
         /// <summary>
