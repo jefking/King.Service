@@ -74,12 +74,11 @@
                 }
                 );
 
-
                 Trace.TraceInformation("Finished starting services.");
             }
             else
             {
-                Trace.TraceInformation("No services to start up.");
+                Trace.TraceWarning("No services to start up.");
             }
 
             Trace.TraceInformation("Run finished");
