@@ -46,6 +46,11 @@
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Get Timing
+        /// </summary>
+        /// <param name="workWasDone">Work was done</param>
+        /// <returns>New Timing</returns>
         public virtual double Get(bool workWasDone)
         {
             this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
