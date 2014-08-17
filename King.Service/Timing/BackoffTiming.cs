@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Backoff Timing
+    /// </summary>
     public class BackoffTiming : IDynamicTiming
     {
         #region Members
@@ -17,11 +20,20 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="minimumPeriodInSeconds">Minimum Period in Seconds</param>
+        /// <param name="maximumPeriodInSeconds">Maximum Period in Seconds</param>
         public BackoffTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
             :this(new CalculateTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
         {
         }
 
+        /// <summary>
+        /// Mockable Constructor
+        /// </summary>
+        /// <param name="timing">Calculate Timing</param>
         public BackoffTiming(ICalculateTiming timing)
         {
             if (null == timing)
