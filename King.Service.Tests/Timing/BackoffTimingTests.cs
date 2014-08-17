@@ -1,31 +1,30 @@
-﻿namespace King.Azure.BackgroundWorker.Tests
+﻿namespace King.Service.Tests.Timing
 {
-    using King.Service;
     using King.Service.Timing;
     using NSubstitute;
     using NUnit.Framework;
     using System;
 
     [TestFixture]
-    public class AdaptiveTimingTests
+    public class BackoffTimingTests
     {
         [Test]
         public void Constructor()
         {
-            new AdaptiveTiming();
+            new BackoffTiming();
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTimingNull()
         {
-            new AdaptiveTiming(null);
+            new BackoffTiming(null);
         }
 
         [Test]
         public void IsIDynamicTiming()
         {
-            Assert.IsNotNull(new AdaptiveTiming() as IDynamicTiming);
+            Assert.IsNotNull(new BackoffTiming() as IDynamicTiming);
         }
 
         [Test]
@@ -38,7 +37,7 @@
             var timing = Substitute.For<ICalculateTiming>();
             timing.Exponential(0, max, min).Returns(expected);
 
-            var t = new AdaptiveTiming(timing);
+            var t = new BackoffTiming(timing);
             var value = t.Get(true, max, min);
 
             Assert.AreEqual(expected, value);
@@ -56,7 +55,7 @@
             var timing = Substitute.For<ICalculateTiming>();
             timing.Exponential(1, max, min).Returns(expected);
 
-            var t = new AdaptiveTiming(timing);
+            var t = new BackoffTiming(timing);
             var value = t.Get(false, max, min);
 
             Assert.AreEqual(expected, value);
@@ -74,7 +73,7 @@
             var timing = Substitute.For<ICalculateTiming>();
             timing.Exponential(0, max, min).Returns(expected);
 
-            var t = new AdaptiveTiming(timing);
+            var t = new BackoffTiming(timing);
             t.Get(true, max, min);
             t.Get(true, max, min);
             t.Get(true, max, min);
@@ -97,7 +96,7 @@
             var timing = Substitute.For<ICalculateTiming>();
             timing.Exponential(6, max, min).Returns(expected);
 
-            var t = new AdaptiveTiming(timing);
+            var t = new BackoffTiming(timing);
             t.Get(false, max, min);
             t.Get(false, max, min);
             t.Get(false, max, min);
