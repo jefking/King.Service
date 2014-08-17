@@ -1,7 +1,6 @@
 ﻿namespace King.Service.Integration
 {
     using NUnit.Framework;
-    using System;
     using System.Configuration;
     using System.Diagnostics;
 
@@ -9,13 +8,13 @@
     public class Initialization
     {
         [SetUp]
-        public static void Init()
+        public static void SetUp()
         {
             var emulator = ConfigurationManager.AppSettings["AzureEmulator"];
 
             using (var process = new Process())
             {
-                process.StartInfo = CreateProcessStartInfo(emulator, "/devstore:start");
+                process.StartInfo = CreateProcessStartInfo(emulator, "start");
                 process.Start();
 
                 process.WaitForExit();

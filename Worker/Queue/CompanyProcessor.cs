@@ -1,5 +1,6 @@
 ﻿namespace Worker.Queue
 {
+    using King.Azure.Data;
     using King.Service.Data;
     using System.Diagnostics;
     using System.Threading.Tasks;

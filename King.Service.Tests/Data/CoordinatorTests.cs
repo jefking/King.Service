@@ -7,6 +7,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using King.Azure.Data;
 
     [TestFixture]
     public class CoordinatorTests

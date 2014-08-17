@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Data
 {
+    using King.Azure.Data;
     using King.Service.Data.Model;
     using System;
     using System.Diagnostics;

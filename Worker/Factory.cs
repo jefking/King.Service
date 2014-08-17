@@ -1,5 +1,6 @@
 ﻿namespace Worker
 {
+    using King.Azure.Data;
     using King.Service;
     using King.Service.Data;
     using System.Collections.Generic;

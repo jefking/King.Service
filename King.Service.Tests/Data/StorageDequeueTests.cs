@@ -8,6 +8,7 @@
     using NUnit.Framework;
     using NSubstitute;
     using King.Service.Data;
+    using King.Azure.Data;
 
     [TestFixture]
     public class StorageDequeueTests

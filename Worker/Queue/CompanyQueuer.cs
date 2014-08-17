@@ -1,5 +1,6 @@
 ﻿namespace Worker.Queue
 {
+    using King.Azure.Data;
     using King.Service;
     using King.Service.Data;
     using Microsoft.WindowsAzure.Storage.Queue;

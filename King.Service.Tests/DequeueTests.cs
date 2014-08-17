@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Tests
 {
+    using King.Azure.Data;
     using King.Service.Data;
     using NSubstitute;
     using NUnit.Framework;

@@ -4,6 +4,7 @@
     using NUnit.Framework;
     using NSubstitute;
     using System;
+    using King.Azure.Data;
 
     [TestFixture]
     public class InitializeStorageTaskTests
