@@ -5,7 +5,7 @@
     /// <summary>
     /// Timing Maths
     /// </summary>
-    public class Timing : ITiming
+    public class CalculateTiming : ICalculateTiming
     {
         #region Methods
         /// <summary>

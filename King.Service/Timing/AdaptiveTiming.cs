@@ -13,15 +13,15 @@
         /// <summary>
         /// Timing Halper
         /// </summary>
-        protected readonly ITiming timing = null;
+        protected readonly ICalculateTiming timing = null;
         #endregion
 
         #region Constructors
         public AdaptiveTiming()
-            :this(new Timing())
+            :this(new CalculateTiming())
         { }
 
-        public AdaptiveTiming(ITiming timing)
+        public AdaptiveTiming(ICalculateTiming timing)
         {
             if (null == timing)
             {

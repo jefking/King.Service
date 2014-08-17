@@ -1,6 +1,7 @@
 ﻿namespace King.Azure.BackgroundWorker.Tests
 {
     using King.Service;
+    using King.Service.Timing;
     using NSubstitute;
     using NUnit.Framework;
     using System;
@@ -34,7 +35,7 @@
             var min = random.Next();
             var max = random.Next();
             var expected = random.NextDouble();
-            var timing = Substitute.For<ITiming>();
+            var timing = Substitute.For<ICalculateTiming>();
             timing.Exponential(0, max, min).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
@@ -52,7 +53,7 @@
             var min = random.Next();
             var max = random.Next();
             var expected = random.NextDouble();
-            var timing = Substitute.For<ITiming>();
+            var timing = Substitute.For<ICalculateTiming>();
             timing.Exponential(1, max, min).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
@@ -70,7 +71,7 @@
             var min = random.Next();
             var max = random.Next();
             var expected = random.NextDouble();
-            var timing = Substitute.For<ITiming>();
+            var timing = Substitute.For<ICalculateTiming>();
             timing.Exponential(0, max, min).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
@@ -93,7 +94,7 @@
             var min = random.Next();
             var max = random.Next();
             var expected = random.NextDouble();
-            var timing = Substitute.For<ITiming>();
+            var timing = Substitute.For<ICalculateTiming>();
             timing.Exponential(6, max, min).Returns(expected);
 
             var t = new AdaptiveTiming(timing);

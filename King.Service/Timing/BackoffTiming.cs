@@ -13,15 +13,15 @@
         /// <summary>
         /// Timing Halper
         /// </summary>
-        protected readonly ITiming timing = null;
+        protected readonly ICalculateTiming timing = null;
         #endregion
 
         #region Constructors
         public BackoffTiming()
-            :this(new Timing())
+            :this(new CalculateTiming())
         { }
 
-        public BackoffTiming(ITiming timing)
+        public BackoffTiming(ICalculateTiming timing)
         {
             if (null == timing)
             {

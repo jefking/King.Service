@@ -3,7 +3,7 @@
     /// <summary>
     /// Timing interface for Timing Maths
     /// </summary>
-    public interface ITiming
+    public interface ICalculateTiming
     {
         #region Methods
         double Exponential(ulong attempts, int max, int min = 1);

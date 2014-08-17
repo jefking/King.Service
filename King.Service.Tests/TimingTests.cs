@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Tests
 {
 
+    using King.Service.Timing;
     using NUnit.Framework;
     using System;
 
@@ -10,13 +11,13 @@
         [Test]
         public void Constructor()
         {
-            new Timing();
+            new CalculateTiming();
         }
 
         [Test]
         public void IsITiming()
         {
-            Assert.IsNotNull(new Timing() as ITiming);
+            Assert.IsNotNull(new CalculateTiming() as ICalculateTiming);
         }
 
         [Test]
@@ -24,7 +25,7 @@
         {
             var random = new Random();
             var min = random.Next();
-            var time = new Timing();
+            var time = new CalculateTiming();
             var ex = time.Exponential(0, 60, min);
             Assert.AreEqual(min, ex);
         }
@@ -34,7 +35,7 @@
         {
             var random = new Random();
             var max = random.Next(1, 60);
-            var time = new Timing();
+            var time = new CalculateTiming();
             var ex = time.Exponential((ulong)random.Next(61, 500), max);
             Assert.AreEqual(max, ex);
         }
@@ -46,7 +47,7 @@
             var min = random.Next(1, 30);
             var max = random.Next(60, 120);
 
-            var time = new Timing();
+            var time = new CalculateTiming();
             for (ulong i = 1; i < 10; i++)
             {
                 var calc = time.Exponential(i, max, min);
@@ -70,7 +71,7 @@
             var min = random.Next(3600, 4000);
             var max = random.Next(28800, 86400);
 
-            var time = new Timing();
+            var time = new CalculateTiming();
             for (ulong i = 1; i < 10; i++)
             {
                 var calc = time.Exponential(i, max, min);

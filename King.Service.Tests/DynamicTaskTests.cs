@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Tests
 {
     using King.Service;
+    using King.Service.Timing;
     using NSubstitute;
     using NUnit.Framework;
     using System;
