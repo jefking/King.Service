@@ -114,5 +114,32 @@
             timing.Received().Exponential(5, max, min);
             timing.Received().Exponential(6, max, min);
         }
+
+        [Test]
+        public void GetWorkNoWork()
+        {
+            var random = new Random();
+            var min = random.Next();
+            var max = random.Next();
+            var expected = random.NextDouble();
+            var timing = Substitute.For<ICalculateTiming>();
+            timing.Exponential(0, max, min).Returns(expected);
+            timing.Exponential(1, max, min).Returns(expected);
+            timing.Exponential(2, max, min).Returns(expected);
+
+            var t = new AdaptiveTiming(timing);
+            t.Get(true, max, min);
+            t.Get(false, max, min);
+            t.Get(true, max, min);
+            t.Get(false, max, min);
+            t.Get(false, max, min);
+            var value = t.Get(true, max, min);
+
+            Assert.AreEqual(expected, value);
+
+            timing.Received(2).Exponential(0, max, min);
+            timing.Received(3).Exponential(1, max, min);
+            timing.Received().Exponential(2, max, min);
+        }
     }
 }
