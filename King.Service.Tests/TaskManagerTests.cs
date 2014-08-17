@@ -143,6 +143,16 @@
         }
 
         [Test]
+        public void StartZeroStop()
+        {
+            var m = new TestManager(10, 0);
+            var success = m.Start();
+            Assert.IsTrue(success);
+            success = m.Stop();
+            Assert.IsTrue(success);
+        }
+
+        [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ChangeTimingZero()
         {
