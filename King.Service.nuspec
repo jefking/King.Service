@@ -17,7 +17,7 @@
         <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing</tags>
         <dependencies>
           <dependency id="WindowsAzure.Storage" version="4.2.1" />
-          <dependency id="King.Azure" version="1.0.2" />
+          <dependency id="King.Azure" version="1.0.4" />
         </dependencies>
         <frameworkAssemblies>
             <frameworkAssembly assemblyName="System" targetFramework="net451" />
