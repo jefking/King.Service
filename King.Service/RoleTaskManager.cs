@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -59,11 +60,11 @@
             {
                 Trace.TraceInformation("Starting {0} services.", services.Count());
 
-                Parallel.ForEach(services, s =>
+                foreach (var s in services)
                 {
                     try
                     {
-                       s.Start();
+                        s.Start();
 
                         Trace.TraceInformation("{0} Started.", s.GetType().ToString());
                     }
@@ -71,8 +72,10 @@
                     {
                         Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.ToString());
                     }
+
+                    //Slightly stager tasks, so they don't compete.
+                    Thread.Sleep(500);
                 }
-                );
 
                 Trace.TraceInformation("Finished starting services.");
             }
@@ -92,16 +95,16 @@
         {
             Trace.TraceInformation("On start called.");
 
-            if (null == this.services)
+            lock (this.managerLock)
             {
-                Trace.TraceInformation("Loading Services.");
-
-                lock (this.managerLock)
+                if (null == this.services)
                 {
-                    this.services = manager.Tasks(this);
-                }
+                    Trace.TraceInformation("Loading Services.");
 
-                Trace.TraceInformation("Services Loaded.");
+                    this.services = manager.Tasks(this);
+
+                    Trace.TraceInformation("Services Loaded.");
+                }
             }
 
             Trace.TraceInformation("On start finished.");
