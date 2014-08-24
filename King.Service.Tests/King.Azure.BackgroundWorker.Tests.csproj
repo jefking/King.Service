@@ -87,6 +87,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="Data\DequeueBatchTests.cs" />
     <Compile Include="Timing\AdaptiveTimingTests.cs" />
     <Compile Include="Timing\BackoffTimingTests.cs" />
     <Compile Include="DynamicTaskTests.cs" />
