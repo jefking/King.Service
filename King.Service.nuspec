@@ -14,7 +14,7 @@
         <summary>Easily create background tasks to be run on worker roles.</summary>
         <releaseNotes>Dequeue multiple items at a time from Azure Storage.</releaseNotes>
         <copyright>Jef King</copyright>
-        <tags>Azure Queue Service Bus Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing</tags>
+        <tags>King.Service Azure Queue Service Bus Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing</tags>
         <dependencies>
           <dependency id="King.Azure" version="1.0.4" />
         </dependencies>
