@@ -94,7 +94,6 @@
 
             Trace.TraceInformation(string.Format("{0}: Querying scheduled tasks for the latest.", entry.ServiceName));
 
-            // Peek the table first to determine if there's any task to execute
             var records = this.storage.QueryByPartition<ScheduledTaskEntry>(entry.PartitionKey);
 
             if (records != null && records.Count() > 0)
@@ -103,11 +102,6 @@
 
                 Trace.TraceInformation("{0}: Latest task found: StartTime: {1} CompletionTime: {2}", entry.ServiceName, latest.StartTime, latest.CompletionTime);
 
-                // 1. If the latest task has been completed, then perform task if
-                // - the latest task has been completed more than <period> ago, or
-                // - the latest task was unsuccessful
-                // 2. If the latest task has been started but not completed yet,
-                // then perform the task if it has been started more than <backupRetryInterval> ago
                 performTask = (latest.CompletionTime.HasValue) ?
                     DateTime.UtcNow.Subtract(latest.CompletionTime.Value) >= period || !latest.Successful :
                     DateTime.UtcNow.Subtract(latest.StartTime) >= retryInterval;
@@ -122,7 +116,7 @@
         /// <param name="type">Task Type</param>
         /// <param name="identifier">Identifier</param>
         /// <param name="start">Start</param>
-        /// <returns></returns>
+        /// <returns>Task</returns>
         public virtual async Task Start(Type type, Guid identifier, DateTime start)
         {
             if (null == type)
@@ -151,7 +145,7 @@
         /// <param name="start">Start</param>
         /// <param name="end">End</param>
         /// <param name="success">Success</param>
-        /// <returns></returns>
+        /// <returns>Task</returns>
         public virtual async Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success)
         {
             if (null == type)
@@ -176,6 +170,9 @@
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Period In Seconds
+        /// </summary>
         public int PeriodInSeconds
         {
             get
