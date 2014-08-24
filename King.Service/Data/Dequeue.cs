@@ -73,33 +73,7 @@
             {
                 worked = true;
 
-                try
-                {
-                    var data = await message.Data();
-                    if (null != data)
-                    {
-                        var successful = await this.processor.Process(data);
-                        if (successful)
-                        {
-                            await message.Complete();
-                        }
-                        else
-                        {
-                            await message.Abandon();
-                        }
-                    }
-                    else
-                    {
-                        await message.Abandon();
-                    }
-                }
-                catch
-                {
-                    var task = message.Abandon();
-                    task.Wait();
-
-                    throw;
-                }
+                await this.Process(message);
             }
             else
             {
@@ -107,6 +81,42 @@
             }
 
             return worked;
+        }
+
+        /// <summary>
+        /// Process Mesage
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <returns>Task</returns>
+        protected virtual async Task Process(IQueued<T> message)
+        {
+            try
+            {
+                var data = await message.Data();
+                if (null != data)
+                {
+                    var successful = await this.processor.Process(data);
+                    if (successful)
+                    {
+                        await message.Complete();
+                    }
+                    else
+                    {
+                        await message.Abandon();
+                    }
+                }
+                else
+                {
+                    await message.Abandon();
+                }
+            }
+            catch
+            {
+                var task = message.Abandon();
+                task.Wait();
+
+                throw;
+            }
         }
         #endregion
 
