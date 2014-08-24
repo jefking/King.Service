@@ -5,6 +5,7 @@
     using NSubstitute;
     using NUnit.Framework;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     [TestFixture]
@@ -38,6 +39,64 @@
             var processor = Substitute.For<IProcessor<object>>();
             var d = new DequeueBatch<object>(poller, processor, count);
             Assert.AreEqual(5, d.BatchCount);
+        }
+
+        [Test]
+        public async Task Run()
+        {
+            var data = new object();
+
+            var message = Substitute.For<IQueued<object>>();
+            message.Data().Returns(Task.FromResult(data));
+            message.Complete();
+
+            var msgs = new List<IQueued<object>>();
+            msgs.Add(message);
+
+            var poller = Substitute.For<IPoller<object>>();
+            poller.PollMany(5).Returns(Task.FromResult<IEnumerable<IQueued<object>>>(msgs));
+
+            var processor = Substitute.For<IProcessor<object>>();
+            processor.Process(data).Returns(Task.FromResult(true));
+
+            var d = new DequeueBatch<object>(poller, processor);
+
+            var result = await d.Run();
+            Assert.IsTrue(result);
+
+            message.Received().Data();
+            message.Received().Complete();
+            poller.Received().PollMany(5);
+            processor.Received().Process(data);
+        }
+
+        [Test]
+        public async Task RunPollNull()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            poller.PollMany(5).Returns(Task.FromResult<IEnumerable<IQueued<object>>>(null));
+
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new DequeueBatch<object>(poller, processor);
+
+            var result = await d.Run();
+            Assert.IsFalse(result);
+
+            poller.Received().PollMany(5);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ApplicationException))]
+        public async Task RunPollThrows()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            poller.PollMany(5).Returns(x => { throw new ApplicationException(); });
+
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new DequeueBatch<object>(poller, processor);
+            await d.Run();
         }
     }
 }
