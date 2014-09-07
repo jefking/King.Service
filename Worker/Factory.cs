@@ -50,7 +50,7 @@
             tasks.Add(new Adaptive());
 
             //Dequeue task(s)
-            tasks.Add(new BackoffRunner(new CompanyDequeuer(connectionString)));
+            tasks.Add(new BackoffRunner(new CompanyDequeuer(queue)));
 
             //Task for Queuing
             tasks.Add(new CompanyQueuer());

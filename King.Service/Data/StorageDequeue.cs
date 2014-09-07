@@ -10,7 +10,12 @@
     {
         #region Constructors
         public StorageDequeue(string name, string connectionString, IProcessor<T> processor, int minimumPeriodInSeconds = 15, int maximumPeriodInSeconds = 300)
-            : base(new StorageQueuePoller<T>(name, connectionString), processor, minimumPeriodInSeconds, maximumPeriodInSeconds)
+            : this(new StorageQueue(name, connectionString), processor, minimumPeriodInSeconds, maximumPeriodInSeconds)
+        {
+        }
+
+        public StorageDequeue(IStorageQueue queue, IProcessor<T> processor, int minimumPeriodInSeconds = 15, int maximumPeriodInSeconds = 300)
+            : base(new StorageQueuePoller<T>(queue), processor, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
         #endregion

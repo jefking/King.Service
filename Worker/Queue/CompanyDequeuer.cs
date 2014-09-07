@@ -1,5 +1,6 @@
 ﻿namespace Worker.Queue
 {
+    using King.Azure.Data;
     using King.Service.Data;
 
     /// <summary>
@@ -7,8 +8,8 @@
     /// </summary>
     public class CompanyDequeuer : StorageDequeue<CompanyModel>
     {
-        public CompanyDequeuer(string connectionString)
-            : base("queue", connectionString, new CompanyProcessor())
+        public CompanyDequeuer(IStorageQueue queue)
+            : base(queue, new CompanyProcessor())
         {
         }
     }
