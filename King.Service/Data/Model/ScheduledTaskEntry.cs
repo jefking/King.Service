@@ -45,7 +45,7 @@
         /// <summary>
         /// Identifier
         /// </summary>
-        public Guid? Identifier
+        public virtual Guid? Identifier
         {
             get
             {
@@ -60,7 +60,7 @@
         /// <summary>
         /// Start Time
         /// </summary>
-        public DateTime StartTime
+        public virtual DateTime StartTime
         {
             get;
             set;
@@ -69,7 +69,7 @@
         /// <summary>
         /// Completion Time
         /// </summary>
-        public DateTime? CompletionTime
+        public virtual DateTime? CompletionTime
         {
             get;
             set;
@@ -78,7 +78,7 @@
         /// <summary>
         /// the Service Name
         /// </summary>
-        public string ServiceName
+        public virtual string ServiceName
         {
             get;
             set;
@@ -87,7 +87,7 @@
         /// <summary>
         /// Successful
         /// </summary>
-        public bool Successful
+        public virtual bool Successful
         {
             get;
             set;

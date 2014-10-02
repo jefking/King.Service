@@ -173,7 +173,7 @@
         /// <summary>
         /// Period In Seconds
         /// </summary>
-        public int PeriodInSeconds
+        public virtual int PeriodInSeconds
         {
             get
             {
