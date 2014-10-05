@@ -81,7 +81,7 @@
         /// </summary>
         /// <param name="type">Type</param>
         /// <returns>True if need to execute, false if not</returns>
-        public virtual bool Check(Type type)
+        public virtual async Task<bool> Check(Type type)
         {
             if (null == type)
             {
@@ -94,7 +94,7 @@
 
             Trace.TraceInformation(string.Format("{0}: Querying scheduled tasks for the latest.", entry.ServiceName));
 
-            var records = this.storage.QueryByPartition<ScheduledTaskEntry>(entry.PartitionKey);
+            var records = await this.storage.QueryByPartition<ScheduledTaskEntry>(entry.PartitionKey);
 
             if (records != null && records.Count() > 0)
             {

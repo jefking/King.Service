@@ -42,21 +42,21 @@
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void CheckTypeNull()
+        public async Task CheckTypeNull()
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
-            core.Check(null);
+            await core.Check(null);
         }
 
         [Test]
-        public void CheckNoRecords()
+        public async Task CheckNoRecords()
         {
             var table = Substitute.For<ITableStorage>();
-            table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(new List<ScheduledTaskEntry>());
+            table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(Task.FromResult<IEnumerable<ScheduledTaskEntry>>(new List<ScheduledTaskEntry>()));
 
             var core = new Coordinator(table, new TimeSpan(9000));
-            var perform = core.Check(this.GetType());
+            var perform = await core.Check(this.GetType());
 
             Assert.IsTrue(perform);
 
@@ -64,7 +64,7 @@
         }
 
         [Test]
-        public void CheckCompletedFailureOld()
+        public async Task CheckCompletedFailureOld()
         {
             var records = new List<ScheduledTaskEntry>();
             var record = new ScheduledTaskEntry()
@@ -76,10 +76,10 @@
             records.Add(record);
 
             var table = Substitute.For<ITableStorage>();
-            table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(records);
+            table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(Task.FromResult<IEnumerable<ScheduledTaskEntry>>(records));
 
             var core = new Coordinator(table, new TimeSpan(9000));
-            var perform = core.Check(this.GetType());
+            var perform = await core.Check(this.GetType());
 
             Assert.IsTrue(perform);
 
@@ -87,7 +87,7 @@
         }
 
         [Test]
-        public void CheckCompletedFailure()
+        public async Task CheckCompletedFailure()
         {
             var records = new List<ScheduledTaskEntry>();
             var record = new ScheduledTaskEntry()
@@ -99,10 +99,10 @@
             records.Add(record);
 
             var table = Substitute.For<ITableStorage>();
-            table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(records);
+            table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(Task.FromResult<IEnumerable<ScheduledTaskEntry>>(records));
 
             var core = new Coordinator(table, TimeSpan.FromHours(1));
-            var perform = core.Check(this.GetType());
+            var perform = await core.Check(this.GetType());
 
             Assert.IsFalse(perform);
 
@@ -110,7 +110,7 @@
         }
 
         [Test]
-        public void Check()
+        public async Task Check()
         {
             var records = new List<ScheduledTaskEntry>();
             var record = new ScheduledTaskEntry()
@@ -121,10 +121,10 @@
             records.Add(record);
 
             var table = Substitute.For<ITableStorage>();
-            table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(records);
+            table.QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>()).Returns(Task.FromResult<IEnumerable<ScheduledTaskEntry>>(records));
 
             var core = new Coordinator(table, TimeSpan.FromSeconds(1));
-            var perform = core.Check(this.GetType());
+            var perform = await core.Check(this.GetType());
 
             Assert.IsTrue(perform);
 

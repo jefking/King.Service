@@ -62,7 +62,8 @@
 
             try
             {
-                if (taskCore.Check(type))
+                var ready = taskCore.Check(type).Result;
+                if (ready)
                 {
                     Trace.TraceInformation("{0}: Task Starting.", base.serviceName);
 

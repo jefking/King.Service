@@ -22,7 +22,7 @@
         /// </summary>
         /// <param name="entry">Scheduled Task Entry</param>
         /// <returns>True if need to execute, false if not</returns>
-        bool Check(Type type);
+        Task<bool> Check(Type type);
 
         /// <summary>
         /// Start Task
