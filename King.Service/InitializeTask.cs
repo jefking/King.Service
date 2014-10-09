@@ -1,5 +1,6 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
     using System;
 
     /// <summary>
@@ -12,7 +13,7 @@
         /// Default Constructor
         /// </summary>
         public InitializeTask()
-            : base(10, -1)
+            : base(BaseTimes.InitializationTiming, BaseTimes.NoRepeat)
         {
         }
         #endregion

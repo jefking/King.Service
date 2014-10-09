@@ -1,6 +1,7 @@
 ﻿namespace King.Service
 {
     using King.Service.Data;
+    using King.Service.Timing;
     using System;
     using System.Diagnostics;
 
@@ -22,7 +23,7 @@
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
-        protected CoordinatedTask(string connectionString, double periodInSeconds = 30)
+        protected CoordinatedTask(string connectionString, double periodInSeconds = BaseTimes.MinimumStorageTiming)
             : this(new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionString))
         {
         }

@@ -1,8 +1,9 @@
 ﻿namespace King.Service
 {
-    using System;
-    using System.Diagnostics;
-    using System.Threading;
+    using King.Service.Timing;
+using System;
+using System.Diagnostics;
+using System.Threading;
 
     /// <summary>
     /// Service Manager
@@ -25,7 +26,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        protected TaskManager(int dueInSeconds = 15, int periodInSeconds = 60)
+        protected TaskManager(int dueInSeconds = BaseTimes.MinimumTiming, int periodInSeconds = BaseTimes.MaximumTiming)
         {
             if (0 > dueInSeconds)
             {

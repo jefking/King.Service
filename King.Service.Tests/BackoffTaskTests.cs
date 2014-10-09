@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Tests
 {
     using King.Service;
+    using King.Service.Timing;
     using NSubstitute;
     using NUnit.Framework;
     using System;
@@ -36,7 +37,7 @@
         {
             using (var t = new BackoffTest())
             {
-                Assert.AreEqual(30, t.StartIn.TotalSeconds);
+                Assert.AreEqual(BaseTimes.MinimumTiming, t.StartIn.TotalSeconds);
             }
         }
 
@@ -45,7 +46,7 @@
         {
             using (var t = new BackoffTest())
             {
-                Assert.AreEqual(30, t.Every.TotalSeconds);
+                Assert.AreEqual(BaseTimes.MinimumTiming, t.Every.TotalSeconds);
             }
         }
     }

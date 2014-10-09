@@ -94,6 +94,7 @@
     <Compile Include="CoordinatedTask.cs" />
     <Compile Include="Data\Coordinator.cs" />
     <Compile Include="TaskFactory.cs" />
+    <Compile Include="Timing\BaseTimes.cs" />
     <Compile Include="Timing\Interfaces.cs" />
     <Compile Include="Timing\CalculateTiming.cs" />
   </ItemGroup>

@@ -1,9 +1,8 @@
 ﻿namespace King.Service.Tests
 {
     using King.Service;
-    using NSubstitute;
+    using King.Service.Timing;
     using NUnit.Framework;
-    using System;
 
     [TestFixture]
     public class AdaptiveTaskTests
@@ -36,7 +35,7 @@
         {
             using (var t = new AdaptiveTest())
             {
-                Assert.AreEqual(30, t.StartIn.TotalSeconds);
+                Assert.AreEqual(BaseTimes.MinimumTiming, t.StartIn.TotalSeconds);
             }
         }
 
@@ -45,7 +44,7 @@
         {
             using (var t = new AdaptiveTest())
             {
-                Assert.AreEqual(30, t.Every.TotalSeconds);
+                Assert.AreEqual(BaseTimes.MinimumTiming, t.Every.TotalSeconds);
             }
         }
     }
