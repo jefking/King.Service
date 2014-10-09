@@ -22,7 +22,7 @@
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
-        protected CoordinatedTask(string connectionString, double periodInSeconds = 60)
+        protected CoordinatedTask(string connectionString, double periodInSeconds = 30)
             : this(new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionString))
         {
         }

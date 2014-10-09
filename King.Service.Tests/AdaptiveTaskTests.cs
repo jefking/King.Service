@@ -36,7 +36,7 @@
         {
             using (var t = new AdaptiveTest())
             {
-                Assert.AreEqual(45, t.StartIn.TotalSeconds);
+                Assert.AreEqual(30, t.StartIn.TotalSeconds);
             }
         }
 
@@ -45,7 +45,7 @@
         {
             using (var t = new AdaptiveTest())
             {
-                Assert.AreEqual(45, t.Every.TotalSeconds);
+                Assert.AreEqual(30, t.Every.TotalSeconds);
             }
         }
     }
