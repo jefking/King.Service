@@ -7,8 +7,7 @@ Task scheduling for Azure; use with worker roles for running background data pro
 - And much more! [View Wiki](https://github.com/jefking/King.Azure.BackgroundWorker/wiki)
 - [Example Project](https://github.com/jefking/King.Azure.BackgroundWorker/tree/master/Worker)
 
-## NuGet
-[Add via NuGet](https://www.nuget.org/packages/King.Service)
+## [NuGet](https://www.nuget.org/packages/King.Service)
 ```
 PM> Install-Package King.Service
 ```
