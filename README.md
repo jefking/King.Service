@@ -1,6 +1,8 @@
-Task scheduling for Azure or Windows
+Task scheduling for Azure and Windows Servers
 - Create a task to initialize your environment
 - Plugs into Azure Worker Roles
+- Initialization: Azure Storage Queues, Tables, Containers
+- Run tasks such as WFC services
 - Create a task that runs every X amount of time per instance
 - Create a task that runs every X; and when work lessens backs off to Y
 - Create a task that determines the needed rate via frequency of processing tasks
