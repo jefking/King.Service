@@ -1,4 +1,4 @@
-Task scheduling for Azure and Windows Servers
+### Task scheduling for Azure and Windows Servers
 - Create a task to initialize your environment
 - Plugs into Azure Worker Roles
 - Initialization: Azure Storage Queues, Tables, Containers
@@ -10,7 +10,7 @@ Task scheduling for Azure and Windows Servers
 - And much more! [View Wiki](https://github.com/jefking/King.Service/wiki)
 - [Example Project](https://github.com/jefking/King.Service/tree/master/Worker)
 
-## [NuGet](https://www.nuget.org/packages/King.Service)
+### [NuGet](https://www.nuget.org/packages/King.Service)
 ```
 PM> Install-Package King.Service
 ```
