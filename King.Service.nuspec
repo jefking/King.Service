@@ -10,8 +10,8 @@
         <projectUrl>https://github.com/jefking/King.Service</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Task scheduling for Azure; use with worker roles for running data processing tasks.</description>
-        <summary>Easily create background tasks to be run on worker roles.</summary>
+        <description>Task scheduling for Azure and Windows Servers.</description>
+        <summary>Task scheduling for Azure and Windows Servers.</summary>
         <releaseNotes>Update NuGet references.</releaseNotes>
         <copyright>Jef King</copyright>
         <tags>King.Service Azure Queue Service Bus Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure</tags>
