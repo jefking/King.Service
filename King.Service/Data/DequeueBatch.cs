@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Data
 {
     using King.Azure.Data;
+    using King.Service.Timing;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
@@ -29,7 +30,7 @@
         /// <param name="batchCount">Number of items to dequeue at a time</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public DequeueBatch(IPoller<T> poller, IProcessor<T> processor, int batchCount = 5, int minimumPeriodInSeconds = 15, int maximumPeriodInSeconds = 300)
+        public DequeueBatch(IPoller<T> poller, IProcessor<T> processor, int batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
             : base(poller, processor, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
             this.batchCount = batchCount <= 0 ? 5 : batchCount;

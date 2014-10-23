@@ -23,7 +23,7 @@
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
-        protected CoordinatedTask(string connectionString, double periodInSeconds = BaseTimes.MinimumStorageTiming)
+        protected CoordinatedTask(string connectionString, double periodInSeconds = BaseTimes.MaximumStorageTiming)
             : this(new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionString))
         {
         }
@@ -33,7 +33,7 @@
         /// </summary>
         /// <param name="coordinator">Coordinator</param>
         public CoordinatedTask(ICoordinator coordinator)
-            : base(15, coordinator.PeriodInSeconds + 1)
+            : base(BaseTimes.MinimumStorageTiming, coordinator.PeriodInSeconds + 1)
         {
             this.taskCore = coordinator;
         }

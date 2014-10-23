@@ -128,13 +128,12 @@
                 throw new ArgumentException("identifier");
             }
 
-            var entry = new ScheduledTaskEntry(type)
+            await this.storage.InsertOrReplace(new ScheduledTaskEntry(type)
             {
                 Identifier = identifier,
                 StartTime = start,
-            };
-
-            await this.storage.InsertOrReplace(entry);
+            }
+            );
         }
 
         /// <summary>
@@ -157,15 +156,14 @@
                 throw new ArgumentException("identifier");
             }
 
-            var entry = new ScheduledTaskEntry(type)
+            await this.storage.InsertOrReplace(new ScheduledTaskEntry(type)
             {
                 Identifier = identifier,
                 StartTime = start,
                 CompletionTime = end,
                 Successful = success,
-            };
-
-            await this.storage.InsertOrReplace(entry);
+            }
+            );
         }
         #endregion
 

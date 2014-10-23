@@ -2,6 +2,7 @@
 {
     using King.Azure.Data;
     using King.Service.Data;
+    using King.Service.Timing;
     using NSubstitute;
     using NUnit.Framework;
     using System;
@@ -78,7 +79,7 @@
             var poller = Substitute.For<IPoller<object>>();
             var processor = Substitute.For<IProcessor<object>>();
             var d = new Dequeue<object>(poller, processor);
-            Assert.AreEqual(300, d.MaximumPeriodInSeconds);
+            Assert.AreEqual(BaseTimes.MaximumStorageTiming, d.MaximumPeriodInSeconds);
         }
 
         [Test]

@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Data
 {
     using King.Azure.Data;
+    using King.Service.Timing;
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
@@ -33,7 +34,7 @@
         /// <param name="poller">Poller</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public Dequeue(IPoller<T> poller, IProcessor<T> processor, int minimumPeriodInSeconds = 15, int maximumPeriodInSeconds = 300)
+        public Dequeue(IPoller<T> poller, IProcessor<T> processor, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
         {
             if (null == poller)
             {

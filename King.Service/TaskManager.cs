@@ -1,9 +1,9 @@
 ﻿namespace King.Service
 {
     using King.Service.Timing;
-using System;
-using System.Diagnostics;
-using System.Threading;
+    using System;
+    using System.Diagnostics;
+    using System.Threading;
 
     /// <summary>
     /// Service Manager
@@ -162,7 +162,7 @@ using System.Threading;
         /// <summary>
         /// Due Time of Timer
         /// </summary>
-        public TimeSpan StartIn
+        public virtual TimeSpan StartIn
         {
             get;
             private set;
@@ -171,7 +171,7 @@ using System.Threading;
         /// <summary>
         /// Period of Timer
         /// </summary>
-        public TimeSpan Every
+        public virtual TimeSpan Every
         {
             get;
             private set;

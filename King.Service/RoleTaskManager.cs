@@ -1,5 +1,6 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -56,7 +57,7 @@
         {
             Trace.TraceInformation("Run called");
 
-            if (null != services && 0 < services.Count())
+            if (null != services && services.Any())
             {
                 Trace.TraceInformation("Starting {0} services.", services.Count());
 
@@ -73,8 +74,7 @@
                         Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.ToString());
                     }
 
-                    //Slightly stager tasks, so they don't compete.
-                    Thread.Sleep(500);
+                    Thread.Sleep(BaseTimes.ThreadingOffset);
                 }
 
                 Trace.TraceInformation("Finished starting services.");
@@ -119,7 +119,7 @@
         {
             Trace.TraceInformation("On stop called.");
 
-            if (null != services && 0 < services.Count())
+            if (null != services && services.Any())
             {
                 Trace.TraceInformation("Stopping {0} services.", services.Count());
 

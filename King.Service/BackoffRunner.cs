@@ -18,7 +18,7 @@
         /// </summary>
         /// <param name="run">Run</param>
         public BackoffRunner(IBackoffRuns run)
-            :base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds)
+            : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds)
         {
             this.run = run;
         }
