@@ -113,9 +113,8 @@
             }
             catch
             {
-                var task = message.Abandon();
-                task.Wait();
-
+                message.Abandon().Wait();
+                
                 throw;
             }
         }
@@ -125,7 +124,7 @@
         /// <summary>
         /// Minimum Period In Seconds
         /// </summary>
-        public int MinimumPeriodInSeconds
+        public virtual int MinimumPeriodInSeconds
         {
             get;
             private set;
@@ -134,7 +133,7 @@
         /// <summary>
         /// Maximum Period In Seconds
         /// </summary>
-        public int MaximumPeriodInSeconds
+        public virtual int MaximumPeriodInSeconds
         {
             get;
             private set;

@@ -62,7 +62,7 @@
             var messages = await this.poller.PollMany(this.batchCount);
             if (null != messages && messages.Any())
             {
-                Trace.TraceInformation("{0} Messages dequeued.", messages.Count());
+                Trace.TraceInformation("{0} messages dequeued.", messages.Count());
 
                 worked = true;
 
