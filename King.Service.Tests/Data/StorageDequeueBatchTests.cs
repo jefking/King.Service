@@ -6,7 +6,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class StorageDequeueTests
+    public class StorageDequeueBatchTests
     {
         const string ConnectionString = "UseDevelopmentStorage=true";
 
@@ -14,14 +14,14 @@
         public void Constructor()
         {
             var processor = Substitute.For<IProcessor<object>>();
-            new StorageDequeue<object>("queue", ConnectionString, processor);
+            new StorageDequeueBatch<object>("queue", ConnectionString, processor);
         }
 
         [Test]
-        public void IsDequeue()
+        public void IsDequeueBatch()
         {
             var processor = Substitute.For<IProcessor<object>>();
-            Assert.IsNotNull(new StorageDequeue<object>("queue", ConnectionString, processor) as Dequeue<object>);
+            Assert.IsNotNull(new StorageDequeueBatch<object>("queue", ConnectionString, processor) as DequeueBatch<object>);
         }
     }
 }

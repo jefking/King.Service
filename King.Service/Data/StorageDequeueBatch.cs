@@ -4,10 +4,10 @@
     using King.Service.Timing;
 
     /// <summary>
-    /// Storage Dequeue
+    /// Storage Dequeue Batch
     /// </summary>
     /// <typeparam name="T">Type</typeparam>
-    public class StorageDequeue<T> : Dequeue<T>
+    public class StorageDequeueBatch<T> : DequeueBatch<T>
     {
         #region Constructors
         /// <summary>
@@ -16,10 +16,11 @@
         /// <param name="name">Queue Name</param>
         /// <param name="connectionString">Connection String</param>
         /// <param name="processor">Processor</param>
+        /// <param name="batchCount">Batch Count</param>
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
-        public StorageDequeue(string name, string connectionString, IProcessor<T> processor, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
-            : this(new StorageQueue(name, connectionString), processor, minimumPeriodInSeconds, maximumPeriodInSeconds)
+        public StorageDequeueBatch(string name, string connectionString, IProcessor<T> processor, int batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+            : this(new StorageQueue(name, connectionString), processor, batchCount, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
 
@@ -28,10 +29,11 @@
         /// </summary>
         /// <param name="queue">Storage Queue</param>
         /// <param name="processor">Processor</param>
+        /// <param name="batchCount">Batch Count</param>
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
-        public StorageDequeue(IStorageQueue queue, IProcessor<T> processor, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
-            : base(new StorageQueuePoller<T>(queue), processor, minimumPeriodInSeconds, maximumPeriodInSeconds)
+        public StorageDequeueBatch(IStorageQueue queue, IProcessor<T> processor, int batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+            : base(new StorageQueuePoller<T>(queue), processor, batchCount, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
         #endregion

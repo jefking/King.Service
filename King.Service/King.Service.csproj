@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\DequeueBatch.cs" />
+    <Compile Include="Data\StorageDequeueBatch.cs" />
     <Compile Include="Timing\AdaptiveTiming.cs" />
     <Compile Include="BackoffRunner.cs" />
     <Compile Include="BackoffTask.cs" />
