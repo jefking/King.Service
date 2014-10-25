@@ -7,6 +7,7 @@
 - Create a task that runs every X; and when work lessens backs off to Y
 - Create a task that determines the needed rate via frequency of processing tasks
 - Create a task that occurs once when running on many machines
+- Dequeue messages and batches of messages for Azure Storage Queues
 - And much more! [View Wiki](https://github.com/jefking/King.Service/wiki)
 - [Example Project](https://github.com/jefking/King.Service/tree/master/Worker)
 
