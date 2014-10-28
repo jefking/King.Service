@@ -75,8 +75,9 @@
         /// <summary>
         /// On Start
         /// </summary>
+        /// <param name="passthrough">Passthrough</param>
         /// <returns>Started</returns>
-        bool OnStart();
+        bool OnStart(object passthrough = null);
 
         /// <summary>
         /// On Stop

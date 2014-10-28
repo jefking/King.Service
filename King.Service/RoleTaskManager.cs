@@ -90,8 +90,9 @@
         /// <summary>
         /// On Start
         /// </summary>
+        /// <param name="passthrough">Passthrough</param>
         /// <returns>Started</returns>
-        public virtual bool OnStart()
+        public virtual bool OnStart(object passthrough = null)
         {
             Trace.TraceInformation("On start called.");
 
@@ -101,7 +102,7 @@
                 {
                     Trace.TraceInformation("Loading Services.");
 
-                    this.services = manager.Tasks(this);
+                    this.services = manager.Tasks(passthrough);
 
                     Trace.TraceInformation("Services Loaded.");
                 }
