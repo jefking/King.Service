@@ -1,10 +1,11 @@
 namespace King.Service.WorkerRole
 {
+    using King.Service.ServiceBus;
     using Microsoft.WindowsAzure.ServiceRuntime;
 
     public class WorkerRole : RoleEntryPoint
     {
-        private RoleTaskManager manager = new RoleTaskManager(new King.Service.ServiceBus.Factory());
+        private RoleTaskManager manager = new RoleTaskManager(new Factory());
 
         public override void Run()
         {

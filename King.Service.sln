@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{E515
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service", "King.Service\King.Service.csproj", "{E72D36E9-0849-498E-AC4F-B97FB632E112}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Azure.BackgroundWorker.Integration", "King.Service.Integration\King.Azure.BackgroundWorker.Integration.csproj", "{8B041949-3049-49DD-A2F5-74587FAD08FB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Integration.Tests", "King.Service.Integration\King.Service.Integration.Tests.csproj", "{8B041949-3049-49DD-A2F5-74587FAD08FB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Unit.Tests", "King.Service.Tests\King.Service.Unit.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
 EndProject

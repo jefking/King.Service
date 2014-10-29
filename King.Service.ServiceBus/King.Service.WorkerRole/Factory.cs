@@ -3,18 +3,23 @@
     using King.Service.Data;
     using King.Service.ServiceBus.Queue;
     using King.Service.WorkerRole.Queue;
-    using Microsoft.ServiceBus;
     using Microsoft.ServiceBus.Messaging;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Facotry
+    /// </summary>
     public class Factory : TaskFactory
     {
+        /// <summary>
+        /// Load Tasks
+        /// </summary>
+        /// <param name="passthrough"></param>
+        /// <returns></returns>
         public override IEnumerable<IRunnable> Tasks(object passthrough)
         {
-            var tasks = new List<IRunnable>();
-
             //Initialization
-            tasks.Add(new InitializeQueues());
+            yield return new InitializeQueues();
 
             //Connection
             var pollingClient = QueueClient.Create("polling");
@@ -30,16 +35,14 @@
             var dequeue = new Dequeue<ExampleModel>(poller, processor);
 
             //Task Manifest for King.Service
-            tasks.Add(new BackoffRunner(dequeue));
+            yield return new BackoffRunner(dequeue);
 
             //Task for watching for queue events
-            tasks.Add(new Events(eventClient));
+            yield return new Events(eventClient);
 
             //Tasks for queuing work
-            tasks.Add(new QueueForPoll(pollingClient));
-            tasks.Add(new QueueForEvents(eventClient));
-
-            return tasks;
+            yield return new QueueForPoll(pollingClient);
+            yield return new QueueForEvents(eventClient);
         }
     }
 }
