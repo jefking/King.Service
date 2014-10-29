@@ -30,19 +30,30 @@
     }
 
     /// <summary>
-    /// Runner
+    /// Dynamic Runs Interface
     /// </summary>
-    public interface IBackoffRuns
+    public interface IDynamicRuns
     {
         #region Methods
+        /// <summary>
+        /// Run
+        /// </summary>
+        /// <returns>Work was done.</returns>
         Task<bool> Run();
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Minimum Period In Seconds
+        /// </summary>
         int MinimumPeriodInSeconds
         {
             get;
         }
+
+        /// <summary>
+        /// Maximum Period In Seconds
+        /// </summary>
         int MaximumPeriodInSeconds
         {
             get;

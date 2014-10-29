@@ -74,6 +74,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdaptiveRunner.cs" />
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Data\StorageDequeueBatch.cs" />
     <Compile Include="Timing\AdaptiveTiming.cs" />

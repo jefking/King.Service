@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
 
     [TestFixture]
-    public class BackoffRunnerTests
+    public class AdaptiveRunnerTests
     {
         [Test]
         public void Constructor()
@@ -15,27 +15,27 @@
             runs.MinimumPeriodInSeconds.Returns(1);
             runs.MaximumPeriodInSeconds.Returns(100);
 
-            new BackoffRunner(runs);
+            new AdaptiveRunner(runs);
 
             var min = runs.Received().MinimumPeriodInSeconds;
             var max = runs.Received().MaximumPeriodInSeconds;
         }
 
         [Test]
-        public void IsBackoffTask()
+        public void IsAdaptiveTask()
         {
             var runs = Substitute.For<IDynamicRuns>();
             runs.MinimumPeriodInSeconds.Returns(1);
             runs.MaximumPeriodInSeconds.Returns(100);
 
-            Assert.IsNotNull(new BackoffRunner(runs) as BackoffTask);
+            Assert.IsNotNull(new AdaptiveRunner(runs) as AdaptiveTask);
         }
 
         [Test]
         [ExpectedException(typeof(NullReferenceException))]
         public void ConstructorRunsNull()
         {
-            new BackoffRunner(null);
+            new AdaptiveRunner(null);
         }
 
         [Test]
@@ -46,7 +46,7 @@
             runs.MaximumPeriodInSeconds.Returns(100);
             runs.Run().Returns(Task.FromResult(false));
 
-            var task = new BackoffRunner(runs);
+            var task = new AdaptiveRunner(runs);
             task.Run();
 
             var min = runs.Received().MinimumPeriodInSeconds;

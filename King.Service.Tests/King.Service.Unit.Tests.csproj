@@ -91,6 +91,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AdaptiveRunnerTests.cs" />
     <Compile Include="Data\DequeueBatchTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
     <Compile Include="Timing\AdaptiveTimingTests.cs" />

@@ -65,7 +65,7 @@
             var processor = Substitute.For<IProcessor<object>>();
 
             var d = new Dequeue<object>(poller, processor);
-            Assert.IsNotNull(d as IBackoffRuns);
+            Assert.IsNotNull(d as IDynamicRuns);
         }
 
         [Test]

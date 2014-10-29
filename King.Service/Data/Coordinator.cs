@@ -92,15 +92,11 @@
 
             var performTask = true;
 
-            Trace.TraceInformation(string.Format("{0}: Querying scheduled tasks for the latest.", entry.ServiceName));
-
             var records = await this.storage.QueryByPartition<ScheduledTaskEntry>(entry.PartitionKey);
 
-            if (records != null && records.Count() > 0)
+            if (records != null && records.Any())
             {
                 var latest = records.OrderByDescending(x => x.StartTime).First();
-
-                Trace.TraceInformation("{0}: Latest task found: StartTime: {1} CompletionTime: {2}", entry.ServiceName, latest.StartTime, latest.CompletionTime);
 
                 performTask = (latest.CompletionTime.HasValue) ?
                     DateTime.UtcNow.Subtract(latest.CompletionTime.Value) >= period || !latest.Successful :
@@ -132,8 +128,7 @@
             {
                 Identifier = identifier,
                 StartTime = start,
-            }
-            );
+            });
         }
 
         /// <summary>
@@ -162,8 +157,7 @@
                 StartTime = start,
                 CompletionTime = end,
                 Successful = success,
-            }
-            );
+            });
         }
         #endregion
 

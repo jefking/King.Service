@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("King.Azure.BackgroundWorker.Integration")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("King.Service.Integration.Test")]
+[assembly: AssemblyDescription("King.Service Integration Tests")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jef King")]
 [assembly: AssemblyProduct("King.Azure.BackgroundWorker.Integration")]

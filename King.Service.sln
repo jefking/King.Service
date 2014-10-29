@@ -22,7 +22,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service", "King.Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Azure.BackgroundWorker.Integration", "King.Service.Integration\King.Azure.BackgroundWorker.Integration.csproj", "{8B041949-3049-49DD-A2F5-74587FAD08FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Azure.BackgroundWorker.Tests", "King.Service.Tests\King.Azure.BackgroundWorker.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Unit.Tests", "King.Service.Tests\King.Service.Unit.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceBus", "ServiceBus", "{7EDD747B-5ED4-4506-95CC-B5D0BCB618EB}"
 EndProject

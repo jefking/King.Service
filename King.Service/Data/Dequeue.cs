@@ -12,7 +12,7 @@
     /// <remarks>
     /// Generic, built for any dequeuing infrastructure
     /// </remarks>
-    public class Dequeue<T> : IBackoffRuns
+    public class Dequeue<T> : IDynamicRuns
     {
         #region Members
         /// <summary>

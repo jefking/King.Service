@@ -1,13 +1,13 @@
 ﻿namespace King.Service
 {
     /// <summary>
-    /// Simplified Backoff Runner
+    /// Simplified Adaptive Runner
     /// </summary>
-    public class BackoffRunner : BackoffTask
+    public class AdaptiveRunner : AdaptiveTask
     {
         #region Members
         /// <summary>
-        /// Backoff Runs
+        /// Dynamic Runs
         /// </summary>
         protected readonly IDynamicRuns run = null;
         #endregion
@@ -17,7 +17,7 @@
         /// Constructor
         /// </summary>
         /// <param name="run">Run</param>
-        public BackoffRunner(IDynamicRuns run)
+        public AdaptiveRunner(IDynamicRuns run)
             : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds)
         {
             this.run = run;
