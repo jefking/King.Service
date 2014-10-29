@@ -11,7 +11,7 @@
         /// <summary>
         /// Attempts Made
         /// </summary>
-        private ulong noWorkCount = 0;
+        private volatile ulong noWorkCount = 0;
 
         /// <summary>
         /// Timing Halper
