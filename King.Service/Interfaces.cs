@@ -73,9 +73,9 @@
     }
 
     /// <summary>
-    /// Role Service Manager Interface
+    /// Role Task Manager Interface
     /// </summary>
-    public interface IRoleServiceManager<T>
+    public interface RoleTaskManager<T>
     {
         #region Methods
         /// <summary>

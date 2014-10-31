@@ -2,6 +2,7 @@
 {
     using King.Service.Data;
     using King.Service.ServiceBus.Queue;
+    using King.Service.WorkerRole;
     using King.Service.WorkerRole.Queue;
     using Microsoft.ServiceBus.Messaging;
     using System.Collections.Generic;
@@ -9,21 +10,21 @@
     /// <summary>
     /// Facotry
     /// </summary>
-    public class Factory : TaskFactory
+    public class Factory : ITaskFactory<Configuration>
     {
         /// <summary>
         /// Load Tasks
         /// </summary>
         /// <param name="passthrough"></param>
         /// <returns></returns>
-        public override IEnumerable<IRunnable> Tasks(object passthrough)
+        public override IEnumerable<IRunnable> Tasks(Configuration config)
         {
             //Initialization
             yield return new InitializeQueues();
 
             //Connection
-            var pollingClient = QueueClient.Create("polling");
-            var eventClient = QueueClient.Create("events");
+            var pollingClient = QueueClient.Create(config.PollingName);
+            var eventClient = QueueClient.Create(config.EventsName);
 
             //Dequeuing; generic for re-use across your code base (just change the model)
             var poller = new ServiceBusQueuePoller<ExampleModel>(pollingClient);

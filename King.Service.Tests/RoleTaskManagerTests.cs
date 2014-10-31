@@ -26,7 +26,7 @@
         public void IsIRoleServiceManager()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
-            Assert.IsNotNull(new RoleTaskManager<object>(factory) as IRoleServiceManager<object>);
+            Assert.IsNotNull(new RoleTaskManager<object>(factory) as RoleTaskManager<object>);
         }
 
         [Test]

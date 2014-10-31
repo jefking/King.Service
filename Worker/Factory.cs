@@ -6,33 +6,30 @@
     using System.Collections.Generic;
     using Worker.Queue;
 
-    public class Factory : TaskFactory
+    public class Factory : ITaskFactory<Configuration>
     {
-        public override IEnumerable<IRunnable> Tasks(object passthrough)
+        public override IEnumerable<IRunnable> Tasks(Configuration config)
         {
-            //Load configuration to pass to objects
-            var connectionString = "UseDevelopmentStorage=true;";
-
             // Initialization Task(s)
             yield return new InitTask();
 
             // Initialize Table; creates table if it doesn't already exist
-            var table = new TableStorage("table", connectionString);
+            var table = new TableStorage(config.TableName, config.ConnectionString);
             yield return new InitializeStorageTask(table);
 
             // Initialize Queue; creates queue if it doesn't already exist
-            var queue = new StorageQueue("queue", connectionString);
+            var queue = new StorageQueue(config.QueueName, config.ConnectionString);
             yield return new InitializeStorageTask(queue);
 
             // Initialize Queue; creates queue if it doesn't already exist
-            var container = new Container("container", connectionString);
+            var container = new Container(config.ContainerName, config.ConnectionString);
             yield return new InitializeStorageTask(container);
 
             //Task(s)
             yield return new Task();
 
             //Cordinated Tasks between Instances
-            var task = new Coordinated(connectionString);
+            var task = new Coordinated(config.ConnectionString);
 
             // Add once to ensure that Table is created for Instances to communicate with
             yield return task.InitializeTask();

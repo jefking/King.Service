@@ -8,7 +8,7 @@ namespace Worker
         /// <summary>
         /// Role Service Manager
         /// </summary>
-        private RoleTaskManager<object> manager = new RoleTaskManager<object>(new Factory());
+        private readonly IRoleTaskManager<Configuration> manager = new RoleTaskManager<Configuration>(new Factory());
 
         /// <summary>
         /// Overloaded Role Entry Point Method
@@ -25,7 +25,15 @@ namespace Worker
         /// </summary>
         public override bool OnStart()
         {
-            return this.manager.OnStart();
+            var config = new Configuration()
+            {
+                ConnectionString = "UseDevelopmentStorage=true;",
+                TableName = "table",
+                QueueName = "queue",
+                ContainerName = "container",
+            };
+
+            return this.manager.OnStart(config);
         }
 
         /// <summary>

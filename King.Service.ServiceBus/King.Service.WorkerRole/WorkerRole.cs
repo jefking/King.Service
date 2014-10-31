@@ -5,7 +5,7 @@ namespace King.Service.WorkerRole
 
     public class WorkerRole : RoleEntryPoint
     {
-        private RoleTaskManager manager = new RoleTaskManager(new Factory());
+        private readonly IRoleTaskManager<Configuration> manager = new RoleTaskManager<Configuration>(new Factory());
 
         public override void Run()
         {
@@ -16,7 +16,12 @@ namespace King.Service.WorkerRole
 
         public override bool OnStart()
         {
-            return this.manager.OnStart();
+            var config = new Configuration()
+            {
+                PollingName = "polling",
+                EventsName = "events",
+            };
+            return this.manager.OnStart(config);
         }
 
         public override void OnStop()
