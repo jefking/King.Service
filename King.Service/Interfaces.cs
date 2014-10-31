@@ -75,7 +75,7 @@
     /// <summary>
     /// Role Service Manager Interface
     /// </summary>
-    public interface IRoleServiceManager
+    public interface IRoleServiceManager<T>
     {
         #region Methods
         /// <summary>
@@ -88,7 +88,7 @@
         /// </summary>
         /// <param name="passthrough">Passthrough</param>
         /// <returns>Started</returns>
-        bool OnStart(object passthrough = null);
+        bool OnStart(T passthrough = default(T));
 
         /// <summary>
         /// On Stop

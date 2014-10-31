@@ -1,4 +1,4 @@
-### Task scheduling for Azure and Windows Servers
+### Task scheduling for Azure and Windows
 - Create a task to initialize your environment
 - Plugs into Azure Worker Roles
 - Initialization: Azure Storage Queues, Tables, Containers

@@ -11,7 +11,7 @@
     /// <summary>
     /// Worker Role Service Manager
     /// </summary>
-    public class RoleTaskManager : IRoleServiceManager
+    public class RoleTaskManager<T> : IRoleServiceManager<T>
     {
         #region Members
         /// <summary>
@@ -22,7 +22,7 @@
         /// <summary>
         /// Manager
         /// </summary>
-        protected readonly ITaskFactory<object> manager = null;
+        protected readonly ITaskFactory<T> manager = null;
 
         /// <summary>
         /// Lock object for Mananger
@@ -35,7 +35,7 @@
         /// Pass Service Factory to run services
         /// </summary>
         /// <param name="services">Services</param>
-        public RoleTaskManager(ITaskFactory<object> manager)
+        public RoleTaskManager(ITaskFactory<T> manager)
         {
             if (null == manager)
             {
@@ -92,7 +92,7 @@
         /// </summary>
         /// <param name="passthrough">Passthrough</param>
         /// <returns>Started</returns>
-        public virtual bool OnStart(object passthrough = null)
+        public virtual bool OnStart(T passthrough = default(T))
         {
             Trace.TraceInformation("On start called.");
 
