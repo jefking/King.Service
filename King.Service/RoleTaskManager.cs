@@ -11,7 +11,7 @@
     /// <summary>
     /// Worker Role Service Manager
     /// </summary>
-    public class RoleTaskManager<T> : RoleTaskManager<T>
+    public class RoleTaskManager<T> : IRoleTaskManager<T>
     {
         #region Members
         /// <summary>
