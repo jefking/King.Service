@@ -17,7 +17,7 @@
         /// </summary>
         /// <param name="passthrough"></param>
         /// <returns></returns>
-        public override IEnumerable<IRunnable> Tasks(Configuration config)
+        public IEnumerable<IRunnable> Tasks(Configuration config)
         {
             //Initialization
             yield return new InitializeQueues();

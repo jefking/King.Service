@@ -8,7 +8,7 @@
 
     public class Factory : ITaskFactory<Configuration>
     {
-        public override IEnumerable<IRunnable> Tasks(Configuration config)
+        public IEnumerable<IRunnable> Tasks(Configuration config)
         {
             // Initialization Task(s)
             yield return new InitTask();
