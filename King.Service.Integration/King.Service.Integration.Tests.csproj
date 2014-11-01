@@ -41,9 +41,9 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="King.Azure, Version=1.0.1.10, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="King.Azure, Version=1.0.1.13, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\King.Azure.1.1.7\lib\net451\King.Azure.dll</HintPath>
+      <HintPath>..\packages\King.Azure.1.1.8\lib\net451\King.Azure.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.6.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
