@@ -38,7 +38,7 @@
         /// <summary>
         /// Hour to execute on
         /// </summary>
-        public byte Hour
+        public virtual byte Hour
         {
             get
             {
@@ -49,7 +49,7 @@
         /// <summary>
         /// Minute to execute on
         /// </summary>
-        public sbyte Minute
+        public virtual sbyte Minute
         {
             get
             {
@@ -65,9 +65,9 @@
         public override void Run()
         {
             var now = DateTime.UtcNow;
-            if (now.Hour == this.hour)
+            if (now.Hour == this.Hour)
             {
-                if (-1 == this.minute || now.Minute == this.minute)
+                if (-1 == this.Minute || now.Minute == this.Minute)
                 {
                     this.Run(now);
                 }
