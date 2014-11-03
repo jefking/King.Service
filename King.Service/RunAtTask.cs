@@ -16,7 +16,7 @@
         /// <summary>
         /// Minute to execute on
         /// </summary>
-        protected readonly byte minute = 0;
+        protected readonly sbyte minute = 0;
         #endregion
 
         #region Constructors
@@ -30,7 +30,7 @@
             : base(connectionString, minute <= 0 ? 3600 : 60)
         {
             this.hour = hour < 0 ? (byte)0 : (hour > 23 ? (byte)23 : hour);
-            this.minute = minute < 0 ? (byte)0 : (minute > 59 ? (byte)59 : (byte)minute);
+            this.minute = minute < 0 ? (sbyte)-1 : (minute > 59 ? (sbyte)59 : (sbyte)minute);
         }
         #endregion
 
@@ -49,7 +49,7 @@
         /// <summary>
         /// Minute to execute on
         /// </summary>
-        public byte Minute
+        public sbyte Minute
         {
             get
             {
@@ -67,7 +67,7 @@
             var now = DateTime.UtcNow;
             if (now.Hour == this.hour)
             {
-                if (0 == this.minute || now.Minute == this.minute)
+                if (-1 == this.minute || now.Minute == this.minute)
                 {
                     this.Run(now);
                 }

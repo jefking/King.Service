@@ -59,7 +59,7 @@
         public void MinuteMin()
         {
             var tt = new TestTask(1, sbyte.MinValue);
-            Assert.AreEqual(0, tt.Minute);
+            Assert.AreEqual(-1, tt.Minute);
         }
 
         [Test]
