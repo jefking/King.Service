@@ -21,6 +21,7 @@
             : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds)
         {
             this.run = run;
+            base.ServiceName = string.Format("{0}+{1}", this.GetType(), this.timing.GetType());
         }
         #endregion
 
