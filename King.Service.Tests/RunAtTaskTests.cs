@@ -10,13 +10,14 @@
         #region Class
         public class TestTask : RunAtTask
         {
-            public TestTask(byte hour, sbyte minute)
+            public TestTask(byte hour, sbyte minute = -1)
                 : base("UseDevelopmentStorage=true;", hour, minute)
             {
             }
+            public bool Called = false;
             public override void Run(DateTime currentTime)
             {
-                throw new NotImplementedException();
+                Called = true;
             }
         }
         #endregion
@@ -45,6 +46,58 @@
         {
             var tt = new TestTask(byte.MinValue, 1);
             Assert.AreEqual(0, tt.Hour);
+        }
+
+        [Test]
+        public void MinuteMax()
+        {
+            var tt = new TestTask(1, sbyte.MaxValue);
+            Assert.AreEqual(59, tt.Minute);
+        }
+
+        [Test]
+        public void MinuteMin()
+        {
+            var tt = new TestTask(1, sbyte.MinValue);
+            Assert.AreEqual(0, tt.Minute);
+        }
+
+        [Test]
+        public void RunHour()
+        {
+            var now = DateTime.UtcNow;
+            var tt = new TestTask((byte)now.Hour);
+            tt.Run();
+            Assert.IsTrue(tt.Called);
+        }
+
+        [Test]
+        public void RunMinute()
+        {
+            var now = DateTime.UtcNow;
+            var tt = new TestTask((byte)now.Hour, (sbyte)now.Minute);
+            tt.Run();
+            Assert.IsTrue(tt.Called);
+        }
+
+        [Test]
+        public void RunWrongHour()
+        {
+            var now = DateTime.UtcNow;
+            var hour = now.Hour > 1 ? now.Hour - 1 : 0;
+            var tt = new TestTask((byte)hour);
+            tt.Run();
+            Assert.IsFalse(tt.Called);
+        }
+
+        [Test]
+        public void RunWrongMinute()
+        {
+            var now = DateTime.UtcNow;
+            var minute = now.Minute > 1 ? now.Minute - 1 : 0;
+            var tt = new TestTask((byte)now.Hour, (sbyte)minute);
+            tt.Run();
+            Assert.IsFalse(tt.Called);
         }
     }
 }
