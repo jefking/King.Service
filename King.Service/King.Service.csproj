@@ -77,7 +77,7 @@
     <Compile Include="AdaptiveRunner.cs" />
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Data\StorageDequeueBatch.cs" />
-    <Compile Include="RunAt.cs" />
+    <Compile Include="RunAtTask.cs" />
     <Compile Include="Timing\AdaptiveTiming.cs" />
     <Compile Include="BackoffRunner.cs" />
     <Compile Include="BackoffTask.cs" />
@@ -101,7 +101,6 @@
     <Compile Include="Timing\CalculateTiming.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
