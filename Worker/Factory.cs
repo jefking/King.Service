@@ -3,6 +3,7 @@
     using King.Azure.Data;
     using King.Service;
     using King.Service.Data;
+    using King.Service.WorkerRole;
     using System.Collections.Generic;
     using Worker.Queue;
 
@@ -52,6 +53,7 @@
             //Task for Queuing
             yield return new CompanyQueuer();
 
+            //Task once daily on the (current) hour
             yield return new OnceDaily(config.ConnectionString);
         }
     }
