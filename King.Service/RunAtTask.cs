@@ -27,7 +27,7 @@
         /// <param name="hour">Hour to run</param>
         /// <param name="minute">Minute to run (-1 for on the hour)</param>
         public RunAtTask(string connectionString, byte hour = 0, sbyte minute = -1)
-            : base(connectionString, minute <= 0 ? 3600 : 60)
+            : base(connectionString, minute <= 0 ? 3599 : 59)
         {
             this.hour = hour < 0 ? (byte)0 : (hour > 23 ? (byte)23 : hour);
             this.minute = minute < 0 ? (sbyte)-1 : (minute > 59 ? (sbyte)59 : (sbyte)minute);
