@@ -51,6 +51,8 @@
 
             //Task for Queuing
             yield return new CompanyQueuer();
+
+            yield return new OnceDaily(config.ConnectionString);
         }
     }
 }
