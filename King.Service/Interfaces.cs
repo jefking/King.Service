@@ -96,4 +96,12 @@
         void OnStop();
         #endregion
     }
+
+    /// <summary>
+    /// AutoScaler Interface
+    /// </summary>
+    public interface IAutoScaler
+    {
+
+    }
 }

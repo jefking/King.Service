@@ -92,6 +92,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AdaptiveRunnerTests.cs" />
+    <Compile Include="AutoScalerTests.cs" />
     <Compile Include="Data\DequeueBatchTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
     <Compile Include="RunAtTaskTests.cs" />
