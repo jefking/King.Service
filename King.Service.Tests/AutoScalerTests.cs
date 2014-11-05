@@ -30,7 +30,7 @@
         public void Minimum()
         {
             var scaler = new AutoScaler(1, 100);
-            Assert.AreEqual(1, scaler.Maximum);
+            Assert.AreEqual(1, scaler.Minimum);
         }
 
         [Test]

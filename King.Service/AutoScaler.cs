@@ -24,8 +24,8 @@
         /// Default Constructor
         /// </summary>
         /// <param name="minimum">Minimum</param>
-        /// <param name="maximmum">Maximum</param>
-        public AutoScaler(byte minimum = 0, byte maximmum = 1)
+        /// <param name="maximum">Maximum</param>
+        public AutoScaler(byte minimum = 0, byte maximum = 1)
         {
             if (minimum > maximum)
             {
@@ -33,7 +33,7 @@
             }
 
             this.minimum = minimum;
-            this.maximum = maximmum;
+            this.maximum = maximum;
         }
         #endregion
 
