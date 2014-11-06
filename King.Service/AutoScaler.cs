@@ -84,7 +84,7 @@
                     //timeToScale += task.Busy ? 1 : -1;
                 }
             }
-            if (timeToScale > 0)
+            if (timeToScale > 0 && this.units.Count > this.minimum) //Scale Up
             {
                 var unit = this.ScaleUnit<object>(null);
                 foreach (var u in unit)
@@ -93,7 +93,7 @@
                 }
                 this.units.Push(unit);
             }
-            else if (timeToScale < 0)
+            else if (timeToScale < 0 && this.units.Count < this.maximum) //Scale Down
             {
                 var unit = this.units.Pop();
                 foreach(var u in unit)
