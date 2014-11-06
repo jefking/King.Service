@@ -1,6 +1,8 @@
 ﻿namespace King.Service
 {
     using System;
+    using System.Linq;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
 
     /// <summary>
@@ -27,7 +29,7 @@
         /// <summary>
         /// Running Tasks
         /// </summary>
-        protected readonly Stack<IEnumerable<IRunnable>> units = new Stack<IEnumerable<IRunnable>>();
+        protected readonly ConcurrentStack<IEnumerable<IRunnable>> units = new ConcurrentStack<IEnumerable<IRunnable>>();
         #endregion
 
         #region Constructors
@@ -82,14 +84,12 @@
         public override void Run()
         {
             var timeToScale = 0;
-            foreach (var unit in this.units)
+            foreach (var unit in this.units.SelectMany(u => u))
             {
-                foreach (var task in unit)
-                {
-                    //Determine a way to track if processes are doing work.
-                    //timeToScale += task.Busy ? 1 : -1;
-                }
+                //Determine a way to track if processes are doing work.
+                //timeToScale += task.Busy ? 1 : -1;
             }
+
             if (timeToScale > 0 && this.units.Count > this.minimum) //Scale Up
             {
                 var unit = this.ScaleUnit(this.configuration);
@@ -101,10 +101,13 @@
             }
             else if (timeToScale < 0 && this.units.Count < this.maximum) //Scale Down
             {
-                var unit = this.units.Pop();
-                foreach(var u in unit)
+                IEnumerable<IRunnable> unit;
+                if (this.units.TryPop(out unit))
                 {
-                    u.Stop();
+                    foreach (var u in unit)
+                    {
+                        u.Stop();
+                    }
                 }
             }
         }
