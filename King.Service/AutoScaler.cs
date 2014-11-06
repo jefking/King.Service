@@ -1,11 +1,12 @@
 ﻿namespace King.Service
 {
     using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Task AutoScaler
     /// </summary>
-    public class AutoScaler : IAutoScaler
+    public abstract class AutoScaler : TaskManager, IAutoScaler
     {
         #region Members
         /// <summary>
@@ -17,6 +18,8 @@
         /// Maximum Instance Count
         /// </summary>
         protected readonly byte maximum = 1;
+
+        protected readonly Stack<IEnumerable<IRunnable>> units = new Stack<IEnumerable<IRunnable>>();
         #endregion
 
         #region Constructors
@@ -37,7 +40,7 @@
         }
         #endregion
 
-        #region
+        #region Properties
         /// <summary>
         /// Minimum Instance Count
         /// </summary>
@@ -57,6 +60,46 @@
             get
             {
                 return this.maximum;
+            }
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Scale Unit
+        /// </summary>
+        /// <returns>Tasks to run</returns>
+        public abstract IEnumerable<IRunnable> ScaleUnit<T>(T data);
+
+        /// <summary>
+        /// Task Run
+        /// </summary>
+        public override void Run()
+        {
+            var timeToScale = 0;
+            foreach (var unit in this.units)
+            {
+                foreach (var task in unit)
+                {
+                    //timeToScale += task.Busy ? 1 : -1;
+                }
+            }
+            if (timeToScale > 0)
+            {
+                var unit = this.ScaleUnit<object>(null);
+                foreach (var u in unit)
+                {
+                    u.Start();
+                }
+                this.units.Push(unit);
+            }
+            else if (timeToScale < 0)
+            {
+                var unit = this.units.Pop();
+                foreach(var u in unit)
+                {
+                    u.Stop();
+                }
             }
         }
         #endregion
