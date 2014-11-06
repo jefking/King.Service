@@ -96,12 +96,4 @@
         void OnStop();
         #endregion
     }
-
-    /// <summary>
-    /// AutoScaler Interface
-    /// </summary>
-    public interface IAutoScaler<T>
-    {
-        IEnumerable<IRunnable> ScaleUnit(T data);
-    }
 }

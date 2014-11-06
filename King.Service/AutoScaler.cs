@@ -8,7 +8,7 @@
     /// <summary>
     /// Task AutoScaler
     /// </summary>
-    public abstract class AutoScaler<T> : RecurringTask, IAutoScaler<T>
+    public abstract class AutoScaler<T> : RecurringTask, ITaskFactory<T>
     {
         #region Members
         /// <summary>
@@ -29,7 +29,7 @@
         /// <summary>
         /// Running Tasks
         /// </summary>
-        protected readonly ConcurrentStack<IEnumerable<IRunnable>> units = new ConcurrentStack<IEnumerable<IRunnable>>();
+        protected readonly ConcurrentStack<IRoleTaskManager<T>> units = new ConcurrentStack<IRoleTaskManager<T>>();
         #endregion
 
         #region Constructors
@@ -76,7 +76,7 @@
         #endregion
 
         #region Methods
-        public abstract IEnumerable<IRunnable> ScaleUnit(T data);
+        public abstract IEnumerable<IRunnable> Tasks(T data);
 
         /// <summary>
         /// Task Run
@@ -84,7 +84,7 @@
         public override void Run()
         {
             var timeToScale = 0;
-            foreach (var unit in this.units.SelectMany(u => u))
+            foreach (var unit in this.units)
             {
                 //Determine a way to track if processes are doing work.
                 //timeToScale += task.Busy ? 1 : -1;
@@ -92,22 +92,17 @@
 
             if (timeToScale > 0 && this.units.Count > this.minimum) //Scale Up
             {
-                var unit = this.ScaleUnit(this.configuration);
-                foreach (var u in unit)
-                {
-                    u.Start();
-                }
+                var unit = new RoleTaskManager<T>(this);
+                unit.OnStart();
+                unit.Run();
                 this.units.Push(unit);
             }
             else if (timeToScale < 0 && this.units.Count < this.maximum) //Scale Down
             {
-                IEnumerable<IRunnable> unit;
+                IRoleTaskManager<T> unit;
                 if (this.units.TryPop(out unit))
                 {
-                    foreach (var u in unit)
-                    {
-                        u.Stop();
-                    }
+                    unit.OnStop();
                 }
             }
         }
