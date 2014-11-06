@@ -25,7 +25,7 @@
         protected readonly ITaskFactory<T> manager = null;
 
         /// <summary>
-        /// Lock object for Mananger
+        /// Lock object for Services
         /// </summary>
         protected readonly object servicesLock = new object();
         #endregion
