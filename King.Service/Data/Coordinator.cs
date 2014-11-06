@@ -71,7 +71,7 @@
         /// <summary>
         /// Initialize Table Task
         /// </summary>
-        public virtual TaskManager InitializeTask()
+        public virtual RecurringTask InitializeTask()
         {
             return new InitializeStorageTask(this.storage);
         }

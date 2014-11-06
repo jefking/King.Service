@@ -100,8 +100,8 @@
     /// <summary>
     /// AutoScaler Interface
     /// </summary>
-    public interface IAutoScaler
+    public interface IAutoScaler<T>
     {
-
+        IEnumerable<IRunnable> ScaleUnit(T data);
     }
 }

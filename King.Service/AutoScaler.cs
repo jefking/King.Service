@@ -6,7 +6,7 @@
     /// <summary>
     /// Task AutoScaler
     /// </summary>
-    public abstract class AutoScaler : TaskManager, IAutoScaler
+    public abstract class AutoScaler<T> : RecurringTask, IAutoScaler<T>
     {
         #region Members
         /// <summary>
@@ -19,6 +19,14 @@
         /// </summary>
         protected readonly byte maximum = 1;
 
+        /// <summary>
+        /// Configuration
+        /// </summary>
+        protected readonly T configuration = default(T);
+
+        /// <summary>
+        /// Running Tasks
+        /// </summary>
         protected readonly Stack<IEnumerable<IRunnable>> units = new Stack<IEnumerable<IRunnable>>();
         #endregion
 
@@ -28,7 +36,7 @@
         /// </summary>
         /// <param name="minimum">Minimum</param>
         /// <param name="maximum">Maximum</param>
-        public AutoScaler(byte minimum = 0, byte maximum = 1)
+        public AutoScaler(byte minimum = 0, byte maximum = 1, T configuration = default(T))
         {
             if (minimum > maximum)
             {
@@ -37,6 +45,7 @@
 
             this.minimum = minimum;
             this.maximum = maximum;
+            this.configuration = configuration;
         }
         #endregion
 
@@ -65,11 +74,7 @@
         #endregion
 
         #region Methods
-        /// <summary>
-        /// Scale Unit
-        /// </summary>
-        /// <returns>Tasks to run</returns>
-        public abstract IEnumerable<IRunnable> ScaleUnit<T>(T data);
+        public abstract IEnumerable<IRunnable> ScaleUnit(T data);
 
         /// <summary>
         /// Task Run
@@ -81,12 +86,13 @@
             {
                 foreach (var task in unit)
                 {
+                    //Determine a way to track if processes are doing work.
                     //timeToScale += task.Busy ? 1 : -1;
                 }
             }
             if (timeToScale > 0 && this.units.Count > this.minimum) //Scale Up
             {
-                var unit = this.ScaleUnit<object>(null);
+                var unit = this.ScaleUnit(this.configuration);
                 foreach (var u in unit)
                 {
                     u.Start();

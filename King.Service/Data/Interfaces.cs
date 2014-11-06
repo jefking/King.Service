@@ -15,7 +15,7 @@
         /// <summary>
         /// Initialize Table
         /// </summary>
-        TaskManager InitializeTask();
+        RecurringTask InitializeTask();
 
         /// <summary>
         /// Determine whether a new task needs to be executed

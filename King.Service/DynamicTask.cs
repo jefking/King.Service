@@ -7,7 +7,7 @@
     /// <summary>
     /// Dynamic Task, base class for Tasks which change their own timing based on quantity of work
     /// </summary>
-    public abstract class DynamicTask : TaskManager
+    public abstract class DynamicTask : RecurringTask
     {
         #region Members
         /// <summary>

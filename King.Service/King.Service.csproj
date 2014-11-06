@@ -92,7 +92,7 @@
     <Compile Include="Data\Interfaces.cs" />
     <Compile Include="Interfaces.cs" />
     <Compile Include="AdaptiveTask.cs" />
-    <Compile Include="TaskManager.cs" />
+    <Compile Include="RecurringTask.cs" />
     <Compile Include="Data\Model\ScheduledTaskEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CoordinatedTask.cs" />

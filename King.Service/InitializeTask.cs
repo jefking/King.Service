@@ -6,7 +6,7 @@
     /// <summary>
     /// Initialize Task
     /// </summary>
-    public abstract class InitializeTask : TaskManager
+    public abstract class InitializeTask : RecurringTask
     {
         #region Constructors
         /// <summary>

@@ -8,7 +8,7 @@
     /// <summary>
     /// Scheduled Manager
     /// </summary>
-    public abstract class CoordinatedTask : TaskManager
+    public abstract class CoordinatedTask : RecurringTask
     {
         #region Members
         /// <summary>

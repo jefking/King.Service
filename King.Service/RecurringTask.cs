@@ -6,9 +6,9 @@
     using System.Threading;
 
     /// <summary>
-    /// Service Manager
+    /// Recurring Task
     /// </summary>
-    public abstract class TaskManager : IRunnable, IDisposable
+    public abstract class RecurringTask : IRunnable, IDisposable
     {
         #region Members
         /// <summary>
@@ -21,7 +21,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        protected TaskManager(int dueInSeconds = BaseTimes.MinimumTiming, int periodInSeconds = BaseTimes.MaximumTiming)
+        protected RecurringTask(int dueInSeconds = BaseTimes.MinimumTiming, int periodInSeconds = BaseTimes.MaximumTiming)
         {
             if (0 > dueInSeconds)
             {
@@ -38,7 +38,7 @@
         /// <summary>
         /// Finalizer
         /// </summary>
-        ~TaskManager() 
+        ~RecurringTask() 
         {
             Dispose(false);
         }

@@ -21,7 +21,7 @@
         [Test]
         public void IsTaskManager()
         {
-            Assert.IsNotNull(new Helper() as TaskManager);
+            Assert.IsNotNull(new Helper() as RecurringTask);
         }
     }
 }
