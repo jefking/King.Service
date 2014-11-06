@@ -27,7 +27,7 @@
         /// <summary>
         /// Lock object for Mananger
         /// </summary>
-        protected readonly object managerLock = new object();
+        protected readonly object servicesLock = new object();
         #endregion
 
         #region Constructors
@@ -93,7 +93,7 @@
         {
             Trace.TraceInformation("On start called.");
 
-            lock (this.managerLock)
+            lock (this.servicesLock)
             {
                 if (null == this.services)
                 {
