@@ -23,11 +23,6 @@
         /// Manager
         /// </summary>
         protected readonly ITaskFactory<T> manager = null;
-
-        /// <summary>
-        /// Lock object for Mananger
-        /// </summary>
-        protected readonly object managerLock = new object();
         #endregion
 
         #region Constructors
@@ -42,10 +37,7 @@
                 throw new ArgumentNullException("manager");
             }
 
-            lock (this.managerLock)
-            {
-                this.manager = manager;
-            }
+            this.manager = manager;
         }
         #endregion
 
@@ -96,16 +88,13 @@
         {
             Trace.TraceInformation("On start called.");
 
-            lock (this.managerLock)
+            if (null == this.services)
             {
-                if (null == this.services)
-                {
-                    Trace.TraceInformation("Loading Services.");
+                Trace.TraceInformation("Loading Services.");
 
-                    this.services = manager.Tasks(passthrough);
+                this.services = this.manager.Tasks(passthrough);
 
-                    Trace.TraceInformation("Services Loaded.");
-                }
+                Trace.TraceInformation("Services Loaded.");
             }
 
             Trace.TraceInformation("On start finished.");
