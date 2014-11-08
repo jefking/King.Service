@@ -2,6 +2,7 @@
 {
     using King.Service.Timing;
     using System;
+    using System.Linq;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -114,12 +115,9 @@
             else
             {
                 var timeToScale = 0;
-                foreach (var unit in this.units)
+                foreach (IScalable t in this.units.SelectMany(u => u.Tasks))
                 {
-                    foreach (IScalable t in unit.Tasks)
-                    {
-                        timeToScale += t.Scale ? 1 : -1;
-                    }
+                    timeToScale += t.Scale ? 1 : -1;
                 }
 
                 if (timeToScale > 0 && this.units.Count < this.maximum) //Scale Up
