@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Tests
 {
-    using King.Service;
     using King.Service.Timing;
     using NUnit.Framework;
 

@@ -8,38 +8,50 @@
     /// <typeparam name="T"></typeparam>
     public interface IScaler<T>
     {
+        #region Properties
+        /// <summary>
+        /// Currnet Unit Count
+        /// </summary>
+        int CurrentUnits
+        {
+            get;
+        }
+        #endregion
+
         #region Methods
+        /// <summary>
+        /// Should Scale
+        /// </summary>
+        /// <returns>Scale</returns>
+        bool ShouldScale();
+
         /// <summary>
         /// Is First Run
         /// </summary>
         /// <param name="minimum">Minimum</param>
-        /// <param name="units">Units</param>
         /// <returns>Is First Run</returns>
-        bool IsFirstRun(byte minimum, ConcurrentStack<IRoleTaskManager<T>> units);
+        bool IsFirstRun(byte minimum);
 
         /// <summary>
         /// Initialize Scale
         /// </summary>
         /// <param name="minimum">Minimum</param>
         /// <param name="factory">Factory</param>
-        /// <param name="units">Units</param>
         /// <param name="serviceName">Service Name</param>
-        void Initialize(byte minimum, ITaskFactory<T> factory, ConcurrentStack<IRoleTaskManager<T>> units, string serviceName);
+        void Initialize(byte minimum, ITaskFactory<T> factory, string serviceName);
 
         /// <summary>
         /// Scale Up by one unit
         /// </summary>
         /// <param name="factory">Task Factory</param>
-        /// <param name="units">Units</param>
         /// <param name="serviceName">Service Name (for Tracing)</param>
-        void ScaleUp(ITaskFactory<T> factory, ConcurrentStack<IRoleTaskManager<T>> units, string serviceName);
+        void ScaleUp(ITaskFactory<T> factory, string serviceName);
 
         /// <summary>
         /// Scale down by one unit
         /// </summary>
-        /// <param name="units">Units</param>
         /// <param name="serviceName">Service Name (for Tracing)</param>
-        void ScaleDown(ConcurrentStack<IRoleTaskManager<T>> units, string serviceName);
+        void ScaleDown(string serviceName);
         #endregion
     }
 }

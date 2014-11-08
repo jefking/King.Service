@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Concurrent;
     using System.Diagnostics;
+    using System.Linq;
 
     /// <summary>
     /// Task Scaler
@@ -10,15 +11,54 @@
     /// <typeparam name="T">Configuration</typeparam>
     public class Scaler<T> : IScaler<T>
     {
+        #region Members
+        /// <summary>
+        /// Running Tasks
+        /// </summary>
+        protected readonly ConcurrentStack<IRoleTaskManager<T>> units = new ConcurrentStack<IRoleTaskManager<T>>();
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Currnet Unit Count
+        /// </summary>
+        public virtual int CurrentUnits
+        {
+            get
+            {
+                return this.units.Count;
+            }
+        }
+        #endregion
+
         #region Methods
+        /// <summary>
+        /// Should Scale
+        /// </summary>
+        /// <returns>Scale</returns>
+        public virtual bool ShouldScale()
+        {
+            var timeToScale = 0;
+            foreach (IScalable t in this.units.SelectMany(u => u.Tasks))
+            {
+                timeToScale += t.Scale ? 1 : -1;
+            }
+
+            return timeToScale != 0;
+        }
+
         /// <summary>
         /// Is First Run
         /// </summary>
         /// <param name="minimum">Minimum</param>
-        /// <param name="units">Units</param>
         /// <returns>Is First Run</returns>
-        public bool IsFirstRun(byte minimum, ConcurrentStack<IRoleTaskManager<T>> units)
+        public virtual bool IsFirstRun(byte minimum)
         {
+            if (minimum < 1)
+            {
+                throw new ArgumentException("minimum");
+            }
+
             return units.Count < minimum;
         }
 
@@ -27,28 +67,36 @@
         /// </summary>
         /// <param name="minimum">Minimum</param>
         /// <param name="factory">Factory</param>
-        /// <param name="units">Units</param>
         /// <param name="serviceName">Service Name</param>
-        public virtual void Initialize(byte minimum, ITaskFactory<T> factory, ConcurrentStack<IRoleTaskManager<T>> units, string serviceName)
+        public virtual void Initialize(byte minimum, ITaskFactory<T> factory, string serviceName)
         {
+            if (minimum < 1)
+            {
+                throw new ArgumentException("minimum");
+            }
+            if (null == factory)
+            {
+                throw new ArgumentNullException("factory");
+            }
+            if (string.IsNullOrWhiteSpace(serviceName))
+            {
+                throw new ArgumentException("serviceName");
+            }
+
             while (units.Count < minimum)
             {
-                this.ScaleUp(factory, units, serviceName);
+                this.ScaleUp(factory, serviceName);
             }
         }
 
         /// <summary>
         /// Scale Up by one unit
         /// </summary>
-        public virtual void ScaleUp(ITaskFactory<T> factory, ConcurrentStack<IRoleTaskManager<T>> units, string serviceName)
+        public virtual void ScaleUp(ITaskFactory<T> factory, string serviceName)
         {
             if (null == factory)
             {
                 throw new ArgumentNullException("factory");
-            }
-            if (null == units)
-            {
-                throw new ArgumentNullException("units");
             }
             if (string.IsNullOrWhiteSpace(serviceName))
             {
@@ -79,12 +127,8 @@
         /// <summary>
         /// Scale down by one unit
         /// </summary>
-        public virtual void ScaleDown(ConcurrentStack<IRoleTaskManager<T>> units, string serviceName)
+        public virtual void ScaleDown(string serviceName)
         {
-            if (null == units)
-            {
-                throw new ArgumentNullException("units");
-            }
             if (string.IsNullOrWhiteSpace(serviceName))
             {
                 throw new ArgumentException("serviceName");

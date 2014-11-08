@@ -3,10 +3,8 @@
     using King.Service.Scalability;
     using King.Service.Timing;
     using System;
-    using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
 
     /// <summary>
     /// Task AutoScaler
@@ -29,11 +27,6 @@
         /// Configuration
         /// </summary>
         protected readonly T configuration = default(T);
-
-        /// <summary>
-        /// Running Tasks
-        /// </summary>
-        protected readonly ConcurrentStack<IRoleTaskManager<T>> units = new ConcurrentStack<IRoleTaskManager<T>>();
 
         /// <summary>
         /// Scaler
@@ -125,29 +118,25 @@
         {
             Trace.TraceInformation("Checking for appropriate scale: '{0}'.", this.ServiceName);
 
-            if (this.scaler.IsFirstRun(this.minimum, this.units))
+            if (this.scaler.IsFirstRun(this.minimum))
             {
-                this.scaler.Initialize(this.minimum, this, this.units, this.ServiceName);
+                this.scaler.Initialize(this.minimum, this, this.ServiceName);
             }
             else
             {
-                var timeToScale = 0;
-                foreach (IScalable t in this.units.SelectMany(u => u.Tasks))
-                {
-                    timeToScale += t.Scale ? 1 : -1;
-                }
+                var shouldScale = this.scaler.ShouldScale();
 
-                if (timeToScale > 0 && this.units.Count < this.maximum)
+                if (shouldScale && this.scaler.CurrentUnits < this.maximum)
                 {
-                    this.scaler.ScaleUp(this, this.units, this.ServiceName);
+                    this.scaler.ScaleUp(this, this.ServiceName);
                 }
-                else if (timeToScale < 0 && this.units.Count > this.minimum)
+                else if (shouldScale && this.scaler.CurrentUnits > this.minimum)
                 {
-                    this.scaler.ScaleDown(this.units, this.ServiceName);
+                    this.scaler.ScaleDown(this.ServiceName);
                 }
                 else
                 {
-                    Trace.TraceInformation("'{0}' is currently running at optimal scale with {1} units.", this.ServiceName, this.units.Count);
+                    Trace.TraceInformation("'{0}' is currently running at optimal scale with {1} units.", this.ServiceName, this.scaler.CurrentUnits);
                 }
             }
         }
