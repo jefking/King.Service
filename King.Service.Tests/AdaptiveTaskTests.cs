@@ -7,25 +7,10 @@
     [TestFixture]
     public class AdaptiveTaskTests
     {
-        #region Helper
-        public class AdaptiveTest : AdaptiveTask
-        {
-            public bool Work
-            {
-                get;
-                set;
-            }
-            public override void Run(out bool workWasDone)
-            {
-                workWasDone = this.Work;
-            }
-        }
-        #endregion
-
         [Test]
         public void Constructor()
         {
-            using (new AdaptiveTest())
+            using (new AdaptiveHelper())
             {
             }
         }
@@ -33,7 +18,7 @@
         [Test]
         public void StartIn()
         {
-            using (var t = new AdaptiveTest())
+            using (var t = new AdaptiveHelper())
             {
                 Assert.AreEqual(BaseTimes.MinimumTiming, t.StartIn.TotalSeconds);
             }
@@ -42,7 +27,7 @@
         [Test]
         public void Every()
         {
-            using (var t = new AdaptiveTest())
+            using (var t = new AdaptiveHelper())
             {
                 Assert.AreEqual(BaseTimes.MinimumTiming, t.Every.TotalSeconds);
             }

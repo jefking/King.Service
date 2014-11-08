@@ -1,17 +1,18 @@
-﻿namespace King.Azure.BackgroundWorker.Tests
+﻿namespace King.Service.Tests
 {
     using King.Service;
     using King.Service.Scalability;
     using King.Service.Timing;
     using NUnit.Framework;
     using System;
+    using System.Collections.Generic;
 
     [TestFixture]
     public class AutoScalerTests
     {
+        #region Helper
         private class AutoScalerHelper : AutoScaler<object>
         {
-
             #region Constructors
             /// <summary>
             /// Default Constructor
@@ -30,11 +31,12 @@
             }
             #endregion
 
-            public override System.Collections.Generic.IEnumerable<IScalable> ScaleUnit(object data)
+            public override IEnumerable<IScalable> ScaleUnit(object data)
             {
-                throw new NotImplementedException();
+                yield return new AdaptiveHelper();
             }
         }
+        #endregion
 
         [Test]
         public void Constructor()
@@ -47,6 +49,20 @@
         public void ConstructorMinimumGreaterThanMaximum()
         {
             new AutoScalerHelper(new object(), 100, 1);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorMinimumZero()
+        {
+            new AutoScalerHelper(new object(), 0, 1);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorScalerNull()
+        {
+            new AutoScalerHelper(null, new object(), 1, 1, 1);
         }
 
         [Test]
@@ -73,6 +89,32 @@
         {
             var scaler = new AutoScalerHelper(new object(), 100, 150);
             Assert.AreEqual(150, scaler.Maximum);
+        }
+
+        [Test]
+        public void MinimumDefault()
+        {
+            var scaler = new AutoScalerHelper();
+            Assert.AreEqual(1, scaler.Minimum);
+        }
+
+        [Test]
+        public void MaximumDefault()
+        {
+            var scaler = new AutoScalerHelper();
+            Assert.AreEqual(2, scaler.Maximum);
+        }
+
+        [Test]
+        public void Tasks()
+        {
+            var scaler = new AutoScalerHelper();
+        }
+
+        [Test]
+        public void ScaleUnit()
+        {
+            var scaler = new AutoScalerHelper();
         }
     }
 }

@@ -6,8 +6,8 @@
     <ProjectGuid>{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>King.Azure.BackgroundWorker.Tests</RootNamespace>
-    <AssemblyName>King.Azure.BackgroundWorker.Tests</AssemblyName>
+    <RootNamespace>King.Service.Tests</RootNamespace>
+    <AssemblyName>King.Service.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -91,10 +91,12 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="AdaptiveHelper.cs" />
     <Compile Include="AdaptiveRunnerTests.cs" />
     <Compile Include="AutoScalerTests.cs" />
     <Compile Include="Data\DequeueBatchTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
+    <Compile Include="RecurringHelper.cs" />
     <Compile Include="RunAtTaskTests.cs" />
     <Compile Include="Scalability\ScalerTests.cs" />
     <Compile Include="Timing\AdaptiveTimingTests.cs" />
