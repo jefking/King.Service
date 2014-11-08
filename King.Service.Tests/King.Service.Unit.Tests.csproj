@@ -96,6 +96,7 @@
     <Compile Include="Data\DequeueBatchTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
     <Compile Include="RunAtTaskTests.cs" />
+    <Compile Include="Scalability\ScalerTests.cs" />
     <Compile Include="Timing\AdaptiveTimingTests.cs" />
     <Compile Include="Timing\BackoffTimingTests.cs" />
     <Compile Include="DynamicTaskTests.cs" />

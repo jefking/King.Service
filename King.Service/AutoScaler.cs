@@ -18,12 +18,12 @@
         /// <summary>
         /// Minimum Instance Count
         /// </summary>
-        protected readonly byte minimum = 0;
+        protected readonly byte minimum = 1;
 
         /// <summary>
         /// Maximum Instance Count
         /// </summary>
-        protected readonly byte maximum = 1;
+        protected readonly byte maximum = 2;
 
         /// <summary>
         /// Configuration
@@ -45,7 +45,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public AutoScaler(T configuration = default(T), byte minimum = 0, byte maximum = 1, byte checkScaleInMinutes = 20)
+        public AutoScaler(T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 20)
             : this(new Scaler<T>(), configuration, minimum, maximum, checkScaleInMinutes)
         {
         }
@@ -53,7 +53,7 @@
         /// <summary>
         /// Mockable Constructor
         /// </summary>
-        public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 0, byte maximum = 1, byte checkScaleInMinutes = 20)
+        public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 20)
             : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(checkScaleInMinutes).TotalSeconds)
         {
             if (1 > minimum)
