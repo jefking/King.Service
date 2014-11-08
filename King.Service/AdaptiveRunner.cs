@@ -3,7 +3,7 @@
     /// <summary>
     /// Simplified Adaptive Runner
     /// </summary>
-    public class AdaptiveRunner : AdaptiveTask
+    public class AdaptiveRunner : AdaptiveTask, IScalable
     {
         #region Members
         /// <summary>
@@ -35,5 +35,13 @@
             workWasDone = this.run.Run().Result;
         }
         #endregion
+
+        public bool Scale
+        {
+            get
+            {
+                return this.run.MinimumPeriodInSeconds == base.Every.TotalSeconds;
+            }
+        }
     }
 }

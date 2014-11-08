@@ -7,7 +7,7 @@
     /// Storage Dequeue
     /// </summary>
     /// <typeparam name="T">Type</typeparam>
-    public class StorageDequeue<T> : Dequeue<T>, IScalable
+    public class StorageDequeue<T> : Dequeue<T>//, IScalable
     {
         #region Constructors
         /// <summary>
@@ -40,20 +40,20 @@
         /// <summary>
         /// Service Should Scale
         /// </summary>
-        public bool Scale
-        {
-            get
-            {
-                var scale = false;
-                var p = base.poller as IStorageQueuePoller<T>;
-                if (null != p)
-                {
-                    var c = p.Queue.ApproixmateMessageCount().Result;
-                    scale = null != c && c.Value > 0;
-                }
-                return scale;
-            }
-        }
+        //public bool Scale
+        //{
+        //    get
+        //    {
+        //        var scale = false;
+        //        var p = base.poller as IStorageQueuePoller<T>;
+        //        if (null != p)
+        //        {
+        //            var c = p.Queue.ApproixmateMessageCount().Result;
+        //            scale = null != c && c.Value > 0;
+        //        }
+        //        return scale;
+        //    }
+        //}
         #endregion
     }
 }

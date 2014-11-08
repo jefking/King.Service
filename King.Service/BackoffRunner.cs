@@ -3,7 +3,7 @@
     /// <summary>
     /// Simplified Backoff Runner
     /// </summary>
-    public class BackoffRunner : BackoffTask
+    public class BackoffRunner : BackoffTask, IScalable
     {
         #region Members
         /// <summary>
@@ -36,5 +36,13 @@
             workWasDone = this.run.Run().Result;
         }
         #endregion
+
+        public bool Scale
+        {
+            get
+            {
+                return this.run.MinimumPeriodInSeconds == base.Every.TotalSeconds;
+            }
+        }
     }
 }
