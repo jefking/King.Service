@@ -22,8 +22,8 @@
         /// <summary>
         /// Should Scale
         /// </summary>
-        /// <returns>Scale</returns>
-        bool ShouldScale();
+        /// <returns>Scale Direction</returns>
+        Direction ShouldScale();
 
         /// <summary>
         /// Is First Run

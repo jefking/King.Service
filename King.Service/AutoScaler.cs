@@ -124,13 +124,13 @@
             }
             else
             {
-                var shouldScale = this.scaler.ShouldScale();
+                var direction = this.scaler.ShouldScale();
 
-                if (shouldScale && this.scaler.CurrentUnits < this.maximum)
+                if (Direction.Up == direction && this.scaler.CurrentUnits < this.maximum)
                 {
                     this.scaler.ScaleUp(this, this.ServiceName);
                 }
-                else if (shouldScale && this.scaler.CurrentUnits > this.minimum)
+                else if (Direction.Down == direction && this.scaler.CurrentUnits > this.minimum)
                 {
                     this.scaler.ScaleDown(this.ServiceName);
                 }

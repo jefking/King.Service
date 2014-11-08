@@ -36,7 +36,7 @@
         /// Should Scale
         /// </summary>
         /// <returns>Scale</returns>
-        public virtual bool ShouldScale()
+        public virtual Direction ShouldScale()
         {
             var timeToScale = 0;
             foreach (IScalable t in this.units.SelectMany(u => u.Tasks))
@@ -44,7 +44,18 @@
                 timeToScale += t.Scale ? 1 : -1;
             }
 
-            return timeToScale != 0;
+            if (timeToScale == 0)
+            {
+                return Direction.None;
+            }
+            else if (timeToScale > 0)
+            {
+                return Direction.Up;
+            }
+            else
+            {
+                return Direction.Down;
+            }
         }
 
         /// <summary>

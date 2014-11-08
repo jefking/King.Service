@@ -150,11 +150,18 @@
         {
             var s = Substitute.For<IScaler<object>>();
             s.IsFirstRun(1).Returns(false);
+            s.ShouldScale().Returns(Direction.Up);
+            s.CurrentUnits.Returns(0);
 
             var scaler = new AutoScalerHelper(s, null);
+            s.ScaleUp(scaler, Arg.Any<string>());
+
             scaler.Run();
 
             s.Received().IsFirstRun(1);
+            s.Received().ShouldScale();
+            var r = s.Received().CurrentUnits;
+            s.Received().ScaleUp(scaler, Arg.Any<string>());
         }
 
         [Test]
@@ -162,23 +169,66 @@
         {
             var s = Substitute.For<IScaler<object>>();
             s.IsFirstRun(1).Returns(false);
+            s.ShouldScale().Returns(Direction.Down);
+            s.CurrentUnits.Returns(100);
+            s.ScaleDown(Arg.Any<string>());
 
             var scaler = new AutoScalerHelper(s, null);
             scaler.Run();
 
             s.Received().IsFirstRun(1);
+            s.Received().ShouldScale();
+            var r = s.Received().CurrentUnits;
+            s.Received().ScaleDown(Arg.Any<string>());
         }
 
         [Test]
-        public void RunOptimal()
+        public void RunOptimalShouldntScale()
         {
             var s = Substitute.For<IScaler<object>>();
             s.IsFirstRun(1).Returns(false);
+            s.ShouldScale().Returns(Direction.None);
 
             var scaler = new AutoScalerHelper(s, null);
             scaler.Run();
 
             s.Received().IsFirstRun(1);
+            s.Received(0).ScaleDown(Arg.Any<string>());
+            s.Received(0).ScaleUp(scaler, Arg.Any<string>());
+        }
+
+        [Test]
+        public void RunOptimalMax()
+        {
+            var s = Substitute.For<IScaler<object>>();
+            s.IsFirstRun(1).Returns(false);
+            s.ShouldScale().Returns(Direction.Up);
+            s.CurrentUnits.Returns(2);
+
+            var scaler = new AutoScalerHelper(s, null);
+            scaler.Run();
+
+            s.Received().IsFirstRun(1);
+            var r = s.Received().CurrentUnits;
+            s.Received(0).ScaleDown(Arg.Any<string>());
+            s.Received(0).ScaleUp(scaler, Arg.Any<string>());
+        }
+
+        [Test]
+        public void RunOptimalMin()
+        {
+            var s = Substitute.For<IScaler<object>>();
+            s.IsFirstRun(1).Returns(false);
+            s.ShouldScale().Returns(Direction.Down);
+            s.CurrentUnits.Returns(1);
+
+            var scaler = new AutoScalerHelper(s, null);
+            scaler.Run();
+
+            s.Received().IsFirstRun(1);
+            var r = s.Received().CurrentUnits;
+            s.Received(0).ScaleDown(Arg.Any<string>());
+            s.Received(0).ScaleUp(scaler, Arg.Any<string>());
         }
     }
 }
