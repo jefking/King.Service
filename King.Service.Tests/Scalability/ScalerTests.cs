@@ -72,6 +72,25 @@
         }
 
         [Test]
+        public void ScaleDown()
+        {
+            var task = Substitute.For<IRoleTaskManager<object>>();
+            task.OnStop();
+            task.Dispose();
+
+            var units = new ConcurrentStack<IRoleTaskManager<object>>();
+            units.Push(task);
+
+            var s = new Scaler<object>();
+            s.ScaleDown(units, Guid.NewGuid().ToString());
+
+            Assert.AreEqual(0, units.Count);
+
+            task.Received().OnStop();
+            task.Received().Dispose();
+        }
+
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ScaleDownUnitsNull()
         {
