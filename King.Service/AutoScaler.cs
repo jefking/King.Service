@@ -132,7 +132,7 @@
                 }
                 else
                 {
-                    Trace.TraceInformation("'{0}' is currently running at optimal scale.", this.ServiceName);
+                    Trace.TraceInformation("'{0}' is currently running at optimal scale with {0} units.", this.ServiceName, this.units.Count);
                 }
             }
         }
