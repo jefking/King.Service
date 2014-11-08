@@ -2,7 +2,6 @@
 {
     using King.Azure.Data;
     using King.Service;
-    using King.Service.Data;
     using Microsoft.WindowsAzure.Storage.Queue;
     using Newtonsoft.Json;
     using System;
@@ -10,7 +9,7 @@
     /// <summary>
     /// Example of Task class which adds a company to a queue
     /// </summary>
-    public class CompanyQueuer : TaskManager
+    public class CompanyQueuer : RecurringTask
     {
         private int id = 0;
 

@@ -3,7 +3,7 @@
     using King.Service;
     using System.Diagnostics;
 
-    public class Task : TaskManager
+    public class Recurring : RecurringTask
     {
         public override void Run()
         {

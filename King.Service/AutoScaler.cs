@@ -1,10 +1,9 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
     using System;
-    using System.Linq;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
-    using King.Service.Timing;
 
     /// <summary>
     /// Task AutoScaler
@@ -37,9 +36,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        /// <param name="minimum">Minimum</param>
-        /// <param name="maximum">Maximum</param>
-        public AutoScaler(byte minimum = 0, byte maximum = 1, T configuration = default(T))
+        public AutoScaler(T configuration = default(T), byte minimum = 0, byte maximum = 1)
             : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(15).TotalSeconds)
         {
             if (minimum > maximum)
@@ -47,9 +44,9 @@
                 throw new ArgumentException("Minimum should be less than Maximum");
             }
 
+            this.configuration = configuration;
             this.minimum = minimum;
             this.maximum = maximum;
-            this.configuration = configuration;
         }
         #endregion
 
