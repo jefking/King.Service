@@ -1,4 +1,4 @@
-﻿namespace Worker
+﻿namespace Worker.Scalable
 {
     using King.Service;
     using System.Diagnostics;

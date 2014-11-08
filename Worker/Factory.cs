@@ -6,7 +6,11 @@
     using King.Service.WorkerRole;
     using System.Collections.Generic;
     using Worker.Queue;
+    using Worker.Scalable;
 
+    /// <summary>
+    /// Task Factory
+    /// </summary>
     public class Factory : ITaskFactory<Configuration>
     {
         public IEnumerable<IRunnable> Tasks(Configuration config)
@@ -27,7 +31,7 @@
             yield return new InitializeStorageTask(container);
 
             //Task(s)
-            yield return new Task();
+            yield return new Recurring();
 
             //Cordinated Tasks between Instances
             var task = new Coordinated(config.ConnectionString);
@@ -55,6 +59,9 @@
 
             //Task once daily on the (current) hour
             yield return new OnceDaily(config.ConnectionString);
+
+            //Auto Scaling Task
+            yield return new DynamicScaler(config);
         }
     }
 }
