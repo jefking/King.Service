@@ -15,7 +15,24 @@
         /// <summary>
         /// Running Tasks
         /// </summary>
-        protected readonly ConcurrentStack<IRoleTaskManager<T>> units = new ConcurrentStack<IRoleTaskManager<T>>();
+        protected readonly IProducerConsumerCollection<IRoleTaskManager<T>> units = null;
+        #endregion
+
+        #region Constructors
+        public Scaler()
+            : this(new ConcurrentStack<IRoleTaskManager<T>>())
+        {
+        }
+
+        public Scaler(IProducerConsumerCollection<IRoleTaskManager<T>> units)
+        {
+            if (null == units)
+            {
+                throw new ArgumentNullException("units");
+            }
+
+            this.units = units;
+        }
         #endregion
 
         #region Properties
@@ -123,7 +140,7 @@
             {
                 unit.Run();
 
-                units.Push(unit);
+                units.TryAdd(unit);
 
                 Trace.TraceInformation("Scaled Up: '{0}'.", serviceName);
             }
@@ -148,7 +165,7 @@
             Trace.TraceInformation("Scaling Down: '{0}'.", serviceName);
 
             IRoleTaskManager<T> unit;
-            if (units.TryPop(out unit))
+            if (units.TryTake(out unit))
             {
                 unit.OnStop();
                 unit.Dispose();
