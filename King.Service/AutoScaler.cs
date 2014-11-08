@@ -106,7 +106,7 @@
                 }
             }
 
-            if (timeToScale > 0 && this.units.Count > this.minimum) //Scale Up
+            if (timeToScale > 0 && this.units.Count < this.maximum) //Scale Up
             {
                 var unit = new RoleTaskManager<T>(this);
                 this.units.Push(unit);
@@ -114,7 +114,7 @@
                 unit.OnStart();
                 unit.Run();
             }
-            else if (timeToScale < 0 && this.units.Count < this.maximum) //Scale Down
+            else if (timeToScale < 0 && this.units.Count > this.minimum) //Scale Down
             {
                 IRoleTaskManager<T> unit;
                 if (this.units.TryPop(out unit))
