@@ -133,52 +133,52 @@
         public void RunIsFirstRun()
         {
             var s = Substitute.For<IScaler<object>>();
-            s.IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>()).Returns(true);
+            s.IsFirstRun(1).Returns(true);
 
             var scaler = new AutoScalerHelper(s, null);
 
-            s.Initialize(1, scaler, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>(), Arg.Any<string>());
+            s.Initialize(1, scaler, Arg.Any<string>());
 
             scaler.Run();
 
-            s.Received().IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>());
-            s.Received().Initialize(1, scaler, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>(), Arg.Any<string>());
+            s.Received().IsFirstRun(1);
+            s.Received().Initialize(1, scaler, Arg.Any<string>());
         }
 
         [Test]
         public void RunScaleUp()
         {
             var s = Substitute.For<IScaler<object>>();
-            s.IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>()).Returns(false);
+            s.IsFirstRun(1).Returns(false);
 
             var scaler = new AutoScalerHelper(s, null);
             scaler.Run();
 
-            s.Received().IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>());
+            s.Received().IsFirstRun(1);
         }
 
         [Test]
         public void RunScaleDown()
         {
             var s = Substitute.For<IScaler<object>>();
-            s.IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>()).Returns(false);
+            s.IsFirstRun(1).Returns(false);
 
             var scaler = new AutoScalerHelper(s, null);
             scaler.Run();
 
-            s.Received().IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>());
+            s.Received().IsFirstRun(1);
         }
 
         [Test]
         public void RunOptimal()
         {
             var s = Substitute.For<IScaler<object>>();
-            s.IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>()).Returns(false);
+            s.IsFirstRun(1).Returns(false);
 
             var scaler = new AutoScalerHelper(s, null);
             scaler.Run();
 
-            s.Received().IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>());
+            s.Received().IsFirstRun(1);
         }
     }
 }

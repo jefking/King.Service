@@ -29,7 +29,7 @@
             var units = new ConcurrentStack<IRoleTaskManager<object>>();
 
             var s = new Scaler<object>();
-            s.ScaleUp(factory, units, Guid.NewGuid().ToString());
+            s.ScaleUp(factory, Guid.NewGuid().ToString());
 
             Assert.AreEqual(1, units.Count);
         }
@@ -41,19 +41,9 @@
             var units = new ConcurrentStack<IRoleTaskManager<object>>();
 
             var s = new Scaler<object>();
-            s.ScaleUp(null, units, Guid.NewGuid().ToString());
+            s.ScaleUp(null, Guid.NewGuid().ToString());
 
             Assert.AreEqual(1, units.Count);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ScaleUpUnitsNull()
-        {
-            var factory = Substitute.For<ITaskFactory<object>>();
-
-            var s = new Scaler<object>();
-            s.ScaleUp(factory, null, Guid.NewGuid().ToString());
         }
 
         [Test]
@@ -61,10 +51,9 @@
         public void ScaleUpServiceNameNull()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
-            var units = new ConcurrentStack<IRoleTaskManager<object>>();
 
             var s = new Scaler<object>();
-            s.ScaleUp(factory, units, null);
+            s.ScaleUp(factory, null);
         }
 
         [Test]
@@ -78,24 +67,14 @@
             units.Push(task);
 
             var s = new Scaler<object>();
-            s.ScaleDown(units, Guid.NewGuid().ToString());
+            s.ScaleDown(Guid.NewGuid().ToString());
 
             Assert.AreEqual(0, units.Count);
 
             task.Received().OnStop();
             task.Received().Dispose();
         }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ScaleDownUnitsNull()
-        {
-            var factory = Substitute.For<ITaskFactory<object>>();
-
-            var s = new Scaler<object>();
-            s.ScaleDown(null, Guid.NewGuid().ToString());
-        }
-
+        
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ScaleDownServiceNameNull()
@@ -104,7 +83,7 @@
             var units = new ConcurrentStack<IRoleTaskManager<object>>();
 
             var s = new Scaler<object>();
-            s.ScaleDown(units, null);
+            s.ScaleDown(null);
         }
     }
 }
