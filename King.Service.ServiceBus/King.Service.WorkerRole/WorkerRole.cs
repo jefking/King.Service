@@ -5,7 +5,7 @@ namespace King.Service.WorkerRole
 
     public class WorkerRole : RoleEntryPoint
     {
-        private readonly RoleTaskManager<Configuration> manager = new RoleTaskManager<Configuration>(new Factory());
+        private readonly IRoleTaskManager<Configuration> manager = new RoleTaskManager<Configuration>(new Factory());
 
         public override void Run()
         {
