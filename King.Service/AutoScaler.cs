@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using King.Service.Timing;
 
     /// <summary>
     /// Task AutoScaler
@@ -39,6 +40,7 @@
         /// <param name="minimum">Minimum</param>
         /// <param name="maximum">Maximum</param>
         public AutoScaler(byte minimum = 0, byte maximum = 1, T configuration = default(T))
+            : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(10).TotalSeconds)
         {
             if (minimum > maximum)
             {
@@ -76,7 +78,22 @@
         #endregion
 
         #region Methods
-        public abstract IEnumerable<IRunnable> Tasks(T data);
+        /// <summary>
+        /// Build Task Manifest
+        /// </summary>
+        /// <param name="passthrough">Configuration</param>
+        /// <returns>Runnable Tasks</returns>
+        public virtual IEnumerable<IRunnable> Tasks(T data)
+        {
+            return this.ScaleUnit(data);
+        }
+
+        /// <summary>
+        /// Services which should be scaled as a group
+        /// </summary>
+        /// <param name="data">Configuration</param>
+        /// <returns>Scalable Tasks</returns>
+        public abstract IEnumerable<IScalable> ScaleUnit(T data);
 
         /// <summary>
         /// Task Run
@@ -86,8 +103,10 @@
             var timeToScale = 0;
             foreach (var unit in this.units)
             {
-                //Determine a way to track if processes are doing work.
-                //timeToScale += task.Busy ? 1 : -1;
+                foreach (IScalable t in unit.Tasks)
+                {
+                    timeToScale += t.Scale ? 1 : -1;
+                }
             }
 
             if (timeToScale > 0 && this.units.Count > this.minimum) //Scale Up

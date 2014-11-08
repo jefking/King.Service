@@ -3,6 +3,7 @@
     using King.Service.Timing;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading;
@@ -17,7 +18,7 @@
         /// <summary>
         /// Services
         /// </summary>
-        protected IEnumerable<IRunnable> services = null;
+        protected IReadOnlyCollection<IRunnable> tasks = null;
 
         /// <summary>
         /// Manager
@@ -46,6 +47,19 @@
         }
         #endregion
 
+        #region Properties
+        /// <summary>
+        /// Tasks
+        /// </summary>
+        public IReadOnlyCollection<IRunnable> Tasks
+        {
+            get
+            {
+                return this.tasks;
+            }
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Run
@@ -54,14 +68,14 @@
         {
             Trace.TraceInformation("Run called");
 
-            if (null != services && services.Any())
+            if (null != tasks && tasks.Any())
             {
-                var serviceCount = services.Count();
+                var serviceCount = tasks.Count();
                 Trace.TraceInformation("Starting {0} services.", serviceCount);
 
                 var successCount = 0;
 
-                foreach (var s in services)
+                foreach (var s in tasks)
                 {
                     try
                     {
@@ -100,11 +114,11 @@
 
             lock (this.servicesLock)
             {
-                if (null == this.services)
+                if (null == this.tasks)
                 {
                     Trace.TraceInformation("Loading Services.");
 
-                    this.services = this.manager.Tasks(passthrough);
+                    this.tasks = new ReadOnlyCollection<IRunnable>(this.manager.Tasks(passthrough).ToList());
 
                     Trace.TraceInformation("Services Loaded.");
                 }
@@ -122,11 +136,11 @@
         {
             Trace.TraceInformation("On stop called.");
 
-            if (null != services && services.Any())
+            if (null != tasks && tasks.Any())
             {
-                Trace.TraceInformation("Stopping {0} services.", services.Count());
+                Trace.TraceInformation("Stopping {0} services.", tasks.Count());
 
-                Parallel.ForEach(services, s =>
+                Parallel.ForEach(tasks, s =>
                 {
                     try
                     {
@@ -141,9 +155,9 @@
                 }
                 );
 
-                Trace.TraceInformation("Stopped {0} services.", services.Count());
+                Trace.TraceInformation("Stopped {0} services.", tasks.Count());
 
-                services = null;
+                tasks = null;
             }
             else
             {

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    #region IRunnable
     /// <summary>
     /// Runnable interface for Tasks
     /// </summary>
@@ -28,7 +29,27 @@
         bool Start();
         #endregion
     }
+    #endregion
 
+    #region IScalable
+    /// <summary>
+    /// Scalable Task Interface
+    /// </summary>
+    public interface IScalable : IRunnable
+    {
+        #region Properties
+        /// <summary>
+        /// Service Should Scale
+        /// </summary>
+        bool Scale
+        {
+            get;
+        }
+        #endregion
+    }
+    #endregion
+
+    #region IDynamicRuns
     /// <summary>
     /// Dynamic Runs Interface
     /// </summary>
@@ -60,7 +81,9 @@
         }
         #endregion
     }
+    #endregion
 
+    #region ITaskFactory
     /// <summary>
     /// Task Factory
     /// </summary>
@@ -68,15 +91,32 @@
     public interface ITaskFactory<T>
     {
         #region Methods
+        /// <summary>
+        /// Build Task Manifest
+        /// </summary>
+        /// <param name="passthrough">Configuration</param>
+        /// <returns>Runnable Tasks</returns>
         IEnumerable<IRunnable> Tasks(T passthrough);
         #endregion
     }
+    #endregion
 
+    #region IRoleTaskManager
     /// <summary>
     /// Role Task Manager Interface
     /// </summary>
     public interface IRoleTaskManager<T>
     {
+        #region Properties
+        /// <summary>
+        /// Tasks
+        /// </summary>
+        IReadOnlyCollection<IRunnable> Tasks
+        {
+            get;
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Run
@@ -96,4 +136,5 @@
         void OnStop();
         #endregion
     }
+    #endregion
 }
