@@ -26,12 +26,11 @@
         public void ScaleUp()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
-            var units = new ConcurrentStack<IRoleTaskManager<object>>();
 
             var s = new Scaler<object>();
             s.ScaleUp(factory, Guid.NewGuid().ToString());
 
-            Assert.AreEqual(1, units.Count);
+            Assert.AreEqual(1, s.CurrentUnits);
         }
 
         [Test]
@@ -59,17 +58,16 @@
         [Test]
         public void ScaleDown()
         {
+            var factory = Substitute.For<ITaskFactory<object>>();
             var task = Substitute.For<IRoleTaskManager<object>>();
             task.OnStop();
             task.Dispose();
-
-            var units = new ConcurrentStack<IRoleTaskManager<object>>();
-            units.Push(task);
-
+            
             var s = new Scaler<object>();
+            s.ScaleUp(factory, Guid.NewGuid().ToString());
             s.ScaleDown(Guid.NewGuid().ToString());
 
-            Assert.AreEqual(0, units.Count);
+            Assert.AreEqual(0, s.CurrentUnits);
 
             task.Received().OnStop();
             task.Received().Dispose();
