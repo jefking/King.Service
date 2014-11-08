@@ -20,6 +20,11 @@
         #endregion
         
         #region Constructors
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
+        /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
         public CalculateTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
         {
             if (0 >= minimumPeriodInSeconds)

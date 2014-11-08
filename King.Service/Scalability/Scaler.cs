@@ -19,11 +19,18 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
         public Scaler()
             : this(new ConcurrentStack<IRoleTaskManager<T>>())
         {
         }
 
+        /// <summary>
+        /// Mockable Constructor
+        /// </summary>
+        /// <param name="units">Scale Units</param>
         public Scaler(IProducerConsumerCollection<IRoleTaskManager<T>> units)
         {
             if (null == units)
@@ -37,7 +44,7 @@
 
         #region Properties
         /// <summary>
-        /// Currnet Unit Count
+        /// Current Unit Count
         /// </summary>
         public virtual int CurrentUnits
         {
@@ -52,7 +59,7 @@
         /// <summary>
         /// Should Scale
         /// </summary>
-        /// <returns>Scale</returns>
+        /// <returns>Direction</returns>
         public virtual Direction ShouldScale()
         {
             var timeToScale = 0;
@@ -95,8 +102,8 @@
         /// </summary>
         /// <param name="minimum">Minimum</param>
         /// <param name="factory">Factory</param>
-        /// <param name="serviceName">Service Name</param>
-        public virtual void Initialize(byte minimum, ITaskFactory<T> factory, string serviceName)
+        /// <param name="taskName">Task Name</param>
+        public virtual void Initialize(byte minimum, ITaskFactory<T> factory, string taskName)
         {
             if (minimum < 1)
             {
@@ -106,32 +113,34 @@
             {
                 throw new ArgumentNullException("factory");
             }
-            if (string.IsNullOrWhiteSpace(serviceName))
+            if (string.IsNullOrWhiteSpace(taskName))
             {
-                throw new ArgumentException("serviceName");
+                throw new ArgumentException("taskName");
             }
 
             while (units.Count < minimum)
             {
-                this.ScaleUp(factory, serviceName);
+                this.ScaleUp(factory, taskName);
             }
         }
 
         /// <summary>
         /// Scale Up by one unit
         /// </summary>
-        public virtual void ScaleUp(ITaskFactory<T> factory, string serviceName)
+        /// <param name="factory">Factory</param>
+        /// <param name="taskName">Task Name</param>
+        public virtual void ScaleUp(ITaskFactory<T> factory, string taskName)
         {
             if (null == factory)
             {
                 throw new ArgumentNullException("factory");
             }
-            if (string.IsNullOrWhiteSpace(serviceName))
+            if (string.IsNullOrWhiteSpace(taskName))
             {
-                throw new ArgumentException("serviceName");
+                throw new ArgumentException("taskName");
             }
 
-            Trace.TraceInformation("Scaling Up: '{0}'.", serviceName);
+            Trace.TraceInformation("Scaling Up: '{0}'.", taskName);
 
             var unit = new RoleTaskManager<T>(factory);
 
@@ -142,27 +151,28 @@
 
                 units.TryAdd(unit);
 
-                Trace.TraceInformation("Scaled Up: '{0}'.", serviceName);
+                Trace.TraceInformation("Scaled Up: '{0}'.", taskName);
             }
             else
             {
                 unit.Dispose();
 
-                Trace.TraceWarning("Failed to start Scale Unit: '{0}'.", serviceName);
+                Trace.TraceWarning("Failed to start Scale Unit: '{0}'.", taskName);
             }
         }
 
         /// <summary>
         /// Scale down by one unit
         /// </summary>
-        public virtual void ScaleDown(string serviceName)
+        /// <param name="taskName">Task Name</param>
+        public virtual void ScaleDown(string taskName)
         {
-            if (string.IsNullOrWhiteSpace(serviceName))
+            if (string.IsNullOrWhiteSpace(taskName))
             {
-                throw new ArgumentException("serviceName");
+                throw new ArgumentException("taskName");
             }
 
-            Trace.TraceInformation("Scaling Down: '{0}'.", serviceName);
+            Trace.TraceInformation("Scaling Down: '{0}'.", taskName);
 
             IRoleTaskManager<T> unit;
             if (units.TryTake(out unit))
@@ -171,7 +181,7 @@
                 unit.Dispose();
             }
 
-            Trace.TraceInformation("Scaled Down: '{0}'.", serviceName);
+            Trace.TraceInformation("Scaled Down: '{0}'.", taskName);
         }
         #endregion
     }

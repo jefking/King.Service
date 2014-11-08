@@ -37,21 +37,21 @@
         /// </summary>
         /// <param name="minimum">Minimum</param>
         /// <param name="factory">Factory</param>
-        /// <param name="serviceName">Service Name</param>
-        void Initialize(byte minimum, ITaskFactory<T> factory, string serviceName);
+        /// <param name="taskName">Task Name</param>
+        void Initialize(byte minimum, ITaskFactory<T> factory, string taskName);
 
         /// <summary>
         /// Scale Up by one unit
         /// </summary>
         /// <param name="factory">Task Factory</param>
-        /// <param name="serviceName">Service Name (for Tracing)</param>
-        void ScaleUp(ITaskFactory<T> factory, string serviceName);
+        /// <param name="taskName">Task Name</param>
+        void ScaleUp(ITaskFactory<T> factory, string taskName);
 
         /// <summary>
         /// Scale down by one unit
         /// </summary>
-        /// <param name="serviceName">Service Name (for Tracing)</param>
-        void ScaleDown(string serviceName);
+        /// <param name="taskName">Task Name</param>
+        void ScaleDown(string taskName);
         #endregion
     }
 }
