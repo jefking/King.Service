@@ -17,6 +17,13 @@
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorUnitsNull()
+        {
+            new Scaler<object>(null);
+        }
+
+        [Test]
         public void IsIScaler()
         {
             Assert.IsNotNull(new Scaler<object>() as IScaler<object>);

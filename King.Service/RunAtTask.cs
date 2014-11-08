@@ -29,7 +29,7 @@
         public RunAtTask(string connectionString, byte hour = 0, sbyte minute = -1)
             : base(connectionString, minute <= 0 ? 3599 : 59)
         {
-            this.hour = hour < 0 ? (byte)0 : (hour > 23 ? (byte)23 : hour);
+            this.hour = hour > 23 ? (byte)23 : hour;
             this.minute = minute < 0 ? (sbyte)-1 : (minute > 59 ? (sbyte)59 : (sbyte)minute);
         }
         #endregion

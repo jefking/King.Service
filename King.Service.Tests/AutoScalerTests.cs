@@ -20,7 +20,7 @@
             /// Default Constructor
             /// </summary>
             public AutoScalerHelper(object configuration = null, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 20)
-                : base(new Scaler<object>(), configuration, minimum, maximum, checkScaleInMinutes)
+                : base(configuration, minimum, maximum, checkScaleInMinutes)
             {
             }
 

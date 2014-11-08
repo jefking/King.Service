@@ -30,22 +30,49 @@
         }
 
         [Test]
-        public void Run()
+        public void TasksOnInit()
         {
-            var services = new List<IRunnable>();
-            var service = Substitute.For<IRunnable>();
-            service.Start();
+            var factory = Substitute.For<ITaskFactory<object>>();
+            var rtm = new RoleTaskManager<object>(factory);
+            Assert.IsNull(rtm.Tasks);
+        }
 
-            services.Add(service);
+        [Test]
+        public void Tasks()
+        {
+            var tasks = new List<IRunnable>();
+            var task = Substitute.For<IRunnable>();
+            task.Start();
+
+            tasks.Add(task);
 
             var factory = Substitute.For<ITaskFactory<object>>();
-            factory.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(services);
+            factory.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(tasks);
 
             var manager = new RoleTaskManager<object>(factory);
             manager.OnStart();
             manager.Run();
 
-            service.Received().Start();
+            Assert.AreEqual(tasks, manager.Tasks);
+        }
+
+        [Test]
+        public void Run()
+        {
+            var tasks = new List<IRunnable>();
+            var task = Substitute.For<IRunnable>();
+            task.Start();
+
+            tasks.Add(task);
+
+            var factory = Substitute.For<ITaskFactory<object>>();
+            factory.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(tasks);
+
+            var manager = new RoleTaskManager<object>(factory);
+            manager.OnStart();
+            manager.Run();
+
+            task.Received().Start();
             factory.Received().Tasks(Arg.Any<RoleTaskManager<object>>());
         }
 
@@ -82,6 +109,15 @@
         {
             var factory = Substitute.For<ITaskFactory<object>>();
             var manager = new RoleTaskManager<object>(factory);
+            manager.OnStart();
+        }
+
+        [Test]
+        public void OnStartTwice()
+        {
+            var factory = Substitute.For<ITaskFactory<object>>();
+            var manager = new RoleTaskManager<object>(factory);
+            manager.OnStart();
             manager.OnStart();
         }
 
@@ -143,6 +179,29 @@
             var factory = Substitute.For<ITaskFactory<object>>();
             var manager = new RoleTaskManager<object>(factory);
             manager.OnStop();
+        }
+
+        [Test]
+        public void Dispose()
+        {
+            var tasks = new List<IRunnable>();
+            var task = Substitute.For<IRunnable>();
+            task.Start();
+
+            tasks.Add(task);
+
+            var factory = Substitute.For<ITaskFactory<object>>();
+            factory.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(tasks);
+
+            using (var manager = new RoleTaskManager<object>(factory))
+            {
+                manager.OnStart();
+                manager.Run();
+            }
+
+            task.Received().Start();
+            task.Received().Dispose();
+            factory.Received().Tasks(Arg.Any<RoleTaskManager<object>>());
         }
     }
 }

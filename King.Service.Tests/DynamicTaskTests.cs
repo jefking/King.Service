@@ -48,6 +48,40 @@
         }
 
         [Test]
+        public void Scale()
+        {
+            var timing = Substitute.For<ICalculateTiming>();
+            timing.MinimumPeriodInSeconds.Returns(60);
+            var time = Substitute.For<IDynamicTiming>();
+            time.Timing.Returns(timing);
+
+            using (var task = new DynamicTest(time))
+            {
+                Assert.IsTrue(task.Scale);
+            }
+
+            var t = time.Received().Timing;
+            var mpins = timing.Received().MinimumPeriodInSeconds;
+        }
+
+        [Test]
+        public void ScaleNope()
+        {
+            var timing = Substitute.For<ICalculateTiming>();
+            timing.MinimumPeriodInSeconds.Returns(120);
+            var time = Substitute.For<IDynamicTiming>();
+            time.Timing.Returns(timing);
+
+            using (var task = new DynamicTest(time))
+            {
+                Assert.IsFalse(task.Scale);
+            }
+
+            var t = time.Received().Timing;
+            var mpins = timing.Received().MinimumPeriodInSeconds;
+        }
+
+        [Test]
         public void Run()
         {
             var random = new Random();
