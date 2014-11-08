@@ -5,6 +5,16 @@
     /// </summary>
     public interface ICalculateTiming
     {
+        #region Properties
+        /// <summary>
+        /// Minimum Timeframe (seconds) (starting timeframe)
+        /// </summary>
+        int MinimumPeriodInSeconds
+        {
+            get;
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Exponential Timing
@@ -20,6 +30,16 @@
     /// </summary>
     public interface IDynamicTiming
     {
+        #region Properties
+        /// <summary>
+        /// Timing Helper
+        /// </summary>
+        ICalculateTiming Timing
+        {
+            get;
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Get Timing

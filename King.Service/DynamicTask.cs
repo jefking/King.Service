@@ -7,7 +7,7 @@
     /// <summary>
     /// Dynamic Task, base class for Tasks which change their own timing based on quantity of work
     /// </summary>
-    public abstract class DynamicTask : RecurringTask
+    public abstract class DynamicTask : RecurringTask, IScalable
     {
         #region Members
         /// <summary>
@@ -23,7 +23,7 @@
         /// <param name="timing">Timing</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public DynamicTask(IDynamicTiming timing, int minimumPeriodInSeconds = BaseTimes.MinimumTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
+        public DynamicTask(IDynamicTiming timing, int minimumPeriodInSeconds = BaseTimes.InitializationTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
             : base(minimumPeriodInSeconds, minimumPeriodInSeconds)
         {
             if (null == timing)
@@ -32,6 +32,19 @@
             }
 
             this.timing = timing;
+        }
+        #endregion
+
+        #region Properties
+        /// <summary>
+        /// Service Should Scale
+        /// </summary>
+        public virtual bool Scale
+        {
+            get
+            {
+                return this.timing.Timing.MinimumPeriodInSeconds == base.Every.TotalSeconds;
+            }
         }
         #endregion
 

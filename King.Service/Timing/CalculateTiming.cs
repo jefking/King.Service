@@ -36,6 +36,19 @@
         }
         #endregion
 
+        #region Properties
+        /// <summary>
+        /// Minimum Timeframe (seconds) (starting timeframe)
+        /// </summary>
+        public virtual int MinimumPeriodInSeconds
+        {
+            get
+            {
+                return this.minimumPeriodInSeconds;
+            }
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Exponential Backoff strategy, within bounds

@@ -45,6 +45,19 @@
         }
         #endregion
 
+        #region Properties
+        /// <summary>
+        /// Timing Helper
+        /// </summary>
+        public virtual ICalculateTiming Timing
+        {
+            get
+            {
+                return this.timing;
+            }
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Get Timing
