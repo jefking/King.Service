@@ -16,6 +16,7 @@
         {
             Trace.TraceInformation("Scaling up.");
             yield return new AdaptiveRunner(new ScalableTask());
+            yield return new BackoffRunner(new ScalableTask()); // More Likely to scale up
         }
     }
 }

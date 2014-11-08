@@ -29,6 +29,7 @@
             var workWasDone = (random.Next() % 2) == 0;
 
             Trace.TraceInformation("Work was done: {0}", workWasDone);
+
             return Task.FromResult(workWasDone);
         }
     }
