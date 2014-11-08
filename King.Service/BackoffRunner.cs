@@ -37,12 +37,17 @@
         }
         #endregion
 
-        public bool Scale
+        #region Properties
+        /// <summary>
+        /// Service Should Scale
+        /// </summary>
+        public virtual bool Scale
         {
             get
             {
                 return this.run.MinimumPeriodInSeconds == base.Every.TotalSeconds;
             }
         }
+        #endregion
     }
 }
