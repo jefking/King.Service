@@ -132,6 +132,10 @@
 
                 Trace.TraceInformation("Scaled Down: '{0}'.", this.ServiceName);
             }
+            else
+            {
+                Trace.TraceInformation("Currently running at optimal scale: '{0}'.", this.ServiceName);
+            }
         }
         #endregion
     }
