@@ -51,11 +51,22 @@
         }
 
         [Test]
+        public void IsIRunnable()
+        {
+            Assert.IsNotNull(new TestRecurring(100, 100) as IRunnable);
+        }
+
+        [Test]
+        public void IsIDisposable()
+        {
+            Assert.IsNotNull(new TestRecurring(100, 100) as IDisposable);
+        }
+
+        [Test]
         public void Dispose()
         {
             using (var m = new TestRecurring(100, 100))
             {
-
             }
         }
 
