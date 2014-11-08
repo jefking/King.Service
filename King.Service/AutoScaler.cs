@@ -1,15 +1,17 @@
 ﻿namespace King.Service
 {
+    using King.Service.Scalability;
     using King.Service.Timing;
     using System;
-    using System.Linq;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
 
     /// <summary>
     /// Task AutoScaler
     /// </summary>
+    /// <typeparam name="T">Configuration</typeparam>
     public abstract class AutoScaler<T> : RecurringTask, ITaskFactory<T>
     {
         #region Members
@@ -32,6 +34,11 @@
         /// Running Tasks
         /// </summary>
         protected readonly ConcurrentStack<IRoleTaskManager<T>> units = new ConcurrentStack<IRoleTaskManager<T>>();
+
+        /// <summary>
+        /// Scaler
+        /// </summary>
+        protected readonly IScaler<T> scaler = null;
         #endregion
 
         #region Constructors
@@ -39,6 +46,14 @@
         /// Default Constructor
         /// </summary>
         public AutoScaler(T configuration = default(T), byte minimum = 0, byte maximum = 1, byte scaleCheckInMinutes = 20)
+            : this(new Scaler<T>(), configuration, minimum, maximum, scaleCheckInMinutes)
+        {
+        }
+
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 0, byte maximum = 1, byte scaleCheckInMinutes = 20)
             : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(scaleCheckInMinutes).TotalSeconds)
         {
             if (1 > minimum)
@@ -49,10 +64,15 @@
             {
                 throw new ArgumentException("Minimum should be less than Maximum");
             }
+            if (null == scaler)
+            {
+                throw new ArgumentNullException("Scaler");
+            }
 
             this.configuration = configuration;
             this.minimum = minimum;
             this.maximum = maximum;
+            this.scaler = scaler;
         }
         #endregion
 
@@ -109,7 +129,7 @@
             {
                 while (this.units.Count < this.minimum)
                 {
-                    this.ScaleUp();
+                    this.scaler.ScaleUp(this, this.units, this.ServiceName);
                 }
             }
             else
@@ -120,62 +140,19 @@
                     timeToScale += t.Scale ? 1 : -1;
                 }
 
-                if (timeToScale > 0 && this.units.Count < this.maximum) //Scale Up
+                if (timeToScale > 0 && this.units.Count < this.maximum)
                 {
-                    this.ScaleUp();
+                    this.scaler.ScaleUp(this, this.units, this.ServiceName);
                 }
-                else if (timeToScale < 0 && this.units.Count > this.minimum) //Scale Down
+                else if (timeToScale < 0 && this.units.Count > this.minimum)
                 {
-                    this.ScaleDown();
+                    this.scaler.ScaleDown(this.units, this.ServiceName);
                 }
                 else
                 {
                     Trace.TraceInformation("'{0}' is currently running at optimal scale with {1} units.", this.ServiceName, this.units.Count);
                 }
             }
-        }
-
-        /// <summary>
-        /// Scale Up by one unit
-        /// </summary>
-        public virtual void ScaleUp()
-        {
-            Trace.TraceInformation("Scaling Up: '{0}'.", this.ServiceName);
-
-            var unit = new RoleTaskManager<T>(this);
-
-            var success = unit.OnStart();
-            if (success)
-            {
-                unit.Run();
-
-                this.units.Push(unit);
-
-                Trace.TraceInformation("Scaled Up: '{0}'.", this.ServiceName);
-            }
-            else
-            {
-                unit.Dispose();
-
-                Trace.TraceWarning("Failed to start Scale Unit: '{0}'.", this.ServiceName);
-            }
-        }
-
-        /// <summary>
-        /// Scale down by one unit
-        /// </summary>
-        public virtual void ScaleDown()
-        {
-            Trace.TraceInformation("Scaling Down: '{0}'.", this.ServiceName);
-
-            IRoleTaskManager<T> unit;
-            if (this.units.TryPop(out unit))
-            {
-                unit.OnStop();
-                unit.Dispose();
-            }
-
-            Trace.TraceInformation("Scaled Down: '{0}'.", this.ServiceName);
         }
         #endregion
     }

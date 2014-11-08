@@ -1,5 +1,6 @@
 ### Task scheduling for Azure and Windows
-+ Plugs into Azure Worker Roles
++ Plugs into Azure Worker Roles & Windows Servers
++ Auto-Scale workloads within your server
 + Tasks to initialize your environment
  + Create Azure Storage: Queues, Tables and Containers
  + Load WFC services
