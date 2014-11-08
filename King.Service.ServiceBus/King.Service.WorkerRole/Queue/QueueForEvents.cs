@@ -5,7 +5,7 @@
     using System;
     using System.Diagnostics;
 
-    public class QueueForEvents : TaskManager
+    public class QueueForEvents : RecurringTask
     {
         #region Members
         /// <summary>

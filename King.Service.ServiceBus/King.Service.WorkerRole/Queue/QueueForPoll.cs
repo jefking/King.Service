@@ -5,7 +5,7 @@
     using System;
     using System.Diagnostics;
 
-    public class QueueForPoll : TaskManager
+    public class QueueForPoll : RecurringTask
     {
         #region Members
         /// <summary>
@@ -25,6 +25,7 @@
             this.client = client;
         }
         #endregion
+
         public override void Run()
         {
             var model = new ExampleModel()

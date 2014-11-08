@@ -4,6 +4,7 @@
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Diagnostics;
 
     /// <summary>
     /// Task AutoScaler
@@ -108,19 +109,28 @@
 
             if (timeToScale > 0 && this.units.Count < this.maximum) //Scale Up
             {
+                Trace.TraceInformation("Scaling Up: '{0}'.", this.ServiceName);
+
                 var unit = new RoleTaskManager<T>(this);
                 this.units.Push(unit);
 
                 unit.OnStart();
                 unit.Run();
+
+                Trace.TraceInformation("Scaled Up: '{0}'.", this.ServiceName);
             }
             else if (timeToScale < 0 && this.units.Count > this.minimum) //Scale Down
             {
+                Trace.TraceInformation("Scaling Down: '{0}'.", this.ServiceName);
+
                 IRoleTaskManager<T> unit;
                 if (this.units.TryPop(out unit))
                 {
                     unit.OnStop();
+                    unit.Dispose();
                 }
+
+                Trace.TraceInformation("Scaled Down: '{0}'.", this.ServiceName);
             }
         }
         #endregion

@@ -45,6 +45,14 @@
 
             this.manager = manager;
         }
+
+        /// <summary>
+        /// Finalizer
+        /// </summary>
+        ~RoleTaskManager() 
+        {
+            Dispose(false);
+        }
         #endregion
 
         #region Properties
@@ -177,6 +185,34 @@
             }
 
             Trace.TraceInformation("On stop finished.");
+        }
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing">Disposing</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (null != this.tasks)
+                {
+                    foreach (var t in tasks)
+                    {
+                        t.Dispose();
+                    }
+                }
+            }
         }
         #endregion
     }

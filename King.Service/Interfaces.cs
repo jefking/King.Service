@@ -1,5 +1,6 @@
 ﻿namespace King.Service
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@
     /// <summary>
     /// Runnable interface for Tasks
     /// </summary>
-    public interface IRunnable
+    public interface IRunnable : IDisposable
     {
         #region Methods
         /// <summary>
@@ -105,7 +106,7 @@
     /// <summary>
     /// Role Task Manager Interface
     /// </summary>
-    public interface IRoleTaskManager<T>
+    public interface IRoleTaskManager<T> : IDisposable
     {
         #region Properties
         /// <summary>

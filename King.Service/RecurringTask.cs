@@ -8,7 +8,7 @@
     /// <summary>
     /// Recurring Task
     /// </summary>
-    public abstract class RecurringTask : IRunnable, IDisposable
+    public abstract class RecurringTask : IRunnable
     {
         #region Members
         /// <summary>
@@ -144,11 +144,7 @@
         {
             if (disposing)
             {
-                if (null != this.timer)
-                {
-                    this.timer.Dispose();
-                    this.timer = null;
-                }
+                this.Stop();
             }
         }
         #endregion
