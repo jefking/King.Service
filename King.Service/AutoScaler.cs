@@ -45,16 +45,16 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public AutoScaler(T configuration = default(T), byte minimum = 0, byte maximum = 1, byte scaleCheckInMinutes = 20)
-            : this(new Scaler<T>(), configuration, minimum, maximum, scaleCheckInMinutes)
+        public AutoScaler(T configuration = default(T), byte minimum = 0, byte maximum = 1, byte checkScaleInMinutes = 20)
+            : this(new Scaler<T>(), configuration, minimum, maximum, checkScaleInMinutes)
         {
         }
 
         /// <summary>
-        /// Default Constructor
+        /// Mockable Constructor
         /// </summary>
-        public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 0, byte maximum = 1, byte scaleCheckInMinutes = 20)
-            : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(scaleCheckInMinutes).TotalSeconds)
+        public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 0, byte maximum = 1, byte checkScaleInMinutes = 20)
+            : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(checkScaleInMinutes).TotalSeconds)
         {
             if (1 > minimum)
             {
