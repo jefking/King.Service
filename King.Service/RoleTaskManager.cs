@@ -56,13 +56,18 @@
 
             if (null != services && services.Any())
             {
-                Trace.TraceInformation("Starting {0} services.", services.Count());
+                var serviceCount = services.Count();
+                Trace.TraceInformation("Starting {0} services.", serviceCount);
+
+                var successCount = 0;
 
                 foreach (var s in services)
                 {
                     try
                     {
                         s.Start();
+                        
+                        successCount++;
 
                         Trace.TraceInformation("{0} Started.", s.GetType().ToString());
                     }
@@ -74,7 +79,7 @@
                     Thread.Sleep(BaseTimes.ThreadingOffset);
                 }
 
-                Trace.TraceInformation("Finished starting services.");
+                Trace.TraceInformation("Finished starting services {0}/{1} successfully.", successCount, serviceCount);
             }
             else
             {
