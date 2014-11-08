@@ -98,6 +98,8 @@
         /// </summary>
         public override void Run()
         {
+            Trace.TraceInformation("Checking for appropriate scale: '{0}'.", this.ServiceName);
+
             var timeToScale = this.units.Count == 0 ? 1 : 0;
             foreach (var unit in this.units)
             {

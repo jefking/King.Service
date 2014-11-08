@@ -102,7 +102,7 @@
                 timing.Stop();
             }
 
-            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.ServiceName, timing.Elapsed);
+            Trace.TraceInformation("{0}: Task Completed (@{2}) (Duration: {1}).", this.ServiceName, timing.Elapsed, DateTime.UtcNow);
         }
 
         /// <summary>
