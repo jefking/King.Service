@@ -40,7 +40,7 @@
         public AutoScaler(T configuration = default(T), byte minimum = 0, byte maximum = 1, byte scaleCheckInMinutes = 20)
             : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(scaleCheckInMinutes).TotalSeconds)
         {
-            if (1 < minimum)
+            if (1 > minimum)
             {
                 throw new ArgumentException("Minimum must be 1 or greater");
             }
