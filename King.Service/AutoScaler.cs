@@ -145,12 +145,22 @@
             Trace.TraceInformation("Scaling Up: '{0}'.", this.ServiceName);
 
             var unit = new RoleTaskManager<T>(this);
-            this.units.Push(unit);
 
-            unit.OnStart();
-            unit.Run();
+            var success = unit.OnStart();
+            if (success)
+            {
+                unit.Run();
 
-            Trace.TraceInformation("Scaled Up: '{0}'.", this.ServiceName);
+                this.units.Push(unit);
+
+                Trace.TraceInformation("Scaled Up: '{0}'.", this.ServiceName);
+            }
+            else
+            {
+                unit.Dispose();
+
+                Trace.TraceWarning("Failed to start Scale Unit: '{0}'.", this.ServiceName);
+            }
         }
 
         /// <summary>
