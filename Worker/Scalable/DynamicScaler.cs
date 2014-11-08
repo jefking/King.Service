@@ -7,7 +7,7 @@
     public class DynamicScaler : AutoScaler<Configuration>
     {
         public DynamicScaler(Configuration config)
-            : base(1, 15, config)
+            : base(config, 1, 15)
         {
             Trace.TraceInformation("Scaler Loaded.");
         }
@@ -16,7 +16,6 @@
         {
             Trace.TraceInformation("Scaling up.");
             yield return new AdaptiveRunner(new ScalableTask());
-            yield return new BackoffRunner(new ScalableTask());
         }
     }
 }

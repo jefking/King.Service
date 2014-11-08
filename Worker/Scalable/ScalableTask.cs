@@ -8,12 +8,12 @@
     {
         public int MaximumPeriodInSeconds
         {
-            get { return 1; }
+            get { return 30; }
         }
 
         public int MinimumPeriodInSeconds
         {
-            get { return 10; }
+            get { return 20; }
         }
 
         public Task<bool> Run()
