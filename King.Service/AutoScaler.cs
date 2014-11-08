@@ -97,7 +97,7 @@
         /// </summary>
         public override void Run()
         {
-            var timeToScale = 0;
+            var timeToScale = this.units.Count == 0 ? 1 : 0;
             foreach (var unit in this.units)
             {
                 foreach (IScalable t in unit.Tasks)

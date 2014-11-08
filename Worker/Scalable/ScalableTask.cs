@@ -1,6 +1,7 @@
 ﻿namespace Worker
 {
     using King.Service;
+    using System.Diagnostics;
     using System.Threading.Tasks;
 
     public class ScalableTask : IDynamicRuns
@@ -17,6 +18,7 @@
 
         public Task<bool> Run()
         {
+            Trace.TraceInformation("Scalable Task Running.");
             return Task.FromResult(true);
         }
     }
