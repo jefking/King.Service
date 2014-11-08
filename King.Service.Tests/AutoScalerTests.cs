@@ -2,10 +2,12 @@
 {
     using King.Service;
     using King.Service.Scalability;
-    using King.Service.Timing;
+    using NSubstitute;
     using NUnit.Framework;
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
 
     [TestFixture]
     public class AutoScalerTests
@@ -109,12 +111,74 @@
         public void Tasks()
         {
             var scaler = new AutoScalerHelper();
+            var unit = scaler.Tasks(null);
+
+            Assert.IsNotNull(unit);
+            Assert.AreEqual(1, unit.Count());
+            Assert.IsNotNull(unit.First() as AdaptiveHelper);
         }
 
         [Test]
         public void ScaleUnit()
         {
             var scaler = new AutoScalerHelper();
+            var unit = scaler.ScaleUnit(null);
+
+            Assert.IsNotNull(unit);
+            Assert.AreEqual(1, unit.Count());
+            Assert.IsNotNull(unit.First() as AdaptiveHelper);
+        }
+
+        [Test]
+        public void RunIsFirstRun()
+        {
+            var s = Substitute.For<IScaler<object>>();
+            s.IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>()).Returns(true);
+
+            var scaler = new AutoScalerHelper(s, null);
+
+            s.Initialize(1, scaler, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>(), Arg.Any<string>());
+
+            scaler.Run();
+
+            s.Received().IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>());
+            s.Received().Initialize(1, scaler, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>(), Arg.Any<string>());
+        }
+
+        [Test]
+        public void RunScaleUp()
+        {
+            var s = Substitute.For<IScaler<object>>();
+            s.IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>()).Returns(false);
+
+            var scaler = new AutoScalerHelper(s, null);
+            scaler.Run();
+
+            s.Received().IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>());
+        }
+
+        [Test]
+        public void RunScaleDown()
+        {
+            var s = Substitute.For<IScaler<object>>();
+            s.IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>()).Returns(false);
+
+            var scaler = new AutoScalerHelper(s, null);
+            scaler.Run();
+
+            s.Received().IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>());
+        }
+
+        [Test]
+        public void RunOptimal()
+        {
+            var s = Substitute.For<IScaler<object>>();
+            s.IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>()).Returns(false);
+
+            var scaler = new AutoScalerHelper(s, null);
+            scaler.Run();
+
+            s.Received().IsFirstRun(1, Arg.Any<ConcurrentStack<IRoleTaskManager<object>>>());
         }
     }
 }

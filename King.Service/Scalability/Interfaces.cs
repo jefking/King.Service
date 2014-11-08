@@ -10,6 +10,23 @@
     {
         #region Methods
         /// <summary>
+        /// Is First Run
+        /// </summary>
+        /// <param name="minimum">Minimum</param>
+        /// <param name="units">Units</param>
+        /// <returns>Is First Run</returns>
+        bool IsFirstRun(byte minimum, ConcurrentStack<IRoleTaskManager<T>> units);
+
+        /// <summary>
+        /// Initialize Scale
+        /// </summary>
+        /// <param name="minimum">Minimum</param>
+        /// <param name="factory">Factory</param>
+        /// <param name="units">Units</param>
+        /// <param name="serviceName">Service Name</param>
+        void Initialize(byte minimum, ITaskFactory<T> factory, ConcurrentStack<IRoleTaskManager<T>> units, string serviceName);
+
+        /// <summary>
         /// Scale Up by one unit
         /// </summary>
         /// <param name="factory">Task Factory</param>

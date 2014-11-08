@@ -12,6 +12,32 @@
     {
         #region Methods
         /// <summary>
+        /// Is First Run
+        /// </summary>
+        /// <param name="minimum">Minimum</param>
+        /// <param name="units">Units</param>
+        /// <returns>Is First Run</returns>
+        public bool IsFirstRun(byte minimum, ConcurrentStack<IRoleTaskManager<T>> units)
+        {
+            return units.Count < minimum;
+        }
+
+        /// <summary>
+        /// Initialize Scale
+        /// </summary>
+        /// <param name="minimum">Minimum</param>
+        /// <param name="factory">Factory</param>
+        /// <param name="units">Units</param>
+        /// <param name="serviceName">Service Name</param>
+        public virtual void Initialize(byte minimum, ITaskFactory<T> factory, ConcurrentStack<IRoleTaskManager<T>> units, string serviceName)
+        {
+            while (units.Count < minimum)
+            {
+                this.ScaleUp(factory, units, serviceName);
+            }
+        }
+
+        /// <summary>
         /// Scale Up by one unit
         /// </summary>
         public virtual void ScaleUp(ITaskFactory<T> factory, ConcurrentStack<IRoleTaskManager<T>> units, string serviceName)

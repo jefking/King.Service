@@ -125,12 +125,9 @@
         {
             Trace.TraceInformation("Checking for appropriate scale: '{0}'.", this.ServiceName);
 
-            if (this.units.Count < this.minimum)
+            if (this.scaler.IsFirstRun(this.minimum, this.units))
             {
-                while (this.units.Count < this.minimum)
-                {
-                    this.scaler.ScaleUp(this, this.units, this.ServiceName);
-                }
+                this.scaler.Initialize(this.minimum, this, this.units, this.ServiceName);
             }
             else
             {
