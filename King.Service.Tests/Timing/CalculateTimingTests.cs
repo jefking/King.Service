@@ -39,6 +39,16 @@
         }
 
         [Test]
+        public void MinimumPeriodInSeconds()
+        {
+            var random = new Random();
+            var min = random.Next(1, 99);
+            var ct = new CalculateTiming(min, random.Next(101, 1000));
+
+            Assert.AreEqual(min, ct.MinimumPeriodInSeconds);
+        }
+
+        [Test]
         public void AttemptMinimum()
         {
             var random = new Random();

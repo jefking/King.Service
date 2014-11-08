@@ -30,6 +30,16 @@
         }
 
         [Test]
+        public void Timing()
+        {
+            var timing = Substitute.For<ICalculateTiming>();
+
+            var t = new BackoffTiming(timing);
+
+            Assert.AreEqual(timing, t.Timing);
+        }
+
+        [Test]
         public void Get()
         {
             var random = new Random();
