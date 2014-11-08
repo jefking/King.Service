@@ -12,9 +12,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Task scheduling for Azure and Windows Servers.</description>
         <summary>Task scheduling for Azure and Windows Servers.</summary>
-        <releaseNotes>Task for running @ a specific time.</releaseNotes>
+        <releaseNotes>Auto scaling for Dynamic Tasks.</releaseNotes>
         <copyright>Jef King</copyright>
-        <tags>King.Service Azure Queue Service Bus Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure run task service services tasks scheduling</tags>
+        <tags>King.Service Azure Queue Service Bus scale auto-scale dynamic-scale dynamic Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure run task service services tasks scheduling</tags>
         <dependencies>
           <dependency id="King.Azure" />
         </dependencies>
