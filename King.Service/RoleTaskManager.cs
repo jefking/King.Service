@@ -116,11 +116,23 @@
             {
                 if (null == this.tasks)
                 {
-                    Trace.TraceInformation("Loading Services.");
+                    var t = this.manager.Tasks(passthrough);
+                    if (null != t)
+                    {
+                        Trace.TraceInformation("Loading Services.");
 
-                    this.tasks = new ReadOnlyCollection<IRunnable>(this.manager.Tasks(passthrough).ToList());
+                        this.tasks = new ReadOnlyCollection<IRunnable>(t.ToList());
 
-                    Trace.TraceInformation("Services Loaded.");
+                        Trace.TraceInformation("Services Loaded.");
+                    }
+                    else
+                    {
+                        Trace.TraceWarning("No Services loaded from Factory?");
+                    }
+                }
+                else
+                {
+                    Trace.TraceInformation("Tasks already loaded.");
                 }
             }
 

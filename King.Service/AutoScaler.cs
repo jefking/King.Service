@@ -40,7 +40,7 @@
         /// <param name="minimum">Minimum</param>
         /// <param name="maximum">Maximum</param>
         public AutoScaler(byte minimum = 0, byte maximum = 1, T configuration = default(T))
-            : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(10).TotalSeconds)
+            : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(15).TotalSeconds)
         {
             if (minimum > maximum)
             {
@@ -112,9 +112,10 @@
             if (timeToScale > 0 && this.units.Count > this.minimum) //Scale Up
             {
                 var unit = new RoleTaskManager<T>(this);
+                this.units.Push(unit);
+
                 unit.OnStart();
                 unit.Run();
-                this.units.Push(unit);
             }
             else if (timeToScale < 0 && this.units.Count < this.maximum) //Scale Down
             {
