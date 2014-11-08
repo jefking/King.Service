@@ -157,7 +157,7 @@
         /// <summary>
         /// Service Name (For Tracing)
         /// </summary>
-        protected string ServiceName
+        protected virtual string ServiceName
         {
             get;
             set;
