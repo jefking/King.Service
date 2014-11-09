@@ -74,6 +74,14 @@
         }
 
         [Test]
+        public void Dispose()
+        {
+            using (new AutoScalerHelper())
+            {
+            }
+        }
+
+        [Test]
         public void IsRecurringTask()
         {
             Assert.IsNotNull(new AutoScalerHelper() as RecurringTask);

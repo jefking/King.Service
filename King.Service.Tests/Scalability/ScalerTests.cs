@@ -30,6 +30,27 @@
         }
 
         [Test]
+        public void Dispose()
+        {
+            using (new Scaler<object>())
+            {
+            }
+        }
+
+        [Test]
+        public void DisposeMany()
+        {
+            var factory = Substitute.For<ITaskFactory<object>>();
+
+            using (var s = new Scaler<object>())
+            {
+                s.ScaleUp(factory, Guid.NewGuid().ToString());
+                s.ScaleUp(factory, Guid.NewGuid().ToString());
+                s.ScaleUp(factory, Guid.NewGuid().ToString());
+            }
+        }
+
+        [Test]
         public void ScaleUp()
         {
             var factory = Substitute.For<ITaskFactory<object>>();

@@ -44,7 +44,7 @@
         /// <summary>
         /// Finalizer
         /// </summary>
-        ~Scaler() 
+        ~Scaler()
         {
             Dispose(false);
         }
@@ -191,7 +191,6 @@
 
             Trace.TraceInformation("Scaled Down: '{0}'.", taskName);
         }
-
 
         /// <summary>
         /// Dispose
