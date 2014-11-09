@@ -1,27 +1,21 @@
 ﻿namespace Worker
 {
     using King.Service;
+    using System;
+    using System.Diagnostics;
 
     public class Backoff : BackoffTask
     {
-        private int work = 0;
-
+        public Backoff()
+            : base(1, 120) { }
         public override void Run(out bool workWasDone)
         {
-            workWasDone = false;
+            Trace.TraceInformation("B:{0}", System.DateTime.UtcNow.TimeOfDay);
 
-            if (work > 3)
-            {
-                //If data processing needed to occur:
-                workWasDone = true;
+            var random = new Random();
+            workWasDone = base.Every.TotalSeconds == 120;
 
-                work = 0;
-            }
-            else
-            {
-                //No data processing occurred.
-                work++;
-            }
+            Trace.TraceInformation("Work was done: {0}", workWasDone);
         }
     }
 }
