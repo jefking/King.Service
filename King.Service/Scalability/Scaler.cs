@@ -40,6 +40,14 @@
 
             this.units = units;
         }
+
+        /// <summary>
+        /// Finalizer
+        /// </summary>
+        ~Scaler() 
+        {
+            Dispose(false);
+        }
         #endregion
 
         #region Properties
@@ -182,6 +190,37 @@
             }
 
             Trace.TraceInformation("Scaled Down: '{0}'.", taskName);
+        }
+
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        public void Dispose()
+        {
+            this.Dispose(true);
+
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing">Disposing</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (null != this.units)
+                {
+                    IRoleTaskManager<T> unit;
+                    while (units.TryTake(out unit))
+                    {
+                        unit.OnStop();
+                        unit.Dispose();
+                    }
+                }
+            }
         }
         #endregion
     }

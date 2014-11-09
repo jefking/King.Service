@@ -1,12 +1,13 @@
 ﻿namespace King.Service.Scalability
 {
+    using System;
     using System.Collections.Concurrent;
 
     /// <summary>
     /// Scaler Interface
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public interface IScaler<T>
+    public interface IScaler<T> : IDisposable
     {
         #region Properties
         /// <summary>

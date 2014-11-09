@@ -140,6 +140,23 @@
                 }
             }
         }
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing">Disposing</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (null != this.scaler)
+                {
+                    this.scaler.Dispose();
+                }
+            }
+
+            base.Dispose(disposing);
+        }
         #endregion
     }
 }
