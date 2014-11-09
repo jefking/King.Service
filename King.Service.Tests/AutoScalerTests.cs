@@ -163,7 +163,7 @@
             s.CurrentUnits.Returns(0);
             var config = new object();
 
-            var scaler = new AutoScalerHelper(s, null);
+            var scaler = new AutoScalerHelper(s, config);
             s.ScaleUp(scaler, config, Arg.Any<string>());
 
             scaler.Run();
