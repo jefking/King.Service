@@ -120,7 +120,7 @@
 
             if (this.scaler.IsFirstRun(this.minimum))
             {
-                this.scaler.Initialize(this.minimum, this, this.ServiceName);
+                this.scaler.Initialize(this.minimum, this, this.configuration, this.ServiceName);
             }
             else
             {
@@ -128,7 +128,7 @@
 
                 if (Direction.Up == direction && this.scaler.CurrentUnits < this.maximum)
                 {
-                    this.scaler.ScaleUp(this, this.ServiceName);
+                    this.scaler.ScaleUp(this, this.configuration, this.ServiceName);
                 }
                 else if (Direction.Down == direction && this.scaler.CurrentUnits > this.minimum)
                 {

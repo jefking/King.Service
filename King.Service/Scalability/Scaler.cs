@@ -110,8 +110,9 @@
         /// </summary>
         /// <param name="minimum">Minimum</param>
         /// <param name="factory">Factory</param>
+        /// <param name="configuration">Configuration</param>
         /// <param name="taskName">Task Name</param>
-        public virtual void Initialize(byte minimum, ITaskFactory<T> factory, string taskName)
+        public virtual void Initialize(byte minimum, ITaskFactory<T> factory, T configuration, string taskName)
         {
             if (minimum < 1)
             {
@@ -128,7 +129,7 @@
 
             while (units.Count < minimum)
             {
-                this.ScaleUp(factory, taskName);
+                this.ScaleUp(factory, configuration, taskName);
             }
         }
 
@@ -136,8 +137,9 @@
         /// Scale Up by one unit
         /// </summary>
         /// <param name="factory">Factory</param>
+        /// <param name="configuration">Configuration</param>
         /// <param name="taskName">Task Name</param>
-        public virtual void ScaleUp(ITaskFactory<T> factory, string taskName)
+        public virtual void ScaleUp(ITaskFactory<T> factory, T configuration, string taskName)
         {
             if (null == factory)
             {

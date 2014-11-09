@@ -44,9 +44,9 @@
 
             using (var s = new Scaler<object>())
             {
-                s.ScaleUp(factory, Guid.NewGuid().ToString());
-                s.ScaleUp(factory, Guid.NewGuid().ToString());
-                s.ScaleUp(factory, Guid.NewGuid().ToString());
+                s.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
+                s.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
+                s.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
             }
         }
 
@@ -56,7 +56,7 @@
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.ScaleUp(factory, Guid.NewGuid().ToString());
+            s.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
 
             Assert.AreEqual(1, s.CurrentUnits);
         }
@@ -66,7 +66,7 @@
         public void ScaleUpFactoryNull()
         {
             var s = new Scaler<object>();
-            s.ScaleUp(null, Guid.NewGuid().ToString());
+            s.ScaleUp(null, new object(), Guid.NewGuid().ToString());
 
             Assert.AreEqual(1, s.CurrentUnits);
         }
@@ -78,7 +78,7 @@
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.ScaleUp(factory, null);
+            s.ScaleUp(factory, new object(), null);
         }
 
         [Test]
@@ -90,7 +90,7 @@
             task.Dispose();
             
             var s = new Scaler<object>();
-            s.ScaleUp(factory, Guid.NewGuid().ToString());
+            s.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
             s.ScaleDown(Guid.NewGuid().ToString());
 
             Assert.AreEqual(0, s.CurrentUnits);
@@ -114,7 +114,7 @@
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.Initialize(0, factory, Guid.NewGuid().ToString());
+            s.Initialize(0, factory, new object(), Guid.NewGuid().ToString());
         }
 
         [Test]
@@ -122,7 +122,7 @@
         public void InitializeFactoryNull()
         {
             var s = new Scaler<object>();
-            s.Initialize(1, null, Guid.NewGuid().ToString());
+            s.Initialize(1, null, new object(), Guid.NewGuid().ToString());
         }
 
         [Test]
@@ -132,7 +132,7 @@
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.Initialize(1, factory, null);
+            s.Initialize(1, factory, new object(), null);
         }
 
         [Test]
@@ -141,7 +141,7 @@
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.Initialize(1, factory, Guid.NewGuid().ToString());
+            s.Initialize(1, factory, new object(), Guid.NewGuid().ToString());
 
             Assert.AreEqual(1, s.CurrentUnits);
         }
@@ -152,7 +152,7 @@
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.Initialize(5, factory, Guid.NewGuid().ToString());
+            s.Initialize(5, factory, new object(), Guid.NewGuid().ToString());
 
             Assert.AreEqual(5, s.CurrentUnits);
         }
@@ -182,7 +182,7 @@
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.ScaleUp(factory, Guid.NewGuid().ToString());
+            s.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
 
             var result = s.IsFirstRun(1);
 
