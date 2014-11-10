@@ -99,9 +99,9 @@
         /// </summary>
         /// <param name="passthrough">Configuration</param>
         /// <returns>Runnable Tasks</returns>
-        public virtual IEnumerable<IRunnable> Tasks(T data)
+        public virtual IEnumerable<IRunnable> Tasks(T data = default(T))
         {
-            return this.ScaleUnit(data);
+            return this.ScaleUnit(this.configuration);
         }
 
         /// <summary>

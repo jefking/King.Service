@@ -33,8 +33,11 @@
             }
             #endregion
 
+            public object passed = null;
+
             public override IEnumerable<IScalable> ScaleUnit(object data)
             {
+                this.passed = data;
                 yield return new AdaptiveHelper();
             }
         }
@@ -118,12 +121,14 @@
         [Test]
         public void Tasks()
         {
-            var scaler = new AutoScalerHelper();
-            var unit = scaler.Tasks(null);
+            var config = new object();
+            var scaler = new AutoScalerHelper(config);
+            var unit = scaler.Tasks();
 
             Assert.IsNotNull(unit);
             Assert.AreEqual(1, unit.Count());
             Assert.IsNotNull(unit.First() as AdaptiveHelper);
+            Assert.AreEqual(config, scaler.passed);
         }
 
         [Test]
@@ -136,7 +141,7 @@
             Assert.AreEqual(1, unit.Count());
             Assert.IsNotNull(unit.First() as AdaptiveHelper);
         }
-
+        
         [Test]
         public void RunIsFirstRun()
         {
