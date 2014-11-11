@@ -7,7 +7,7 @@
     {
         public override void Run()
         {
-            Trace.TraceInformation("Task that you want to do");
+            Trace.TraceInformation("working");
         }
     }
 }

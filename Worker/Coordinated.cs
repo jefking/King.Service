@@ -12,7 +12,7 @@
 
         public override void Run()
         {
-            Trace.TraceInformation("Coordinated Task that you want to do");
+            Trace.TraceInformation("coordinated");
         }
     }
 }

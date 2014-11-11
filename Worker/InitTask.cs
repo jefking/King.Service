@@ -7,7 +7,7 @@
     {
         public override void Run()
         {
-            Trace.TraceInformation("Initialize a resource here.");
+            Trace.TraceInformation("initializing");
         }
     }
 }
