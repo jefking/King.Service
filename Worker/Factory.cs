@@ -48,10 +48,10 @@
             //Self Governing task(s)
             yield return new Adaptive();
 
-            //Dequeue task(s), Backoff
+            //Dequeue task(s), Backoff behavior
             yield return new BackoffRunner(new CompanyDequeuer(queue));
 
-            //Dequeue task(s), Adaptive
+            //Dequeue task(s), Adaptive behavior
             yield return new AdaptiveRunner(new CompanyDequeuer(queue));
 
             //Task for Queuing
