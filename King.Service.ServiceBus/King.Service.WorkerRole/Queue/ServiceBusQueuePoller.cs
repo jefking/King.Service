@@ -3,6 +3,7 @@
     using King.Azure.Data;
     using Microsoft.ServiceBus.Messaging;
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -41,9 +42,10 @@
             return null == msg ? null : new Queued<T>(msg);
         }
 
-        public Task<System.Collections.Generic.IEnumerable<IQueued<T>>> PollMany(int messageCount = 5)
+        public async Task<System.Collections.Generic.IEnumerable<IQueued<T>>> PollMany(int messageCount = 5)
         {
-            throw new NotImplementedException();
+            var msgs = await this.client.ReceiveBatchAsync(messageCount);
+            return null == msgs || !msgs.Any() ? null : msgs.Select(m => new Queued<T>(m));
         }
         #endregion
     }

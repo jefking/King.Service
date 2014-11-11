@@ -21,6 +21,7 @@ namespace King.Service.WorkerRole
                 PollingName = "polling",
                 EventsName = "events",
             };
+
             return this.manager.OnStart(config);
         }
 
