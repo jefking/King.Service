@@ -105,7 +105,6 @@
     <Compile Include="Timing\CalculateTiming.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Diagrams\Tasks.cd" />
     <None Include="packages.config" />
   </ItemGroup>
