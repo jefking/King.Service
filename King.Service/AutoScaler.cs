@@ -73,7 +73,7 @@
         /// <summary>
         /// Minimum Instance Count
         /// </summary>
-        public byte Minimum
+        public virtual byte Minimum
         {
             get
             {
@@ -84,7 +84,7 @@
         /// <summary>
         /// Maximum Instance Count
         /// </summary>
-        public byte Maximum
+        public virtual byte Maximum
         {
             get
             {

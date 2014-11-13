@@ -211,6 +211,8 @@
                     {
                         t.Dispose();
                     }
+
+                    this.tasks = null;
                 }
             }
         }

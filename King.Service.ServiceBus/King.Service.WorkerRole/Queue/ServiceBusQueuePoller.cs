@@ -3,6 +3,7 @@
     using King.Azure.Data;
     using Microsoft.ServiceBus.Messaging;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -16,7 +17,7 @@
         /// <summary>
         /// Queue Client
         /// </summary>
-        private readonly QueueClient client;
+        protected readonly QueueClient client;
         #endregion
 
         #region Constructors
@@ -42,7 +43,12 @@
             return null == msg ? null : new Queued<T>(msg);
         }
 
-        public async Task<System.Collections.Generic.IEnumerable<IQueued<T>>> PollMany(int messageCount = 5)
+        /// <summary>
+        /// Poll Many
+        /// </summary>
+        /// <param name="messageCount">Message Count</param>
+        /// <returns>Queued Messages</returns>
+        public async Task<IEnumerable<IQueued<T>>> PollMany(int messageCount = 5)
         {
             var msgs = await this.client.ReceiveBatchAsync(messageCount);
             return null == msgs || !msgs.Any() ? null : msgs.Select(m => new Queued<T>(m));

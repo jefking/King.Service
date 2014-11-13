@@ -3,7 +3,6 @@
     using King.Azure.Data;
     using King.Service.Data.Model;
     using System;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
 
