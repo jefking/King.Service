@@ -11,7 +11,7 @@
     <RootNamespace>Azure.Demo</RootNamespace>
     <AssemblyName>Azure.Demo</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
-    <Name>Azure.Demo</Name>
+    <Name>King.Service.Azure</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,22 +37,21 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Worker\Worker.csproj">
-      <Name>Worker</Name>
+    <Folder Include="King.Service.Azure.WorkerContent" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="King.Service.Azure.WorkerContent\diagnostics.wadcfg">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Worker\King.Service.Azure.Worker.csproj">
+      <Name>King.Service.Azure.Worker</Name>
       <Project>{bcc0442f-e931-4d6e-a78c-1fee6320d047}</Project>
       <Private>True</Private>
       <RoleType>Worker</RoleType>
-      <RoleName>Worker</RoleName>
-      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+      <RoleName>King.Service.Azure.Worker</RoleName>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="WorkerContent\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="WorkerContent\diagnostics.wadcfg">
-      <SubType>Content</SubType>
-    </Content>
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>
