@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceConfiguration serviceName="King.Service.Worker" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="4" osVersion="*" schemaVersion="2014-01.2.3">
-  <Role name="King.Service.WorkerRole">
+  <Role name="King.Service.Azure.ServiceBus.Worker">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

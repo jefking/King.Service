@@ -40,11 +40,6 @@
     <Folder Include="King.Service.Azure.WorkerContent" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="King.Service.Azure.WorkerContent\diagnostics.wadcfg">
-      <SubType>Content</SubType>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Worker\King.Service.Azure.Worker.csproj">
       <Name>King.Service.Azure.Worker</Name>
       <Project>{bcc0442f-e931-4d6e-a78c-1fee6320d047}</Project>
