@@ -70,7 +70,7 @@
         /// <summary>
         /// Initialize Table Task
         /// </summary>
-        public virtual RecurringTask InitializeTask()
+        public virtual IRunnable InitializeTask()
         {
             return new InitializeStorageTask(this.storage);
         }

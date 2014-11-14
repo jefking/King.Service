@@ -4,6 +4,7 @@
     using King.Service;
     using System;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Initialize Storage
@@ -37,11 +38,11 @@
         /// <summary>
         /// Run, Creates Table
         /// </summary>
-        public override void Run()
+        public override async Task RunAsync()
         {
             Trace.TraceInformation("Creating: '{0}'.", this.storage.Name);
 
-            var result = this.storage.CreateIfNotExists().Result;
+            var result = await this.storage.CreateIfNotExists();
 
             Trace.TraceInformation("Created: '{0}'; was created {1}.", this.storage.Name, result);
         }

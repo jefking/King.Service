@@ -1,27 +1,73 @@
 ﻿namespace King.Service.Tests
 {
     using NUnit.Framework;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class InitializeTaskTests
     {
-        public class Helper : InitializeTask
-        {
-            public override void Run()
-            {
-            }
-        }
-
         [Test]
         public void Constructor()
         {
-            new Helper();
+            new InitializeTask();
         }
 
         [Test]
-        public void IsTaskManager()
+        public void IsIRunnable()
         {
-            Assert.IsNotNull(new Helper() as RecurringTask);
+            Assert.IsNotNull(new InitializeTask() as IRunnable);
+        }
+
+        [Test]
+        public void RunObj()
+        {
+            var it = new InitializeTask();
+            it.Run(new object());
+        }
+
+        [Test]
+        public void RunObjNull()
+        {
+            var it = new InitializeTask();
+            it.Run(null);
+        }
+
+        [Test]
+        public void Run()
+        {
+            var it = new InitializeTask();
+            it.Run();
+        }
+
+        [Test]
+        public async Task RunAsync()
+        {
+            var it = new InitializeTask();
+            await it.RunAsync();
+        }
+
+        [Test]
+        public void Stop()
+        {
+            var it = new InitializeTask();
+            var result = it.Stop();
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void Start()
+        {
+            var it = new InitializeTask();
+            var result = it.Start();
+            Assert.IsTrue(result);
+        }
+
+        [Test]
+        public void Dispose()
+        {
+            using (var it = new InitializeTask())
+            {
+            }
         }
     }
 }

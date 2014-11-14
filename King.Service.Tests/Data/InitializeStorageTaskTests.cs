@@ -1,10 +1,11 @@
 ﻿namespace King.Service.Tests.Data
 {
-    using King.Service.Data;
-    using NUnit.Framework;
-    using NSubstitute;
-    using System;
     using King.Azure.Data;
+    using King.Service.Data;
+    using NSubstitute;
+    using NUnit.Framework;
+    using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class InitializeStorageTaskTests
@@ -38,6 +39,30 @@
 
             var task = new InitializeStorageTask(table);
             task.Run();
+
+            table.Received().CreateIfNotExists();
+        }
+
+        [Test]
+        public void RunObj()
+        {
+            var table = Substitute.For<ITableStorage>();
+            table.CreateIfNotExists();
+
+            var task = new InitializeStorageTask(table);
+            task.Run(new object());
+
+            table.Received().CreateIfNotExists();
+        }
+
+        [Test]
+        public async Task RunAsync()
+        {
+            var table = Substitute.For<ITableStorage>();
+            table.CreateIfNotExists();
+
+            var task = new InitializeStorageTask(table);
+            await task.RunAsync();
 
             table.Received().CreateIfNotExists();
         }
