@@ -49,6 +49,8 @@
         /// <returns>Running</returns>
         public virtual bool Start()
         {
+            this.Run();
+
             return true;
         }
 

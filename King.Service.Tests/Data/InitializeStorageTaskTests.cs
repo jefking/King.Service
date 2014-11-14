@@ -44,6 +44,18 @@
         }
 
         [Test]
+        public void Start()
+        {
+            var table = Substitute.For<ITableStorage>();
+            table.CreateIfNotExists();
+
+            var task = new InitializeStorageTask(table);
+            task.Start();
+
+            table.Received().CreateIfNotExists();
+        }
+
+        [Test]
         public void RunObj()
         {
             var table = Substitute.For<ITableStorage>();
