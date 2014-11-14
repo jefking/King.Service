@@ -12,7 +12,7 @@
         /// Execute the action
         /// </summary>
         /// <param name="state">State of Timer</param>
-        public void Run(object state)
+        public virtual void Run(object state)
         {
             this.Run();
         }
