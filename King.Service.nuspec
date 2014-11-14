@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.Service</id>
-        <version>1.8.2</version>
+        <version>1.8.3</version>
         <title>King.Service</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
@@ -12,7 +12,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Task scheduling for Azure and Windows Servers.</description>
         <summary>Task scheduling for Azure and Windows Servers.</summary>
-        <releaseNotes>Auto scaling for Dynamic Tasks.</releaseNotes>
+        <releaseNotes>Initialization is much lighter on system performance.</releaseNotes>
         <copyright>Jef King</copyright>
         <tags>King.Service Azure Queue Service Bus scale auto-scale dynamic-scale dynamic Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure run task service services tasks scheduling</tags>
         <dependencies>
