@@ -12,19 +12,14 @@
         public const int NoRepeat = -1;
 
         /// <summary>
-        /// Initialization Timing. (Seconds)
-        /// </summary>
-        public const int InitializationTiming = 10;
-
-        /// <summary>
         /// Minimum Timing. (Seconds)
         /// </summary>
-        public const int MinimumTiming = 15;
+        public const int MinimumTiming = 10;
 
         /// <summary>
         /// Maxium Timing. (Seconds)
         /// </summary>
-        public const int MaximumTiming = 120;
+        public const int MaximumTiming = 180;
 
         /// <summary>
         /// Minimum Storage Timing. (Seconds)

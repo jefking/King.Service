@@ -16,23 +16,17 @@
         {
             Assert.AreEqual(-1, BaseTimes.NoRepeat);
         }
-        
-        [Test]
-        public void InitializationTiming()
-        {
-            Assert.AreEqual(10, BaseTimes.InitializationTiming);
-        }
-        
+                
         [Test]
         public void MinimumTiming()
         {
-            Assert.AreEqual(15, BaseTimes.MinimumTiming);
+            Assert.AreEqual(10, BaseTimes.MinimumTiming);
         }
         
         [Test]
         public void MaximumTiming()
         {
-            Assert.AreEqual(120, BaseTimes.MaximumTiming);
+            Assert.AreEqual(180, BaseTimes.MaximumTiming);
         }
         
         [Test]

@@ -21,7 +21,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        protected RecurringTask(int dueInSeconds = BaseTimes.InitializationTiming, int periodInSeconds = BaseTimes.MaximumTiming)
+        protected RecurringTask(int dueInSeconds = BaseTimes.MinimumTiming, int periodInSeconds = BaseTimes.MaximumTiming)
         {
             if (0 > dueInSeconds)
             {

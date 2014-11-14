@@ -47,7 +47,7 @@
         /// Mockable Constructor
         /// </summary>
         public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 20)
-            : base(BaseTimes.InitializationTiming, (int)TimeSpan.FromMinutes(checkScaleInMinutes).TotalSeconds)
+            : base(BaseTimes.MinimumTiming, (int)TimeSpan.FromMinutes(checkScaleInMinutes).TotalSeconds)
         {
             if (1 > minimum)
             {
