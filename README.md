@@ -3,7 +3,7 @@
 + Auto-Scale workloads within your server
 + Tasks to initialize your environment
  + Create Azure Storage: Queues, Tables and Containers
- + Load WFC services
+ + Load WCF services
 + Create Tasks that Occur:
  + Every X seconds per server instance
 + Every X seconds; and lessens frequency to Y when there is no work
