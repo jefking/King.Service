@@ -4,6 +4,7 @@
     using King.Service.Timing;
     using System;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Scheduled Manager
@@ -49,10 +50,19 @@
         }
 
         /// <summary>
-        /// Execute
+        /// Run
         /// </summary>
         /// <param name="state">State</param>
         public override void Run(object state)
+        {
+            this.RunAsync().Wait();
+        }
+
+        /// <summary>
+        /// Run Async
+        /// </summary>
+        /// <returns>Task</returns>
+        public async Task RunAsync()
         {
             var timing = Stopwatch.StartNew();
             var type = this.GetType();
@@ -63,15 +73,14 @@
 
             try
             {
-                var ready = taskCore.Check(type).Result;
+                var ready = await taskCore.Check(type);
                 if (ready)
                 {
                     Trace.TraceInformation("{0}: Task Starting.", base.ServiceName);
 
                     var identifier = Guid.NewGuid();
 
-                    var task = this.taskCore.Start(type, identifier, startTime);
-                    task.Wait();
+                    await this.taskCore.Start(type, identifier, startTime);
 
                     try
                     {
@@ -84,8 +93,7 @@
                         successful = false;
                     }
 
-                    task = this.taskCore.Complete(type, identifier, startTime, DateTime.UtcNow, successful);
-                    task.Wait();
+                    await this.taskCore.Complete(type, identifier, startTime, DateTime.UtcNow, successful);
                 }
                 else
                 {

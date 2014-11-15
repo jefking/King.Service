@@ -55,20 +55,42 @@
         }
 
         [Test]
-        public void RunCheckFalse()
+        public void RunObj()
+        {
+            var coordinator = Substitute.For<ICoordinator>();
+            using (var m = new TestManager(coordinator))
+            {
+                m.Run(new object());
+            }
+        }
+
+        [Test]
+        public void RunObjNull()
+        {
+            var coordinator = Substitute.For<ICoordinator>();
+            using (var m = new TestManager(coordinator))
+            {
+                m.Run(null);
+            }
+        }
+
+        [Test]
+        public async Task RunCheckFalse()
         {
             var coordinator = Substitute.For<ICoordinator>();
             coordinator.PeriodInSeconds.Returns(100);
             coordinator.Check(Arg.Any<Type>()).Returns(Task.FromResult(false));
 
-            var m = new TestManager(coordinator);
-            m.Run(this);
+            using (var m = new TestManager(coordinator))
+            {
+                await m.RunAsync();
+            }
 
             coordinator.Received().Check(Arg.Any<Type>());
         }
 
         [Test]
-        public void Run()
+        public async Task Run()
         {
             var coordinator = Substitute.For<ICoordinator>();
             coordinator.PeriodInSeconds.Returns(100000000);
@@ -78,7 +100,7 @@
 
             using (var m = new TestManager(coordinator))
             {
-                m.Run(this);
+                await m.RunAsync();
             }
 
             coordinator.Received().Check(Arg.Any<Type>());
@@ -87,7 +109,7 @@
         }
 
         [Test]
-        public void RunCheckThrows()
+        public async Task RunCheckThrows()
         {
             var coordinator = Substitute.For<ICoordinator>();
             coordinator.PeriodInSeconds.Returns(100000000);
@@ -95,8 +117,10 @@
             coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
             coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
 
-            var m = new TestManager(coordinator);
-            m.Run(this);
+            using (var m = new TestManager(coordinator))
+            {
+                await m.RunAsync();
+            }
 
             coordinator.Received().Check(Arg.Any<Type>());
             coordinator.DidNotReceive().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
@@ -104,7 +128,7 @@
         }
 
         [Test]
-        public void RunStartThrows()
+        public async Task RunStartThrows()
         {
             var coordinator = Substitute.For<ICoordinator>();
             coordinator.PeriodInSeconds.Returns(100000000);
@@ -112,8 +136,10 @@
             coordinator.When(c => c.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>())).Do(x => { throw new Exception(); });
             coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
 
-            var m = new TestManager(coordinator);
-            m.Run(this);
+            using (var m = new TestManager(coordinator))
+            {
+                await m.RunAsync();
+            }
 
             coordinator.Received().Check(Arg.Any<Type>());
             coordinator.Received().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
@@ -129,11 +155,11 @@
             coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
             coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
 
-            var m = new TestManager(coordinator)
+            using (var m = new TestManager(coordinator))
             {
-                Throw = true,
-            };
-            m.Run(this);
+                m.Throw = true;
+                await m.RunAsync();
+            }
 
             coordinator.Received().Check(Arg.Any<Type>());
             coordinator.Received().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
