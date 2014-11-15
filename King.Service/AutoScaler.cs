@@ -133,19 +133,18 @@
             }
             else
             {
-                var direction = this.scaler.ShouldScale();
-
-                if (Direction.Up == direction && this.scaler.CurrentUnits < this.maximum)
+                var scale = this.scaler.ShouldScale();
+                if (scale == null)
+                {
+                    Trace.TraceInformation("'{0}' is currently running at optimal scale with {1} units.", this.ServiceName, this.scaler.CurrentUnits);
+                }
+                else if (scale.Value && this.scaler.CurrentUnits < this.maximum)
                 {
                     this.scaler.ScaleUp(this, this.configuration, this.ServiceName);
                 }
-                else if (Direction.Down == direction && this.scaler.CurrentUnits > this.minimum)
+                else if (!scale.Value && this.scaler.CurrentUnits > this.minimum)
                 {
                     this.scaler.ScaleDown(this.ServiceName);
-                }
-                else
-                {
-                    Trace.TraceInformation("'{0}' is currently running at optimal scale with {1} units.", this.ServiceName, this.scaler.CurrentUnits);
                 }
             }
         }

@@ -79,7 +79,6 @@
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Data\StorageDequeueBatch.cs" />
     <Compile Include="RunAtTask.cs" />
-    <Compile Include="Scalability\Enums.cs" />
     <Compile Include="Scalability\Interfaces.cs" />
     <Compile Include="Scalability\Scaler.cs" />
     <Compile Include="Timing\AdaptiveTiming.cs" />

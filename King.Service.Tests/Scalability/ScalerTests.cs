@@ -194,7 +194,7 @@
         {
             var s = new Scaler<object>();
             var result = s.ShouldScale();
-            Assert.AreEqual(Direction.None, result);
+            Assert.AreEqual(null, result);
         }
 
         [Test]
@@ -209,7 +209,7 @@
 
             var s = new Scaler<object>(stack);
             var result = s.ShouldScale();
-            Assert.AreEqual(Direction.Up, result);
+            Assert.AreEqual(true, result);
         }
 
         [Test]
@@ -225,7 +225,7 @@
             var s = new Scaler<object>(stack);
             var result = s.ShouldScale();
 
-            Assert.AreEqual(Direction.Down, result);
+            Assert.AreEqual(false, result);
         }
     }
 }

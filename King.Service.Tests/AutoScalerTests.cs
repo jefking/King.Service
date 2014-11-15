@@ -164,7 +164,7 @@
         {
             var s = Substitute.For<IScaler<object>>();
             s.IsFirstRun(1).Returns(false);
-            s.ShouldScale().Returns(Direction.Up);
+            s.ShouldScale().Returns(true);
             s.CurrentUnits.Returns(0);
             var config = new object();
 
@@ -184,7 +184,7 @@
         {
             var s = Substitute.For<IScaler<object>>();
             s.IsFirstRun(1).Returns(false);
-            s.ShouldScale().Returns(Direction.Down);
+            s.ShouldScale().Returns(false);
             s.CurrentUnits.Returns(100);
             s.ScaleDown(Arg.Any<string>());
 
@@ -203,7 +203,7 @@
             var config = new object();
             var s = Substitute.For<IScaler<object>>();
             s.IsFirstRun(1).Returns(false);
-            s.ShouldScale().Returns(Direction.None);
+            s.ShouldScale().Returns((bool?)null);
 
             var scaler = new AutoScalerHelper(s, config);
             scaler.Run();
@@ -219,7 +219,7 @@
             var config = new object();
             var s = Substitute.For<IScaler<object>>();
             s.IsFirstRun(1).Returns(false);
-            s.ShouldScale().Returns(Direction.Up);
+            s.ShouldScale().Returns(true);
             s.CurrentUnits.Returns(2);
 
             var scaler = new AutoScalerHelper(s, config);
@@ -237,7 +237,7 @@
             var config = new object();
             var s = Substitute.For<IScaler<object>>();
             s.IsFirstRun(1).Returns(false);
-            s.ShouldScale().Returns(Direction.Down);
+            s.ShouldScale().Returns(false);
             s.CurrentUnits.Returns(1);
 
             var scaler = new AutoScalerHelper(s, config);
