@@ -1,9 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ServiceDefinition name="Azure.Demo" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-01.2.3">
+<ServiceDefinition name="Azure.Demo" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceDefinition" schemaVersion="2014-06.2.4">
   <WorkerRole name="King.Service.Azure.Worker" vmsize="Small">
-    <Imports>
-    </Imports>
-    <ConfigurationSettings>
-    </ConfigurationSettings>
+    <Imports></Imports>
+    <ConfigurationSettings></ConfigurationSettings>
   </WorkerRole>
 </ServiceDefinition>
