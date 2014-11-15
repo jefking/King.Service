@@ -150,7 +150,7 @@
                 throw new ArgumentException("taskName");
             }
 
-            Trace.TraceInformation("Scaling Up: '{0}'.", taskName);
+            Trace.TraceInformation("Scaling up: '{0}'.", taskName);
 
             var unit = new RoleTaskManager<T>(factory);
 
@@ -159,15 +159,22 @@
             {
                 unit.Run();
 
-                units.TryAdd(unit);
+                if (units.TryAdd(unit))
+                {
+                    Trace.TraceInformation("Scaled up: '{0}'.", taskName);
+                }
+                else
+                {
+                    unit.Dispose();
 
-                Trace.TraceInformation("Scaled Up: '{0}'.", taskName);
+                    Trace.TraceWarning("Failed to add scale unit: '{0}'.", taskName);
+                }
             }
             else
             {
                 unit.Dispose();
 
-                Trace.TraceWarning("Failed to start Scale Unit: '{0}'.", taskName);
+                Trace.TraceWarning("Failed to start scale unit: '{0}'.", taskName);
             }
         }
 

@@ -5,10 +5,6 @@
     /// <summary>
     /// Exponential Backoff Task
     /// </summary>
-    /// <remarks>
-    /// When a run is made and no work done, the task backs off.
-    /// - Perfect for dequeuing when there might not be work items in the queue.
-    /// </remarks>
     public abstract class BackoffTask : DynamicTask
     {
         #region Constructors
