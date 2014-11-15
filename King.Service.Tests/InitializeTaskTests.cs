@@ -19,20 +19,6 @@
         }
 
         [Test]
-        public void RunObj()
-        {
-            var it = new InitializeTask();
-            it.Run(new object());
-        }
-
-        [Test]
-        public void RunObjNull()
-        {
-            var it = new InitializeTask();
-            it.Run(null);
-        }
-
-        [Test]
         public void Run()
         {
             var it = new InitializeTask();

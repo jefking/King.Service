@@ -1,4 +1,5 @@
-﻿namespace King.Service
+﻿
+namespace King.Service
 {
     using System;
 
@@ -65,12 +66,9 @@
         public override void Run()
         {
             var now = DateTime.UtcNow;
-            if (now.Hour == this.Hour)
+            if (now.Hour == this.Hour && (-1 == this.Minute || now.Minute == this.Minute))
             {
-                if (-1 == this.Minute || now.Minute == this.Minute)
-                {
-                    this.Run(now);
-                }
+                this.Run(now);
             }
         }
 

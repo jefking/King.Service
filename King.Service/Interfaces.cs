@@ -12,12 +12,6 @@
     {
         #region Methods
         /// <summary>
-        /// Execute the action
-        /// </summary>
-        /// <param name="state">State of Timer</param>
-        void Run(object state);
-
-        /// <summary>
         /// Stops Service
         /// </summary>
         /// <returns>Stopped</returns>

@@ -56,18 +56,6 @@
         }
 
         [Test]
-        public void RunObj()
-        {
-            var table = Substitute.For<ITableStorage>();
-            table.CreateIfNotExists();
-
-            var task = new InitializeStorageTask(table);
-            task.Run(new object());
-
-            table.Received().CreateIfNotExists();
-        }
-
-        [Test]
         public async Task RunAsync()
         {
             var table = Substitute.For<ITableStorage>();

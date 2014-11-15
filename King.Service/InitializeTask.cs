@@ -9,15 +9,6 @@
     {
         #region Methods
         /// <summary>
-        /// Execute the action
-        /// </summary>
-        /// <param name="state">State of Timer</param>
-        public virtual void Run(object state)
-        {
-            this.Run();
-        }
-
-        /// <summary>
         /// Run Method
         /// </summary>
         public virtual void Run()
