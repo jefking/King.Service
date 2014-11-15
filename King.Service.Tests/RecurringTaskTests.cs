@@ -20,6 +20,13 @@
         }
 
         [Test]
+        public void ConstructorPeriodNegative()
+        {
+            var rh = new RecurringHelper(100, -50);
+            Assert.AreEqual(TimeSpan.Zero, rh.Every);
+        }
+
+        [Test]
         public void IsIRunnable()
         {
             Assert.IsNotNull(new RecurringHelper(100, 100) as IRunnable);
