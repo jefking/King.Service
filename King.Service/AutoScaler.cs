@@ -38,7 +38,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        public AutoScaler(T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 20)
+        public AutoScaler(T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
             : this(new Scaler<T>(), configuration, minimum, maximum, checkScaleInMinutes)
         {
         }
@@ -46,7 +46,7 @@
         /// <summary>
         /// Mockable Constructor
         /// </summary>
-        public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 20)
+        public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
             : base(BaseTimes.MinimumTiming, (int)TimeSpan.FromMinutes(checkScaleInMinutes).TotalSeconds)
         {
             if (1 > minimum)

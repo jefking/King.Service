@@ -2,11 +2,6 @@
 {
     using King.Service.Timing;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class BaseTimesTests
@@ -16,11 +11,17 @@
         {
             Assert.AreEqual(-1, BaseTimes.NoRepeat);
         }
-                
+
         [Test]
         public void MinimumTiming()
         {
             Assert.AreEqual(10, BaseTimes.MinimumTiming);
+        }
+
+        [Test]
+        public void ScaleCheck()
+        {
+            Assert.AreEqual(5, BaseTimes.ScaleCheck);
         }
         
         [Test]
