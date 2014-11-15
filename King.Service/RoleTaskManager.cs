@@ -81,21 +81,21 @@
                 var serviceCount = tasks.Count();
                 Trace.TraceInformation("Starting {0} services.", serviceCount);
 
-                var successCount = 0;
+                ushort successCount = 0;
 
-                foreach (var s in tasks)
+                foreach (var task in tasks)
                 {
                     try
                     {
-                        s.Start();
+                        task.Start();
                         
                         successCount++;
 
-                        Trace.TraceInformation("{0} Started.", s.GetType().ToString());
+                        Trace.TraceInformation("{0} Started.", task.GetType().ToString());
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError("{0}: {1}", s.GetType().ToString(), ex.ToString());
+                        Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
                     }
 
                     Thread.Sleep(BaseTimes.ThreadingOffset);
@@ -125,7 +125,7 @@
                 if (null == this.tasks)
                 {
                     var t = this.manager.Tasks(passthrough);
-                    if (null != t)
+                    if (null != t && t.Any())
                     {
                         Trace.TraceInformation("Loading Services.");
 
@@ -160,17 +160,17 @@
             {
                 Trace.TraceInformation("Stopping {0} services.", tasks.Count());
 
-                Parallel.ForEach(tasks, s =>
+                Parallel.ForEach(tasks, task =>
                 {
                     try
                     {
-                        var success = s.Stop();
+                        var success = task.Stop();
 
-                        Trace.TraceInformation("{0} Stopped; Success: {1}.", s.GetType().ToString(), success);
+                        Trace.TraceInformation("{0} Stopped; Success: {1}.", task.GetType().ToString(), success);
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError("{0}: {1}.", s.GetType().ToString(), ex.ToString());
+                        Trace.TraceError("{0}: {1}.", task.GetType().ToString(), ex.ToString());
                     }
                 }
                 );
@@ -207,10 +207,17 @@
             {
                 if (null != this.tasks)
                 {
-                    foreach (var t in tasks)
+                    Parallel.ForEach(tasks, task =>
                     {
-                        t.Dispose();
-                    }
+                        try
+                        {
+                            task.Dispose();
+                        }
+                        catch (Exception ex)
+                        {
+                            Trace.TraceError("Error while disposing of task: {0}", ex.ToString());
+                        }
+                    });
 
                     this.tasks = null;
                 }
