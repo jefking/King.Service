@@ -27,25 +27,28 @@
         /// <summary>
         /// Start Task
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="identifier"></param>
-        /// <param name="start"></param>
-        /// <returns></returns>
+        /// <param name="type">Task Type</param>
+        /// <param name="identifier">Identifier</param>
+        /// <param name="start">Start</param>
+        /// <returns>Task</returns>
         Task Start(Type type, Guid identifier, DateTime start);
 
         /// <summary>
         /// Complete Task
         /// </summary>
-        /// <param name="type"></param>
-        /// <param name="identifier"></param>
-        /// <param name="start"></param>
-        /// <param name="end"></param>
-        /// <param name="success"></param>
-        /// <returns></returns>
+        /// <param name="type">Task Type</param>
+        /// <param name="identifier">Identifier</param>
+        /// <param name="start">Start</param>
+        /// <param name="end">End</param>
+        /// <param name="success">Success</param>
+        /// <returns>Task</returns>
         Task Complete(Type type, Guid identifier, DateTime start, DateTime end, bool success);
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Period in seconds
+        /// </summary>
         int PeriodInSeconds
         {
             get;
