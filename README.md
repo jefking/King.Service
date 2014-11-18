@@ -13,7 +13,7 @@
 + Dequeue messages or batches of messages for Azure Storage Queues
 + And much more! [View Wiki](https://github.com/jefking/King.Service/wiki)
 + [Cloud Service](https://github.com/jefking/King.Service/tree/master/Worker)
-+ [Service Bus](https://github.com/jefking/King.Service/tree/master/King.Service.ServiceBus)
++ [Service Bus](https://github.com/jefking/King.Service.ServiceBus)
 + [WebJob](https://github.com/jefking/King.Service/tree/master/King.Service.WebJob)
 
 ### [NuGet](https://www.nuget.org/packages/King.Service)
