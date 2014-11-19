@@ -1,4 +1,5 @@
-﻿namespace King.Service
+﻿using King.Service.Timing;
+namespace King.Service
 {
     /// <summary>
     /// Simplified Backoff Runner
@@ -17,8 +18,9 @@
         /// Constructor
         /// </summary>
         /// <param name="run">Run</param>
-        public BackoffRunner(IDynamicRuns run)
-            : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds)
+        /// <param name="strategy">Timing Strategy</param>
+        public BackoffRunner(IDynamicRuns run, Strategy strategy = Strategy.Exponential)
+            : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds, strategy)
         {
             this.run = run;
 

@@ -1,4 +1,5 @@
-﻿namespace King.Service
+﻿using King.Service.Timing;
+namespace King.Service
 {
     /// <summary>
     /// Simplified Adaptive Runner
@@ -17,8 +18,9 @@
         /// Constructor
         /// </summary>
         /// <param name="run">Run</param>
-        public AdaptiveRunner(IDynamicRuns run)
-            : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds)
+        /// <param name="strategy">Timing Strategy</param>
+        public AdaptiveRunner(IDynamicRuns run, Strategy strategy = Strategy.Exponential)
+            : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds, strategy)
         {
             this.run = run;
 

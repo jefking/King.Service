@@ -106,6 +106,7 @@
     <Compile Include="Timing\Interfaces.cs" />
     <Compile Include="Timing\CalculateTiming.cs" />
     <Compile Include="Timing\LinearTiming.cs" />
+    <Compile Include="Timing\Strategies.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\Tasks.cd" />
