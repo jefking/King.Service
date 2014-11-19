@@ -10,24 +10,10 @@
     public class AdaptiveTimingTests
     {
         [Test]
-        public void Constructor()
+        public void IsDynamicTiming()
         {
             var random = new Random();
-            new AdaptiveTiming(random.Next(1, 100), random.Next(100, 1000));
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorTimingNull()
-        {
-            new AdaptiveTiming(null);
-        }
-
-        [Test]
-        public void IsIDynamicTiming()
-        {
-            var random = new Random();
-            Assert.IsNotNull(new AdaptiveTiming(random.Next(1, 100), random.Next(100, 1000)) as IDynamicTiming);
+            Assert.IsNotNull(new AdaptiveTiming(random.Next(1, 100), random.Next(100, 1000)) as DynamicTiming);
         }
 
         [Test]

@@ -3,8 +3,11 @@
     using King.Service.Timing;
 
     /// <summary>
-    /// Exponential Backoff Task
+    /// Backoff Task
     /// </summary>
+    /// <remarks>
+    /// A task that determines its frequency through work load
+    /// </remarks>
     public abstract class BackoffTask : DynamicTask
     {
         #region Constructors

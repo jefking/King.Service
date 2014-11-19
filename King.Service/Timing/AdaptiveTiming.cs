@@ -5,20 +5,8 @@
     /// <summary>
     /// Adaptive Timing
     /// </summary>
-    public class AdaptiveTiming : IDynamicTiming
+    public class AdaptiveTiming : DynamicTiming
     {
-        #region Members
-        /// <summary>
-        /// Attempts Made
-        /// </summary>
-        private ulong noWorkCount = 0;
-
-        /// <summary>
-        /// Timing Helper
-        /// </summary>
-        protected readonly ICalculateTiming timing = null;
-        #endregion
-
         #region Constructors
         /// <summary>
         /// Constructor
@@ -26,7 +14,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum Period in Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period in Seconds</param>
         public AdaptiveTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
-            : this(new ExponentialTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
+            : base(new ExponentialTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
         {
         }
 
@@ -35,26 +23,8 @@
         /// </summary>
         /// <param name="timing">Calculate Timing</param>
         public AdaptiveTiming(ICalculateTiming timing)
+            : base(timing)
         {
-            if (null == timing)
-            {
-                throw new ArgumentNullException("timing");
-            }
-
-            this.timing = timing;
-        }
-        #endregion
-
-        #region Properties
-        /// <summary>
-        /// Timing Helper
-        /// </summary>
-        public virtual ICalculateTiming Timing
-        {
-            get
-            {
-                return this.timing;
-            }
         }
         #endregion
 
@@ -64,7 +34,7 @@
         /// </summary>
         /// <param name="workWasDone">Work was done</param>
         /// <returns>New Timing</returns>
-        public virtual double Get(bool workWasDone)
+        public override double Get(bool workWasDone)
         {
             if (workWasDone)
             {

@@ -9,34 +9,10 @@
     public class BackoffTimingTests
     {
         [Test]
-        public void Constructor()
+        public void IsDynamicTiming()
         {
             var random = new Random();
-            new BackoffTiming(random.Next(1, 100), random.Next(100, 1000));
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorTimingNull()
-        {
-            new BackoffTiming(null);
-        }
-
-        [Test]
-        public void IsIDynamicTiming()
-        {
-            var random = new Random();
-            Assert.IsNotNull(new BackoffTiming(random.Next(1, 100), random.Next(100, 1000)) as IDynamicTiming);
-        }
-
-        [Test]
-        public void Timing()
-        {
-            var timing = Substitute.For<ICalculateTiming>();
-
-            var t = new BackoffTiming(timing);
-
-            Assert.AreEqual(timing, t.Timing);
+            Assert.IsNotNull(new BackoffTiming(random.Next(1, 100), random.Next(100, 1000)) as DynamicTiming);
         }
 
         [Test]
