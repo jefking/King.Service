@@ -101,6 +101,7 @@
     <Compile Include="Data\Coordinator.cs" />
     <Compile Include="Timing\BaseTimes.cs" />
     <Compile Include="Timing\DynamicTiming.cs" />
+    <Compile Include="Timing\Enums.cs" />
     <Compile Include="Timing\ExponentialTiming.cs" />
     <Compile Include="Timing\Interfaces.cs" />
     <Compile Include="Timing\CalculateTiming.cs" />
