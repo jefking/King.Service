@@ -9,27 +9,27 @@
         /// <summary>
         /// Causes Threading Time to run Once. (Seconds)
         /// </summary>
-        public const int NoRepeat = -1;
+        public const sbyte NoRepeat = -1;
 
         /// <summary>
         /// Minimum Timing. (Seconds)
         /// </summary>
-        public const int MinimumTiming = 10;
+        public const byte MinimumTiming = 10;
 
         /// <summary>
         /// Maxium Timing. (Seconds)
         /// </summary>
-        public const int MaximumTiming = 180;
+        public const byte MaximumTiming = 180;
 
         /// <summary>
         /// Minimum Storage Timing. (Seconds)
         /// </summary>
-        public const int MinimumStorageTiming = 15;
+        public const byte MinimumStorageTiming = 15;
 
         /// <summary>
         /// Maximum Storage Timing. (Seconds)
         /// </summary>
-        public const int MaximumStorageTiming = 180;
+        public const byte MaximumStorageTiming = 180;
 
         /// <summary>
         /// Slightly stager tasks, so they don't compete. (Milliseconds)
