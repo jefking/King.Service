@@ -4,10 +4,11 @@
 
     public static class Strategies
     {
+        #region Methods
         /// <summary>
         /// Get Calculate Timing
         /// </summary>
-        /// <param name="strategy">Strategy</param>
+        /// <param name="strategy">Timing Strategy</param>
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
         /// <returns></returns>
@@ -24,14 +25,29 @@
             }
         }
 
+        /// <summary>
+        /// Get Adaptive Timing
+        /// </summary>
+        /// <param name="strategy">Timing Strategy</param>
+        /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
+        /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
+        /// <returns></returns>
         public static IDynamicTiming Adaptive(Strategy strategy, int minimumPeriodInSeconds, int maximumPeriodInSeconds)
         {
             return new AdaptiveTiming(Strategies.Get(strategy, minimumPeriodInSeconds, maximumPeriodInSeconds));
         }
 
+        /// <summary>
+        /// Get Backoff Timing
+        /// </summary>
+        /// <param name="strategy">Timing Strategy</param>
+        /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
+        /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
+        /// <returns></returns>
         public static IDynamicTiming Backoff(Strategy strategy, int minimumPeriodInSeconds, int maximumPeriodInSeconds)
         {
             return new BackoffTiming(Strategies.Get(strategy, minimumPeriodInSeconds, maximumPeriodInSeconds));
         }
+        #endregion
     }
 }
