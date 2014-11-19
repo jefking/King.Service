@@ -46,14 +46,14 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.Exponential(0).Returns(expected);
+            timing.Get(0).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
             var value = t.Get(true);
 
             Assert.AreEqual(expected, value);
 
-            timing.Received().Exponential(0);
+            timing.Received().Get(0);
         }
 
         [Test]
@@ -62,14 +62,14 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.Exponential(1).Returns(expected);
+            timing.Get(1).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
             var value = t.Get(false);
 
             Assert.AreEqual(expected, value);
 
-            timing.Received().Exponential(1);
+            timing.Received().Get(1);
         }
 
         [Test]
@@ -78,7 +78,7 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.Exponential(0).Returns(expected);
+            timing.Get(0).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
             t.Get(true);
@@ -90,7 +90,7 @@
 
             Assert.AreEqual(expected, value);
 
-            timing.Received(6).Exponential(0);
+            timing.Received(6).Get(0);
         }
 
         [Test]
@@ -99,7 +99,7 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.Exponential(6).Returns(expected);
+            timing.Get(6).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
             t.Get(false);
@@ -111,12 +111,12 @@
 
             Assert.AreEqual(expected, value);
 
-            timing.Received().Exponential(1);
-            timing.Received().Exponential(2);
-            timing.Received().Exponential(3);
-            timing.Received().Exponential(4);
-            timing.Received().Exponential(5);
-            timing.Received().Exponential(6);
+            timing.Received().Get(1);
+            timing.Received().Get(2);
+            timing.Received().Get(3);
+            timing.Received().Get(4);
+            timing.Received().Get(5);
+            timing.Received().Get(6);
         }
 
         [Test]
@@ -125,9 +125,9 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.Exponential(0).Returns(expected);
-            timing.Exponential(1).Returns(expected);
-            timing.Exponential(2).Returns(expected);
+            timing.Get(0).Returns(expected);
+            timing.Get(1).Returns(expected);
+            timing.Get(2).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
             t.Get(true);
@@ -139,9 +139,9 @@
 
             Assert.AreEqual(expected, value);
 
-            timing.Received(2).Exponential(0);
-            timing.Received(3).Exponential(1);
-            timing.Received().Exponential(2);
+            timing.Received(2).Get(0);
+            timing.Received(3).Get(1);
+            timing.Received().Get(2);
         }
     }
 }

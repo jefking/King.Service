@@ -26,7 +26,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum Period in Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period in Seconds</param>
         public BackoffTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
-            :this(new CalculateTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
+            :this(new ExponentialTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
         {
         }
 
@@ -68,7 +68,7 @@
         {
             this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
 
-            return this.timing.Exponential(this.noWorkCount);
+            return this.timing.Get(this.noWorkCount);
         }
         #endregion
     }

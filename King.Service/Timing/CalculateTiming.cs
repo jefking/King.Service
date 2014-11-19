@@ -5,7 +5,7 @@
     /// <summary>
     /// Timing Maths
     /// </summary>
-    public class CalculateTiming : ICalculateTiming
+    public abstract class CalculateTiming : ICalculateTiming
     {
         #region Members
         /// <summary>
@@ -56,22 +56,11 @@
 
         #region Methods
         /// <summary>
-        /// Exponential Backoff strategy, within bounds
+        /// Get timing
         /// </summary>
         /// <param name="attempts">attempts</param>
-        /// <param name="max">upper bound</param>
-        /// <param name="min">lower bound</param>
         /// <returns>timing</returns>
-        public virtual double Exponential(ulong attempts)
-        {
-            if (0 == attempts)
-            {
-                return this.minimumPeriodInSeconds;
-            }
-
-            var current = ((Math.Pow(2, attempts) * .1d) * this.minimumPeriodInSeconds) + this.minimumPeriodInSeconds;
-            return current < this.maximumPeriodInSeconds ? current : this.maximumPeriodInSeconds;
-        }
+        public abstract double Get(ulong attempts);
         #endregion
     }
 }

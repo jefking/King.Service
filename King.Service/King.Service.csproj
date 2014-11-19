@@ -100,8 +100,10 @@
     <Compile Include="CoordinatedTask.cs" />
     <Compile Include="Data\Coordinator.cs" />
     <Compile Include="Timing\BaseTimes.cs" />
+    <Compile Include="Timing\ExponentialTiming.cs" />
     <Compile Include="Timing\Interfaces.cs" />
     <Compile Include="Timing\CalculateTiming.cs" />
+    <Compile Include="Timing\LinearTiming.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Diagrams\Tasks.cd" />

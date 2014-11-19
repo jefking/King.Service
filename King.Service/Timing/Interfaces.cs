@@ -17,11 +17,11 @@
 
         #region Methods
         /// <summary>
-        /// Exponential Timing
+        /// Get Timing
         /// </summary>
         /// <param name="attempts">Attempts</param>
         /// <returns>Timing</returns>
-        double Exponential(ulong attempts);
+        double Get(ulong attempts);
         #endregion
     }
 

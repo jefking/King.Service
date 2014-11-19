@@ -26,7 +26,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum Period in Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period in Seconds</param>
         public AdaptiveTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
-            : this(new CalculateTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
+            : this(new ExponentialTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
         {
         }
 
@@ -78,7 +78,7 @@
                 this.noWorkCount++;
             }
 
-            return this.timing.Exponential(this.noWorkCount);
+            return this.timing.Get(this.noWorkCount);
         }
         #endregion
     }

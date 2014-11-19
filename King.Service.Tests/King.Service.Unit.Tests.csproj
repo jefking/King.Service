@@ -119,6 +119,8 @@
     <Compile Include="RoleTaskManagerTests.cs" />
     <Compile Include="Timing\BaseTimesTests.cs" />
     <Compile Include="Timing\CalculateTimingTests.cs" />
+    <Compile Include="Timing\ExponentialTimingTests.cs" />
+    <Compile Include="Timing\LinearTimingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
