@@ -1,5 +1,4 @@
-﻿
-namespace King.Service
+﻿namespace King.Service
 {
     using System;
 
