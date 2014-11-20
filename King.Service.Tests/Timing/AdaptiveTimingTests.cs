@@ -48,14 +48,14 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.Get(1).Returns(expected);
+            timing.Get(0).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
             var value = t.Get(false);
 
             Assert.AreEqual(expected, value);
 
-            timing.Received().Get(1);
+            timing.Received().Get(0);
         }
 
         [Test]
@@ -85,6 +85,7 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
+            timing.MaximumPeriodInSeconds.Returns(100000);
             timing.Get(6).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
@@ -103,6 +104,7 @@
             timing.Received().Get(4);
             timing.Received().Get(5);
             timing.Received().Get(6);
+            var r = timing.Received().MaximumPeriodInSeconds;
         }
 
         [Test]
@@ -111,6 +113,7 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
+            timing.MaximumPeriodInSeconds.Returns(100000);
             timing.Get(0).Returns(expected);
             timing.Get(1).Returns(expected);
             timing.Get(2).Returns(expected);
@@ -125,9 +128,26 @@
 
             Assert.AreEqual(expected, value);
 
-            timing.Received(2).Get(0);
-            timing.Received(3).Get(1);
+            timing.Received(4).Get(0);
+            timing.Received(4).Get(1);
             timing.Received().Get(2);
+            var r = timing.Received().MaximumPeriodInSeconds;
+        }
+
+        [Test]
+        public void GetMaxThenMin()
+        {
+            var min = 1;
+            var max = 10;
+            var t = new AdaptiveTiming(min, max);
+            while (max > t.Get(false))
+            { }
+
+            Assert.AreEqual(max, t.Get(false));
+            Assert.AreEqual(max, t.Get(false));
+            
+            var result = t.Get(true);
+            Assert.IsTrue(result < max);
         }
     }
 }

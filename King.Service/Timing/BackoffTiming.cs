@@ -36,9 +36,16 @@
         /// <returns>New Timing</returns>
         public override double Get(bool workWasDone)
         {
-            this.noWorkCount = workWasDone ? 0 : this.noWorkCount + 1;
-
-            return this.timing.Get(this.noWorkCount);
+            if (workWasDone)
+            {
+                this.noWorkCount = 0;
+                return this.timing.MinimumPeriodInSeconds;
+            }
+            else
+            {
+                this.noWorkCount++;
+                return this.timing.Get(this.noWorkCount);
+            }
         }
         #endregion
     }

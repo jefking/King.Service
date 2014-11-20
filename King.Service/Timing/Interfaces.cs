@@ -13,6 +13,14 @@
         {
             get;
         }
+
+        /// <summary>
+        /// Maximum Timeframe (seconds)
+        /// </summary>
+        int MaximumPeriodInSeconds
+        {
+            get;
+        }
         #endregion
 
         #region Methods

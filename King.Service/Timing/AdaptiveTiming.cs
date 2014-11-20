@@ -43,7 +43,7 @@
                     this.noWorkCount--;
                 }
             }
-            else
+            else if (this.timing.MaximumPeriodInSeconds > this.timing.Get(this.noWorkCount))
             {
                 this.noWorkCount++;
             }

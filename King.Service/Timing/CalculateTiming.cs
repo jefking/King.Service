@@ -52,6 +52,17 @@
                 return this.minimumPeriodInSeconds;
             }
         }
+
+        /// <summary>
+        /// Maximum Timeframe (seconds)
+        /// </summary>
+        public virtual int MaximumPeriodInSeconds
+        {
+            get
+            {
+                return this.maximumPeriodInSeconds;
+            }
+        }
         #endregion
 
         #region Methods

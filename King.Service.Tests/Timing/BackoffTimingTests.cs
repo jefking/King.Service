@@ -19,16 +19,16 @@
         public void Get()
         {
             var random = new Random();
-            var expected = random.NextDouble();
+            var expected = random.Next();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.Get(0).Returns(expected);
+            timing.MinimumPeriodInSeconds.Returns(expected);
 
             var t = new BackoffTiming(timing);
             var value = t.Get(true);
 
             Assert.AreEqual(expected, value);
 
-            timing.Received().Get(0);
+            var r = timing.Received().MinimumPeriodInSeconds;
         }
 
         [Test]
@@ -51,9 +51,9 @@
         public void GetWorkMultiple()
         {
             var random = new Random();
-            var expected = random.NextDouble();
+            var expected = random.Next();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.Get(0).Returns(expected);
+            timing.MinimumPeriodInSeconds.Returns(expected);
 
             var t = new BackoffTiming(timing);
             t.Get(true);
@@ -65,7 +65,7 @@
 
             Assert.AreEqual(expected, value);
 
-            timing.Received(6).Get(0);
+            var r = timing.Received(6).MinimumPeriodInSeconds;
         }
 
         [Test]
@@ -74,6 +74,11 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
+            timing.Get(1).Returns(random.NextDouble());
+            timing.Get(2).Returns(random.NextDouble());
+            timing.Get(3).Returns(random.NextDouble());
+            timing.Get(4).Returns(random.NextDouble());
+            timing.Get(5).Returns(random.NextDouble());
             timing.Get(6).Returns(expected);
 
             var t = new BackoffTiming(timing);
@@ -92,6 +97,22 @@
             timing.Received().Get(4);
             timing.Received().Get(5);
             timing.Received().Get(6);
+        }
+
+        [Test]
+        public void GetMaxThenMin()
+        {
+            var min = 1;
+            var max = 10;
+            var t = new BackoffTiming(min, max);
+            while (max > t.Get(false))
+            { }
+
+            Assert.AreEqual(max, t.Get(false));
+            Assert.AreEqual(max, t.Get(false));
+
+            var result = t.Get(true);
+            Assert.IsTrue(result < max);
         }
     }
 }
