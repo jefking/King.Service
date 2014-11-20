@@ -122,6 +122,7 @@
     <Compile Include="Timing\DynamicTimingTests.cs" />
     <Compile Include="Timing\ExponentialTimingTests.cs" />
     <Compile Include="Timing\LinearTimingTests.cs" />
+    <Compile Include="Timing\StrategiesTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

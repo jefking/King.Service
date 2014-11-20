@@ -2,6 +2,9 @@
 {
     using System;
 
+    /// <summary>
+    /// Timing Strategy Factory
+    /// </summary>
     public static class Strategies
     {
         #region Methods
@@ -12,7 +15,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
         /// <returns></returns>
-        public static ICalculateTiming Get(Strategy strategy, int minimumPeriodInSeconds, int maximumPeriodInSeconds)
+        public static ICalculateTiming Get(Strategy strategy = Strategy.Exponential, int minimumPeriodInSeconds = BaseTimes.MinimumTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
         {
             switch (strategy)
             {
@@ -32,7 +35,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
         /// <returns></returns>
-        public static IDynamicTiming Adaptive(Strategy strategy, int minimumPeriodInSeconds, int maximumPeriodInSeconds)
+        public static IDynamicTiming Adaptive(Strategy strategy = Strategy.Exponential, int minimumPeriodInSeconds = BaseTimes.MinimumTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
         {
             return new AdaptiveTiming(Strategies.Get(strategy, minimumPeriodInSeconds, maximumPeriodInSeconds));
         }
@@ -44,7 +47,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
         /// <returns></returns>
-        public static IDynamicTiming Backoff(Strategy strategy, int minimumPeriodInSeconds, int maximumPeriodInSeconds)
+        public static IDynamicTiming Backoff(Strategy strategy = Strategy.Exponential, int minimumPeriodInSeconds = BaseTimes.MinimumTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
         {
             return new BackoffTiming(Strategies.Get(strategy, minimumPeriodInSeconds, maximumPeriodInSeconds));
         }

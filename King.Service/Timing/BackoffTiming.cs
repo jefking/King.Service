@@ -13,7 +13,7 @@
         /// </summary>
         /// <param name="minimumPeriodInSeconds">Minimum Period in Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period in Seconds</param>
-        public BackoffTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
+        public BackoffTiming(int minimumPeriodInSeconds = BaseTimes.MinimumTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
             : base(new ExponentialTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
         {
         }

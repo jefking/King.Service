@@ -11,7 +11,7 @@
         /// </summary>
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
-        public LinearTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
+        public LinearTiming(int minimumPeriodInSeconds = BaseTimes.MinimumTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
             : base(minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
