@@ -48,7 +48,25 @@
     /// <summary>
     /// Dynamic Runs Interface
     /// </summary>
-    public interface IDynamicRuns
+    public interface IDynamicRuns : IRuns
+    {
+        #region Properties
+        /// <summary>
+        /// Maximum Period In Seconds
+        /// </summary>
+        int MaximumPeriodInSeconds
+        {
+            get;
+        }
+        #endregion
+    }
+    #endregion
+
+    #region IRuns
+    /// <summary>
+    /// Dynamic Runs Interface
+    /// </summary>
+    public interface IRuns
     {
         #region Methods
         /// <summary>
@@ -63,14 +81,6 @@
         /// Minimum Period In Seconds
         /// </summary>
         int MinimumPeriodInSeconds
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Maximum Period In Seconds
-        /// </summary>
-        int MaximumPeriodInSeconds
         {
             get;
         }

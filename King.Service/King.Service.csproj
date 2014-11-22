@@ -78,6 +78,7 @@
     <Compile Include="AutoScaler.cs" />
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Data\StorageDequeueBatch.cs" />
+    <Compile Include="RecurringRunner.cs" />
     <Compile Include="RunAtTask.cs" />
     <Compile Include="Scalability\Interfaces.cs" />
     <Compile Include="Scalability\Scaler.cs" />

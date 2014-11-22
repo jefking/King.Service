@@ -98,6 +98,7 @@
     <Compile Include="Data\DequeueBatchTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
     <Compile Include="RecurringHelper.cs" />
+    <Compile Include="RecurringRunnerTests.cs" />
     <Compile Include="RunAtTaskTests.cs" />
     <Compile Include="Scalability\ScalerTests.cs" />
     <Compile Include="Timing\AdaptiveTimingTests.cs" />

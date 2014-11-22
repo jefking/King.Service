@@ -3,15 +3,15 @@
     using King.Service.Timing;
 
     /// <summary>
-    /// Simplified Backoff Runner
+    /// Recurring Runner
     /// </summary>
-    public class BackoffRunner : BackoffTask
+    public class RecurringRunner : RecurringTask
     {
         #region Members
         /// <summary>
         /// Backoff Runs
         /// </summary>
-        protected readonly IDynamicRuns run = null;
+        protected readonly IRuns run = null;
         #endregion
 
         #region Constructors
@@ -20,8 +20,8 @@
         /// </summary>
         /// <param name="run">Run</param>
         /// <param name="strategy">Timing Strategy</param>
-        public BackoffRunner(IDynamicRuns run, Strategy strategy = Strategy.Exponential)
-            : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds, strategy)
+        public RecurringRunner(IRuns run)
+            : base(BaseTimes.MinimumTiming, run.MinimumPeriodInSeconds)
         {
             this.run = run;
 
@@ -33,10 +33,9 @@
         /// <summary>
         /// Run
         /// </summary>
-        /// <param name="workWasDone">Work Was Done</param>
-        public override void Run(out bool workWasDone)
+        public override void Run()
         {
-            workWasDone = this.run.Run().Result;
+            this.run.Run().Wait();
         }
         #endregion
     }
