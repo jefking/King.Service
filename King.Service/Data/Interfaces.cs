@@ -1,11 +1,9 @@
 ﻿namespace King.Service.Data
 {
-    using Microsoft.WindowsAzure.Storage.Queue;
-    using Microsoft.WindowsAzure.Storage.Table;
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    #region ICoordinator
     /// <summary>
     /// Scheduled Task Core for Mocking
     /// </summary>
@@ -55,4 +53,5 @@
         }
         #endregion
     }
+    #endregion
 }
