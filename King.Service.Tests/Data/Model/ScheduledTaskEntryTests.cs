@@ -13,33 +13,7 @@
         {
             new ScheduledTaskEntry();
         }
-
-        [Test]
-        public void ConstructorServiceName()
-        {
-            new ScheduledTaskEntry(Guid.NewGuid().ToString());
-        }
-
-        [Test]
-        [ExpectedException(typeof(NullReferenceException))]
-        public void ConstructorTypeNull()
-        {
-            new ScheduledTaskEntry((Type)null);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ConstructorServiceNameNull()
-        {
-            new ScheduledTaskEntry((string)null);
-        }
-
-        [Test]
-        public void ConstructorType()
-        {
-            new ScheduledTaskEntry(this.GetType());
-        }
-
+        
         [Test]
         public void IsTableEntity()
         {
@@ -50,14 +24,22 @@
         public void PartitionKey()
         {
             var expected = ScheduledTaskEntry.GenerateLogsPartitionKey(this.GetType().ToString());
-            var entity = new ScheduledTaskEntry(this.GetType());
+            var entity = new ScheduledTaskEntry
+            {
+                PartitionKey = ScheduledTaskEntry.GenerateLogsPartitionKey(this.GetType().ToString()),
+                ServiceName = this.GetType().ToString(),
+            };
             Assert.AreEqual(expected, entity.PartitionKey);
         }
 
         [Test]
         public void Identifier()
         {
-            var entity = new ScheduledTaskEntry(this.GetType());
+            var entity = new ScheduledTaskEntry
+            {
+                PartitionKey = ScheduledTaskEntry.GenerateLogsPartitionKey(this.GetType().ToString()),
+                ServiceName = this.GetType().ToString(),
+            };
             Assert.IsNull(entity.Identifier);
             var data = Guid.NewGuid();
             entity.Identifier = data;

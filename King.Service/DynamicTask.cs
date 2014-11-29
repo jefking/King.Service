@@ -7,7 +7,7 @@
     /// <summary>
     /// Dynamic Task, base class for Tasks which change their own timing based on quantity of work
     /// </summary>
-    public abstract class DynamicTask : RecurringTask, IScalable
+    public abstract class DynamicTask : RecurringTask, IScalable, IDisposable
     {
         #region Members
         /// <summary>
@@ -76,6 +76,12 @@
         /// </summary>
         /// <param name="workWasDone">Work Was Done</param>
         public abstract void Run(out bool workWasDone);
+
+        protected override void Dispose(bool disposing)
+        {
+
+            base.Dispose(disposing);
+        }
         #endregion
     }
 }

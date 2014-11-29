@@ -21,6 +21,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         protected RecurringTask(int dueInSeconds = BaseTimes.MinimumTiming, int periodInSeconds = BaseTimes.MaximumTiming)
         {
             if (0 > dueInSeconds)

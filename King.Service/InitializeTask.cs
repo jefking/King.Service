@@ -48,7 +48,15 @@
         /// <summary>
         /// Dispose
         /// </summary>
-        public virtual void Dispose()
+        public void Dispose()
+        {
+            this.Dispose(true);
+        }
+
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        protected virtual void Dispose(bool disposing)
         {
         }
         #endregion

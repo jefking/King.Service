@@ -87,7 +87,11 @@
                 throw new ArgumentNullException("type");
             }
 
-            var entry = new ScheduledTaskEntry(type);
+            var entry = new ScheduledTaskEntry()
+            {
+                PartitionKey = ScheduledTaskEntry.GenerateLogsPartitionKey(type.GetType().ToString()),
+                ServiceName = type.GetType().ToString(),
+            };
 
             var performTask = true;
 
@@ -123,8 +127,10 @@
                 throw new ArgumentException("identifier");
             }
 
-            await this.storage.InsertOrReplace(new ScheduledTaskEntry(type)
+            await this.storage.InsertOrReplace(new ScheduledTaskEntry
             {
+                PartitionKey = ScheduledTaskEntry.GenerateLogsPartitionKey(type.GetType().ToString()),
+                ServiceName = type.GetType().ToString(),
                 Identifier = identifier,
                 StartTime = start,
             });
@@ -150,8 +156,10 @@
                 throw new ArgumentException("identifier");
             }
 
-            await this.storage.InsertOrReplace(new ScheduledTaskEntry(type)
+            await this.storage.InsertOrReplace(new ScheduledTaskEntry
             {
+                PartitionKey = ScheduledTaskEntry.GenerateLogsPartitionKey(type.GetType().ToString()),
+                ServiceName = type.GetType().ToString(),
                 Identifier = identifier,
                 StartTime = start,
                 CompletionTime = end,

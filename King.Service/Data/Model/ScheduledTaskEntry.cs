@@ -8,39 +8,6 @@
     /// </summary>
     public class ScheduledTaskEntry : TableEntity
     {
-        #region Constructor
-        /// <summary>
-        /// Default Constructpor
-        /// </summary>
-        public ScheduledTaskEntry()
-        {
-        }
-        
-        /// <summary>
-        /// Service Type
-        /// </summary>
-        /// <param name="service">Type</param>
-        public ScheduledTaskEntry(Type service)
-            :this(service.ToString())
-        {
-        }
-
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="serviceName">Service Name</param>
-        public ScheduledTaskEntry(string serviceName)
-        {
-            if (string.IsNullOrWhiteSpace(serviceName))
-            {
-                throw new ArgumentException("serviceName");
-            }
-
-            this.ServiceName = serviceName;
-            this.PartitionKey = ScheduledTaskEntry.GenerateLogsPartitionKey(serviceName);
-        }
-        #endregion
-
         #region Properties
         /// <summary>
         /// Identifier
