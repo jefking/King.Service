@@ -42,13 +42,13 @@
             // Add your coordinated task
             yield return task;
 
-            //Task once daily on the (current) hour
+            //Task once daily on the (specified/current) hour
             yield return new OnceDaily(config.ConnectionString);
 
             //Backoff task
             yield return new Backoff();
 
-            //Self Governing task
+            //Self governing task
             yield return new Adaptive();
 
             //Dequeue task, Backoff behavior
