@@ -15,7 +15,7 @@
     {
         public IEnumerable<IRunnable> Tasks(Configuration config)
         {
-            // Initialization Task(s)
+            // Initialization task
             yield return new InitTask();
 
             // Initialize Table; creates table if it doesn't already exist
@@ -26,11 +26,11 @@
             var queue = new StorageQueue(config.QueueName, config.ConnectionString);
             yield return new InitializeStorageTask(queue);
 
-            // Initialize Queue; creates queue if it doesn't already exist
+            // Initialize Container; creates container if it doesn't already exist
             var container = new Container(config.ContainerName, config.ConnectionString);
             yield return new InitializeStorageTask(container);
 
-            //Task(s)
+            //basic task
             yield return new Recurring();
 
             //Cordinated Tasks between Instances
@@ -39,26 +39,26 @@
             // Add once to ensure that Table is created for Instances to communicate with
             yield return task.InitializeTask();
 
-            // Add your coordinated task(s)
+            // Add your coordinated task
             yield return task;
 
-            //Backoff task(s)
+            //Task once daily on the (current) hour
+            yield return new OnceDaily(config.ConnectionString);
+
+            //Backoff task
             yield return new Backoff();
 
-            //Self Governing task(s)
+            //Self Governing task
             yield return new Adaptive();
 
-            //Dequeue task(s), Backoff behavior
+            //Dequeue task, Backoff behavior
             yield return new BackoffRunner(new CompanyDequeuer(queue));
 
-            //Dequeue task(s), Adaptive behavior
+            //Dequeue task, Adaptive behavior
             yield return new AdaptiveRunner(new CompanyDequeuer(queue));
 
             //Task for Queuing
             yield return new CompanyQueuer();
-
-            //Task once daily on the (current) hour
-            yield return new OnceDaily(config.ConnectionString);
 
             //Auto Scaling Task
             yield return new DynamicScaler(config);
