@@ -57,6 +57,9 @@
             //Dequeue task, Adaptive behavior
             yield return new AdaptiveRunner(new CompanyDequeuer(queue));
 
+            //Dequeue task, Recurring behavior
+            yield return new RecurringRunner(new CompanyDequeuer(queue));
+
             //Task for Queuing
             yield return new CompanyQueuer();
 

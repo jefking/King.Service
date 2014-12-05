@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.Service</id>
-        <version>1.8.8</version>
+        <version>1.8.9</version>
         <title>King.Service</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
@@ -12,7 +12,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Task scheduling for Azure and Windows Servers.</description>
         <summary>Task scheduling for Azure and Windows Servers.</summary>
-        <releaseNotes>Linear timing as well as Exponential. Adaptive and Backoff timing refined.</releaseNotes>
+        <releaseNotes>Recurring runner.</releaseNotes>
         <copyright>Jef King</copyright>
         <tags>King.Service Azure Queue Service Bus scale linear exponential timing auto-scale dynamic-scale dynamic Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure run task service services tasks scheduling</tags>
         <dependencies>
