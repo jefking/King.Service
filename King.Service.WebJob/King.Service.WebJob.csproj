@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="King.Azure, Version=1.0.1.22, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\King.Azure.1.1.15\lib\net451\King.Azure.dll</HintPath>
+    </Reference>
     <Reference Include="King.Service, Version=1.5.0.10, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\King.Service.1.8.9\lib\net451\King.Service.dll</HintPath>

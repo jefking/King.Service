@@ -41,6 +41,10 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="King.Azure, Version=1.0.1.22, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\King.Azure.1.1.15\lib\net451\King.Azure.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Data.Edm, Version=5.6.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Data.Edm.5.6.3\lib\net40\Microsoft.Data.Edm.dll</HintPath>
@@ -96,6 +100,7 @@
     <Compile Include="RecurringHelper.cs" />
     <Compile Include="RecurringRunnerTests.cs" />
     <Compile Include="RunAtTaskTests.cs" />
+    <Compile Include="Scalability\QueueScalerTests.cs" />
     <Compile Include="Scalability\ScalerTests.cs" />
     <Compile Include="Timing\AdaptiveTimingTests.cs" />
     <Compile Include="Timing\BackoffTimingTests.cs" />
