@@ -77,9 +77,12 @@
         /// <param name="workWasDone">Work Was Done</param>
         public abstract void Run(out bool workWasDone);
 
+        /// <summary>
+        /// Dispose
+        /// </summary>
+        /// <param name="disposing">Dispposing</param>
         protected override void Dispose(bool disposing)
         {
-
             base.Dispose(disposing);
         }
         #endregion
