@@ -18,6 +18,13 @@
         }
 
         [Test]
+        public void IsScaler()
+        {
+            var queue = Substitute.For<IQueueCount>();
+            Assert.IsNotNull(new QueueScaler<object>(queue) as Scaler<object>);
+        }
+
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorQueueNull()
         {
