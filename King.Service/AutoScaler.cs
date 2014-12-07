@@ -134,18 +134,19 @@
             else
             {
                 var scale = this.scaler.ShouldScale();
-                if (scale == null)
+                if (scale.HasValue)
                 {
-                    Trace.TraceInformation("'{0}' is currently running at optimal scale with {1} units.", this.ServiceName, this.scaler.CurrentUnits);
+                    if (scale.Value && this.scaler.CurrentUnits < this.maximum)
+                    {
+                        this.scaler.ScaleUp(this, this.configuration, this.ServiceName);
+                    }
+                    else if (!scale.Value && this.scaler.CurrentUnits > this.minimum)
+                    {
+                        this.scaler.ScaleDown(this.ServiceName);
+                    }
                 }
-                else if (scale.Value && this.scaler.CurrentUnits < this.maximum)
-                {
-                    this.scaler.ScaleUp(this, this.configuration, this.ServiceName);
-                }
-                else if (!scale.Value && this.scaler.CurrentUnits > this.minimum)
-                {
-                    this.scaler.ScaleDown(this.ServiceName);
-                }
+
+                Trace.TraceInformation("'{0}' is currently running at optimal scale with {1} units.", this.ServiceName, this.scaler.CurrentUnits);
             }
         }
 
