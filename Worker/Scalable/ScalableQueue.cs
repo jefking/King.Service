@@ -12,7 +12,6 @@
         public ScalableQueue(IQueueCount count, Configuration config)
             : base(count, config, 1, 15, 1)
         {
-            Trace.TraceInformation("Scalable Queue Loaded.");
         }
 
         public override IEnumerable<IScalable> ScaleUnit(Configuration config)
