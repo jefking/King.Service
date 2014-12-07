@@ -15,12 +15,13 @@
         /// Default Constructor
         /// </summary>
         /// <param name="count">Count</param>
+        /// <param name="messagesPerScaleUnit">Messages Per-Scale Unit</param>
         /// <param name="configuration">Configuration</param>
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public QueueAutoScaler(IQueueCount count, T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
-            : base(new QueueScaler<T>(count), configuration, minimum, maximum, checkScaleInMinutes)
+        public QueueAutoScaler(IQueueCount count, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
+            : base(new QueueScaler<T>(count, messagesPerScaleUnit), configuration, minimum, maximum, checkScaleInMinutes)
         {
         }
         #endregion

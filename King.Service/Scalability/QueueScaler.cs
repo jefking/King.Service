@@ -12,9 +12,14 @@
     {
         #region Members
         /// <summary>
+        /// Messages per-Scale Unit Default
+        /// </summary>
+        public const ushort MessagesPerScaleUnitDefault = 10;
+
+        /// <summary>
         /// Messages per-Scale Unit
         /// </summary>
-        protected readonly ushort messagesPerScaleUnit = 10;
+        protected readonly ushort messagesPerScaleUnit = MessagesPerScaleUnitDefault;
 
         /// <summary>
         /// Queue Count
@@ -26,7 +31,7 @@
         /// <summary>
         /// Mockable Constructor
         /// </summary>
-        public QueueScaler(IQueueCount queueCount, ushort messagesPerScaleUnit = 10)
+        public QueueScaler(IQueueCount queueCount, ushort messagesPerScaleUnit = MessagesPerScaleUnitDefault)
         {
             if (null == queueCount)
             {
@@ -34,7 +39,7 @@
             }
 
             this.queueCount = queueCount;
-            this.messagesPerScaleUnit = messagesPerScaleUnit < 10 ? (ushort)10 : messagesPerScaleUnit;
+            this.messagesPerScaleUnit = messagesPerScaleUnit < 10 ? (ushort)MessagesPerScaleUnitDefault : messagesPerScaleUnit;
         }
         #endregion
 
