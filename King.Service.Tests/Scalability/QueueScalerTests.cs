@@ -52,7 +52,7 @@
         }
 
         [Test]
-        public void ShouldScaleTrue()
+        public void ShouldScaleUp()
         {
             var queue = Substitute.For<IQueueCount>();
             queue.ApproixmateMessageCount().Returns(Task.FromResult<long?>(10000));
@@ -66,15 +66,40 @@
         }
 
         [Test]
-        public void ShouldScaleFalse()
+        public void ShouldScaleDown()
         {
+            var factory = Substitute.For<ITaskFactory<object>>();
             var queue = Substitute.For<IQueueCount>();
             queue.ApproixmateMessageCount().Returns(Task.FromResult<long?>(1));
 
-            var qs = new QueueScaler<object>(queue);
+            var qs = new QueueScaler<object>(queue, 12);
+            qs.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
+            qs.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
+
             var result = qs.ShouldScale();
 
             Assert.IsFalse(result.Value);
+
+            queue.Received().ApproixmateMessageCount();
+        }
+
+        [Test]
+        public void ShouldScaleOptimal()
+        {
+            var random = new Random();
+            var count = (ushort)random.Next(ushort.MinValue, ushort.MaxValue);
+
+            var factory = Substitute.For<ITaskFactory<object>>();
+
+            var queue = Substitute.For<IQueueCount>();
+            queue.ApproixmateMessageCount().Returns(Task.FromResult<long?>(count));
+
+            var qs = new QueueScaler<object>(queue, count);
+            qs.ScaleUp(factory, new object(), Guid.NewGuid().ToString());
+
+            var result = qs.ShouldScale();
+
+            Assert.IsNull(result);
 
             queue.Received().ApproixmateMessageCount();
         }

@@ -80,13 +80,9 @@
             {
                 return null;
             }
-            else if (timeToScale > 0)
-            {
-                return true;
-            }
             else
             {
-                return false;
+                return timeToScale > 0;
             }
         }
 
