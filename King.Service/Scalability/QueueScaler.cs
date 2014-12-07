@@ -12,9 +12,9 @@
     {
         #region Members
         /// <summary>
-        /// Maximum
+        /// Messages per-Scale Unit
         /// </summary>
-        protected readonly ushort maximum = 100;
+        protected readonly ushort messagesPerScaleUnit = 10;
 
         /// <summary>
         /// Queue Count
@@ -26,8 +26,7 @@
         /// <summary>
         /// Mockable Constructor
         /// </summary>
-        /// <param name="units">Scale Units</param>
-        public QueueScaler(IQueueCount queueCount, ushort maximum = 100)
+        public QueueScaler(IQueueCount queueCount, ushort messagesPerScaleUnit = 10)
         {
             if (null == queueCount)
             {
@@ -35,7 +34,7 @@
             }
 
             this.queueCount = queueCount;
-            this.maximum = maximum < 10 ? (ushort)100 : maximum;
+            this.messagesPerScaleUnit = messagesPerScaleUnit < 10 ? (ushort)10 : messagesPerScaleUnit;
         }
         #endregion
 
@@ -47,7 +46,7 @@
         {
             get
             {
-                return this.maximum;
+                return this.messagesPerScaleUnit;
             }
         }
         #endregion
@@ -61,8 +60,9 @@
         {
             try
             {
-                var result = queueCount.ApproixmateMessageCount().Result;
-                return result > maximum;
+                var messageCount = queueCount.ApproixmateMessageCount().Result;
+                var result = messageCount / messagesPerScaleUnit;
+                return result > this.CurrentUnits;
             }
             catch (Exception ex)
             {
