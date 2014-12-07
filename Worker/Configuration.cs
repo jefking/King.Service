@@ -18,6 +18,11 @@
             get;
             set;
         }
+        public string ScalableQueueName
+        {
+            get;
+            set;
+        }
         public string ContainerName
         {
             get;

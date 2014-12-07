@@ -25,6 +25,8 @@
             // Initialize Queue; creates queue if it doesn't already exist
             var queue = new StorageQueue(config.QueueName, config.ConnectionString);
             yield return new InitializeStorageTask(queue);
+            var scalableQueue = new StorageQueue(config.ScalableQueueName, config.ConnectionString);
+            yield return new InitializeStorageTask(scalableQueue);
 
             // Initialize Container; creates container if it doesn't already exist
             var container = new Container(config.ContainerName, config.ConnectionString);
@@ -65,6 +67,9 @@
 
             //Auto Scaling Task
             yield return new DynamicScaler(config);
+
+            //Auto Scaling Dequeue Task
+            yield return new ScalableQueue(scalableQueue, config);
         }
     }
 }

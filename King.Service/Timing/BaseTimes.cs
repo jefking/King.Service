@@ -39,7 +39,7 @@
         /// <summary>
         /// Scale Check (Minutes)
         /// </summary>
-        public const byte ScaleCheck = 5;
+        public const byte ScaleCheck = 1;
         #endregion
     }
 }
