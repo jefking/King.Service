@@ -33,7 +33,7 @@
         public void IsAutoScaler()
         {
             var c = Substitute.For<IQueueCount>();
-            Assert.IsNull(new MyQScaler(c) as AutoScaler<object>);
+            Assert.IsNotNull(new MyQScaler(c) as AutoScaler<object>);
         }
     }
 }
