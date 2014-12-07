@@ -21,7 +21,7 @@
         [Test]
         public void ScaleCheck()
         {
-            Assert.AreEqual(5, BaseTimes.ScaleCheck);
+            Assert.AreEqual(2, BaseTimes.ScaleCheck);
         }
         
         [Test]
