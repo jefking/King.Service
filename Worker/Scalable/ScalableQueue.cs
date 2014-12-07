@@ -10,7 +10,7 @@
     public class ScalableQueue : QueueAutoScaler<Configuration>
     {
         public ScalableQueue(IQueueCount count, Configuration config)
-            : base(count, config, 1, 15, 1)
+            : base(count, 1, config, 1, 15, 1)
         {
         }
 
