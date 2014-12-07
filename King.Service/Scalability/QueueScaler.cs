@@ -66,15 +66,17 @@
             try
             {
                 var messageCount = queueCount.ApproixmateMessageCount().Result;
-                var result = messageCount / messagesPerScaleUnit;
-                return result > this.CurrentUnits;
+                if (messageCount.HasValue)
+                {
+                    return (messageCount / messagesPerScaleUnit) > this.CurrentUnits;
+                }
             }
             catch (Exception ex)
             {
                 Trace.TraceError(ex.ToString());
-
-                return null;
             }
+
+            return null;
         }
         #endregion
     }
