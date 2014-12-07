@@ -1,0 +1,39 @@
+﻿namespace King.Service.Tests.Data
+{
+    using King.Azure.Data;
+    using King.Service.Data;
+    using NSubstitute;
+    using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+
+    [TestFixture]
+    public class QueueAutoScalerTests
+    {
+        public class MyQScaler : QueueAutoScaler<object>
+        {
+            public MyQScaler(IQueueCount count)
+                :base(count)
+            {
+            }
+            public override IEnumerable<IScalable> ScaleUnit(object data)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [Test]
+        public void Constructor()
+        {
+            var c = Substitute.For<IQueueCount>();
+            new MyQScaler(c);
+        }
+
+        [Test]
+        public void IsAutoScaler()
+        {
+            var c = Substitute.For<IQueueCount>();
+            Assert.IsNull(new MyQScaler(c) as AutoScaler<object>);
+        }
+    }
+}
