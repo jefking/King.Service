@@ -62,8 +62,9 @@
             //Dequeue task, Recurring behavior
             yield return new RecurringRunner(new CompanyDequeuer(queue));
 
-            //Task for Queuing
-            yield return new CompanyQueuer();
+            //Tasks for Queuing
+            yield return new CompanyQueuer(queue);
+            yield return new CompanyQueuer(scalableQueue);
 
             //Auto Scaling Task
             yield return new DynamicScaler(config);

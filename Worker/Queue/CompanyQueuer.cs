@@ -12,6 +12,12 @@
     public class CompanyQueuer : RecurringTask
     {
         private int id = 0;
+        private readonly IStorageQueue queue = null;
+
+        public CompanyQueuer(IStorageQueue queue)
+        {
+            this.queue = queue;
+        }
 
         public override void Run()
         {
@@ -21,8 +27,7 @@
                 Name = string.Format("company-{0}", id),
             };
 
-            var queue = new StorageQueue("queue", "UseDevelopmentStorage=true;");
-            var task = queue.Save(new CloudQueueMessage(JsonConvert.SerializeObject(company)));
+            var task = this.queue.Save(new CloudQueueMessage(JsonConvert.SerializeObject(company)));
             task.Wait();
 
             id++;
