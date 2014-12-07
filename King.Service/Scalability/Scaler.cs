@@ -76,14 +76,7 @@
                 timeToScale += t.Scale ? 1 : -1;
             }
 
-            if (timeToScale == 0)
-            {
-                return null;
-            }
-            else
-            {
-                return timeToScale > 0;
-            }
+            return timeToScale == 0 ? (bool?)null : timeToScale > 0;
         }
 
         /// <summary>

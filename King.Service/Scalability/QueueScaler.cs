@@ -69,14 +69,7 @@
                 if (messageCount.HasValue)
                 {
                     var result = (double)messageCount.Value / messagesPerScaleUnit;
-                    if (result == this.CurrentUnits)
-                    {
-                        return null;
-                    }
-                    else
-                    {
-                        return result > this.CurrentUnits;
-                    }
+                    return result == this.CurrentUnits ? (bool?)null : result > this.CurrentUnits;
                 }
             }
             catch (Exception ex)
