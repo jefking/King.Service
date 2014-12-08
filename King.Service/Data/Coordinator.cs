@@ -151,16 +151,12 @@
             {
                 throw new ArgumentNullException("type");
             }
-            if (Guid.Empty == identifier)
-            {
-                throw new ArgumentException("identifier");
-            }
 
             await this.storage.InsertOrReplace(new ScheduledTaskEntry
             {
                 PartitionKey = ScheduledTaskEntry.GenerateLogsPartitionKey(type.GetType().ToString()),
                 ServiceName = type.GetType().ToString(),
-                Identifier = identifier,
+                Identifier = Guid.Empty == identifier ? Guid.NewGuid() : identifier,
                 StartTime = start,
                 CompletionTime = end,
                 Successful = success,

@@ -27,17 +27,8 @@
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
         public CalculateTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
         {
-            if (0 >= minimumPeriodInSeconds)
-            {
-                throw new ArgumentException("Minimum Period In Seconds must be greater than 0.");
-            }
-            if (minimumPeriodInSeconds >= maximumPeriodInSeconds)
-            {
-                throw new ArgumentException("Mminimum Period In Seconds must be less than Maximum Period In Seconds");
-            }
-
-            this.minimumPeriodInSeconds = minimumPeriodInSeconds;
-            this.maximumPeriodInSeconds = maximumPeriodInSeconds;
+            this.minimumPeriodInSeconds = 0 >= minimumPeriodInSeconds ? 1 : minimumPeriodInSeconds;
+            this.maximumPeriodInSeconds = minimumPeriodInSeconds >= maximumPeriodInSeconds ? minimumPeriodInSeconds + 1 : maximumPeriodInSeconds;
         }
         #endregion
 

@@ -57,7 +57,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinimumZero()
         {
             new AutoScalerHelper(new object(), 0, 1);

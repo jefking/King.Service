@@ -13,7 +13,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorDueZero()
         {
             new RecurringHelper(-10, 100);

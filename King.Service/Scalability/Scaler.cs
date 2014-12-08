@@ -86,11 +86,7 @@
         /// <returns>Is First Run</returns>
         public virtual bool IsFirstRun(byte minimum)
         {
-            if (minimum < 1)
-            {
-                throw new ArgumentException("minimum");
-            }
-
+            minimum = minimum < 1 ? (byte)1 : minimum;
             return units.Count < minimum;
         }
 

@@ -25,12 +25,7 @@
         /// <returns>timing</returns>
         public override double Get(ulong attempts)
         {
-            if (attempts > 10)
-            {
-                return this.maximumPeriodInSeconds;
-            }
-
-            return this.minimumPeriodInSeconds + (((this.maximumPeriodInSeconds - this.minimumPeriodInSeconds) * .1) * attempts);
+            return attempts > 10 ? this.maximumPeriodInSeconds : this.minimumPeriodInSeconds + (((this.maximumPeriodInSeconds - this.minimumPeriodInSeconds) * .1) * attempts);
         }
         #endregion
     }

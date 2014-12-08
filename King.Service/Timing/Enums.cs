@@ -9,6 +9,7 @@
         /// Exponential, Default
         /// </summary>
         Exponential = 0,
+
         /// <summary>
         /// Linear
         /// </summary>

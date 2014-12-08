@@ -58,10 +58,6 @@
         public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
             : base(BaseTimes.MinimumTiming, (int)TimeSpan.FromMinutes(checkScaleInMinutes).TotalSeconds)
         {
-            if (1 > minimum)
-            {
-                throw new ArgumentException("Minimum must be 1 or greater");
-            }
             if (minimum > maximum)
             {
                 throw new ArgumentException("Minimum should be less than Maximum");
@@ -72,8 +68,8 @@
             }
 
             this.configuration = configuration;
-            this.minimum = minimum;
-            this.maximum = maximum;
+            this.minimum = 1 > minimum ? (byte)1 : minimum;
+            this.maximum = 2 > maximum ? (byte)2 : maximum;
             this.scaler = scaler;
         }
         #endregion

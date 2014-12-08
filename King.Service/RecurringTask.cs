@@ -24,10 +24,7 @@
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         protected RecurringTask(int dueInSeconds = BaseTimes.MinimumTiming, int periodInSeconds = BaseTimes.MaximumTiming)
         {
-            if (0 > dueInSeconds)
-            {
-                throw new ArgumentException("dueInSeconds");
-            }
+            dueInSeconds = 0 > dueInSeconds ? BaseTimes.MinimumTiming : dueInSeconds;
 
             this.StartIn = TimeSpan.FromSeconds(dueInSeconds);
             this.Every = 0 > periodInSeconds ? TimeSpan.Zero : TimeSpan.FromSeconds(periodInSeconds);

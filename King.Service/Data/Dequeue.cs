@@ -44,19 +44,11 @@
             {
                 throw new ArgumentNullException("processor");
             }
-            if (0 >= minimumPeriodInSeconds)
-            {
-                throw new ArgumentException("Minimum Period In Seconds must be greater than 0.");
-            }
-            if (minimumPeriodInSeconds >= maximumPeriodInSeconds)
-            {
-                throw new ArgumentException("Mminimum Period In Seconds must be less than Maximum Period In Seconds");
-            }
 
             this.poller = poller;
             this.processor = processor;
-            this.MinimumPeriodInSeconds = minimumPeriodInSeconds;
-            this.MaximumPeriodInSeconds = maximumPeriodInSeconds;
+            this.MinimumPeriodInSeconds = 0 >= minimumPeriodInSeconds ? BaseTimes.MinimumStorageTiming : minimumPeriodInSeconds;
+            this.MaximumPeriodInSeconds = minimumPeriodInSeconds >= maximumPeriodInSeconds ? BaseTimes.MaximumStorageTiming : maximumPeriodInSeconds;
         }
         #endregion
 
