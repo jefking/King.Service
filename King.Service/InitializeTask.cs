@@ -19,7 +19,7 @@
         /// <summary>
         /// Run Async
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Task</returns>
         public virtual async Task RunAsync()
         {
             await new TaskFactory().StartNew(() => { });
@@ -56,6 +56,7 @@
         /// <summary>
         /// Dispose
         /// </summary>
+        /// <param name="disposing">Disposing</param>
         protected virtual void Dispose(bool disposing)
         {
         }
