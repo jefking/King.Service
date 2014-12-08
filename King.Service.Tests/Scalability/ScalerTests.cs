@@ -158,7 +158,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void IsFirstRunMinimumZero()
         {
             var factory = Substitute.For<ITaskFactory<object>>();

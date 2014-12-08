@@ -181,7 +181,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public async Task CompeleteIdentifierEmpty()
         {
             var table = Substitute.For<ITableStorage>();

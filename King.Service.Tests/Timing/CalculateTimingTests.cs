@@ -23,7 +23,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinMaxZero()
         {
             var random = new Random();
@@ -31,7 +30,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinMaxSwitched()
         {
             var random = new Random();

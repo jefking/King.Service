@@ -36,7 +36,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinMaxZero()
         {
             var poller = Substitute.For<IPoller<object>>();
@@ -47,7 +46,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinMaxSwitched()
         {
             var poller = Substitute.For<IPoller<object>>();
