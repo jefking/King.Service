@@ -4,7 +4,6 @@
     using King.Service;
     using King.Service.Data;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using Worker.Queue;
 
     public class ScalableQueue : QueueAutoScaler<Configuration>
