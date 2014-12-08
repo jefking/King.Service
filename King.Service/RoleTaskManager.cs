@@ -181,7 +181,7 @@
             }
             else
             {
-                Trace.TraceInformation("No services to stopped.");
+                Trace.TraceInformation("No services to be stopped.");
             }
 
             Trace.TraceInformation("On stop finished.");
@@ -215,7 +215,7 @@
                         }
                         catch (Exception ex)
                         {
-                            Trace.TraceError("Error while disposing of task: {0}", ex.ToString());
+                            Trace.TraceError("Error while disposing of task ({0}): {1}", task.GetType(), ex.ToString());
                         }
                     });
 
