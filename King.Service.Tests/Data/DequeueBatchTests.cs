@@ -23,7 +23,7 @@
         public void BatchCount()
         {
             var random = new Random();
-            var count = random.Next(1, 1000);
+            var count = (byte)random.Next(byte.MinValue, byte.MaxValue);
             var poller = Substitute.For<IPoller<object>>();
             var processor = Substitute.For<IProcessor<object>>();
             var d = new DequeueBatch<object>(poller, processor, count);
@@ -31,10 +31,10 @@
         }
 
         [Test]
-        public void BatchCountNegative()
+        public void BatchCountMin()
         {
             var random = new Random();
-            var count = random.Next(1, 1000) * -1;
+            var count = byte.MinValue;
             var poller = Substitute.For<IPoller<object>>();
             var processor = Substitute.For<IProcessor<object>>();
             var d = new DequeueBatch<object>(poller, processor, count);
