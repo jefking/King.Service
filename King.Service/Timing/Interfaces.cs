@@ -70,7 +70,16 @@ namespace King.Service.Timing
     public interface ITimingTracker
     {
         #region Methods
-        void Digest(TimeSpan timespan);
+        /// <summary>
+        /// Digest Duration
+        /// </summary>
+        /// <param name="duration">Duration</param>
+        void Digest(TimeSpan duration);
+
+        /// <summary>
+        /// Batch Size
+        /// </summary>
+        /// <returns>Size</returns>
         byte BatchSize();
         #endregion
     }

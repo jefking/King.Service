@@ -21,6 +21,10 @@
         #endregion
 
         #region Constructors
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="maxTime">Maximum time until time-outs occur</param>
         public TimingTracker(TimeSpan maxTime)
         {
             if (TimeSpan.Zero >= maxTime)
@@ -33,13 +37,26 @@
         #endregion
 
         #region Methods
-        public void Digest(TimeSpan timespan)
+        /// <summary>
+        /// Digest Duration
+        /// </summary>
+        /// <param name="duration">Duration</param>
+        public void Digest(TimeSpan duration)
         {
-            this.times.Push(timespan);
+            this.times.Push(duration);
         }
 
+        /// <summary>
+        /// Batch Size
+        /// </summary>
+        /// <returns>Size</returns>
         public byte BatchSize()
         {
+            if (0 == this.times.Count)
+            {
+                return 1;
+            }
+
             return 1;
         }
         #endregion
