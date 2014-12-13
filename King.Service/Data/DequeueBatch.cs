@@ -67,6 +67,8 @@
                 {
                     await this.Process(msg);
                 }
+
+                this.RunCompleted();
             }
             else
             {
@@ -74,6 +76,14 @@
             }
 
             return worked;
+        }
+
+        /// <summary>
+        /// Signal for completion
+        /// </summary>
+        protected virtual void RunCompleted()
+        {
+
         }
         #endregion
     }

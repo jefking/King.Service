@@ -64,6 +64,9 @@ namespace King.Service.Timing
     #endregion
 
     #region ITimingTracker
+    /// <summary>
+    /// Timing Tracker Inteface
+    /// </summary>
     public interface ITimingTracker
     {
         #region Methods
