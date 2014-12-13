@@ -1,5 +1,7 @@
-﻿namespace King.Service.Timing
+﻿using System;
+namespace King.Service.Timing
 {
+    #region ICalculateTiming
     /// <summary>
     /// Timing interface for Timing Maths
     /// </summary>
@@ -32,7 +34,9 @@
         double Get(ulong attempts);
         #endregion
     }
+    #endregion
 
+    #region IDynamicTiming
     /// <summary>
     /// Dynamic Timing
     /// </summary>
@@ -57,4 +61,15 @@
         double Get(bool workWasDone);
         #endregion
     }
+    #endregion
+
+    #region ITimingTracker
+    public interface ITimingTracker
+    {
+        #region Methods
+        void Digest(TimeSpan timespan);
+        byte BatchSize();
+        #endregion
+    }
+    #endregion
 }
