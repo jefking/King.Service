@@ -19,7 +19,7 @@
         /// <param name="batchCount">Batch Count</param>
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
-        public StorageDequeueBatch(string name, string connectionString, IProcessor<T> processor, int batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+        public StorageDequeueBatch(string name, string connectionString, IProcessor<T> processor, byte batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
             : this(new StorageQueue(name, connectionString), processor, batchCount, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
@@ -32,7 +32,7 @@
         /// <param name="batchCount">Batch Count</param>
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
-        public StorageDequeueBatch(IStorageQueue queue, IProcessor<T> processor, int batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+        public StorageDequeueBatch(IStorageQueue queue, IProcessor<T> processor, byte batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
             : base(new StorageQueuePoller<T>(queue), processor, batchCount, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }

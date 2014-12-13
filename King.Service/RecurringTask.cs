@@ -51,14 +51,9 @@
         {
             if (this.Stop())
             {
-                if (TimeSpan.Zero == this.Every)
-                {
-                    this.timer = new Timer(this.Run, null, (int)this.StartIn.TotalSeconds, Timeout.Infinite);
-                }
-                else
-                {
-                    this.timer = new Timer(this.Run, null, this.StartIn, this.Every);
-                }
+                this.timer = (TimeSpan.Zero == this.Every)
+                    ? new Timer(this.Run, null, (int)this.StartIn.TotalSeconds, Timeout.Infinite)
+                    : new Timer(this.Run, null, this.StartIn, this.Every);
             }
 
             return true;
