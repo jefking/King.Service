@@ -30,7 +30,7 @@
         public DequeueBatch(IPoller<T> poller, IProcessor<T> processor, byte batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
             : base(poller, processor, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
-            this.batchCount = batchCount < 1 ? (byte)1 : batchCount;
+            this.batchCount = batchCount == byte.MinValue ? (byte)1 : batchCount;
         }
         #endregion
 

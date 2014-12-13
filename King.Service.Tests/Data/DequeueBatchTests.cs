@@ -38,7 +38,7 @@
             var poller = Substitute.For<IPoller<object>>();
             var processor = Substitute.For<IProcessor<object>>();
             var d = new DequeueBatch<object>(poller, processor, count);
-            Assert.AreEqual(5, d.BatchCount);
+            Assert.AreEqual(1, d.BatchCount);
         }
 
         [Test]
