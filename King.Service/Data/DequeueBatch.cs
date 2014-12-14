@@ -2,6 +2,7 @@
 {
     using King.Azure.Data;
     using King.Service.Timing;
+    using System;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
@@ -16,6 +17,11 @@
         /// Batch Count
         /// </summary>
         protected byte batchCount = 5;
+
+        /// <summary>
+        /// Minimum Batch Size
+        /// </summary>
+        public const byte MinimumBatchSize = 1;
         #endregion
 
         #region Constructors
@@ -30,7 +36,7 @@
         public DequeueBatch(IPoller<T> poller, IProcessor<T> processor, byte batchCount = 5, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
             : base(poller, processor, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
-            this.batchCount = batchCount == byte.MinValue ? (byte)1 : batchCount;
+            this.batchCount = batchCount == byte.MinValue ? MinimumBatchSize : batchCount;
         }
         #endregion
 
@@ -56,6 +62,9 @@
         {
             var worked = false;
 
+            var timing = new Stopwatch();
+            timing.Start();
+
             var messages = await this.poller.PollMany(this.batchCount);
             if (null != messages && messages.Any())
             {
@@ -68,10 +77,14 @@
                     await this.Process(msg);
                 }
 
-                this.RunCompleted();
+                timing.Stop();
+
+                this.RunCompleted(TimeSpan.FromTicks(timing.ElapsedTicks));
             }
             else
             {
+                timing.Stop();
+
                 Trace.TraceInformation("No messages were dequeued.");
             }
 
@@ -81,9 +94,9 @@
         /// <summary>
         /// Signal for completion
         /// </summary>
-        protected virtual void RunCompleted()
+        /// <param name="duration">Duration</param>
+        protected virtual void RunCompleted(TimeSpan duration)
         {
-
         }
         #endregion
     }

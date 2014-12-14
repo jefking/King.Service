@@ -41,30 +41,12 @@
 
         #region Methods
         /// <summary>
-        /// Processing Method
+        /// Signal for completion
         /// </summary>
-        /// <param name="data">Data</param>
-        /// <returns>Process Task</returns>
-        protected override async Task<bool> Process(T data)
+        /// <param name="duration">Duration</param>
+        protected override void RunCompleted(TimeSpan duration)
         {
-            var timing = new Stopwatch();
-            timing.Start();
-            
-            var result = await this.processor.Process(data);
-
-            timing.Stop();
-            
-            this.tracker.Digest(TimeSpan.FromTicks(timing.ElapsedTicks));
-
-            return result;
-        }
-
-        /// <summary>
-        /// Sets Batch Completed
-        /// </summary>
-        protected override void RunCompleted()
-        {
-            this.batchCount = this.tracker.BatchSize();
+            this.batchCount = this.tracker.Calculate(duration, this.batchCount);
         }
         #endregion
     }

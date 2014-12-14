@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Timing
 {
+    using King.Service.Data;
     using System;
     using System.Collections.Concurrent;
     using System.Collections.Generic;
@@ -14,12 +15,7 @@
         /// <summary>
         /// Max Time
         /// </summary>
-        protected readonly TimeSpan maxTime;
-
-        /// <summary>
-        /// Times
-        /// </summary>
-        protected readonly ConcurrentStack<TimeSpan> times = new ConcurrentStack<TimeSpan>();
+        protected readonly TimeSpan maxTime = TimeSpan.FromSeconds(45);
         #endregion
 
         #region Constructors
@@ -43,36 +39,24 @@
         /// Digest Duration
         /// </summary>
         /// <param name="duration">Duration</param>
-        public void Digest(TimeSpan duration)
-        {
-            this.times.Push(duration);
-        }
-
-        /// <summary>
-        /// Batch Size
-        /// </summary>
         /// <returns>Size</returns>
-        public byte BatchSize()
+        public byte Calculate(TimeSpan duration, byte currentSize)
         {
-            if (0 == this.times.Count)
+            var max = this.maxTime.Ticks * .7;
+            var result = max > duration.Ticks ? (byte)currentSize + 1 : (byte)currentSize - 1;
+
+            if (byte.MaxValue <= result)
             {
-                return 1;//should this be a no-op?
+                return byte.MaxValue;
             }
-
-            //take all
-            var durations = new TimeSpan[this.times.Count];
-            this.times.CopyTo(durations, 0);
-            this.times.Clear();
-
-            var average = durations.Average(d => d.Ticks);
-
-            var result = this.maxTime.Ticks / average;
-
-            return result <= byte.MinValue
-                ? (byte)1
-                : result > byte.MinValue
-                ? byte.MaxValue
-                : (byte)result;
+            else if (byte.MinValue >= result)
+            {
+                return DequeueBatch<object>.MinimumBatchSize;
+            }
+            else
+            {
+                return (byte)result;
+            }
         }
         #endregion
     }

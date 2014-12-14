@@ -88,7 +88,7 @@
                 var data = await message.Data();
                 if (null != data)
                 {
-                    var successful = await this.Process(data);
+                    var successful = await this.processor.Process(data);
                     if (successful)
                     {
                         await message.Complete();
@@ -109,16 +109,6 @@
                 
                 throw;
             }
-        }
-
-        /// <summary>
-        /// Processing Method
-        /// </summary>
-        /// <param name="data">Data</param>
-        /// <returns>Process Task</returns>
-        protected virtual async Task<bool> Process(T data)
-        {
-            return await this.processor.Process(data);
         }
         #endregion
 

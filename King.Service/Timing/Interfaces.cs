@@ -74,13 +74,8 @@ namespace King.Service.Timing
         /// Digest Duration
         /// </summary>
         /// <param name="duration">Duration</param>
-        void Digest(TimeSpan duration);
-
-        /// <summary>
-        /// Batch Size
-        /// </summary>
         /// <returns>Size</returns>
-        byte BatchSize();
+        byte Calculate(TimeSpan duration, byte currentSize);
         #endregion
     }
     #endregion
