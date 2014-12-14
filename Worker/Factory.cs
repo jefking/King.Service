@@ -27,6 +27,8 @@
             yield return new InitializeStorageTask(queue);
             var scalableQueue = new StorageQueue(config.ScalableQueueName, config.ConnectionString);
             yield return new InitializeStorageTask(scalableQueue);
+            var dynamicQueue = new StorageQueue(config.DynamicQueueName, config.ConnectionString);
+            yield return new InitializeStorageTask(dynamicQueue);
 
             // Initialize Container; creates container if it doesn't already exist
             var container = new Container(config.ContainerName, config.ConnectionString);
@@ -65,12 +67,16 @@
             //Tasks for Queuing
             yield return new CompanyQueuer(queue);
             yield return new CompanyQueuer(scalableQueue);
+            yield return new CompanyQueuer(dynamicQueue);
 
             //Auto Scaling Task
             yield return new DynamicScaler(config);
 
             //Auto Scaling Dequeue Task
             yield return new ScalableQueue(scalableQueue, config);
+
+            //Auto Batch Size Dequeue Task
+            yield return new AdaptiveRunner(new StorageDequeueBatchDynamic<CompanyModel>(config.DynamicQueueName, config.ConnectionString, new CompanyProcessor()));
         }
     }
 }

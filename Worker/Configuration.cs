@@ -23,6 +23,11 @@
             get;
             set;
         }
+        public string DynamicQueueName
+        {
+            get;
+            set;
+        }
         public string ContainerName
         {
             get;
