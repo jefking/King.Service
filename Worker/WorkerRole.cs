@@ -30,6 +30,7 @@ namespace Worker
                 ConnectionString = "UseDevelopmentStorage=true;",
                 TableName = "table",
                 QueueName = "queue",
+                DynamicQueueName = "batchsizing",
                 ScalableQueueName = "scalequeue",
                 ContainerName = "container",
             };

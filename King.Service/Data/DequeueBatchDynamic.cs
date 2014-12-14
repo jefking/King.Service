@@ -42,12 +42,23 @@
         /// <summary>
         /// Signal for completion
         /// </summary>
+        /// <param name="count">Batch Count</param>
         /// <param name="duration">Duration</param>
-        protected override void RunCompleted(TimeSpan duration)
+        protected override void RunCompleted(int count, TimeSpan duration)
         {
-            this.batchCount = this.tracker.Calculate(duration, this.batchCount);
+            Trace.TraceInformation("Dequeue message processing took: {0}; for {1} messages.", duration, count);
 
-            Trace.TraceInformation("Current batch size set to: {0}.", this.batchCount);
+            if (count == this.batchCount)
+            {
+                var result = this.tracker.Calculate(duration, this.batchCount);
+
+                if (result != this.batchCount)
+                {
+                    this.batchCount = result;
+
+                    Trace.TraceInformation("Current batch size set to: {0}.", this.batchCount);
+                }
+            }
         }
         #endregion
     }

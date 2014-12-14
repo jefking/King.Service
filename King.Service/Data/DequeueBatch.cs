@@ -77,7 +77,7 @@
                     await this.Process(msg);
                 }
 
-                this.RunCompleted(TimeSpan.FromTicks(timing.ElapsedTicks));
+                this.RunCompleted(messages.Count(), TimeSpan.FromTicks(timing.ElapsedTicks));
             }
             else
             {
@@ -93,8 +93,9 @@
         /// <summary>
         /// Signal for completion
         /// </summary>
+        /// <param name="count">Batch Count</param>
         /// <param name="duration">Duration</param>
-        protected virtual void RunCompleted(TimeSpan duration)
+        protected virtual void RunCompleted(int count, TimeSpan duration)
         {
         }
         #endregion
