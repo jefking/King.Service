@@ -4,6 +4,7 @@
     using King.Service.Timing;
     using System;
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Dequeue Batch Task for Queues
@@ -40,11 +41,29 @@
 
         #region Methods
         /// <summary>
+        /// Run
+        /// </summary>
+        /// <returns>Work was done</returns>
+        public override Task<bool> Run()
+        {
+            var timing = new Stopwatch();
+            timing.Start();
+
+            var result = base.Work().Result;
+
+            this.RunCompleted(result, TimeSpan.FromTicks(timing.ElapsedTicks));
+
+            timing.Stop();
+
+            return Task.FromResult(0 < result);
+        }
+
+        /// <summary>
         /// Signal for completion
         /// </summary>
         /// <param name="count">Batch Count</param>
         /// <param name="duration">Duration</param>
-        protected override void RunCompleted(int count, TimeSpan duration)
+        protected virtual void RunCompleted(int count, TimeSpan duration)
         {
             Trace.TraceInformation("Dequeue message processing took: {0}; for {1} messages.", duration, count);
 
