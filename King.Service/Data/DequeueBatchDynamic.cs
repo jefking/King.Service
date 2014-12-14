@@ -3,6 +3,7 @@
     using King.Azure.Data;
     using King.Service.Timing;
     using System;
+    using System.Diagnostics;
 
     /// <summary>
     /// Dequeue Batch Task for Queues
@@ -45,6 +46,7 @@
         protected override void RunCompleted(TimeSpan duration)
         {
             this.batchCount = this.tracker.Calculate(duration, this.batchCount);
+            Trace.TraceInformation("Current batch size set to: {0}.", this.batchCount);
         }
         #endregion
     }
