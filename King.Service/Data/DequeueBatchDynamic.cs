@@ -13,7 +13,7 @@
         /// <summary>
         /// Tracking
         /// </summary>
-        protected readonly ITimingTracker tracker;
+        protected readonly ITimingTracker tracker = null;
         #endregion
 
         #region Constructors
