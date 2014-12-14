@@ -3,8 +3,6 @@
     using King.Azure.Data;
     using King.Service.Timing;
     using System;
-    using System.Diagnostics;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Dequeue Batch Task for Queues
@@ -28,7 +26,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
         public DequeueBatchDynamic(IPoller<T> poller, IProcessor<T> processor, ITimingTracker tracker, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
-            : base(poller, processor, 1, minimumPeriodInSeconds, maximumPeriodInSeconds)
+            : base(poller, processor, DequeueBatch<T>.MinimumBatchSize, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
             if (null == tracker)
             {
