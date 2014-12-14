@@ -33,7 +33,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
         public StorageDequeueBatchDynamic(string name, string connectionString, IProcessor<T> processor, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
-            : this(new StorageQueue(name, connectionString), processor, new TimingTracker(VisibilityDuration, MaxBatchSize), minimumPeriodInSeconds, maximumPeriodInSeconds)
+            : this(new StorageQueue(name, connectionString, VisibilityDuration), processor, new TimingTracker(VisibilityDuration, MaxBatchSize), minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
 
