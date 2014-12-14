@@ -95,6 +95,7 @@
     <Compile Include="AdaptiveHelper.cs" />
     <Compile Include="AdaptiveRunnerTests.cs" />
     <Compile Include="AutoScalerTests.cs" />
+    <Compile Include="Data\DequeueBatchDynamicTests.cs" />
     <Compile Include="Data\DequeueBatchTests.cs" />
     <Compile Include="Data\QueueAutoScalerTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Timing\ExponentialTimingTests.cs" />
     <Compile Include="Timing\LinearTimingTests.cs" />
     <Compile Include="Timing\StrategiesTests.cs" />
+    <Compile Include="Timing\TimingTrackerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
