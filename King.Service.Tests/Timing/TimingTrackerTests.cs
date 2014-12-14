@@ -1,12 +1,9 @@
 ﻿namespace King.Service.Tests.Timing
 {
+    using King.Service.Data;
     using King.Service.Timing;
     using NUnit.Framework;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class TimingTrackerTests
@@ -28,6 +25,38 @@
         public void ConstructorMaxZero()
         {
             new TimingTracker(TimeSpan.Zero);
+        }
+
+        [Test]
+        public void Maximum()
+        {
+            var t = new TimingTracker(TimeSpan.FromSeconds(10));
+            var result = t.Calculate(TimeSpan.FromSeconds(1), byte.MaxValue);
+            Assert.AreEqual(byte.MaxValue, result);
+        }
+
+        [Test]
+        public void Minimum()
+        {
+            var t = new TimingTracker(TimeSpan.FromSeconds(10));
+            var result = t.Calculate(TimeSpan.FromSeconds(11), byte.MinValue);
+            Assert.AreEqual(DequeueBatch<object>.MinimumBatchSize, result);
+        }
+
+        [Test]
+        public void Up()
+        {
+            var t = new TimingTracker(TimeSpan.FromSeconds(10));
+            var result = t.Calculate(TimeSpan.FromSeconds(1), 1);
+            Assert.AreEqual(2, result);
+        }
+
+        [Test]
+        public void Down()
+        {
+            var t = new TimingTracker(TimeSpan.FromSeconds(10));
+            var result = t.Calculate(TimeSpan.FromSeconds(11), 5);
+            Assert.AreEqual(4, result);
         }
     }
 }
