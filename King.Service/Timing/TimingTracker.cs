@@ -2,9 +2,6 @@
 {
     using King.Service.Data;
     using System;
-    using System.Collections.Concurrent;
-    using System.Collections.Generic;
-    using System.Linq;
 
     /// <summary>
     /// Timing Tracker

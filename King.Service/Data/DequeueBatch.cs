@@ -65,7 +65,7 @@
             var timing = new Stopwatch();
             timing.Start();
 
-            var messages = await this.poller.PollMany(this.batchCount);
+            var messages = await this.poller.PollMany(this.BatchCount);
             if (null != messages && messages.Any())
             {
                 Trace.TraceInformation("{0} messages dequeued.", messages.Count());
@@ -77,16 +77,15 @@
                     await this.Process(msg);
                 }
 
-                timing.Stop();
-
                 this.RunCompleted(TimeSpan.FromTicks(timing.ElapsedTicks));
             }
             else
             {
-                timing.Stop();
 
                 Trace.TraceInformation("No messages were dequeued.");
             }
+
+            timing.Stop();
 
             return worked;
         }
