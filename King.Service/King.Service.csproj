@@ -79,6 +79,7 @@
     <Compile Include="AutoScaler.cs" />
     <Compile Include="Data\DequeueBatchDynamic.cs" />
     <Compile Include="Data\DequeueBatch.cs" />
+    <Compile Include="Data\StorageDequeueBatchDynamic.cs" />
     <Compile Include="Timing\TimingTracker.cs" />
     <Compile Include="Data\QueueAutoScaler.cs" />
     <Compile Include="Scalability\QueueScaler.cs" />
