@@ -33,7 +33,7 @@
                 throw new ArgumentException("maxTime");
             }
 
-            this.maxTime = maxTime;
+            this.maxTime = TimeSpan.FromTicks((long)Math.Round(maxTime.Ticks * .75, 0));
             this.max = max;
         }
         #endregion
@@ -46,8 +46,7 @@
         /// <returns>Size</returns>
         public byte Calculate(TimeSpan duration, byte currentSize)
         {
-            var max = this.maxTime.Ticks * .7;
-            var result = max > duration.Ticks ? (byte)currentSize + 1 : (byte)currentSize - 1;
+            var result = this.maxTime > duration ? (byte)currentSize + 1 : (byte)currentSize - 1;
 
             if (this.max <= result)
             {
