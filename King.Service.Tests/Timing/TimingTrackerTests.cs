@@ -36,6 +36,14 @@
         }
 
         [Test]
+        public void MaximumSpecified()
+        {
+            var t = new TimingTracker(TimeSpan.FromSeconds(10), 22);
+            var result = t.Calculate(TimeSpan.FromSeconds(1), byte.MaxValue);
+            Assert.AreEqual(22, result);
+        }
+
+        [Test]
         public void Minimum()
         {
             var t = new TimingTracker(TimeSpan.FromSeconds(10));

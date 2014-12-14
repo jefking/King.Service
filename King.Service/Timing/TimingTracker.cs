@@ -13,6 +13,11 @@
         /// Max Time
         /// </summary>
         protected readonly TimeSpan maxTime = TimeSpan.FromSeconds(45);
+
+        /// <summary>
+        /// Maximum batch size
+        /// </summary>
+        protected readonly byte max = byte.MaxValue;
         #endregion
 
         #region Constructors
@@ -20,7 +25,8 @@
         /// Constructor
         /// </summary>
         /// <param name="maxTime">Maximum time until time-outs occur</param>
-        public TimingTracker(TimeSpan maxTime)
+        /// <param name="max">Maximum batch size</param>
+        public TimingTracker(TimeSpan maxTime, byte max = byte.MaxValue)
         {
             if (TimeSpan.Zero >= maxTime)
             {
@@ -28,6 +34,7 @@
             }
 
             this.maxTime = maxTime;
+            this.max = max;
         }
         #endregion
 
@@ -42,9 +49,9 @@
             var max = this.maxTime.Ticks * .7;
             var result = max > duration.Ticks ? (byte)currentSize + 1 : (byte)currentSize - 1;
 
-            if (byte.MaxValue <= result)
+            if (this.max <= result)
             {
-                return byte.MaxValue;
+                return this.max;
             }
             else if (byte.MinValue >= result)
             {
