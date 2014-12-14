@@ -1,7 +1,9 @@
 ﻿namespace King.Service.Timing
 {
     using System;
+    using System.Collections.Concurrent;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// Timing Tracker
@@ -12,12 +14,12 @@
         /// <summary>
         /// Max Time
         /// </summary>
-        private readonly TimeSpan maxTime;
+        protected readonly TimeSpan maxTime;
 
         /// <summary>
         /// Times
         /// </summary>
-        protected readonly Stack<TimeSpan> times = new Stack<TimeSpan>(byte.MaxValue);
+        protected readonly ConcurrentStack<TimeSpan> times = new ConcurrentStack<TimeSpan>();
         #endregion
 
         #region Constructors
@@ -54,10 +56,23 @@
         {
             if (0 == this.times.Count)
             {
-                return 1;
+                return 1;//should this be a no-op?
             }
 
-            return 1;
+            //take all
+            var durations = new TimeSpan[this.times.Count];
+            this.times.CopyTo(durations, 0);
+            this.times.Clear();
+
+            var average = durations.Average(d => d.Ticks);
+
+            var result = this.maxTime.Ticks / average;
+
+            return result <= byte.MinValue
+                ? (byte)1
+                : result > byte.MinValue
+                ? byte.MaxValue
+                : (byte)result;
         }
         #endregion
     }

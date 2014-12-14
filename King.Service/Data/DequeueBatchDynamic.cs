@@ -9,7 +9,7 @@
     /// <summary>
     /// Dequeue Batch Task for Queues
     /// </summary>
-    public class DequeueDynamicBatch<T> : DequeueBatch<T>
+    public class DequeueBatchDynamic<T> : DequeueBatch<T>
     {
         #region Members
         /// <summary>
@@ -27,7 +27,7 @@
         /// <param name="tracker">Tracker</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public DequeueDynamicBatch(IPoller<T> poller, IProcessor<T> processor, ITimingTracker tracker, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+        public DequeueBatchDynamic(IPoller<T> poller, IProcessor<T> processor, ITimingTracker tracker, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
             : base(poller, processor, 1, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
             if (null == tracker)
@@ -54,8 +54,7 @@
 
             timing.Stop();
             
-            var duration = TimeSpan.FromTicks(timing.ElapsedTicks);
-            this.tracker.Digest(duration);
+            this.tracker.Digest(TimeSpan.FromTicks(timing.ElapsedTicks));
 
             return result;
         }

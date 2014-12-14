@@ -77,7 +77,7 @@
   <ItemGroup>
     <Compile Include="AdaptiveRunner.cs" />
     <Compile Include="AutoScaler.cs" />
-    <Compile Include="Data\DequeueDynamicBatch.cs" />
+    <Compile Include="Data\DequeueBatchDynamic.cs" />
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Timing\TimingTracker.cs" />
     <Compile Include="Data\QueueAutoScaler.cs" />
