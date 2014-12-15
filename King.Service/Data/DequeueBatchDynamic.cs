@@ -4,12 +4,13 @@
     using King.Service.Timing;
     using System;
     using System.Diagnostics;
-    using System.Threading.Tasks;
     using System.Linq;
+    using System.Threading.Tasks;
 
     /// <summary>
     /// Dequeue Batch Task for Queues
     /// </summary>
+    /// <typeparam name="T">Type</typeparam>
     public class DequeueBatchDynamic<T> : DequeueBatch<T>
     {
         #region Members
