@@ -60,27 +60,18 @@
         /// <returns>Work was done</returns>
         public override async Task<bool> Run()
         {
-            var count = await this.Work();
-
-            return 0 < count;
-        }
-
-        protected virtual async Task<int> Work()
-        {
-            var count = 0;
+            var workDone = false;
             var messages = await this.poller.PollMany(this.BatchCount);
             if (null != messages && messages.Any())
             {
-                count = messages.Count();
-                Trace.TraceInformation("{0} messages dequeued.", count);
+                workDone = true;
 
-                
+                Trace.TraceInformation("{0} messages dequeued.", messages.Count());
 
                 foreach (var msg in messages.Where(m => m != null))
                 {
                     await this.Process(msg);
                 }
-
             }
             else
             {
@@ -88,7 +79,7 @@
                 Trace.TraceInformation("No messages were dequeued.");
             }
 
-            return count;
+            return workDone;
         }
         #endregion
     }
