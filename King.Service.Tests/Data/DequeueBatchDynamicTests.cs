@@ -81,5 +81,22 @@
             poller.Received().PollMany(1);
             processor.Received().Process(data);
         }
+
+        [Test]
+        public async Task RunPollNull()
+        {
+            var poller = Substitute.For<IPoller<object>>();
+            poller.PollMany(5).Returns(Task.FromResult<IEnumerable<IQueued<object>>>(null));
+
+            var processor = Substitute.For<IProcessor<object>>();
+            var tracker = Substitute.For<ITimingTracker>();
+
+            var d = new DequeueBatchDynamic<object>(poller, processor, tracker);
+
+            var result = await d.Run();
+            Assert.IsFalse(result);
+
+            poller.Received().PollMany(5);
+        }
     }
 }
