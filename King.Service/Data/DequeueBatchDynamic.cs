@@ -5,6 +5,7 @@
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using System.Linq;
 
     /// <summary>
     /// Dequeue Batch Task for Queues
@@ -44,18 +45,40 @@
         /// Run
         /// </summary>
         /// <returns>Work was done</returns>
-        public override Task<bool> Run()
+        public override async Task<bool> Run()
         {
+            var workDone = false;
             var timing = new Stopwatch();
             timing.Start();
 
-            var result = base.Work().Result;
+            var messages = await this.poller.PollMany(this.BatchCount);
+            if (null != messages && messages.Any())
+            {
+                workDone = true;
 
-            this.RunCompleted(result, TimeSpan.FromTicks(timing.ElapsedTicks));
+                Trace.TraceInformation("{0} messages dequeued.", messages.Count());
+
+                var tasks = new Task[messages.Count()];
+                var i = 0;
+                foreach (var msg in messages.Where(m => m != null))
+                {
+                    tasks[i] = this.Process(msg);
+                    i++;
+                }
+
+                Task.WaitAll(tasks);
+
+                this.RunCompleted(messages.Count(), TimeSpan.FromTicks(timing.ElapsedTicks));
+            }
+            else
+            {
+
+                Trace.TraceInformation("No messages were dequeued.");
+            }
 
             timing.Stop();
 
-            return Task.FromResult(0 < result);
+            return workDone;
         }
 
         /// <summary>
@@ -67,15 +90,15 @@
         {
             Trace.TraceInformation("Dequeue message processing took: {0}; for {1} messages.", duration, count);
 
-            if (count == this.batchCount)
+            if (count == this.BatchCount)
             {
                 var result = this.tracker.Calculate(duration, this.batchCount);
 
-                if (result != this.batchCount)
+                if (result != this.BatchCount)
                 {
                     this.batchCount = result;
 
-                    Trace.TraceInformation("Current batch size set to: {0}.", this.batchCount);
+                    Trace.TraceInformation("Current batch size set to: {0}.", this.BatchCount);
                 }
             }
         }
