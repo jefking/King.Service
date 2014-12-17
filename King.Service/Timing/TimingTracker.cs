@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="duration">Duration</param>
         /// <returns>Size</returns>
-        public byte Calculate(TimeSpan duration, byte currentSize)
+        public virtual byte Calculate(TimeSpan duration, byte currentSize)
         {
             var result = this.maxTime > duration ? (byte)currentSize + 1 : (byte)currentSize - 1;
 
