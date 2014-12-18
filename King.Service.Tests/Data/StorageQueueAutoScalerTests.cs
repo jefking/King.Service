@@ -14,99 +14,20 @@
     [TestFixture]
     public class StorageQueueAutoScalerTests
     {
-        const string ConnectionString = "UseDevelopmentStorage=true";
-
-        class Setup : QueueSetup<object>
-        {
-            public override IProcessor<object> Get()
-            {
-                return Substitute.For<IProcessor<object>>();
-            }
-        }
-
         [Test]
         public void Constructor()
         {
-            new StorageDequeueFactory<object>();
+            var count = Substitute.For<IQueueCount>();
+            var setup = Substitute.For<IQueueSetup<object>>();
+            new StorageQueueAutoScaler<object>(count, setup);
         }
 
         [Test]
-        public void IsITaskFactory()
+        public void IsQueueAutoScaler()
         {
-            Assert.IsNotNull(new StorageDequeueFactory<object>() as ITaskFactory<IQueueSetup<object>>);
-        }
-
-        [Test]
-        public void Tasks()
-        {
-            var setup = new Setup
-            {
-                ConnectionString = ConnectionString,
-                Name = "test",
-                Priority = QueuePriority.Low,
-            };
-            var f = new StorageDequeueFactory<object>();
-            var tasks = f.Tasks(setup);
-
-            Assert.IsNotNull(tasks);
-            Assert.AreEqual(2, tasks.Count());
-
-            var t = (from n in tasks
-                     where n.GetType() == typeof(InitializeStorageTask)
-                     select true).FirstOrDefault();
-
-            Assert.IsTrue(t);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void TasksSetupNull()
-        {
-            var f = new StorageDequeueFactory<object>();
-            var tasks = f.Tasks(null);
-
-            Assert.IsNotNull(tasks);
-            Assert.AreEqual(2, tasks.Count());
-        }
-
-        [Test]
-        public void DequeueTask()
-        {
-            var queue = Substitute.For<IStorageQueue>();
-            var setup = new Setup
-            {
-                ConnectionString = ConnectionString,
-                Name = "test",
-                Priority = QueuePriority.Low,
-            };
-            var f = new StorageDequeueFactory<object>();
-            var task = f.DequeueTask(queue, setup);
-
-            Assert.IsNotNull(task);
-            Assert.IsNotNull(task as StorageQueueAutoScaler<object>);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void DequeueTaskQueueNull()
-        {
-            var setup = new Setup
-            {
-                ConnectionString = ConnectionString,
-                Name = "test",
-                Priority = QueuePriority.Low,
-            };
-            var f = new StorageDequeueFactory<object>();
-            var task = f.DequeueTask(null, setup);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void DequeueTaskSetupNull()
-        {
-            var queue = Substitute.For<IStorageQueue>();
-            var f = new StorageDequeueFactory<object>();
-            var task = f.DequeueTask(queue, null);
+            var count = Substitute.For<IQueueCount>();
+            var setup = Substitute.For<IQueueSetup<object>>();
+            Assert.IsNotNull(new StorageQueueAutoScaler<object>(count, setup) as QueueAutoScaler<IQueueSetup<object>>);
         }
     }
 }
