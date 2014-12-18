@@ -11,16 +11,16 @@
     /// Storage Dequeue Factory
     /// </summary>
     /// <typeparam name="T">Processor Type</typeparam>
-    public class StorageDequeueFactory<T> : ITaskFactory<QueueSetup>
+    public class StorageDequeueFactory<T> : ITaskFactory<IQueueSetup>
     {
         #region Methods
         /// <summary>
-        /// Creates the Queue, and Generates Dequeuer
+        /// Creates the Queue, and Loads Dynamic Dequeuer
         /// </summary>
         /// <param name="setup">Setup</param>
         /// <param name="processor">Processor</param>
         /// <returns>Tasks</returns>
-        public virtual IEnumerable<IRunnable> Tasks(QueueSetup setup)
+        public virtual IEnumerable<IRunnable> Tasks(IQueueSetup setup)
         {
             if (null == setup)
             {

@@ -4,14 +4,13 @@
     using King.Service.Data.Model;
     using King.Service.Scalability;
     using King.Service.Timing;
-    using System;
     using System.Collections.Generic;
 
     /// <summary>
     /// Storage Queue AutoScaler
     /// </summary>
     /// <typeparam name="T">Processor Type</typeparam>
-    public class StorageQueueAutoScaler<T> : QueueAutoScaler<QueueSetup>
+    public class StorageQueueAutoScaler<T> : QueueAutoScaler<IQueueSetup>
     {
         #region Constructors
         /// <summary>
@@ -23,7 +22,7 @@
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public StorageQueueAutoScaler(IQueueCount count, QueueSetup setup, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
+        public StorageQueueAutoScaler(IQueueCount count, IQueueSetup setup, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
             : base(count, messagesPerScaleUnit, setup, minimum, maximum, checkScaleInMinutes)
         {
         }
@@ -35,7 +34,7 @@
         /// </summary>
         /// <param name="setup">Setup</param>
         /// <returns>Scalable Task</returns>
-        public override IEnumerable<IScalable> ScaleUnit(QueueSetup setup)
+        public override IEnumerable<IScalable> ScaleUnit(IQueueSetup setup)
         {
             var processor = setup.Get<T>();
             var dequeue = new StorageDequeueBatchDynamic<T>(setup.Name, setup.ConnectionString, processor);
@@ -45,11 +44,9 @@
                 case QueuePriority.Medium:
                     yield return new BackoffRunner(dequeue);
                     break;
-                case QueuePriority.Low:
+                default:
                     yield return new AdaptiveRunner(dequeue);
                     break;
-                default:
-                    throw new InvalidOperationException("Unknown Priority");
             }
         }
         #endregion
