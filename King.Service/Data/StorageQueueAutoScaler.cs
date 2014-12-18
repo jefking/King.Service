@@ -4,6 +4,7 @@
     using King.Service.Data.Model;
     using King.Service.Scalability;
     using King.Service.Timing;
+    using System;
     using System.Collections.Generic;
 
     /// <summary>
@@ -66,7 +67,11 @@
         /// <returns>Dynamic Runs</returns>
         public virtual IDynamicRuns Runs(IQueueSetup<T> setup)
         {
-            var processor = setup.Get();
+            if (null == setup)
+            {
+                throw new ArgumentNullException("setup");
+            }
+
             var minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming;
             var maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming;
             switch (setup.Priority)
@@ -81,7 +86,7 @@
                     break;
             }
 
-            return new StorageDequeueBatchDynamic<T>(setup.Name, setup.ConnectionString, processor, minimumPeriodInSeconds, maximumPeriodInSeconds);
+            return new StorageDequeueBatchDynamic<T>(setup.Name, setup.ConnectionString, setup.Get(), minimumPeriodInSeconds, maximumPeriodInSeconds);
         }
         #endregion
     }
