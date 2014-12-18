@@ -3,7 +3,7 @@
     using King.Azure.Data;
 
     /// <summary>
-    /// Queue Setup
+    /// Queue Setup Interface
     /// </summary>
     public interface IQueueSetup
     {
