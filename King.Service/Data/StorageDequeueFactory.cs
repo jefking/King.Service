@@ -13,20 +13,16 @@
     {
         #region Methods
         /// <summary>
-        /// Tasks; Creates the Queue, and Generates Dequeuer
+        /// Creates the Queue, and Generates Dequeuer
         /// </summary>
         /// <param name="setup">Setup</param>
         /// <param name="processor">Processor</param>
         /// <returns>Tasks</returns>
-        public IEnumerable<IRunnable> Tasks(QueueSetup setup, IProcessor<T> processor)
+        public IEnumerable<IRunnable> Tasks(QueueSetup setup)
         {
             if (null == setup)
             {
                 throw new ArgumentNullException("setup");
-            }
-            if (null == processor)
-            {
-                throw new ArgumentNullException("processor");
             }
 
             var q = new StorageQueue(setup.Name, setup.ConnectionString);

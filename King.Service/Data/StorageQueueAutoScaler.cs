@@ -17,7 +17,7 @@
         /// <param name="count">Count</param>
         /// <param name="setup">Setup</param>
         public StorageQueueAutoScaler(IQueueCount count, QueueSetup setup)
-            : base(count, 1, setup)
+            : base(count, 100, setup)
         {
         }
         #endregion

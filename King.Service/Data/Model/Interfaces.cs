@@ -40,8 +40,8 @@
         /// <summary>
         /// Get Processor
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">Dequeue Type</typeparam>
+        /// <returns>Processor</returns>
         IProcessor<T> Get<T>();
         #endregion
     }

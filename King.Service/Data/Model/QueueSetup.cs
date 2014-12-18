@@ -5,7 +5,7 @@
     /// <summary>
     /// Queue Setup
     /// </summary>
-    public class QueueSetup : IQueueSetup
+    public abstract class QueueSetup : IQueueSetup
     {
         #region Properties
         /// <summary>
@@ -40,12 +40,9 @@
         /// <summary>
         /// Get Processor
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        public virtual IProcessor<T> Get<T>()
-        {
-            return null;
-        }
+        /// <typeparam name="T">Dequeue Type</typeparam>
+        /// <returns>Processor</returns>
+        public abstract IProcessor<T> Get<T>();
         #endregion
     }
 }
