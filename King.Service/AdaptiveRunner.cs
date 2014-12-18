@@ -1,8 +1,9 @@
-﻿using King.Service.Timing;
-namespace King.Service
+﻿namespace King.Service
 {
+    using King.Service.Timing;
+
     /// <summary>
-    /// Simplified Adaptive Runner
+    /// Adaptive Runner
     /// </summary>
     public class AdaptiveRunner : AdaptiveTask
     {

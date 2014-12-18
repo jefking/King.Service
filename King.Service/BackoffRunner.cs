@@ -3,7 +3,7 @@
     using King.Service.Timing;
 
     /// <summary>
-    /// Simplified Backoff Runner
+    /// Backoff Runner
     /// </summary>
     public class BackoffRunner : BackoffTask
     {
