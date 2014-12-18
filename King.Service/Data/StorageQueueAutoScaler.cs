@@ -37,8 +37,7 @@
         /// <returns>Scalable Task</returns>
         public override IEnumerable<IScalable> ScaleUnit(IQueueSetup<T> setup)
         {
-            var dequeue = this.Runs(setup);
-            yield return this.Runner(dequeue, setup.Priority);
+            yield return this.Runner(this.Runs(setup), setup.Priority);
         }
 
         /// <summary>
