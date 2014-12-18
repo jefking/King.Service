@@ -33,6 +33,7 @@ namespace Worker
                 DynamicQueueName = "batchsizing",
                 ScalableQueueName = "scalequeue",
                 ContainerName = "container",
+                SuperQueueName = "super",
             };
 
             return this.manager.OnStart(config);

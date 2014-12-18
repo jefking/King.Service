@@ -10,7 +10,7 @@
     /// Storage Queue AutoScaler
     /// </summary>
     /// <typeparam name="T">Processor Type</typeparam>
-    public class StorageQueueAutoScaler<T> : QueueAutoScaler<IQueueSetup>
+    public class StorageQueueAutoScaler<T> : QueueAutoScaler<IQueueSetup<T>>
     {
         #region Constructors
         /// <summary>
@@ -22,7 +22,7 @@
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public StorageQueueAutoScaler(IQueueCount count, IQueueSetup setup, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
+        public StorageQueueAutoScaler(IQueueCount count, IQueueSetup<T> setup, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
             : base(count, messagesPerScaleUnit, setup, minimum, maximum, checkScaleInMinutes)
         {
         }
@@ -34,7 +34,7 @@
         /// </summary>
         /// <param name="setup">Setup</param>
         /// <returns>Scalable Task</returns>
-        public override IEnumerable<IScalable> ScaleUnit(IQueueSetup setup)
+        public override IEnumerable<IScalable> ScaleUnit(IQueueSetup<T> setup)
         {
             var dequeue = this.Runs(setup);
             yield return this.Runner(dequeue, setup.Priority);
@@ -64,9 +64,9 @@
         /// </summary>
         /// <param name="setup">Setup</param>
         /// <returns>Dynamic Runs</returns>
-        public virtual IDynamicRuns Runs(IQueueSetup setup)
+        public virtual IDynamicRuns Runs(IQueueSetup<T> setup)
         {
-            var processor = setup.Get<T>();
+            var processor = setup.Get();
             var minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming;
             var maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming;
             switch (setup.Priority)

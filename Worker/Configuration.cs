@@ -28,6 +28,11 @@
             get;
             set;
         }
+        public string SuperQueueName
+        {
+            get;
+            set;
+        }
         public string ContainerName
         {
             get;

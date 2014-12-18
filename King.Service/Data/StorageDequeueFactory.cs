@@ -11,7 +11,7 @@
     /// Storage Dequeue Factory
     /// </summary>
     /// <typeparam name="T">Processor Type</typeparam>
-    public class StorageDequeueFactory<T> : ITaskFactory<IQueueSetup>
+    public class StorageDequeueFactory<T> : ITaskFactory<IQueueSetup<T>>
     {
         #region Methods
         /// <summary>
@@ -20,7 +20,7 @@
         /// <param name="setup">Setup</param>
         /// <param name="processor">Processor</param>
         /// <returns>Tasks</returns>
-        public virtual IEnumerable<IRunnable> Tasks(IQueueSetup setup)
+        public virtual IEnumerable<IRunnable> Tasks(IQueueSetup<T> setup)
         {
             if (null == setup)
             {
@@ -38,7 +38,7 @@
         /// <param name="queue">Queue</param>
         /// <param name="setup">Setup</param>
         /// <returns>Storage Queue Auto Scaler</returns>
-        public virtual IRunnable DequeueTask(IStorageQueue queue, IQueueSetup setup)
+        public virtual IRunnable DequeueTask(IStorageQueue queue, IQueueSetup<T> setup)
         {
             if (null == queue)
             {

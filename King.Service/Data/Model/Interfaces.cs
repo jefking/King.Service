@@ -5,7 +5,8 @@
     /// <summary>
     /// Queue Setup Interface
     /// </summary>
-    public interface IQueueSetup
+    /// <typeparam name="T">Dequeue Type</typeparam>
+    public interface IQueueSetup<T>
     {
         #region Properties
         /// <summary>
@@ -40,9 +41,8 @@
         /// <summary>
         /// Get Processor
         /// </summary>
-        /// <typeparam name="T">Dequeue Type</typeparam>
         /// <returns>Processor</returns>
-        IProcessor<T> Get<T>();
+        IProcessor<T> Get();
         #endregion
     }
 }
