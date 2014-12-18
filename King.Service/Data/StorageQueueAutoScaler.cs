@@ -37,6 +37,11 @@
         /// <returns>Scalable Task</returns>
         public override IEnumerable<IScalable> ScaleUnit(IQueueSetup<T> setup)
         {
+            if (null == setup)
+            {
+                throw new ArgumentNullException("setup");
+            }
+
             yield return this.Runner(this.Runs(setup), setup.Priority);
         }
 
@@ -48,6 +53,11 @@
         /// <returns>Scalable</returns>
         public virtual IScalable Runner(IDynamicRuns runs, QueuePriority priority)
         {
+            if (null == runs)
+            {
+                throw new ArgumentNullException("runs");
+            }
+
             switch (priority)
             {
                 case QueuePriority.High:

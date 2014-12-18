@@ -141,13 +141,40 @@
         }
 
         [Test]
-        public void RunnerHigh()
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void RunnerRunsNull()
         {
             var count = Substitute.For<IQueueCount>();
             var setup = Substitute.For<IQueueSetup<object>>();
 
             var s = new StorageQueueAutoScaler<object>(count, setup);
+            var scalable = s.Runner(null, QueuePriority.High);
+        }
+
+        [Test]
+        public void ScaleUnit()
+        {
+            var count = Substitute.For<IQueueCount>();
+            var setup = Substitute.For<IQueueSetup<object>>();
+            setup.Name.Returns(Guid.NewGuid().ToString());
+            setup.ConnectionString.Returns(ConnectionString);
+
+            var s = new StorageQueueAutoScaler<object>(count, setup);
             var unit = s.ScaleUnit(setup);
+
+            Assert.IsNotNull(unit);
+            Assert.AreEqual(1, unit.Count());
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ScaleUnitSetupNull()
+        {
+            var count = Substitute.For<IQueueCount>();
+            var setup = Substitute.For<IQueueSetup<object>>();
+
+            var s = new StorageQueueAutoScaler<object>(count, setup);
+            var unit = s.ScaleUnit(null);
 
             Assert.IsNotNull(unit);
             Assert.AreEqual(1, unit.Count());
