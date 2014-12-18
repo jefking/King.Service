@@ -57,12 +57,13 @@
             switch (setup.Priority)
             {
                 case QueuePriority.Low:
-                    messagesPerScaleUnit = 50;
+                    messagesPerScaleUnit = 1000;
                     checkScaleInMinutes = 4;
                     break;
                 case QueuePriority.Medium:
-                    messagesPerScaleUnit = 25;
+                    messagesPerScaleUnit = 100;
                     maximum = 5;
+                    checkScaleInMinutes = 2;
                     break;
                 case QueuePriority.High:
                     minimum = 2;
