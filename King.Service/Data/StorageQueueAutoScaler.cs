@@ -37,12 +37,29 @@
         public override IEnumerable<IScalable> ScaleUnit(IQueueSetup setup)
         {
             var processor = setup.Get<T>();
-            var dequeue = new StorageDequeueBatchDynamic<T>(setup.Name, setup.ConnectionString, processor);
+            var minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming;
+            var maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming;
             switch (setup.Priority)
             {
                 case QueuePriority.High:
+                    minimumPeriodInSeconds = 1;
+                    maximumPeriodInSeconds = BaseTimes.MinimumStorageTiming;
+                    break;
                 case QueuePriority.Medium:
-                    yield return new BackoffRunner(dequeue);
+                    minimumPeriodInSeconds /= 2;
+                    maximumPeriodInSeconds /= 2;
+                    break;
+            }
+
+            var dequeue = new StorageDequeueBatchDynamic<T>(setup.Name, setup.ConnectionString, processor, minimumPeriodInSeconds, maximumPeriodInSeconds);
+
+            switch (setup.Priority)
+            {
+                case QueuePriority.High:
+                    yield return new BackoffRunner(dequeue, Strategy.Linear);
+                    break;
+                case QueuePriority.Medium:
+                    yield return new BackoffRunner(dequeue, Strategy.Exponential);
                     break;
                 default:
                     yield return new AdaptiveRunner(dequeue);
