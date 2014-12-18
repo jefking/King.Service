@@ -3,8 +3,10 @@
     using King.Azure.Data;
     using King.Service;
     using King.Service.Data;
+    using King.Service.Data.Model;
     using King.Service.WorkerRole;
     using System.Collections.Generic;
+    using Worker.Dequeue;
     using Worker.Queue;
     using Worker.Scalable;
 
@@ -77,6 +79,19 @@
 
             //Auto Batch Size Dequeue Task
             yield return new AdaptiveRunner(new StorageDequeueBatchDynamic<CompanyModel>(config.DynamicQueueName, config.ConnectionString, new CompanyProcessor()));
+
+            var f = new StorageDequeueFactory<CompanyModel>();
+            var setup = new SuperSetup()
+            {
+                ConnectionString = config.ConnectionString,
+                Name = config.SuperQueueName,
+                Priority = QueuePriority.Medium,
+            };
+            
+            foreach (var t in f.Tasks(setup))
+            {
+                yield return t;
+            }
         }
     }
 }
