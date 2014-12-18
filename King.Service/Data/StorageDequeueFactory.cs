@@ -27,8 +27,27 @@
                 throw new ArgumentNullException("setup");
             }
 
-            var q = new StorageQueue(setup.Name, setup.ConnectionString);
-            yield return new InitializeStorageTask(q);
+            var queue = new StorageQueue(setup.Name, setup.ConnectionString);
+            yield return new InitializeStorageTask(queue);
+            yield return this.DequeueTask(queue, setup);
+        }
+
+        /// <summary>
+        /// Dequeue Task
+        /// </summary>
+        /// <param name="queue">Queue</param>
+        /// <param name="setup">Setup</param>
+        /// <returns>Storage Queue Auto Scaler</returns>
+        public virtual IRunnable DequeueTask(IStorageQueue queue, IQueueSetup setup)
+        {
+            if (null == queue)
+            {
+                throw new ArgumentNullException("queue");
+            }
+            if (null == setup)
+            {
+                throw new ArgumentNullException("setup");
+            }
 
             var messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault;
             byte minimum = 1;
@@ -52,7 +71,7 @@
                     break;
             }
 
-            yield return new StorageQueueAutoScaler<T>(q, setup, messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes);
+            return new StorageQueueAutoScaler<T>(queue, setup, messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes);
         }
         #endregion
     }

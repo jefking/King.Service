@@ -36,6 +36,36 @@
         /// <returns>Scalable Task</returns>
         public override IEnumerable<IScalable> ScaleUnit(IQueueSetup setup)
         {
+            var dequeue = this.Runs(setup);
+            yield return this.Runner(dequeue, setup.Priority);
+        }
+
+        /// <summary>
+        /// Runner
+        /// </summary>
+        /// <param name="runs">Runs</param>
+        /// <param name="priority">Priority</param>
+        /// <returns>Scalable</returns>
+        public virtual IScalable Runner(IDynamicRuns runs, QueuePriority priority)
+        {
+            switch (priority)
+            {
+                case QueuePriority.High:
+                    return new BackoffRunner(runs, Strategy.Linear);
+                case QueuePriority.Medium:
+                    return new BackoffRunner(runs, Strategy.Exponential);
+                default:
+                    return new AdaptiveRunner(runs);
+            }
+        }
+
+        /// <summary>
+        /// Runs
+        /// </summary>
+        /// <param name="setup">Setup</param>
+        /// <returns>Dynamic Runs</returns>
+        public virtual IDynamicRuns Runs(IQueueSetup setup)
+        {
             var processor = setup.Get<T>();
             var minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming;
             var maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming;
@@ -51,20 +81,7 @@
                     break;
             }
 
-            var dequeue = new StorageDequeueBatchDynamic<T>(setup.Name, setup.ConnectionString, processor, minimumPeriodInSeconds, maximumPeriodInSeconds);
-
-            switch (setup.Priority)
-            {
-                case QueuePriority.High:
-                    yield return new BackoffRunner(dequeue, Strategy.Linear);
-                    break;
-                case QueuePriority.Medium:
-                    yield return new BackoffRunner(dequeue, Strategy.Exponential);
-                    break;
-                default:
-                    yield return new AdaptiveRunner(dequeue);
-                    break;
-            }
+            return new StorageDequeueBatchDynamic<T>(setup.Name, setup.ConnectionString, processor, minimumPeriodInSeconds, maximumPeriodInSeconds);
         }
         #endregion
     }
