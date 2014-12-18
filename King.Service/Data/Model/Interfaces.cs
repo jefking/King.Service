@@ -15,7 +15,6 @@
         string Name
         {
             get;
-            set;
         }
 
         /// <summary>
@@ -24,7 +23,6 @@
         string ConnectionString
         {
             get;
-            set;
         }
 
         /// <summary>
@@ -33,7 +31,6 @@
         QueuePriority Priority
         {
             get;
-            set;
         }
         #endregion
 

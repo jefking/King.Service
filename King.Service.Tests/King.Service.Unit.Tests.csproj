@@ -101,6 +101,8 @@
     <Compile Include="Data\QueueAutoScalerTests.cs" />
     <Compile Include="Data\StorageDequeueBatchDynamicTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
+    <Compile Include="Data\StorageDequeueFactoryTests.cs" />
+    <Compile Include="Data\StorageQueueAutoScalerTests.cs" />
     <Compile Include="RecurringHelper.cs" />
     <Compile Include="RecurringRunnerTests.cs" />
     <Compile Include="RunAtTaskTests.cs" />
