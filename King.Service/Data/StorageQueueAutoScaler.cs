@@ -65,7 +65,7 @@
                 case QueuePriority.Medium:
                     return new BackoffRunner(runs, Strategy.Exponential);
                 default:
-                    return new AdaptiveRunner(runs);
+                    return new AdaptiveRunner(runs, Strategy.Linear);
             }
         }
 

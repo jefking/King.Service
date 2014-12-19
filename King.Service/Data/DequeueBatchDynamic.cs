@@ -91,16 +91,13 @@
         {
             Trace.TraceInformation("Dequeue message processing took: {0}; for {1} messages.", duration, count);
 
-            if (count == this.BatchCount)
+            var result = this.tracker.Calculate(duration, this.batchCount);
+
+            if (result != this.BatchCount)
             {
-                var result = this.tracker.Calculate(duration, this.batchCount);
+                this.batchCount = result;
 
-                if (result != this.BatchCount)
-                {
-                    this.batchCount = result;
-
-                    Trace.TraceInformation("Current batch size set to: {0}.", this.BatchCount);
-                }
+                Trace.TraceInformation("Current batch size set to: {0}.", this.BatchCount);
             }
         }
         #endregion
