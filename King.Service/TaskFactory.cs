@@ -1,8 +1,9 @@
 ﻿namespace King.Service
 {
     using King.Azure.Data;
-    using King.Service.Data;
-    using System.Collections.Generic;
+using King.Service.Data;
+using King.Service.Timing;
+using System.Collections.Generic;
 
     /// <summary>
     /// Task Factory
@@ -41,9 +42,9 @@
         /// </summary>
         /// <param name="runs">Dynamic Runs</param>
         /// <returns>Runnable</returns>
-        public virtual IRunnable Adaptive(IDynamicRuns runs)
+        public virtual IRunnable Adaptive(IDynamicRuns runs, Strategy strategy = Strategy.Exponential)
         {
-            return new AdaptiveRunner(runs);
+            return new AdaptiveRunner(runs, strategy);
         }
 
         /// <summary>
@@ -51,9 +52,9 @@
         /// </summary>
         /// <param name="runs">Dynamic Runs</param>
         /// <returns>Runnable</returns>
-        public virtual IRunnable Backoff(IDynamicRuns runs)
+        public virtual IRunnable Backoff(IDynamicRuns runs, Strategy strategy = Strategy.Exponential)
         {
-            return new BackoffRunner(runs);
+            return new BackoffRunner(runs, strategy);
         }
 
         /// <summary>
