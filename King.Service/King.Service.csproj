@@ -84,6 +84,7 @@
     <Compile Include="Data\StorageDequeueBatchDynamic.cs" />
     <Compile Include="Data\StorageDequeueFactory.cs" />
     <Compile Include="Data\StorageQueueAutoScaler.cs" />
+    <Compile Include="Scalability\QueueThroughput.cs" />
     <Compile Include="TaskFactory.cs" />
     <Compile Include="Timing\TimingTracker.cs" />
     <Compile Include="Data\QueueAutoScaler.cs" />

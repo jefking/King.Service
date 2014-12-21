@@ -94,6 +94,28 @@
         /// <param name="priority">Priority</param>
         /// <returns>Check Scale every (in minutes)</returns>
         byte CheckScaleEvery(QueuePriority priority);
+
+        /// <summary>
+        /// Runner
+        /// </summary>
+        /// <param name="runs">Runs</param>
+        /// <param name="priority">Priority</param>
+        /// <returns>Scalable</returns>
+        IScalable Runner(IDynamicRuns runs, QueuePriority priority);
+
+        /// <summary>
+        /// Minimum Frequency
+        /// </summary>
+        /// <param name="priority">Priority</param>
+        /// <returns>Minimum Frequency</returns>
+        byte MinimumFrequency(QueuePriority priority);
+
+        /// <summary>
+        /// Maximum Frequency
+        /// </summary>
+        /// <param name="priority">Priority</param>
+        /// <returns>Maximum Frequency</returns>
+        byte MaximumFrequency(QueuePriority priority);
         #endregion
     }
     #endregion
