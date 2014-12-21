@@ -1,4 +1,4 @@
-﻿namespace King.Service.Data.Model
+﻿namespace King.Service.Data
 {
     using King.Azure.Data;
 

@@ -1,4 +1,4 @@
-﻿namespace King.Service.Data.Model
+﻿namespace King.Service.Data
 {
     /// <summary>
     /// Priority
