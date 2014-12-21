@@ -28,6 +28,13 @@
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorThroughputNull()
+        {
+            new StorageDequeueFactory<object>(null);
+        }
+
+        [Test]
         public void IsITaskFactory()
         {
             Assert.IsNotNull(new StorageDequeueFactory<object>() as ITaskFactory<IQueueSetup<object>>);
