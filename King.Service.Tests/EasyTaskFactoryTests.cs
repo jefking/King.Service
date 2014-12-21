@@ -5,12 +5,17 @@
     using NSubstitute;
     using NUnit.Framework;
     using System;
+    using System.Collections.Generic;
 
     [TestFixture]
     public class EasyTaskFactoryTests
     {
         class MyFactory : EasyTaskFactory<object>
         {
+            public override IEnumerable<IRunnable> Tasks(object passthrough)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         [Test]
@@ -71,7 +76,7 @@
             var f = new MyFactory();
             var r = f.Backoff(runs);
 
-            Assert.IsNotNull(r as AdaptiveRunner);
+            Assert.IsNotNull(r as BackoffRunner);
         }
 
         [Test]
@@ -90,7 +95,7 @@
             var f = new MyFactory();
             var r = f.Recurring(runs);
 
-            Assert.IsNotNull(r as AdaptiveRunner);
+            Assert.IsNotNull(r as RecurringRunner);
         }
 
         [Test]
