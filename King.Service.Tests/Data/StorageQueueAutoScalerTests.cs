@@ -2,6 +2,7 @@
 {
     using King.Azure.Data;
     using King.Service.Data;
+    using King.Service.Scalability;
     using King.Service.Timing;
     using NSubstitute;
     using NUnit.Framework;
@@ -12,6 +13,14 @@
     public class StorageQueueAutoScalerTests
     {
         const string ConnectionString = "UseDevelopmentStorage=true";
+
+        class Setup : QueueSetup<object>
+        {
+            public override IProcessor<object> Get()
+            {
+                return Substitute.For<IProcessor<object>>();
+            }
+        }
 
         [Test]
         public void Constructor()
@@ -39,57 +48,31 @@
         }
 
         [Test]
-        public void RunsLow()
+        public void Runs()
         {
+            var random = new Random();
+            var max = (byte)random.Next(byte.MinValue, byte.MaxValue);
+            var min = (byte)random.Next(byte.MinValue, max);
             var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-            setup.Priority.Returns(QueuePriority.Low);
-            setup.Name.Returns(Guid.NewGuid().ToString());
-            setup.ConnectionString.Returns(ConnectionString);
-            setup.Get().Returns(Substitute.For<IProcessor<object>>());
+            var setup = new Setup
+            {
+                Priority = QueuePriority.High,
+                Name = Guid.NewGuid().ToString(),
+                ConnectionString = ConnectionString,
+            };
+            var throughput = Substitute.For<IQueueThroughput>();
+            throughput.MinimumFrequency(setup.Priority).Returns(min);
+            throughput.MaximumFrequency(setup.Priority).Returns(max);
 
-            var s = new StorageQueueAutoScaler<object>(count, setup);
+            var s = new StorageQueueAutoScaler<object>(count, setup, throughput);
             var runs = s.Runs(setup);
 
             Assert.IsNotNull(runs);
-            Assert.AreEqual(BaseTimes.MinimumStorageTiming, runs.MinimumPeriodInSeconds);
-            Assert.AreEqual(BaseTimes.MaximumStorageTiming, runs.MaximumPeriodInSeconds);
-        }
+            Assert.AreEqual(min, runs.MinimumPeriodInSeconds);
+            Assert.AreEqual(max, runs.MaximumPeriodInSeconds);
 
-        [Test]
-        public void RunsMedium()
-        {
-            var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-            setup.Priority.Returns(QueuePriority.Medium);
-            setup.Name.Returns(Guid.NewGuid().ToString());
-            setup.ConnectionString.Returns(ConnectionString);
-            setup.Get().Returns(Substitute.For<IProcessor<object>>());
-
-            var s = new StorageQueueAutoScaler<object>(count, setup);
-            var runs = s.Runs(setup);
-
-            Assert.IsNotNull(runs);
-            Assert.AreEqual(7, runs.MinimumPeriodInSeconds);
-            Assert.AreEqual(90, runs.MaximumPeriodInSeconds);
-        }
-
-        [Test]
-        public void RunsHigh()
-        {
-            var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-            setup.Priority.Returns(QueuePriority.High);
-            setup.Name.Returns(Guid.NewGuid().ToString());
-            setup.ConnectionString.Returns(ConnectionString);
-            setup.Get().Returns(Substitute.For<IProcessor<object>>());
-
-            var s = new StorageQueueAutoScaler<object>(count, setup);
-            var runs = s.Runs(setup);
-
-            Assert.IsNotNull(runs);
-            Assert.AreEqual(1, runs.MinimumPeriodInSeconds);
-            Assert.AreEqual(BaseTimes.MinimumStorageTiming, runs.MaximumPeriodInSeconds);
+            throughput.Received().MinimumFrequency(setup.Priority);
+            throughput.Received().MaximumFrequency(setup.Priority);
         }
 
         [Test]
