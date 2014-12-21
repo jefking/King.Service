@@ -1,9 +1,7 @@
 ﻿namespace King.Service.Data
 {
     using King.Azure.Data;
-    using King.Service.Data.Model;
     using King.Service.Scalability;
-    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
 
@@ -13,6 +11,37 @@
     /// <typeparam name="T">Processor Type</typeparam>
     public class StorageDequeueFactory<T> : ITaskFactory<IQueueSetup<T>>
     {
+        #region Members
+        /// <summary>
+        /// Queue Throughput
+        /// </summary>
+        protected readonly IQueueThroughput throughput = null;
+        #endregion
+
+        #region Constructors
+        /// <summary>
+        /// Default Constructors
+        /// </summary>
+        public StorageDequeueFactory()
+            :this(new QueueThroughput())
+        {
+        }
+
+        /// <summary>
+        /// Mockable Constructor
+        /// </summary>
+        /// <param name="throughput">Throughput</param>
+        public StorageDequeueFactory(IQueueThroughput throughput)
+        {
+            if (null == throughput)
+            {
+                throw new ArgumentNullException("throughput");
+            }
+
+            this.throughput = throughput;
+        }
+        #endregion
+
         #region Methods
         /// <summary>
         /// Creates the Queue, and Loads Dynamic Dequeuer
@@ -49,28 +78,10 @@
                 throw new ArgumentNullException("setup");
             }
 
-            var messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault;
-            byte minimum = 1;
-            byte maximum = 2;
-            var checkScaleInMinutes = BaseTimes.ScaleCheck;
-
-            switch (setup.Priority)
-            {
-                case QueuePriority.Low:
-                    messagesPerScaleUnit = 1000;
-                    checkScaleInMinutes = 4;
-                    break;
-                case QueuePriority.Medium:
-                    messagesPerScaleUnit = 100;
-                    maximum = 5;
-                    checkScaleInMinutes = 2;
-                    break;
-                case QueuePriority.High:
-                    minimum = 2;
-                    maximum = 10;
-                    checkScaleInMinutes = 1;
-                    break;
-            }
+            var messagesPerScaleUnit = this.throughput.MessagesPerScaleUnit(setup.Priority);
+            byte minimum = this.throughput.MinimumScale(setup.Priority);
+            byte maximum = this.throughput.MaximumScale(setup.Priority);
+            var checkScaleInMinutes = this.throughput.CheckScaleEvery(setup.Priority);
 
             return new StorageQueueAutoScaler<T>(queue, setup, messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes);
         }
