@@ -2,7 +2,7 @@
 {
     using King.Azure.Data;
     using King.Service.Data;
-    using King.Service.Data.Model;
+    using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;
     using System;
@@ -72,79 +72,45 @@
             Assert.IsNotNull(tasks);
             Assert.AreEqual(2, tasks.Count());
         }
-
+        
         [Test]
-        public void DequeueTaskLow()
+        public void DequeueTask()
         {
-            var queue = Substitute.For<IStorageQueue>();
-            var setup = new Setup
-            {
-                ConnectionString = ConnectionString,
-                Name = "test",
-                Priority = QueuePriority.Low,
-            };
-            var f = new StorageDequeueFactory<object>();
-            var task = f.DequeueTask(queue, setup);
-
-            Assert.IsNotNull(task);
-            var scaler = task as StorageQueueAutoScaler<object>;
-            Assert.IsNotNull(scaler);
-            Assert.AreEqual(1, scaler.Minimum);
-            Assert.AreEqual(2, scaler.Maximum);
-        }
-
-        [Test]
-        public void DequeueTaskMedium()
-        {
-            var queue = Substitute.For<IStorageQueue>();
-            var setup = new Setup
-            {
-                ConnectionString = ConnectionString,
-                Name = "test",
-                Priority = QueuePriority.Medium,
-            };
-            var f = new StorageDequeueFactory<object>();
-            var task = f.DequeueTask(queue, setup);
-
-            Assert.IsNotNull(task);
-            var scaler = task as StorageQueueAutoScaler<object>;
-            Assert.IsNotNull(scaler);
-            Assert.AreEqual(1, scaler.Minimum);
-            Assert.AreEqual(5, scaler.Maximum);
-        }
-
-        [Test]
-        public void DequeueTaskHigh()
-        {
-            var queue = Substitute.For<IStorageQueue>();
             var setup = new Setup
             {
                 ConnectionString = ConnectionString,
                 Name = "test",
                 Priority = QueuePriority.High,
             };
-            var f = new StorageDequeueFactory<object>();
+
+            var random = new Random();
+            var max = (byte)random.Next(byte.MinValue, byte.MaxValue);
+            var min = (byte)random.Next(byte.MinValue, max);
+
+            var queue = Substitute.For<IStorageQueue>();
+            var throughput = Substitute.For<IQueueThroughput>();
+            throughput.MaximumScale(setup.Priority).Returns(max);
+            throughput.MinimumScale(setup.Priority).Returns(min);
+
+            var f = new StorageDequeueFactory<object>(throughput);
             var task = f.DequeueTask(queue, setup);
 
             Assert.IsNotNull(task);
             var scaler = task as StorageQueueAutoScaler<object>;
             Assert.IsNotNull(scaler);
-            Assert.AreEqual(2, scaler.Minimum);
-            Assert.AreEqual(10, scaler.Maximum);
+            Assert.AreEqual(min, scaler.Minimum);
+            Assert.AreEqual(max, scaler.Maximum);
+
+            throughput.Received().MaximumScale(setup.Priority);
+            throughput.Received().MinimumScale(setup.Priority);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void DequeueTaskQueueNull()
         {
-            var setup = new Setup
-            {
-                ConnectionString = ConnectionString,
-                Name = "test",
-                Priority = QueuePriority.Low,
-            };
             var f = new StorageDequeueFactory<object>();
-            var task = f.DequeueTask(null, setup);
+            var task = f.DequeueTask(null, new Setup());
         }
 
         [Test]
