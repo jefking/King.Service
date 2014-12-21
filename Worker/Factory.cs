@@ -5,7 +5,6 @@
     using King.Service.Data;
     using King.Service.WorkerRole;
     using System.Collections.Generic;
-    using Worker.Dequeue;
     using Worker.Queue;
     using Worker.Scalable;
 
@@ -84,7 +83,7 @@
             var setup = new SetupExample()
             {
                 ConnectionString = config.ConnectionString,
-                Name = config.SuperQueueName,
+                Name = config.FactoryQueueName,
                 Priority = QueuePriority.Medium,
             };
             

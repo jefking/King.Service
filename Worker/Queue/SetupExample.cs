@@ -1,8 +1,7 @@
-﻿namespace Worker.Dequeue
+﻿namespace Worker.Queue
 {
     using King.Azure.Data;
     using King.Service.Data;
-    using Worker.Queue;
 
     public class SetupExample : QueueSetup<CompanyModel>
     {

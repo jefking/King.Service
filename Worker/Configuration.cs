@@ -28,7 +28,7 @@
             get;
             set;
         }
-        public string SuperQueueName
+        public string FactoryQueueName
         {
             get;
             set;
