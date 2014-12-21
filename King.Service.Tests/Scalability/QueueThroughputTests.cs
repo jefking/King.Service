@@ -22,9 +22,9 @@
             Assert.IsNotNull(new QueueThroughput() as IQueueThroughput);
         }
 
-        [TestCase(QueuePriority.Low, 1000)]
-        [TestCase(QueuePriority.Medium, 100)]
-        [TestCase(QueuePriority.High, 10)]
+        [TestCase(QueuePriority.Low, (ushort)1000)]
+        [TestCase(QueuePriority.Medium, (ushort)100)]
+        [TestCase(QueuePriority.High, (ushort)10)]
         public void MessagesPerScaleUnit(QueuePriority priority, ushort expected)
         {
             var s = new QueueThroughput();
@@ -55,8 +55,8 @@
             Assert.AreEqual(expected, data);
         }
 
-        [TestCase(QueuePriority.Low, BaseTimes.MinimumStorageTiming)]
-        [TestCase(QueuePriority.Medium, BaseTimes.MinimumStorageTiming / 2)]
+        [TestCase(QueuePriority.Low, BaseTimes.MaximumStorageTiming)]
+        [TestCase(QueuePriority.Medium, BaseTimes.MaximumStorageTiming / 2)]
         [TestCase(QueuePriority.High, BaseTimes.MinimumStorageTiming)]
         public void MaximumFrequency(QueuePriority priority, byte expected)
         {
