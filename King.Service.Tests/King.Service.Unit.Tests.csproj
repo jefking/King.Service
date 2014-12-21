@@ -107,6 +107,7 @@
     <Compile Include="RecurringRunnerTests.cs" />
     <Compile Include="RunAtTaskTests.cs" />
     <Compile Include="Scalability\QueueScalerTests.cs" />
+    <Compile Include="Scalability\QueueThroughputTests.cs" />
     <Compile Include="Scalability\ScalerTests.cs" />
     <Compile Include="Timing\AdaptiveTimingTests.cs" />
     <Compile Include="Timing\BackoffTimingTests.cs" />

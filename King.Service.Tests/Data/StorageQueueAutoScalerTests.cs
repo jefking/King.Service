@@ -99,59 +99,6 @@
         }
 
         [Test]
-        public void RunnerLow()
-        {
-            var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-            var runs = Substitute.For<IDynamicRuns>();
-
-            var s = new StorageQueueAutoScaler<object>(count, setup);
-            var scalable = s.Runner(runs, QueuePriority.Low);
-
-            Assert.IsNotNull(runs);
-            Assert.IsNotNull(scalable as AdaptiveRunner);
-        }
-
-        [Test]
-        public void RunnerMedium()
-        {
-            var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-            var runs = Substitute.For<IDynamicRuns>();
-
-            var s = new StorageQueueAutoScaler<object>(count, setup);
-            var scalable = s.Runner(runs, QueuePriority.Medium);
-
-            Assert.IsNotNull(runs);
-            Assert.IsNotNull(scalable as BackoffRunner);
-        }
-
-        [Test]
-        public void RunnerHigh()
-        {
-            var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-            var runs = Substitute.For<IDynamicRuns>();
-
-            var s = new StorageQueueAutoScaler<object>(count, setup);
-            var scalable = s.Runner(runs, QueuePriority.High);
-
-            Assert.IsNotNull(runs);
-            Assert.IsNotNull(scalable as BackoffRunner);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void RunnerRunsNull()
-        {
-            var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-
-            var s = new StorageQueueAutoScaler<object>(count, setup);
-            var scalable = s.Runner(null, QueuePriority.High);
-        }
-
-        [Test]
         public void ScaleUnit()
         {
             var count = Substitute.For<IQueueCount>();
