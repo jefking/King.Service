@@ -4,7 +4,7 @@
     using King.Service.Data.Model;
     using Worker.Queue;
 
-    public class SuperSetup : QueueSetup<CompanyModel>
+    public class SetupExample : QueueSetup<CompanyModel>
     {
         public override IProcessor<CompanyModel> Get()
         {

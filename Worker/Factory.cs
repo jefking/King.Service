@@ -80,9 +80,9 @@
             //Auto Batch Size Dequeue Task
             yield return new AdaptiveRunner(new StorageDequeueBatchDynamic<CompanyModel>(config.DynamicQueueName, config.ConnectionString, new CompanyProcessor()));
 
-            //Dynamic Batch Size, Frequency, Threads
+            //Dynamic Batch Size, Frequency, Threads (and queue creation)
             var f = new StorageDequeueFactory<CompanyModel>();
-            var setup = new SuperSetup()
+            var setup = new SetupExample()
             {
                 ConnectionString = config.ConnectionString,
                 Name = config.SuperQueueName,

@@ -91,7 +91,7 @@
   <ItemGroup>
     <Compile Include="Backoff.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Dequeue\SuperSetup.cs" />
+    <Compile Include="Dequeue\SetupExample.cs" />
     <Compile Include="OnceDaily.cs" />
     <Compile Include="Queue\CompanyQueuer.cs" />
     <Compile Include="Factory.cs" />
