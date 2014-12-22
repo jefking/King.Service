@@ -63,17 +63,10 @@
                 workDone = true;
 
                 var count = messages.Count();
+
                 Trace.TraceInformation("{0} messages dequeued for processing by {1}.", count, base.processor.GetType());
 
-                var tasks = new Task[count];
-                var i = 0;
-                foreach (var msg in messages.Where(m => m != null))
-                {
-                    tasks[i] = this.Process(msg);
-                    i++;
-                }
-
-                Task.WaitAll(tasks);
+                Task.WaitAll(messages.Where(m => m != null).Select(m => this.Process(m)).ToArray());
 
                 this.RunCompleted(count, TimeSpan.FromTicks(timing.ElapsedTicks));
             }
