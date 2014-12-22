@@ -18,6 +18,11 @@
         /// Tracking
         /// </summary>
         protected readonly ITimingTracker tracker = null;
+
+        /// <summary>
+        /// Last Message Dequeue Count
+        /// </summary>
+        protected byte lastCount = 0;
         #endregion
 
         #region Constructors
@@ -93,9 +98,10 @@
 
             var result = this.tracker.Calculate(duration, this.batchCount);
 
-            if (result != this.BatchCount)
+            if (result != this.BatchCount && (this.batchCount > result || count > this.lastCount))
             {
                 this.batchCount = result;
+                this.lastCount = count > this.lastCount ? (byte)count : this.lastCount;
 
                 Trace.TraceInformation("Current batch size set to: {0}.", this.BatchCount);
             }

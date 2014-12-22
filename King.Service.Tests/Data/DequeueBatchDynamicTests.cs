@@ -141,5 +141,46 @@
             tracker.Received().Calculate(duration, 1);
             tracker.Received().Calculate(duration, 2);
         }
+
+        [Test]
+        [Category("Integration")]
+        public void RunCompleteUpIntegration()
+        {
+            var random = new Random();
+            var duration = TimeSpan.FromMilliseconds(10);
+
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new DequeueBatchDynamic<object>(poller, processor, new TimingTracker(TimeSpan.FromMinutes(1), 50));
+            d.RunCompleted(1, duration);
+            d.RunCompleted(2, duration);
+            d.RunCompleted(1, duration);
+            d.RunCompleted(3, duration);
+            d.RunCompleted(1, duration);
+
+            Assert.AreEqual(4, d.BatchCount);
+        }
+
+        [Test]
+        [Category("Integration")]
+        public void RunCompleteDownIntegration()
+        {
+            var random = new Random();
+            var duration = TimeSpan.FromMilliseconds(10);
+
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var d = new DequeueBatchDynamic<object>(poller, processor, new TimingTracker(TimeSpan.FromMinutes(1), 50));
+            d.RunCompleted(1, duration);
+            d.RunCompleted(2, duration);
+            d.RunCompleted(3, duration);
+            d.RunCompleted(1, TimeSpan.FromMinutes(1));
+            d.RunCompleted(1, TimeSpan.FromMinutes(1));
+            d.RunCompleted(1, TimeSpan.FromMinutes(1));
+
+            Assert.AreEqual(1, d.BatchCount);
+        }
     }
 }
