@@ -94,13 +94,14 @@
         /// <param name="duration">Duration</param>
         public virtual void RunCompleted(int count, TimeSpan duration)
         {
-            Trace.TraceInformation("Dequeue message processing took: {0}; for {1} messages.", duration, count);
+            Trace.TraceInformation("Dequeue message processing took: {0}; for {1} messages for processing by {2}.", duration, count, base.processor.GetType());
 
             var result = this.tracker.Calculate(duration, this.batchCount);
 
             if (result != this.BatchCount && (this.batchCount > result || count > this.largestCount))
             {
                 this.batchCount = result;
+
                 this.largestCount = count > this.largestCount ? (byte)count : this.largestCount;
 
                 Trace.TraceInformation("Current batch size set to: {0}.", this.BatchCount);
