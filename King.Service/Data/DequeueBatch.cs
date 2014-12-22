@@ -65,7 +65,7 @@
             {
                 workDone = true;
 
-                Trace.TraceInformation("{0} messages dequeued.", messages.Count());
+                Trace.TraceInformation("{0} messages dequeued for processing by: {1}.", messages.Count(), base.processor.GetType());
 
                 foreach (var msg in messages.Where(m => m != null))
                 {

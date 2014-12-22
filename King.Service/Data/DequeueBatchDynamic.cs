@@ -22,7 +22,7 @@
         /// <summary>
         /// Last Message Dequeue Count
         /// </summary>
-        protected byte lastCount = 0;
+        protected byte largestCount = 0;
         #endregion
 
         #region Constructors
@@ -98,10 +98,10 @@
 
             var result = this.tracker.Calculate(duration, this.batchCount);
 
-            if (result != this.BatchCount && (this.batchCount > result || count > this.lastCount))
+            if (result != this.BatchCount && (this.batchCount > result || count > this.largestCount))
             {
                 this.batchCount = result;
-                this.lastCount = count > this.lastCount ? (byte)count : this.lastCount;
+                this.largestCount = count > this.largestCount ? (byte)count : this.largestCount;
 
                 Trace.TraceInformation("Current batch size set to: {0}.", this.BatchCount);
             }
