@@ -11,24 +11,24 @@
     /// <summary>
     /// Task Factory
     /// </summary>
-    public class Factory : EasyTaskFactory<Configuration>
+    public class Factory : ITaskFactory<Configuration>
     {
-        public override IEnumerable<IRunnable> Tasks(Configuration config)
+        public IEnumerable<IRunnable> Tasks(Configuration config)
         {
             // Initialization task
             yield return new InitTask();
 
             // Initialize Table; creates table if it doesn't already exist
             var table = new TableStorage(config.TableName, config.ConnectionString);
-            yield return base.InitializeStorage(table);
+            yield return new InitializeStorageTask(table);
 
             // Initialize Queue; creates queue if it doesn't already exist
             var queue = new StorageQueue(config.QueueName, config.ConnectionString);
-            yield return base.InitializeStorage(queue);
+            yield return new InitializeStorageTask(queue);
             var scalableQueue = new StorageQueue(config.ScalableQueueName, config.ConnectionString);
-            yield return base.InitializeStorage(scalableQueue);
+            yield return new InitializeStorageTask(scalableQueue);
             var dynamicQueue = new StorageQueue(config.DynamicQueueName, config.ConnectionString);
-            yield return base.InitializeStorage(dynamicQueue);
+            yield return new InitializeStorageTask(dynamicQueue);
 
             // Initialize Container; creates container if it doesn't already exist
             var container = new Container(config.ContainerName, config.ConnectionString);
@@ -56,13 +56,13 @@
             yield return new Adaptive();
 
             //Dequeue task, Backoff behavior
-            yield return base.Backoff(new CompanyDequeuer(queue));
+            yield return new BackoffRunner(new CompanyDequeuer(queue));
 
             //Dequeue task, Adaptive behavior
-            yield return base.Adaptive(new CompanyDequeuer(queue));
+            yield return new AdaptiveRunner(new CompanyDequeuer(queue));
 
             //Dequeue task, Recurring behavior
-            yield return base.Recurring(new CompanyDequeuer(queue));
+            yield return new RecurringRunner(new CompanyDequeuer(queue));
 
             //Tasks for Queuing
             yield return new CompanyQueuer(queue);
@@ -76,7 +76,7 @@
             yield return new ScalableQueue(scalableQueue, config);
 
             //Auto Batch Size Dequeue Task
-            yield return base.Adaptive(new StorageDequeueBatchDynamic<CompanyModel>(config.DynamicQueueName, config.ConnectionString, new CompanyProcessor()));
+            yield return new AdaptiveRunner(new StorageDequeueBatchDynamic<CompanyModel>(config.DynamicQueueName, config.ConnectionString, new CompanyProcessor()));
 
             //Dynamic Batch Size, Frequency, Threads (and queue creation)
             var f = new StorageDequeueFactory<CompanyModel>();
