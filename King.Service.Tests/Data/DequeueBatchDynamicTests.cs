@@ -98,5 +98,48 @@
 
             poller.Received().PollMany(1);
         }
+
+        [Test]
+        public void RunCompleteUp()
+        {
+            var random = new Random();
+            var count = random.Next(5, int.MaxValue);
+            var duration = TimeSpan.FromMilliseconds(random.Next());
+
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+            var tracker = Substitute.For<ITimingTracker>();
+            tracker.Calculate(duration, 1).Returns((byte)2);
+
+            var d = new DequeueBatchDynamic<object>(poller, processor, tracker);
+            d.RunCompleted(count, duration);
+
+            Assert.AreEqual(2, d.BatchCount);
+
+            tracker.Received().Calculate(duration, 1);
+        }
+
+        [Test]
+        public void RunCompleteDown()
+        {
+            var random = new Random();
+            var count = random.Next(5, int.MaxValue);
+            var duration = TimeSpan.FromMilliseconds(random.Next());
+
+            var poller = Substitute.For<IPoller<object>>();
+            var processor = Substitute.For<IProcessor<object>>();
+            var tracker = Substitute.For<ITimingTracker>();
+            tracker.Calculate(duration, 1).Returns((byte)2);
+            tracker.Calculate(duration, 2).Returns((byte)1);
+
+            var d = new DequeueBatchDynamic<object>(poller, processor, tracker);
+            d.RunCompleted(1, duration);
+            d.RunCompleted(1, duration);
+
+            Assert.AreEqual(1, d.BatchCount);
+
+            tracker.Received().Calculate(duration, 1);
+            tracker.Received().Calculate(duration, 2);
+        }
     }
 }

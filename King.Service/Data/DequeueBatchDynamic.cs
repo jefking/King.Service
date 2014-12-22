@@ -87,7 +87,7 @@
         /// </summary>
         /// <param name="count">Batch Count</param>
         /// <param name="duration">Duration</param>
-        protected virtual void RunCompleted(int count, TimeSpan duration)
+        public virtual void RunCompleted(int count, TimeSpan duration)
         {
             Trace.TraceInformation("Dequeue message processing took: {0}; for {1} messages.", duration, count);
 
