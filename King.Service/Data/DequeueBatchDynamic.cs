@@ -62,8 +62,8 @@
             {
                 workDone = true;
 
-                var count = messages.Count()
-                Trace.TraceInformation("{0} messages dequeued for processing by {2}.", count, base.processor.GetType());
+                var count = messages.Count();
+                Trace.TraceInformation("{0} messages dequeued for processing by {1}.", count, base.processor.GetType());
 
                 var tasks = new Task[count];
                 var i = 0;
