@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="King.Service.AutoScaler&lt;T&gt;" Collapsed="true">
-    <Position X="6" Y="1.75" Width="1.5" />
+    <Position X="7.25" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>wAAAAICAACAAgAAAAAAAAAACAACAAAAAAAAIAAAAAAI=</HashCode>
       <FileName>AutoScaler.cs</FileName>
@@ -37,7 +37,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="King.Service.CoordinatedTask" Collapsed="true">
-    <Position X="7" Y="3" Width="1.5" />
+    <Position X="8.5" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAI=</HashCode>
       <FileName>CoordinatedTask.cs</FileName>
@@ -46,7 +46,7 @@
   <Class Name="King.Service.DynamicTask" Collapsed="true">
     <Position X="4.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>BAAAAAAAACAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>DynamicTask.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -60,7 +60,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="King.Service.RecurringTask" Collapsed="true">
-    <Position X="4" Y="0.5" Width="1.5" />
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAIAAAAMAAAAAAARAI=</HashCode>
       <FileName>RecurringTask.cs</FileName>
@@ -68,7 +68,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="King.Service.RunAtTask" Collapsed="true">
-    <Position X="7" Y="4" Width="1.5" />
+    <Position X="8.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAACIAAAAiAAAAAAI=</HashCode>
       <FileName>RunAtTask.cs</FileName>
@@ -85,7 +85,7 @@
   <Class Name="King.Service.Data.DequeueBatch&lt;T&gt;" Collapsed="true">
     <Position X="4.25" Y="6.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAAAAAI=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAACAAAAI=</HashCode>
       <FileName>Data\DequeueBatch.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -115,6 +115,20 @@
     <TypeIdentifier>
       <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>RecurringRunner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="King.Service.Data.StorageQueueAutoScaler&lt;T&gt;" Collapsed="true">
+    <Position X="7.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAEAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\StorageQueueAutoScaler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="King.Service.Data.QueueAutoScaler&lt;T&gt;" Collapsed="true">
+    <Position X="7.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Data\QueueAutoScaler.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
