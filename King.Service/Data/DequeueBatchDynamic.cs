@@ -62,9 +62,10 @@
             {
                 workDone = true;
 
-                Trace.TraceInformation("{0} messages dequeued for processing by {2}.", messages.Count(), base.processor.GetType());
+                var count = messages.Count()
+                Trace.TraceInformation("{0} messages dequeued for processing by {2}.", count, base.processor.GetType());
 
-                var tasks = new Task[messages.Count()];
+                var tasks = new Task[count];
                 var i = 0;
                 foreach (var msg in messages.Where(m => m != null))
                 {
@@ -74,11 +75,10 @@
 
                 Task.WaitAll(tasks);
 
-                this.RunCompleted(messages.Count(), TimeSpan.FromTicks(timing.ElapsedTicks));
+                this.RunCompleted(count, TimeSpan.FromTicks(timing.ElapsedTicks));
             }
             else
             {
-
                 Trace.TraceInformation("No messages were dequeued.");
             }
 
