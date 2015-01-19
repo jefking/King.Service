@@ -121,7 +121,6 @@
     <Compile Include="Timing\Strategies.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="Diagrams\Tasks.cd" />
     <None Include="packages.config" />
   </ItemGroup>
