@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>King.Service</id>
-        <version>1.9.4</version>
+        <version>1.9.5</version>
         <title>King.Service</title>
         <authors>Jef King</authors>
         <owners>Jef King</owners>
@@ -12,18 +12,18 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Task scheduling for Azure and Windows Servers.</description>
         <summary>Task scheduling for Azure and Windows Servers.</summary>
-        <releaseNotes>Storage Dequeue, dynamic frequency/batch/threads.</releaseNotes>
+        <releaseNotes>Support for .NET 4.5</releaseNotes>
         <copyright>Jef King</copyright>
         <tags>King.Service Azure Queue Service Bus scale scaling linear exponential timing auto-scale dynamic-scale dynamic Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure run task service services tasks scheduling</tags>
         <dependencies>
           <dependency id="King.Azure" />
         </dependencies>
         <frameworkAssemblies>
-            <frameworkAssembly assemblyName="System" targetFramework="net451" />
-            <frameworkAssembly assemblyName="System.Data" targetFramework="net451" />
+            <frameworkAssembly assemblyName="System" targetFramework="net45" />
+            <frameworkAssembly assemblyName="System.Data" targetFramework="net45" />
         </frameworkAssemblies>
     </metadata>
     <files>
-        <file src="King.Service\bin\Release\King.Service.dll" target="lib\net451\King.Service.dll" />
+        <file src="King.Service\bin\Release\King.Service.dll" target="lib\net45\King.Service.dll" />
     </files>
 </package>
