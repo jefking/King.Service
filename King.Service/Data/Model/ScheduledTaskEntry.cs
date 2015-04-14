@@ -70,8 +70,7 @@
         /// <returns>Partition key</returns>
         public static string GenerateLogsPartitionKey(string serviceName)
         {
-            const string format = "{0}-{1:yyyy}-{1:MM}";
-            return string.Format(format, serviceName, DateTime.UtcNow);
+            return string.Format("{0}-{1:yyyy-MM}", serviceName, DateTime.UtcNow);
         }
         #endregion
     }

@@ -1,8 +1,8 @@
 ﻿namespace King.Service.Tests.Data.Model
 {
     using King.Service.Data.Model;
-    using NUnit.Framework;
     using Microsoft.WindowsAzure.Storage.Table;
+    using NUnit.Framework;
     using System;
 
     [TestFixture]
@@ -29,7 +29,16 @@
                 PartitionKey = ScheduledTaskEntry.GenerateLogsPartitionKey(this.GetType().ToString()),
                 ServiceName = this.GetType().ToString(),
             };
+
             Assert.AreEqual(expected, entity.PartitionKey);
+        }
+
+        [Test]
+        public void GenerateLogsPartitionKey()
+        {
+            var serviceName = Guid.NewGuid().ToString();
+
+            Assert.AreEqual(string.Format("{0}-{1:yyyy}-{1:MM}", serviceName, DateTime.UtcNow), ScheduledTaskEntry.GenerateLogsPartitionKey(serviceName));
         }
 
         [Test]
