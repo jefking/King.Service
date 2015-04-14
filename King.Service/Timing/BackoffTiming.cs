@@ -39,11 +39,13 @@
             if (workWasDone)
             {
                 this.noWorkCount = 0;
+
                 return this.timing.MinimumPeriodInSeconds;
             }
             else
             {
                 this.noWorkCount++;
+
                 return this.timing.Get(this.noWorkCount);
             }
         }

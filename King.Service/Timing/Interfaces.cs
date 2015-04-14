@@ -1,6 +1,7 @@
-﻿using System;
-namespace King.Service.Timing
+﻿namespace King.Service.Timing
 {
+    using System;
+
     #region ICalculateTiming
     /// <summary>
     /// Timing interface for Timing Maths

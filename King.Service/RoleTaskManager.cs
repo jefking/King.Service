@@ -79,6 +79,7 @@
             if (null != tasks && tasks.Any())
             {
                 var serviceCount = tasks.Count();
+
                 Trace.TraceInformation("Starting {0} services.", serviceCount);
 
                 ushort successCount = 0;

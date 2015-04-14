@@ -29,22 +29,6 @@
         }
 
         /// <summary>
-        /// Minimum Scale
-        /// </summary>
-        /// <param name="priority">Priority</param>
-        /// <returns>Minimum Scale</returns>
-        public virtual byte MinimumScale(QueuePriority priority)
-        {
-            switch (priority)
-            {
-                case QueuePriority.High:
-                    return 2;
-                default:
-                    return 1;
-            }
-        }
-
-        /// <summary>
         /// Minimum Frequency
         /// </summary>
         /// <param name="priority">Priority</param>
@@ -77,6 +61,22 @@
                     return BaseTimes.MaximumStorageTiming / 2;
                 default:
                     return BaseTimes.MaximumStorageTiming;
+            }
+        }
+
+        /// <summary>
+        /// Minimum Scale
+        /// </summary>
+        /// <param name="priority">Priority</param>
+        /// <returns>Minimum Scale</returns>
+        public virtual byte MinimumScale(QueuePriority priority)
+        {
+            switch (priority)
+            {
+                case QueuePriority.High:
+                    return 2;
+                default:
+                    return 1;
             }
         }
 

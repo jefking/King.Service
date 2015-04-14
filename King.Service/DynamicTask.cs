@@ -55,6 +55,7 @@
         public override void Run()
         {
             bool workWasDone;
+
             this.Run(out workWasDone);
 
             Trace.TraceInformation("{0}: {1}Work done.", base.ServiceName, workWasDone ? string.Empty : "No ");
