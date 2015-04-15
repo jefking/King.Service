@@ -80,7 +80,7 @@
             {
                 var serviceCount = tasks.Count();
 
-                Trace.TraceInformation("Starting {0} services.", serviceCount);
+                Trace.TraceInformation("Starting {0} tasks", serviceCount);
 
                 ushort successCount = 0;
 
@@ -92,7 +92,7 @@
                         
                         successCount++;
 
-                        Trace.TraceInformation("{0} Started.", task.GetType().ToString());
+                        Trace.TraceInformation("{0} started.", task.GetType().ToString());
                     }
                     catch (Exception ex)
                     {
@@ -102,11 +102,11 @@
                     Thread.Sleep(BaseTimes.ThreadingOffset);
                 }
 
-                Trace.TraceInformation("Finished starting services {0}/{1} successfully.", successCount, serviceCount);
+                Trace.TraceInformation("Finished starting tasks {0}/{1} successfully.", successCount, serviceCount);
             }
             else
             {
-                Trace.TraceWarning("No services to start up.");
+                Trace.TraceWarning("No tasks to start");
             }
 
             Trace.TraceInformation("Run finished");
@@ -128,20 +128,20 @@
                     var t = this.manager.Tasks(passthrough);
                     if (null != t && t.Any())
                     {
-                        Trace.TraceInformation("Loading Services.");
+                        Trace.TraceInformation("Tasks loading");
 
                         this.tasks = new ReadOnlyCollection<IRunnable>(t.ToList());
 
-                        Trace.TraceInformation("Services Loaded.");
+                        Trace.TraceInformation("Tasks loaded");
                     }
                     else
                     {
-                        Trace.TraceWarning("No Services loaded from Factory?");
+                        Trace.TraceWarning("No tasks loaded from factory?");
                     }
                 }
                 else
                 {
-                    Trace.TraceInformation("Tasks already loaded.");
+                    Trace.TraceInformation("Tasks previously loaded");
                 }
             }
 
@@ -159,7 +159,7 @@
 
             if (null != tasks && tasks.Any())
             {
-                Trace.TraceInformation("Stopping {0} services.", tasks.Count());
+                Trace.TraceInformation("Stopping {0} tasks", tasks.Count());
 
                 Parallel.ForEach(tasks, task =>
                 {
@@ -176,13 +176,13 @@
                 }
                 );
 
-                Trace.TraceInformation("Stopped {0} services.", tasks.Count());
+                Trace.TraceInformation("Stopped {0} tasks", tasks.Count());
 
                 tasks = null;
             }
             else
             {
-                Trace.TraceInformation("No services to be stopped.");
+                Trace.TraceInformation("No tasks to be stopped.");
             }
 
             Trace.TraceInformation("On stop finished.");
