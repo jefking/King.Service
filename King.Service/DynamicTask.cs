@@ -37,7 +37,7 @@
 
         #region Properties
         /// <summary>
-        /// Service Should Scale
+        /// Task Should Scale
         /// </summary>
         public virtual bool Scale
         {

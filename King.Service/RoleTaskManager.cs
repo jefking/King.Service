@@ -33,17 +33,17 @@
 
         #region Constructors
         /// <summary>
-        /// Pass Service Factory to run services
+        /// Pass Factory to run services
         /// </summary>
-        /// <param name="services">Services</param>
-        public RoleTaskManager(ITaskFactory<T> manager)
+        /// <param name="factory">Task Factory</param>
+        public RoleTaskManager(ITaskFactory<T> factory)
         {
-            if (null == manager)
+            if (null == factory)
             {
                 throw new ArgumentNullException("manager");
             }
 
-            this.manager = manager;
+            this.manager = factory;
         }
 
         /// <summary>
@@ -119,7 +119,7 @@
         /// <returns>Started</returns>
         public virtual bool OnStart(T passthrough = default(T))
         {
-            Trace.TraceInformation("On start called.");
+            Trace.TraceInformation("On start called");
 
             lock (this.servicesLock)
             {
@@ -145,7 +145,7 @@
                 }
             }
 
-            Trace.TraceInformation("On start finished.");
+            Trace.TraceInformation("On start finished");
 
             return true;
         }
@@ -155,7 +155,7 @@
         /// </summary>
         public virtual void OnStop()
         {
-            Trace.TraceInformation("On stop called.");
+            Trace.TraceInformation("On stop called");
 
             if (null != tasks && tasks.Any())
             {
@@ -182,10 +182,10 @@
             }
             else
             {
-                Trace.TraceInformation("No tasks to be stopped.");
+                Trace.TraceInformation("No tasks to be stopped");
             }
 
-            Trace.TraceInformation("On stop finished.");
+            Trace.TraceInformation("On stop finished");
         }
 
         /// <summary>
