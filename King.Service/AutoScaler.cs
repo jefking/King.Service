@@ -7,7 +7,7 @@
     using System.Diagnostics;
 
     /// <summary>
-    /// Task AutoScaler
+    /// Task Auto Scaler
     /// </summary>
     /// <typeparam name="T">Configuration</typeparam>
     public abstract class AutoScaler<T> : RecurringTask, ITaskFactory<T>
@@ -142,7 +142,7 @@
                     }
                 }
 
-                Trace.TraceInformation("'{0}' is currently running at optimal scale with {1} units.", this.ServiceName, this.scaler.CurrentUnits);
+                Trace.TraceInformation("'{0}' is at optimal scale ({1} units).", this.ServiceName, this.scaler.CurrentUnits);
             }
         }
 

@@ -22,7 +22,7 @@
         /// <returns>Task</returns>
         public virtual async Task RunAsync()
         {
-            await new TaskFactory().StartNew(() => { });
+            await new TaskFactory().StartNew(() => { } );
         }
 
         /// <summary>
