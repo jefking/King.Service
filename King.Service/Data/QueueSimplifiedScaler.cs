@@ -3,7 +3,9 @@
     using System;
     using System.Collections.Generic;
     using King.Azure.Data;
-
+    using Scalability;
+    using Timing;
+    
     /// <summary>
     /// Queue Simplified Scaler
     /// </summary>
@@ -19,7 +21,7 @@
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public QueueSimplifiedScaler(IQueueCount count, ITaskCreator creator, ushort messagesPerScaleUnit = 10, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 2)
+        public QueueSimplifiedScaler(IQueueCount count, ITaskCreator creator, ushort messagesPerScaleUnit = QueueScaler<ITaskCreator>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
             : base(count, messagesPerScaleUnit, creator, minimum, maximum, checkScaleInMinutes)
         {
             if (null == creator)
