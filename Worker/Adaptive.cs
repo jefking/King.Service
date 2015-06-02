@@ -1,8 +1,8 @@
 ﻿namespace Worker
 {
-    using King.Service;
     using System;
     using System.Diagnostics;
+    using King.Service;
 
     public class Adaptive : AdaptiveTask
     {
