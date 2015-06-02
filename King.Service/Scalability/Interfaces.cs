@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Scalability
 {
-    using King.Service.Data;
     using System;
+    using King.Service.Data;
 
     #region IScaler
     /// <summary>
@@ -116,6 +116,24 @@
         /// <param name="priority">Priority</param>
         /// <returns>Maximum Frequency</returns>
         byte MaximumFrequency(QueuePriority priority);
+        #endregion
+    }
+    #endregion
+
+    #region ITaskCreator
+    /// <summary>
+    /// Task Creator Interface
+    /// </summary>
+    public interface ITaskCreator
+    {
+        #region Properties
+        /// <summary>
+        /// Task
+        /// </summary>
+        Func<IScalable> Task
+        {
+            get;
+        }
         #endregion
     }
     #endregion
