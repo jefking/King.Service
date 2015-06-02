@@ -13,12 +13,12 @@
         /// Default Constructor
         /// </summary>
         /// <param name="count">Count</param>
-        /// <param name="messagesPerScaleUnit">Messages Per-Scale Unit</param>
         /// <param name="task">Task</param>
+        /// <param name="messagesPerScaleUnit">Messages Per-Scale Unit</param>
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public QueueSimplifiedScaler(IQueueCount count, ushort messagesPerScaleUnit = 10, ITaskCreator task = null, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 2)
+        public QueueSimplifiedScaler(IQueueCount count, ITaskCreator task = null, ushort messagesPerScaleUnit = 10, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = 2)
             : base(count, messagesPerScaleUnit, task, minimum, maximum, checkScaleInMinutes)
         {
         }
