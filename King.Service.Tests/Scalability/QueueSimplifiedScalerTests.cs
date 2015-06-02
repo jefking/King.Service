@@ -1,11 +1,10 @@
-﻿namespace King.Service.Tests.Data
+﻿namespace King.Service.Tests.Scalability
 {
     using King.Azure.Data;
     using King.Service.Data;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
+    using Service.Scalability;
 
     [TestFixture]
     public class QueueSimplifiedScalerTests

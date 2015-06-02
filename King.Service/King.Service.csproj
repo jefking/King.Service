@@ -83,7 +83,7 @@
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\QueueSetup.cs" />
-    <Compile Include="Data\QueueSimplifiedScaler.cs" />
+    <Compile Include="Scalability\QueueSimplifiedScaler.cs" />
     <Compile Include="Data\StorageDequeueBatchDynamic.cs" />
     <Compile Include="Data\StorageDequeueFactory.cs" />
     <Compile Include="Data\StorageQueueAutoScaler.cs" />

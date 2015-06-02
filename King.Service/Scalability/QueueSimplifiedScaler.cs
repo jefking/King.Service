@@ -1,11 +1,11 @@
-﻿namespace King.Service.Data
+﻿namespace King.Service.Scalability
 {
     using System;
     using System.Collections.Generic;
+    using Data;
     using King.Azure.Data;
-    using Scalability;
     using Timing;
-    
+
     /// <summary>
     /// Queue Simplified Scaler
     /// </summary>
