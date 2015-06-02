@@ -98,4 +98,22 @@
         #endregion
     }
     #endregion
+
+    #region ITaskCreator
+    /// <summary>
+    /// Task Creator Interface
+    /// </summary>
+    public interface ITaskCreator
+    {
+        #region Properties
+        /// <summary>
+        /// Task
+        /// </summary>
+        Func<IScalable> Task
+        {
+            get;
+        }
+        #endregion
+    }
+    #endregion
 }
