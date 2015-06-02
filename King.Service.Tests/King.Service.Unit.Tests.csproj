@@ -100,6 +100,7 @@
     <Compile Include="Data\DequeueBatchDynamicTests.cs" />
     <Compile Include="Data\DequeueBatchTests.cs" />
     <Compile Include="Data\QueueAutoScalerTests.cs" />
+    <Compile Include="Data\QueueSimplifiedScalerTests.cs" />
     <Compile Include="Data\StorageDequeueBatchDynamicTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
     <Compile Include="Data\StorageDequeueFactoryTests.cs" />
