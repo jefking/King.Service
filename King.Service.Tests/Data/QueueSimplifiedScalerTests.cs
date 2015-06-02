@@ -12,8 +12,8 @@
     {
         public class MyQScaler : QueueSimplifiedScaler
         {
-            public MyQScaler(IQueueCount count)
-                : base(count)
+            public MyQScaler(IQueueCount count, ITaskCreator creator)
+                : base(count, creator)
             {
             }
         }
@@ -21,15 +21,17 @@
         [Test]
         public void Constructor()
         {
-            var c = Substitute.For<IQueueCount>();
-            new MyQScaler(c);
+            var count = Substitute.For<IQueueCount>();
+            var creator = Substitute.For<ITaskCreator>();
+            new MyQScaler(count, creator);
         }
 
         [Test]
         public void IsAutoScaler()
         {
-            var c = Substitute.For<IQueueCount>();
-            Assert.IsNotNull(new MyQScaler(c) as AutoScaler<object>);
+            var count = Substitute.For<IQueueCount>();
+            var creator = Substitute.For<ITaskCreator>();
+            Assert.IsNotNull(new MyQScaler(count, creator) as QueueAutoScaler<ITaskCreator>);
         }
     }
 }
