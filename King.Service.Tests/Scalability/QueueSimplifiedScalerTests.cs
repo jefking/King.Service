@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Tests.Scalability
 {
+    using System;
     using King.Azure.Data;
     using King.Service.Data;
     using NSubstitute;
@@ -26,11 +27,23 @@
         }
 
         [Test]
-        public void IsAutoScaler()
+        public void IsQueueAutoScaler()
         {
             var count = Substitute.For<IQueueCount>();
             var creator = Substitute.For<ITaskCreator>();
             Assert.IsNotNull(new MyQScaler(count, creator) as QueueAutoScaler<ITaskCreator>);
+        }
+
+        [Test]
+        public void ScaleUnit()
+        {
+            var count = Substitute.For<IQueueCount>();
+            var creator = Substitute.For<ITaskCreator>();
+            creator.Task.Returns((Func<IScalable>)null);
+
+            Assert.IsNotNull(new MyQScaler(count, creator) as QueueAutoScaler<ITaskCreator>);
+
+            creator.Task().Received();
         }
     }
 }
