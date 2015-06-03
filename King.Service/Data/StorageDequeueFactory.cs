@@ -11,13 +11,18 @@
     /// Storage Dequeue Factory
     /// </summary>
     /// <typeparam name="T">Processor Type</typeparam>
-    public class StorageDequeueFactory<T> : DequeueFactory<T>, ITaskFactory<IQueueSetup<T>>
+    public class StorageDequeueFactory<T> : ITaskFactory<IQueueSetup<T>>
     {
         #region Members
         /// <summary>
         /// Connection String
         /// </summary>
         protected readonly string connectionString = null;
+
+        /// <summary>
+        /// Throughput metrics
+        /// </summary>
+        protected readonly IQueueThroughput throughput = null;
         #endregion
 
         #region Constructors
@@ -36,7 +41,6 @@
         /// <param name="connectionString">Connection String</param>
         /// <param name="throughput">Throughput</param>
         public StorageDequeueFactory(string connectionString, IQueueThroughput throughput = null)
-           : base(throughput)
         {
             if (string.IsNullOrWhiteSpace(connectionString))
             {
@@ -44,6 +48,7 @@
             }
 
             this.connectionString = connectionString;
+            this.throughput = throughput ?? new QueueThroughput();
         }
         #endregion
 
@@ -92,13 +97,13 @@
         }
 
         /// <summary>
-        /// Create Runnable Task
+        /// Create Scalable Task
         /// </summary>
         /// <param name="queueName">Queue Name</param>
         /// <param name="processor">Processor</param>
         /// <param name="priority">Priority</param>
         /// <returns>Runnable</returns>
-        public override IRunnable Scalable(string queueName, IProcessor<T> processor, QueuePriority priority = QueuePriority.Low)
+        public virtual IRunnable Scalable(string queueName, IProcessor<T> processor, QueuePriority priority = QueuePriority.Low)
         {
             if (string.IsNullOrWhiteSpace(queueName))
             {

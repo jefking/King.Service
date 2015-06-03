@@ -35,9 +35,9 @@
         }
 
         [Test]
-        public void IsDequeueFactory()
+        public void ConstructorThroughputNull()
         {
-            Assert.IsNotNull(new StorageDequeueFactory<object>(ConnectionString) as DequeueFactory<object>);
+            new StorageDequeueFactory<object>(ConnectionString, null);
         }
 
         [Test]
