@@ -28,10 +28,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorThroughputNull()
+        public void IsDequeueFactory()
         {
-            new StorageDequeueFactory<object>(null);
+            Assert.IsNotNull(new StorageDequeueFactory<object>(ConnectionString) as DequeueFactory<object>);
         }
 
         [Test]
