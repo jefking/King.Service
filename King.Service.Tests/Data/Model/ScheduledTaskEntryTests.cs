@@ -56,5 +56,17 @@
             entity.Identifier = null;
             Assert.IsNull(entity.Identifier);
         }
+
+        [Test]
+        public void ServiceName()
+        {
+            var expected = ScheduledTaskEntry.GenerateLogsPartitionKey(this.GetType().ToString());
+            var entity = new ScheduledTaskEntry
+            {
+                ServiceName = expected,
+            };
+
+            Assert.AreEqual(expected, entity.ServiceName);
+        }
     }
 }
