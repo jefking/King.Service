@@ -6,7 +6,7 @@
     using King.Service.Scalability;
 
     /// <summary>
-    /// Dequeue Factory
+    /// Dequeue Factory, for auto-scaling dequeue classes
     /// </summary>
     /// <typeparam name="T">Dequeue Model</typeparam>
     public class DequeueFactory<T>
@@ -22,7 +22,7 @@
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="throughput"></param>
+        /// <param name="throughput">Queue Throughput</param>
         public DequeueFactory(IQueueThroughput throughput = null)
         {
             this.throughput = throughput ?? new QueueThroughput();
