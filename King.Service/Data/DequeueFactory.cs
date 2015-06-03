@@ -54,7 +54,7 @@
             }
 
             var queue = new StorageQueue(queueName, connectionString);
-            var creator = new DequeueTaskCreator<T>(queueName, connectionString, processor, priority);
+            var creator = new DequeueTaskCreator<T>(queueName, connectionString, processor, priority, this.throughput);
             var messagesPerScaleUnit = this.throughput.MessagesPerScaleUnit(priority);
             var minimumScale = this.throughput.MinimumScale(priority);
             var maximumScale = this.throughput.MaximumScale(priority);
