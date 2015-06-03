@@ -54,5 +54,18 @@
             var processor = Substitute.For<IProcessor<object>>();
             Assert.IsNotNull(new DequeueTaskCreator<object>(queue, connection, processor) as ITaskCreator);
         }
+
+        [Test]
+        public void Task()
+        {
+            var queue = Guid.NewGuid().ToString();
+            var connection = Guid.NewGuid().ToString();
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var dtc = new DequeueTaskCreator<object>(queue, connection, processor);
+
+            var t = dtc.Task;
+            Assert.IsNotNull(t);
+        }
     }
 }
