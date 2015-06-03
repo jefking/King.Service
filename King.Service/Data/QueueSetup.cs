@@ -1,12 +1,13 @@
 ﻿namespace King.Service.Data
 {
     using King.Azure.Data;
+    using System;
 
     /// <summary>
     /// Queue Setup
     /// </summary>
     /// <typeparam name="T">Dequeue Type</typeparam>
-    public abstract class QueueSetup<T> : IQueueSetup<T>
+    public class QueueSetup<T> : IQueueSetup<T>
     {
         #region Properties
         /// <summary>
@@ -17,16 +18,7 @@
             get;
             set;
         }
-
-        /// <summary>
-        /// Connection String
-        /// </summary>
-        public virtual string ConnectionString
-        {
-            get;
-            set;
-        }
-
+        
         /// <summary>
         /// Priority
         /// </summary>
@@ -35,14 +27,15 @@
             get;
             set;
         }
-        #endregion
 
-        #region Methods
         /// <summary>
-        /// Get Processor
+        /// Processor
         /// </summary>
-        /// <returns>Processor</returns>
-        public abstract IProcessor<T> Get();
+        public virtual Func<IProcessor<T>> Processor
+        {
+            get;
+            set;
+        }
         #endregion
     }
 }

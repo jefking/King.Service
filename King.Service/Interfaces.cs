@@ -92,7 +92,7 @@
     /// <summary>
     /// Task Factory
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Passthrough</typeparam>
     public interface ITaskFactory<T>
     {
         #region Methods

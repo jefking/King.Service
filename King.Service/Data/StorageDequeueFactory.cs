@@ -1,17 +1,14 @@
 ﻿namespace King.Service.Data
 {
-    using King.Azure.Data;
-    using King.Service.Scalability;
     using System;
     using System.Collections.Generic;
-    using King.Service.Data.Model;
-
-
+    using King.Azure.Data;
+    using King.Service.Scalability;
+    
     /// <summary>
     /// Storage Dequeue Factory
     /// </summary>
-    /// <typeparam name="T">Processor Type</typeparam>
-    public class StorageDequeueFactory<T> : ITaskFactory<IQueueSetup<T>>
+    public class StorageDequeueFactory
     {
         #region Members
         /// <summary>
@@ -39,7 +36,7 @@
         /// Mockable Constructor
         /// </summary>
         /// <param name="connectionString">Connection String</param>
-        /// <param name="throughput">Throughput</param>
+        /// <param name="throughput">Queue Throughput</param>
         public StorageDequeueFactory(string connectionString, IQueueThroughput throughput = null)
         {
             if (string.IsNullOrWhiteSpace(connectionString))
@@ -56,33 +53,29 @@
         /// <summary>
         /// Creates the Queue, and Loads Dynamic Dequeuer
         /// </summary>
+        /// <typeparam name="T">Passthrough</typeparam>
         /// <param name="setup">Setup</param>
         /// <param name="processor">Processor</param>
         /// <returns>Tasks</returns>
-        public virtual IEnumerable<IRunnable> Tasks(IQueueSetup<T> setup)
+        public virtual IEnumerable<IRunnable> Tasks<T>(IQueueSetup<T> setup)
         {
             if (null == setup)
             {
                 throw new ArgumentNullException("setup");
             }
-
-            var queue = new StorageQueue(setup.Name, setup.ConnectionString);
-            yield return new InitializeStorageTask(queue);
-            yield return this.DequeueTask(queue, setup);
+            
+            yield return new InitializeStorageTask(new StorageQueue(setup.Name, this.connectionString));
+            yield return this.Dequeue<T>(setup);
         }
 
         /// <summary>
-        /// Dequeue Task
+        /// Dequeue Task (Storage Queue Auto Scaler)
         /// </summary>
-        /// <param name="queue">Queue</param>
+        /// <typeparam name="T">Data Type</typeparam>
         /// <param name="setup">Setup</param>
         /// <returns>Storage Queue Auto Scaler</returns>
-        public virtual IRunnable DequeueTask(IStorageQueue queue, IQueueSetup<T> setup)
+        public virtual IRunnable Dequeue<T>(IQueueSetup<T> setup)
         {
-            if (null == queue)
-            {
-                throw new ArgumentNullException("queue");
-            }
             if (null == setup)
             {
                 throw new ArgumentNullException("setup");
@@ -92,35 +85,14 @@
             var minimum = this.throughput.MinimumScale(setup.Priority);
             var maximum = this.throughput.MaximumScale(setup.Priority);
             var checkScaleInMinutes = this.throughput.CheckScaleEvery(setup.Priority);
-
-            return new StorageQueueAutoScaler<T>(queue, setup, messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes);
-        }
-
-        /// <summary>
-        /// Create Scalable Task
-        /// </summary>
-        /// <param name="queueName">Queue Name</param>
-        /// <param name="processor">Processor</param>
-        /// <param name="priority">Priority</param>
-        /// <returns>Runnable</returns>
-        public virtual IRunnable Scalable(string queueName, IProcessor<T> processor, QueuePriority priority = QueuePriority.Low)
-        {
-            if (string.IsNullOrWhiteSpace(queueName))
+            var connection = new QueueConnection<T>()
             {
-                throw new ArgumentException("queueName");
-            }
-            if (null == processor)
-            {
-                throw new ArgumentNullException("processor");
-            }
+                ConnectionString = this.connectionString,
+                Queue = setup,
+            };
+            var queue = new StorageQueue(connection.Queue.Name, connection.ConnectionString);
 
-            var queue = new StorageQueue(queueName, connectionString);
-            var creator = new DequeueTaskCreator<T>(queueName, connectionString, processor, priority, this.throughput);
-            var messagesPerScaleUnit = this.throughput.MessagesPerScaleUnit(priority);
-            var minimumScale = this.throughput.MinimumScale(priority);
-            var maximumScale = this.throughput.MaximumScale(priority);
-            var checkScaleEvery = this.throughput.CheckScaleEvery(priority);
-            return new QueueSimplifiedScaler(queue, creator, messagesPerScaleUnit, minimumScale, maximumScale, checkScaleEvery);
+            return new StorageQueueAutoScaler<T>(queue, connection, this.throughput, messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes);
         }
         #endregion
     }

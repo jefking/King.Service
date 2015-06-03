@@ -73,6 +73,33 @@
         }
 
         /// <summary>
+        /// Priority
+        /// </summary>
+        QueuePriority Priority
+        {
+            get;
+        }
+
+        /// <summary>
+        /// Get Processor
+        /// </summary>
+        Func<IProcessor<T>> Processor
+        {
+            get;
+        }
+        #endregion
+    }
+    #endregion
+
+    #region IQueueSetup
+    /// <summary>
+    /// Queue Setup Interface
+    /// </summary>
+    /// <typeparam name="T">Dequeue Type</typeparam>
+    public interface IQueueConnection<T>
+    {
+        #region Properties
+        /// <summary>
         /// Connection String
         /// </summary>
         string ConnectionString
@@ -81,20 +108,12 @@
         }
 
         /// <summary>
-        /// Priority
+        /// Queue Setup
         /// </summary>
-        QueuePriority Priority
+        IQueueSetup<T> Queue
         {
             get;
         }
-        #endregion
-
-        #region Methods
-        /// <summary>
-        /// Get Processor
-        /// </summary>
-        /// <returns>Processor</returns>
-        IProcessor<T> Get();
         #endregion
     }
     #endregion

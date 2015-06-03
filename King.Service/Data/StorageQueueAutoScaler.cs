@@ -10,7 +10,7 @@
     /// Storage Queue AutoScaler
     /// </summary>
     /// <typeparam name="T">Processor Type</typeparam>
-    public class StorageQueueAutoScaler<T> : QueueAutoScaler<IQueueSetup<T>>
+    public class StorageQueueAutoScaler<T> : QueueAutoScaler<IQueueConnection<T>>
     {
         #region Members
         /// <summary>
@@ -29,7 +29,7 @@
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public StorageQueueAutoScaler(IQueueCount count, IQueueSetup<T> setup, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
+        public StorageQueueAutoScaler(IQueueCount count, IQueueConnection<T> setup, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
             : this(count, setup, new QueueThroughput(), messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes)
         {
         }
@@ -45,7 +45,7 @@
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public StorageQueueAutoScaler(IQueueCount count, IQueueSetup<T> setup, IQueueThroughput throughput, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
+        public StorageQueueAutoScaler(IQueueCount count, IQueueConnection<T> setup, IQueueThroughput throughput, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
             : base(count, messagesPerScaleUnit, setup, minimum, maximum, checkScaleInMinutes)
         {
             if (null == throughput)
@@ -61,33 +61,33 @@
         /// <summary>
         /// Scale Unit
         /// </summary>
-        /// <param name="setup">Setup</param>
+        /// <param name="queue">Queue Setup</param>
         /// <returns>Scalable Task</returns>
-        public override IEnumerable<IScalable> ScaleUnit(IQueueSetup<T> setup)
+        public override IEnumerable<IScalable> ScaleUnit(IQueueConnection<T> queue)
         {
-            if (null == setup)
+            if (null == queue)
             {
                 throw new ArgumentNullException("setup");
             }
 
-            yield return this.throughput.Runner(this.Runs(setup), setup.Priority);
+            yield return this.throughput.Runner(this.Runs(queue), queue.Queue.Priority);
         }
 
         /// <summary>
         /// Runs
         /// </summary>
-        /// <param name="setup">Setup</param>
+        /// <param name="queue">Queue Setup</param>
         /// <returns>Dynamic Runs</returns>
-        public virtual IDynamicRuns Runs(IQueueSetup<T> setup)
+        public virtual IDynamicRuns Runs(IQueueConnection<T> queue)
         {
-            if (null == setup)
+            if (null == queue)
             {
                 throw new ArgumentNullException("setup");
             }
 
-            var minimumPeriodInSeconds = this.throughput.MinimumFrequency(setup.Priority);
-            var maximumPeriodInSeconds = this.throughput.MaximumFrequency(setup.Priority);
-            return new StorageDequeueBatchDynamic<T>(setup.Name, setup.ConnectionString, setup.Get(), minimumPeriodInSeconds, maximumPeriodInSeconds);
+            var minimumPeriodInSeconds = this.throughput.MinimumFrequency(queue.Queue.Priority);
+            var maximumPeriodInSeconds = this.throughput.MaximumFrequency(queue.Queue.Priority);
+            return new StorageDequeueBatchDynamic<T>(queue.Queue.Name, queue.ConnectionString, queue.Queue.Processor(), minimumPeriodInSeconds, maximumPeriodInSeconds);
         }
         #endregion
     }
