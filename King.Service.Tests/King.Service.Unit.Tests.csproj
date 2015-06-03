@@ -116,6 +116,7 @@
     <Compile Include="AutoScalerTests.cs" />
     <Compile Include="Data\DequeueBatchDynamicTests.cs" />
     <Compile Include="Data\DequeueBatchTests.cs" />
+    <Compile Include="Data\DequeueFactoryTests.cs" />
     <Compile Include="Data\Model\DequeueTaskCreatorTests.cs" />
     <Compile Include="Data\QueueAutoScalerTests.cs" />
     <Compile Include="Scalability\QueueSimplifiedScalerTests.cs" />
