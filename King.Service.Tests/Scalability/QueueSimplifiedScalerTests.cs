@@ -39,7 +39,10 @@
         {
             var count = Substitute.For<IQueueCount>();
             var creator = Substitute.For<ITaskCreator>();
-            creator.Task.Returns((Func<IScalable>)null);
+            Func<IScalable> t = () => {
+                return Substitute.For<IScalable>(); ;
+            };
+            creator.Task.Returns(t);
 
             Assert.IsNotNull(new MyQScaler(count, creator) as QueueAutoScaler<ITaskCreator>);
 
