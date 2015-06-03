@@ -2,6 +2,7 @@
 {
     using System;
     using King.Azure.Data;
+    using King.Service.Data;
     using King.Service.Data.Model;
     using King.Service.Scalability;
     using NSubstitute;
@@ -10,6 +11,8 @@
     [TestFixture]
     public class DequeueTaskCreatorTests
     {
+        const string ConnectionString = "UseDevelopmentStorage=true";
+
         [Test]
         public void Constructor()
         {
@@ -59,13 +62,18 @@
         public void Task()
         {
             var queue = Guid.NewGuid().ToString();
-            var connection = Guid.NewGuid().ToString();
             var processor = Substitute.For<IProcessor<object>>();
+            var throughput = Substitute.For<IQueueThroughput>();
+            throughput.Runner(Arg.Any<IDynamicRuns>(), QueuePriority.High);
 
-            var dtc = new DequeueTaskCreator<object>(queue, connection, processor);
+            var dtc = new DequeueTaskCreator<object>(queue, ConnectionString, processor, QueuePriority.High, throughput);
 
             var t = dtc.Task;
             Assert.IsNotNull(t);
+            var r = t();
+            Assert.IsNotNull(r);
+
+            throughput.Received().Runner(Arg.Any<IDynamicRuns>(), QueuePriority.High);
         }
     }
 }

@@ -45,7 +45,7 @@
         /// <param name="connectionString">Connection String</param>
         /// <param name="processor">Processor</param>
         /// <param name="priority">Priority</param>
-        public DequeueTaskCreator(string queueName, string connectionString, IProcessor<T> processor, QueuePriority priority = QueuePriority.Low)
+        public DequeueTaskCreator(string queueName, string connectionString, IProcessor<T> processor, QueuePriority priority = QueuePriority.Low, IQueueThroughput throughput = null)
         {
             if (string.IsNullOrWhiteSpace(queueName))
             {
@@ -64,12 +64,13 @@
             this.connectionString = connectionString;
             this.processor = processor;
             this.priority = priority;
+            this.throughput = throughput ?? new QueueThroughput();
         }
         #endregion
 
         #region Properties
         /// <summary>
-        /// Task
+        /// Scalable Task
         /// </summary>
         public virtual Func<IScalable> Task
         {
