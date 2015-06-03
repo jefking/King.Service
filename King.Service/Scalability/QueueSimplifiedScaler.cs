@@ -39,7 +39,11 @@
         /// <returns>Task(s)</returns>
         public override IEnumerable<IScalable> ScaleUnit(ITaskCreator creator)
         {
-            yield return creator.Task();
+            var t = creator.Task;
+            if (null != t)
+            {
+                yield return t();
+            }
         }
         #endregion
     }
