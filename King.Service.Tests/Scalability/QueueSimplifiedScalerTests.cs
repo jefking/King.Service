@@ -10,20 +10,20 @@
     [TestFixture]
     public class QueueSimplifiedScalerTests
     {
-        public class MyQScaler : QueueSimplifiedScaler
-        {
-            public MyQScaler(IQueueCount count, ITaskCreator creator)
-                : base(count, creator)
-            {
-            }
-        }
-
         [Test]
         public void Constructor()
         {
             var count = Substitute.For<IQueueCount>();
             var creator = Substitute.For<ITaskCreator>();
-            new MyQScaler(count, creator);
+            new QueueSimplifiedScaler(count, creator);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorCreatorNull()
+        {
+            var count = Substitute.For<IQueueCount>();
+            new QueueSimplifiedScaler(count, null);
         }
 
         [Test]
@@ -31,7 +31,7 @@
         {
             var count = Substitute.For<IQueueCount>();
             var creator = Substitute.For<ITaskCreator>();
-            Assert.IsNotNull(new MyQScaler(count, creator) as QueueAutoScaler<ITaskCreator>);
+            Assert.IsNotNull(new QueueSimplifiedScaler(count, creator) as QueueAutoScaler<ITaskCreator>);
         }
 
         [Test]
@@ -44,7 +44,7 @@
             };
             creator.Task.Returns(t);
 
-            Assert.IsNotNull(new MyQScaler(count, creator) as QueueAutoScaler<ITaskCreator>);
+            Assert.IsNotNull(new QueueSimplifiedScaler(count, creator) as QueueAutoScaler<ITaskCreator>);
 
             creator.Task().Received();
         }
