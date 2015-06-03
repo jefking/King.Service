@@ -4,41 +4,46 @@
     using King.Service.Scalability;
     using System;
     using System.Collections.Generic;
+    using King.Service.Data.Model;
+
 
     /// <summary>
     /// Storage Dequeue Factory
     /// </summary>
     /// <typeparam name="T">Processor Type</typeparam>
-    public class StorageDequeueFactory<T> : ITaskFactory<IQueueSetup<T>>
+    public class StorageDequeueFactory<T> : DequeueFactory<T>, ITaskFactory<IQueueSetup<T>>
     {
         #region Members
         /// <summary>
-        /// Queue Throughput
+        /// Connection String
         /// </summary>
-        protected readonly IQueueThroughput throughput = null;
+        protected readonly string connectionString = null;
         #endregion
 
         #region Constructors
         /// <summary>
-        /// Default Constructors
+        /// Default Constructor
         /// </summary>
-        public StorageDequeueFactory()
-            :this(new QueueThroughput())
+        /// <param name="connectionString">Connection String</param>
+        public StorageDequeueFactory(string connectionString)
+            :this(connectionString, new QueueThroughput())
         {
         }
 
         /// <summary>
         /// Mockable Constructor
         /// </summary>
+        /// <param name="connectionString">Connection String</param>
         /// <param name="throughput">Throughput</param>
-        public StorageDequeueFactory(IQueueThroughput throughput)
+        public StorageDequeueFactory(string connectionString, IQueueThroughput throughput = null)
+           :base(throughput)
         {
-            if (null == throughput)
+            if (string.IsNullOrWhiteSpace(connectionString))
             {
-                throw new ArgumentNullException("throughput");
+                throw new ArgumentException("connectionString");
             }
 
-            this.throughput = throughput;
+            this.connectionString = connectionString;
         }
         #endregion
 
@@ -79,11 +84,38 @@
             }
 
             var messagesPerScaleUnit = this.throughput.MessagesPerScaleUnit(setup.Priority);
-            byte minimum = this.throughput.MinimumScale(setup.Priority);
-            byte maximum = this.throughput.MaximumScale(setup.Priority);
+            var minimum = this.throughput.MinimumScale(setup.Priority);
+            var maximum = this.throughput.MaximumScale(setup.Priority);
             var checkScaleInMinutes = this.throughput.CheckScaleEvery(setup.Priority);
 
             return new StorageQueueAutoScaler<T>(queue, setup, messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes);
+        }
+
+        /// <summary>
+        /// Create Runnable Task
+        /// </summary>
+        /// <param name="queueName">Queue Name</param>
+        /// <param name="processor">Processor</param>
+        /// <param name="priority">Priority</param>
+        /// <returns>Runnable</returns>
+        public override IRunnable Scalable(string queueName, IProcessor<T> processor, QueuePriority priority = QueuePriority.Low)
+        {
+            if (string.IsNullOrWhiteSpace(queueName))
+            {
+                throw new ArgumentException("queueName");
+            }
+            if (null == processor)
+            {
+                throw new ArgumentNullException("processor");
+            }
+
+            var queue = new StorageQueue(queueName, connectionString);
+            var creator = new DequeueTaskCreator<T>(queueName, connectionString, processor, priority, this.throughput);
+            var messagesPerScaleUnit = this.throughput.MessagesPerScaleUnit(priority);
+            var minimumScale = this.throughput.MinimumScale(priority);
+            var maximumScale = this.throughput.MaximumScale(priority);
+            var checkScaleEvery = this.throughput.CheckScaleEvery(priority);
+            return new QueueSimplifiedScaler(queue, creator, messagesPerScaleUnit, minimumScale, maximumScale, checkScaleEvery);
         }
         #endregion
     }

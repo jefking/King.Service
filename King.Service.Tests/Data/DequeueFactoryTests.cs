@@ -12,69 +12,29 @@
     {
         const string ConnectionString = "UseDevelopmentStorage=true";
 
+        class MyFactory : DequeueFactory<string>
+        {
+            public MyFactory(IQueueThroughput throughput = null)
+                : base(throughput)
+            {
+            }
+
+            public override IRunnable Scalable(string queueName, IProcessor<string> processor, QueuePriority priority = QueuePriority.Low)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         [Test]
         public void Constructor()
         {
-            new DequeueFactory<object>();
+            new MyFactory();
         }
 
         [Test]
         public void ConstructorThroughputNull()
         {
-            new DequeueFactory<object>(null);
-        }
-
-        [Test]
-        public void Runnable()
-        {
-            var queue = Guid.NewGuid().ToString();
-            var processor = Substitute.For<IProcessor<object>>();
-
-            var df = new DequeueFactory<object>();
-            var t = df.Runnable(queue, ConnectionString, processor);
-
-            Assert.IsNotNull(t);
-            Assert.IsNotNull(t as QueueSimplifiedScaler);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void RunnableQueueNull()
-        {
-            var processor = Substitute.For<IProcessor<object>>();
-
-            var df = new DequeueFactory<object>();
-            var t = df.Runnable(null, ConnectionString, processor);
-
-            Assert.IsNotNull(t);
-            Assert.IsNotNull(t as QueueSimplifiedScaler);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void RunnableConnectionNull()
-        {
-            var queue = Guid.NewGuid().ToString();
-            var processor = Substitute.For<IProcessor<object>>();
-
-            var df = new DequeueFactory<object>();
-            var t = df.Runnable(queue, null, processor);
-
-            Assert.IsNotNull(t);
-            Assert.IsNotNull(t as QueueSimplifiedScaler);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void RunnableProcessorNull()
-        {
-            var queue = Guid.NewGuid().ToString();
-
-            var df = new DequeueFactory<object>();
-            var t = df.Runnable(queue, ConnectionString, null);
-
-            Assert.IsNotNull(t);
-            Assert.IsNotNull(t as QueueSimplifiedScaler);
+            new MyFactory(null);
         }
     }
 }

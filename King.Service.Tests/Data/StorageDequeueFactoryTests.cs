@@ -1,12 +1,12 @@
 ﻿namespace King.Service.Tests.Data
 {
+    using System;
+    using System.Linq;
     using King.Azure.Data;
     using King.Service.Data;
     using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Linq;
 
     [TestFixture]
     public class StorageDequeueFactoryTests
@@ -24,7 +24,7 @@
         [Test]
         public void Constructor()
         {
-            new StorageDequeueFactory<object>();
+            new StorageDequeueFactory<object>(ConnectionString);
         }
 
         [Test]
@@ -37,7 +37,7 @@
         [Test]
         public void IsITaskFactory()
         {
-            Assert.IsNotNull(new StorageDequeueFactory<object>() as ITaskFactory<IQueueSetup<object>>);
+            Assert.IsNotNull(new StorageDequeueFactory<object>(ConnectionString) as ITaskFactory<IQueueSetup<object>>);
         }
 
         [Test]
@@ -49,7 +49,7 @@
                 Name = "test",
                 Priority = QueuePriority.Low,
             };
-            var f = new StorageDequeueFactory<object>();
+            var f = new StorageDequeueFactory<object>(ConnectionString);
             var tasks = f.Tasks(setup);
 
             Assert.IsNotNull(tasks);
@@ -66,7 +66,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void TasksSetupNull()
         {
-            var f = new StorageDequeueFactory<object>();
+            var f = new StorageDequeueFactory<object>(ConnectionString);
             var tasks = f.Tasks(null);
 
             Assert.IsNotNull(tasks);
@@ -92,7 +92,7 @@
             throughput.MaximumScale(setup.Priority).Returns(max);
             throughput.MinimumScale(setup.Priority).Returns(min);
 
-            var f = new StorageDequeueFactory<object>(throughput);
+            var f = new StorageDequeueFactory<object>(ConnectionString, throughput);
             var task = f.DequeueTask(queue, setup);
 
             Assert.IsNotNull(task);
@@ -109,7 +109,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void DequeueTaskQueueNull()
         {
-            var f = new StorageDequeueFactory<object>();
+            var f = new StorageDequeueFactory<object>(ConnectionString);
             var task = f.DequeueTask(null, new Setup());
         }
 
@@ -118,8 +118,48 @@
         public void DequeueTaskSetupNull()
         {
             var queue = Substitute.For<IStorageQueue>();
-            var f = new StorageDequeueFactory<object>();
-            var task = f.DequeueTask(queue, null);
+
+            var df = new StorageDequeueFactory<object>(ConnectionString);
+            var task = df.DequeueTask(queue, null);
+        }
+
+        [Test]
+        public void Runnable()
+        {
+            var queue = Guid.NewGuid().ToString();
+            var processor = Substitute.For<IProcessor<object>>();
+            
+            var df = new StorageDequeueFactory<object>(ConnectionString);
+            var t = df.Scalable(queue, null);
+
+            Assert.IsNotNull(t);
+            Assert.IsNotNull(t as QueueSimplifiedScaler);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void RunnableQueueNull()
+        {
+            var processor = Substitute.For<IProcessor<object>>();
+
+            var df = new StorageDequeueFactory<object>(ConnectionString);
+            var t = df.Scalable(null, processor);
+
+            Assert.IsNotNull(t);
+            Assert.IsNotNull(t as QueueSimplifiedScaler);
+        }
+        
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ScalableProcessorNull()
+        {
+            var queue = Guid.NewGuid().ToString();
+
+            var df = new StorageDequeueFactory<object>(ConnectionString);
+            var t = df.Scalable(queue, null);
+
+            Assert.IsNotNull(t);
+            Assert.IsNotNull(t as QueueSimplifiedScaler);
         }
     }
 }
