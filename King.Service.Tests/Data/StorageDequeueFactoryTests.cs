@@ -124,13 +124,13 @@
         }
 
         [Test]
-        public void Runnable()
+        public void Scalable()
         {
             var queue = Guid.NewGuid().ToString();
             var processor = Substitute.For<IProcessor<object>>();
             
             var df = new StorageDequeueFactory<object>(ConnectionString);
-            var t = df.Scalable(queue, null);
+            var t = df.Scalable(queue, processor);
 
             Assert.IsNotNull(t);
             Assert.IsNotNull(t as QueueSimplifiedScaler);
@@ -138,7 +138,7 @@
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void RunnableQueueNull()
+        public void ScalableQueueNull()
         {
             var processor = Substitute.For<IProcessor<object>>();
 
