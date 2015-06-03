@@ -26,7 +26,7 @@
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         public StorageDequeueFactory(string connectionString)
-            :this(connectionString, new QueueThroughput())
+            : this(connectionString, new QueueThroughput())
         {
         }
 
@@ -36,7 +36,7 @@
         /// <param name="connectionString">Connection String</param>
         /// <param name="throughput">Throughput</param>
         public StorageDequeueFactory(string connectionString, IQueueThroughput throughput = null)
-           :base(throughput)
+           : base(throughput)
         {
             if (string.IsNullOrWhiteSpace(connectionString))
             {

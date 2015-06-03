@@ -28,6 +28,13 @@
         }
 
         [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorConnectionStringNull()
+        {
+            new StorageDequeueFactory<object>(null);
+        }
+
+        [Test]
         public void IsDequeueFactory()
         {
             Assert.IsNotNull(new StorageDequeueFactory<object>(ConnectionString) as DequeueFactory<object>);
