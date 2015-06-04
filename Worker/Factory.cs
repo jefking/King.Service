@@ -79,10 +79,10 @@
             yield return new AdaptiveRunner(new StorageDequeueBatchDynamic<CompanyModel>(config.DynamicQueueName, config.ConnectionString, new CompanyProcessor()));
 
             //Dynamic Batch Size, Frequency, Threads (and queue creation)
-            var f = new StorageDequeueFactory<CompanyModel>();
-            var setup = new SetupExample()
+            var f = new StorageDequeueFactory(config.ConnectionString);
+            var setup = new QueueSetup<CompanyModel>()
             {
-                ConnectionString = config.ConnectionString,
+                Processor = () => { return new CompanyProcessor(); },
                 Name = config.FactoryQueueName,
                 Priority = QueuePriority.Medium,
             };
