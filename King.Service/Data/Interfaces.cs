@@ -110,7 +110,7 @@
         /// <summary>
         /// Queue Setup
         /// </summary>
-        IQueueSetup<T> Queue
+        IQueueSetup<T> Setup
         {
             get;
         }

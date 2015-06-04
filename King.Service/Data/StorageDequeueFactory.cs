@@ -88,9 +88,9 @@
             var connection = new QueueConnection<T>()
             {
                 ConnectionString = this.connectionString,
-                Queue = setup,
+                Setup = setup,
             };
-            var queue = new StorageQueue(connection.Queue.Name, connection.ConnectionString);
+            var queue = new StorageQueue(connection.Setup.Name, connection.ConnectionString);
 
             return new StorageQueueAutoScaler<T>(queue, connection, this.throughput, messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes);
         }

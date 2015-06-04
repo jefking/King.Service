@@ -19,7 +19,7 @@
         /// <summary>
         /// Queue Setup
         /// </summary>
-        public virtual IQueueSetup<T> Queue
+        public virtual IQueueSetup<T> Setup
         {
             get;
             set;

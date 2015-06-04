@@ -70,7 +70,7 @@
                 throw new ArgumentNullException("setup");
             }
 
-            yield return this.throughput.Runner(this.Runs(queue), queue.Queue.Priority);
+            yield return this.throughput.Runner(this.Runs(queue), queue.Setup.Priority);
         }
 
         /// <summary>
@@ -85,9 +85,9 @@
                 throw new ArgumentNullException("setup");
             }
 
-            var minimumPeriodInSeconds = this.throughput.MinimumFrequency(queue.Queue.Priority);
-            var maximumPeriodInSeconds = this.throughput.MaximumFrequency(queue.Queue.Priority);
-            return new StorageDequeueBatchDynamic<T>(queue.Queue.Name, queue.ConnectionString, queue.Queue.Processor(), minimumPeriodInSeconds, maximumPeriodInSeconds);
+            var minimumPeriodInSeconds = this.throughput.MinimumFrequency(queue.Setup.Priority);
+            var maximumPeriodInSeconds = this.throughput.MaximumFrequency(queue.Setup.Priority);
+            return new StorageDequeueBatchDynamic<T>(queue.Setup.Name, queue.ConnectionString, queue.Setup.Processor(), minimumPeriodInSeconds, maximumPeriodInSeconds);
         }
         #endregion
     }
