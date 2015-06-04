@@ -83,7 +83,7 @@
     <Compile Include="Data\DequeueBatchDynamic.cs" />
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Data\Enums.cs" />
-    <Compile Include="Data\QueueConnection.cs" />
+    <Compile Include="Data\Model\QueueConnection.cs" />
     <Compile Include="Data\QueueSetup.cs" />
     <Compile Include="Data\StorageDequeueBatchDynamic.cs" />
     <Compile Include="Data\StorageDequeueFactory.cs" />

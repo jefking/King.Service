@@ -3,8 +3,9 @@
     using System;
     using System.Collections.Generic;
     using King.Azure.Data;
+    using King.Service.Data.Model;
     using King.Service.Scalability;
-    
+
     /// <summary>
     /// Storage Dequeue Factory
     /// </summary>

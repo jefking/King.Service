@@ -1,4 +1,4 @@
-﻿namespace King.Service.Data
+﻿namespace King.Service.Data.Model
 {
     /// <summary>
     /// Queue Connection

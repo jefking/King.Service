@@ -30,13 +30,7 @@
         {
             new StorageDequeueFactory(ConnectionString, null);
         }
-
-        [Test]
-        public void IsITaskFactory()
-        {
-            Assert.IsNotNull(new StorageDequeueFactory(ConnectionString) as ITaskFactory<IQueueSetup<object>>);
-        }
-
+        
         [Test]
         public void Tasks()
         {
