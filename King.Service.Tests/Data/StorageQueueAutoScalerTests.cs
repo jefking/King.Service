@@ -41,6 +41,7 @@
             {
                 Priority = QueuePriority.High,
                 Name = Guid.NewGuid().ToString(),
+                Processor = () => { return Substitute.For<IProcessor<object>>(); },
             };
             var connection = new QueueConnection<object>()
             {
