@@ -25,12 +25,12 @@
         /// </summary>
         /// <param name="count">Count</param>
         /// <param name="messagesPerScaleUnit">Messages Per-Scale Unit</param>
-        /// <param name="setup">Setup</param>
+        /// <param name="connection">Queue Connection</param>
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public StorageQueueAutoScaler(IQueueCount count, IQueueConnection<T> setup, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
-            : this(count, setup, new QueueThroughput(), messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes)
+        public StorageQueueAutoScaler(IQueueCount count, IQueueConnection<T> connection, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
+            : this(count, connection, new QueueThroughput(), messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes)
         {
         }
 
@@ -38,15 +38,15 @@
         /// Mockable Constructor
         /// </summary>
         /// <param name="count">Count</param>
-        /// <param name="setup">Setup</param>
+        /// <param name="connection">Connection</param>
         /// <param name="throughput">Throughput</param>
         /// <param name="messagesPerScaleUnit">Messages Per-Scale Unit</param>
-        /// <param name="setup">Setup</param>
+        /// <param name="connection">Setup</param>
         /// <param name="minimum">Minimum Scale</param>
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
-        public StorageQueueAutoScaler(IQueueCount count, IQueueConnection<T> setup, IQueueThroughput throughput, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
-            : base(count, messagesPerScaleUnit, setup, minimum, maximum, checkScaleInMinutes)
+        public StorageQueueAutoScaler(IQueueCount count, IQueueConnection<T> connection, IQueueThroughput throughput, ushort messagesPerScaleUnit = QueueScaler<T>.MessagesPerScaleUnitDefault, byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
+            : base(count, messagesPerScaleUnit, connection, minimum, maximum, checkScaleInMinutes)
         {
             if (null == throughput)
             {

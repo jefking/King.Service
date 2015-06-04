@@ -1,50 +1,32 @@
 ﻿namespace King.Service.Tests.Data
 {
+    using System;
+    using System.Linq;
     using King.Azure.Data;
     using King.Service.Data;
     using King.Service.Scalability;
-    using King.Service.Timing;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Linq;
 
     [TestFixture]
     public class StorageQueueAutoScalerTests
     {
         const string ConnectionString = "UseDevelopmentStorage=true";
-
-        class Setup : QueueSetup<object>
-        {
-            public override IProcessor<object> Get()
-            {
-                return Substitute.For<IProcessor<object>>();
-            }
-        }
-
+        
         [Test]
         public void Constructor()
         {
             var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
+            var setup = new QueueConnection<object>();
             new StorageQueueAutoScaler<object>(count, setup);
-        }
-
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void ConstructorThroughputNull()
-        {
-            var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-            new StorageQueueAutoScaler<object>(count, setup, null);
         }
 
         [Test]
         public void IsQueueAutoScaler()
         {
             var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
-            Assert.IsNotNull(new StorageQueueAutoScaler<object>(count, setup) as QueueAutoScaler<IQueueSetup<object>>);
+            var setup = new QueueConnection<object>();
+            Assert.IsNotNull(new StorageQueueAutoScaler<object>(count, setup) as QueueAutoScaler<IQueueConnection<object>>);
         }
 
         [Test]
@@ -54,18 +36,22 @@
             var max = (byte)random.Next(byte.MinValue, byte.MaxValue);
             var min = (byte)random.Next(byte.MinValue, max);
             var count = Substitute.For<IQueueCount>();
-            var setup = new Setup
+            var setup = new QueueSetup<object>()
             {
                 Priority = QueuePriority.High,
                 Name = Guid.NewGuid().ToString(),
+            };
+            var connection = new QueueConnection<object>()
+            {
+                Setup = setup,
                 ConnectionString = ConnectionString,
             };
             var throughput = Substitute.For<IQueueThroughput>();
             throughput.MinimumFrequency(setup.Priority).Returns(min);
             throughput.MaximumFrequency(setup.Priority).Returns(max);
 
-            var s = new StorageQueueAutoScaler<object>(count, setup, throughput);
-            var runs = s.Runs(setup);
+            var s = new StorageQueueAutoScaler<object>(count, connection, throughput);
+            var runs = s.Runs(connection);
 
             Assert.IsNotNull(runs);
             Assert.AreEqual(min, runs.MinimumPeriodInSeconds);
@@ -80,9 +66,8 @@
         public void RunsSetupNull()
         {
             var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
 
-            var s = new StorageQueueAutoScaler<object>(count, setup);
+            var s = new StorageQueueAutoScaler<object>(count, new QueueConnection<object>());
             s.Runs(null);
         }
 
@@ -92,10 +77,12 @@
             var count = Substitute.For<IQueueCount>();
             var setup = Substitute.For<IQueueSetup<object>>();
             setup.Name.Returns(Guid.NewGuid().ToString());
-            setup.ConnectionString.Returns(ConnectionString);
+            var connection = Substitute.For<IQueueConnection<object>>();
+            connection.ConnectionString.Returns(ConnectionString);
+            connection.Setup.Returns(setup);
 
-            var s = new StorageQueueAutoScaler<object>(count, setup);
-            var unit = s.ScaleUnit(setup);
+            var s = new StorageQueueAutoScaler<object>(count, connection);
+            var unit = s.ScaleUnit(connection);
 
             Assert.IsNotNull(unit);
             Assert.AreEqual(1, unit.Count());
@@ -106,7 +93,7 @@
         public void ScaleUnitSetupNull()
         {
             var count = Substitute.For<IQueueCount>();
-            var setup = Substitute.For<IQueueSetup<object>>();
+            var setup = new QueueConnection<object>();
 
             var s = new StorageQueueAutoScaler<object>(count, setup);
             var unit = s.ScaleUnit(null);
