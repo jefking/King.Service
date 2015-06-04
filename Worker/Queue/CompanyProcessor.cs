@@ -1,8 +1,8 @@
 ﻿namespace Worker.Queue
 {
-    using King.Azure.Data;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using King.Azure.Data;
 
     /// <summary>
     /// Company Processor, post dequeue action

@@ -1,10 +1,10 @@
 ﻿namespace Worker
 {
+    using System.Collections.Generic;
     using King.Azure.Data;
     using King.Service;
     using King.Service.Data;
     using King.Service.WorkerRole;
-    using System.Collections.Generic;
     using Worker.Queue;
     using Worker.Scalable;
 
