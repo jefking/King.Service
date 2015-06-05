@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Tests.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using King.Service.Data;
     using King.Service.Scalability;
@@ -57,12 +58,23 @@
         public void TasksSetupNull()
         {
             var f = new DequeueFactory(ConnectionString);
-            var tasks = f.Tasks<object>(null);
+            var tasks = f.Tasks<object>((QueueSetup<object>)null);
 
             Assert.IsNotNull(tasks);
             Assert.AreEqual(2, tasks.Count());
         }
-        
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TasksSetupsNull()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Tasks<object>((IEnumerable<QueueSetup<object>>)null);
+
+            Assert.IsNotNull(tasks);
+            Assert.AreEqual(2, tasks.Count());
+        }
+
         [Test]
         public void DequeueTask()
         {
