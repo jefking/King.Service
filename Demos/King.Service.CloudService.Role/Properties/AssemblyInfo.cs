@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Jef King")]
 [assembly: AssemblyProduct("King.Service.CloudService.Role")]
-[assembly: AssemblyCopyright("Copyright © Jef King 2014")]
+[assembly: AssemblyCopyright("Copyright © Jef King 20145")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
