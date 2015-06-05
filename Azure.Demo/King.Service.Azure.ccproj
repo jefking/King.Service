@@ -12,6 +12,8 @@
     <AssemblyName>Azure.Demo</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>King.Service.Azure</Name>
+    <ValidationIssuesAreErrors>True</ValidationIssuesAreErrors>
+    <UseWebProjectPorts>True</UseWebProjectPorts>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
