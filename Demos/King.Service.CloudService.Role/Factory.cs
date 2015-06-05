@@ -74,14 +74,8 @@
 
             //Dynamic Batch Size, Frequency, Threads (and queue creation)
             var f = new DequeueFactory(config.ConnectionString);
-            var setup = new QueueSetup<CompanyModel>()
-            {
-                Processor = () => { return new CompanyProcessor(); },
-                Name = config.FactoryQueueName,
-                Priority = QueuePriority.Medium,
-            };
             
-            foreach (var t in f.Tasks(setup))
+            foreach (var t in f.Tasks(config.FactoryQueueName, () => { return new CompanyProcessor(); }, QueuePriority.Medium))
             {
                 yield return t;
             }
