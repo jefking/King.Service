@@ -22,9 +22,9 @@
             Assert.IsNotNull(new QueueThroughput() as IQueueThroughput);
         }
 
-        [TestCase(QueuePriority.Low, (ushort)1000)]
-        [TestCase(QueuePriority.Medium, (ushort)100)]
-        [TestCase(QueuePriority.High, (ushort)10)]
+        [TestCase(QueuePriority.Low, (ushort)250)]
+        [TestCase(QueuePriority.Medium, (ushort)1400)]
+        [TestCase(QueuePriority.High, (ushort)13000)]
         public void MessagesPerScaleUnit(QueuePriority priority, ushort expected)
         {
             var s = new QueueThroughput();
@@ -68,7 +68,7 @@
 
         [TestCase(QueuePriority.Low, 2)]
         [TestCase(QueuePriority.Medium, 5)]
-        [TestCase(QueuePriority.High, 10)]
+        [TestCase(QueuePriority.High, 7)]
         public void MaximumScale(QueuePriority priority, byte expected)
         {
             var s = new QueueThroughput();

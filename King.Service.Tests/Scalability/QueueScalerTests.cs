@@ -48,7 +48,7 @@
             var max = (ushort)random.Next(ushort.MinValue, 9);
             var queue = Substitute.For<IQueueCount>();
             var qs = new QueueScaler<object>(queue, max);
-            Assert.AreEqual(10, qs.Maximum);
+            Assert.AreEqual(250, qs.Maximum);
         }
 
         [Test]

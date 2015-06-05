@@ -14,7 +14,7 @@
         /// <summary>
         /// Messages per-Scale Unit Default
         /// </summary>
-        public const ushort MessagesPerScaleUnitDefault = 10;
+        public const ushort MessagesPerScaleUnitDefault = 250;
 
         /// <summary>
         /// Messages per-Scale Unit

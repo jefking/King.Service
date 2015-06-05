@@ -1,8 +1,8 @@
 ﻿namespace King.Service.Scalability
 {
+    using System;
     using King.Service.Data;
     using King.Service.Timing;
-    using System;
 
     /// <summary>
     /// Queue Throughput
@@ -13,6 +13,9 @@
         /// <summary>
         /// Messages per Scale-unit
         /// </summary>
+        /// <remarks>
+        /// Targeting ~1 minute per dequeuer to catch up to Queue Count
+        /// </remarks>
         /// <param name="priority">Priority</param>
         /// <returns>Number of messages per scale unit</returns>
         public virtual ushort MessagesPerScaleUnit(QueuePriority priority)
@@ -20,11 +23,11 @@
             switch (priority)
             {
                 case QueuePriority.High:
-                    return QueueScaler<object>.MessagesPerScaleUnitDefault;
+                    return 13000;
                 case QueuePriority.Medium:
-                    return 100;
+                    return 1400;
                 default:
-                    return 1000;
+                    return QueueScaler<object>.MessagesPerScaleUnitDefault;
             }
         }
 
@@ -90,7 +93,7 @@
             switch (priority)
             {
                 case QueuePriority.High:
-                    return 10;
+                    return 7;
                 case QueuePriority.Medium:
                     return 5;
                 default:
