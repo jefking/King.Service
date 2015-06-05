@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using King.Azure.Data;
 
@@ -91,11 +92,11 @@
     }
     #endregion
 
-    #region IQueueSetup
+    #region IQueueConnection
     /// <summary>
-    /// Queue Setup Interface
+    /// Queue Connection Interface
     /// </summary>
-    /// <typeparam name="T">Dequeue Type</typeparam>
+    /// <typeparam name="T">Dequeue Model</typeparam>
     public interface IQueueConnection<T>
     {
         #region Properties
@@ -114,6 +115,40 @@
         {
             get;
         }
+        #endregion
+    }
+    #endregion
+
+    #region IDequeueFactory
+    /// <summary>
+    /// Dequeue Factory
+    /// </summary>
+    public interface IDequeueFactory
+    {
+        #region Methods
+        /// <summary>
+        /// Initializes the Queues, and Dequeuers
+        /// </summary>
+        /// <typeparam name="T">Model</typeparam>
+        /// <param name="setup">Setup</param>
+        /// <returns>Tasks</returns>
+        IEnumerable<IRunnable> Tasks<T>(IEnumerable<IQueueSetup<T>> setups);
+
+        /// <summary>
+        /// Initializes the Queue, and Dequeuer
+        /// </summary>
+        /// <typeparam name="T">Model</typeparam>
+        /// <param name="setup">Setup</param>
+        /// <returns>Tasks</returns>
+        IEnumerable<IRunnable> Tasks<T>(IQueueSetup<T> setup);
+
+        /// <summary>
+        /// Dequeue Task (Storage Queue Auto Scaler)
+        /// </summary>
+        /// <typeparam name="T">Data Type</typeparam>
+        /// <param name="setup">Setup</param>
+        /// <returns>Storage Queue Auto Scaler</returns>
+        IRunnable Dequeue<T>(IQueueSetup<T> setup);
         #endregion
     }
     #endregion
