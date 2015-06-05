@@ -121,7 +121,7 @@
     <Compile Include="Data\QueueSetupTests.cs" />
     <Compile Include="Data\StorageDequeueBatchDynamicTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
-    <Compile Include="Data\StorageDequeueFactoryTests.cs" />
+    <Compile Include="Data\DequeueFactoryTests.cs" />
     <Compile Include="Data\StorageQueueAutoScalerTests.cs" />
     <Compile Include="RecurringHelper.cs" />
     <Compile Include="RecurringRunnerTests.cs" />

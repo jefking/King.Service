@@ -8,27 +8,27 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class StorageDequeueFactoryTests
+    public class DequeueFactoryTests
     {
         const string ConnectionString = "UseDevelopmentStorage=true";
         
         [Test]
         public void Constructor()
         {
-            new StorageDequeueFactory(ConnectionString);
+            new DequeueFactory(ConnectionString);
         }
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ConstructorConnectionStringNull()
         {
-            new StorageDequeueFactory(null);
+            new DequeueFactory(null);
         }
 
         [Test]
         public void ConstructorThroughputNull()
         {
-            new StorageDequeueFactory(ConnectionString, null);
+            new DequeueFactory(ConnectionString, null);
         }
         
         [Test]
@@ -39,7 +39,7 @@
                 Name = "test",
                 Priority = QueuePriority.Low,
             };
-            var f = new StorageDequeueFactory(ConnectionString);
+            var f = new DequeueFactory(ConnectionString);
             var tasks = f.Tasks(setup);
 
             Assert.IsNotNull(tasks);
@@ -56,7 +56,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void TasksSetupNull()
         {
-            var f = new StorageDequeueFactory(ConnectionString);
+            var f = new DequeueFactory(ConnectionString);
             var tasks = f.Tasks<object>(null);
 
             Assert.IsNotNull(tasks);
@@ -80,7 +80,7 @@
             throughput.MaximumScale(setup.Priority).Returns(max);
             throughput.MinimumScale(setup.Priority).Returns(min);
 
-            var f = new StorageDequeueFactory(ConnectionString, throughput);
+            var f = new DequeueFactory(ConnectionString, throughput);
             var task = f.Dequeue<object>(setup);
 
             Assert.IsNotNull(task);
@@ -97,7 +97,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void DequeueTaskSetupNull()
         {
-            var df = new StorageDequeueFactory(ConnectionString);
+            var df = new DequeueFactory(ConnectionString);
             df.Dequeue<object>(null);
         }
     }

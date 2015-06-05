@@ -7,9 +7,9 @@
     using King.Service.Scalability;
 
     /// <summary>
-    /// Storage Dequeue Factory
+    ///  Dequeue Factory
     /// </summary>
-    public class StorageDequeueFactory
+    public class DequeueFactory
     {
         #region Members
         /// <summary>
@@ -28,7 +28,7 @@
         /// Default Constructor
         /// </summary>
         /// <param name="connectionString">Connection String</param>
-        public StorageDequeueFactory(string connectionString)
+        public DequeueFactory(string connectionString)
             : this(connectionString, new QueueThroughput())
         {
         }
@@ -38,7 +38,7 @@
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         /// <param name="throughput">Queue Throughput</param>
-        public StorageDequeueFactory(string connectionString, IQueueThroughput throughput = null)
+        public DequeueFactory(string connectionString, IQueueThroughput throughput = null)
         {
             if (string.IsNullOrWhiteSpace(connectionString))
             {
