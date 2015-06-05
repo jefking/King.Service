@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3B6FC039-79A6-4CFC-8BF7-93638ACC0F31}"
 	ProjectSection(SolutionItems) = preProject
@@ -9,10 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3B6FC0
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
-EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "King.Service.Azure", "Azure.Demo\King.Service.Azure.ccproj", "{7A944B51-4D5F-4CBD-A188-CE336FF932D7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Azure.Worker", "Worker\King.Service.Azure.Worker.csproj", "{BCC0442F-E931-4D6E-A78C-1FEE6320D047}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}"
 EndProject
@@ -22,17 +18,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service", "King.Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Unit.Tests", "King.Service.Tests\King.Service.Unit.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Azure", "Azure", "{25FA819E-AE81-4700-8FF0-32A7607F0288}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebJob", "WebJob", "{D2F4A0AC-D700-4A19-82E4-AEC1B03D1980}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.WebJob", "King.Service.WebJob\King.Service.WebJob.csproj", "{A4319C3E-2DCD-4FAC-968B-6CEFC2FF1878}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C8675FBC-DC7E-4F13-AD15-E73F1E1862FF}"
 	ProjectSection(SolutionItems) = preProject
 		King.Service.nuspec = King.Service.nuspec
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "King.Service.CloudService", "Demos\King.Service.CloudService\King.Service.CloudService.ccproj", "{69C64FB7-0F05-4C4C-BF4E-E5E19ABB89BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.CloudService.Role", "Demos\King.Service.CloudService.Role\King.Service.CloudService.Role.csproj", "{F60A2DC7-1BFC-4536-8DC2-78CC29BC4694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.WebJob", "Demos\King.Service.WebJob\King.Service.WebJob.csproj", "{A4319C3E-2DCD-4FAC-968B-6CEFC2FF1878}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,14 +36,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7A944B51-4D5F-4CBD-A188-CE336FF932D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7A944B51-4D5F-4CBD-A188-CE336FF932D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7A944B51-4D5F-4CBD-A188-CE336FF932D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7A944B51-4D5F-4CBD-A188-CE336FF932D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BCC0442F-E931-4D6E-A78C-1FEE6320D047}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BCC0442F-E931-4D6E-A78C-1FEE6320D047}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BCC0442F-E931-4D6E-A78C-1FEE6320D047}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BCC0442F-E931-4D6E-A78C-1FEE6320D047}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E72D36E9-0849-498E-AC4F-B97FB632E112}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E72D36E9-0849-498E-AC4F-B97FB632E112}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E72D36E9-0849-498E-AC4F-B97FB632E112}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -56,6 +44,14 @@ Global
 		{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69C64FB7-0F05-4C4C-BF4E-E5E19ABB89BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69C64FB7-0F05-4C4C-BF4E-E5E19ABB89BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69C64FB7-0F05-4C4C-BF4E-E5E19ABB89BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69C64FB7-0F05-4C4C-BF4E-E5E19ABB89BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F60A2DC7-1BFC-4536-8DC2-78CC29BC4694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F60A2DC7-1BFC-4536-8DC2-78CC29BC4694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F60A2DC7-1BFC-4536-8DC2-78CC29BC4694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F60A2DC7-1BFC-4536-8DC2-78CC29BC4694}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4319C3E-2DCD-4FAC-968B-6CEFC2FF1878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A4319C3E-2DCD-4FAC-968B-6CEFC2FF1878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4319C3E-2DCD-4FAC-968B-6CEFC2FF1878}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -65,11 +61,9 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{7A944B51-4D5F-4CBD-A188-CE336FF932D7} = {25FA819E-AE81-4700-8FF0-32A7607F0288}
-		{BCC0442F-E931-4D6E-A78C-1FEE6320D047} = {25FA819E-AE81-4700-8FF0-32A7607F0288}
 		{24B0BFED-62C1-48C3-AE4E-A503A007DE1A} = {E515B3A3-A852-4DF1-AFF2-5941FD203E48}
-		{25FA819E-AE81-4700-8FF0-32A7607F0288} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
-		{D2F4A0AC-D700-4A19-82E4-AEC1B03D1980} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
-		{A4319C3E-2DCD-4FAC-968B-6CEFC2FF1878} = {D2F4A0AC-D700-4A19-82E4-AEC1B03D1980}
+		{69C64FB7-0F05-4C4C-BF4E-E5E19ABB89BC} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
+		{F60A2DC7-1BFC-4536-8DC2-78CC29BC4694} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
+		{A4319C3E-2DCD-4FAC-968B-6CEFC2FF1878} = {8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}
 	EndGlobalSection
 EndGlobal
