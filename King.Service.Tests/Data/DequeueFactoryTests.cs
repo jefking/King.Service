@@ -33,6 +33,12 @@
         }
 
         [Test]
+        public void IsIDequeueFactory()
+        {
+            Assert.IsNotNull(new DequeueFactory(ConnectionString) as IDequeueFactory);
+        }
+
+        [Test]
         public void Tasks()
         {
             var setup = new QueueSetup<object>()
