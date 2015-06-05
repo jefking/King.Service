@@ -12,9 +12,9 @@
  + Runs at a specified time (resolution to the hour, or the minute) on one machine daily
 + Dequeue messages or batches of messages for Azure Storage Queues
 + And much more! [View Wiki](https://github.com/jefking/King.Service/wiki)
-+ [Cloud Service](https://github.com/jefking/King.Service/tree/master/Worker)
++ [Cloud Service](https://github.com/jefking/King.Service/tree/master/Demos/King.Service.CloudService.Role)
 + [Service Bus](https://github.com/jefking/King.Service.ServiceBus)
-+ [WebJob](https://github.com/jefking/King.Service/tree/master/King.Service.WebJob)
++ [WebJob](https://github.com/jefking/King.Service/tree/master/Demos/King.Service.WebJob)
 
 ### [NuGet](https://www.nuget.org/packages/King.Service)
 ```
