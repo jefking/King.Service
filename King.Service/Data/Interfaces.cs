@@ -130,7 +130,7 @@
         /// Initializes the Queues, and Dequeuers
         /// </summary>
         /// <typeparam name="T">Model</typeparam>
-        /// <param name="setup">Setup</param>
+        /// <param name="setups">Setups</param>
         /// <returns>Tasks</returns>
         IEnumerable<IRunnable> Tasks<T>(IEnumerable<IQueueSetup<T>> setups);
 

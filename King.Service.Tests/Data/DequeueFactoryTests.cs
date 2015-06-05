@@ -31,7 +31,7 @@
         {
             new DequeueFactory(ConnectionString, null);
         }
-        
+
         [Test]
         public void Tasks()
         {
@@ -51,6 +51,29 @@
                      select true).FirstOrDefault();
 
             Assert.IsTrue(t);
+        }
+
+        [Test]
+        public void TasksMultiple()
+        {
+            var random = new Random();
+            var count = random.Next(1, 20);
+            var setups = new List<IQueueSetup<object>>();
+            for (var i = 0; i < count; i++)
+            {
+                var setup = new QueueSetup<object>()
+                {
+                    Name = "test",
+                    Priority = QueuePriority.Low,
+                };
+
+                setups.Add(setup);
+            }
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Tasks(setups);
+
+            Assert.IsNotNull(tasks);
+            Assert.AreEqual(count * 2, tasks.Count());
         }
 
         [Test]
@@ -76,7 +99,7 @@
         }
 
         [Test]
-        public void DequeueTask()
+        public void Dequeue()
         {
             var setup = new QueueSetup<object>()
             {

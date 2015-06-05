@@ -9,7 +9,7 @@
     /// <summary>
     ///  Dequeue Factory
     /// </summary>
-    public class DequeueFactory
+    public class DequeueFactory : IDequeueFactory
     {
         #region Members
         /// <summary>
@@ -52,11 +52,32 @@
 
         #region Methods
         /// <summary>
-        /// Creates the Queue, and Loads Dynamic Dequeuer
+        /// Initializes the Queues, and Dequeuers
         /// </summary>
-        /// <typeparam name="T">Passthrough</typeparam>
+        /// <typeparam name="T">Model</typeparam>
+        /// <param name="setups">Setups</param>
+        /// <returns>Tasks</returns>
+        public virtual IEnumerable<IRunnable> Tasks<T>(IEnumerable<IQueueSetup<T>> setups)
+        {
+            if (null == setups)
+            {
+                throw new ArgumentNullException("setups");
+            }
+
+            foreach (var setup in setups)
+            {
+                foreach (var t in this.Tasks(setup))
+                {
+                    yield return t;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Initializes the Queue, and Dequeuer
+        /// </summary>
+        /// <typeparam name="T">Model</typeparam>
         /// <param name="setup">Setup</param>
-        /// <param name="processor">Processor</param>
         /// <returns>Tasks</returns>
         public virtual IEnumerable<IRunnable> Tasks<T>(IQueueSetup<T> setup)
         {
