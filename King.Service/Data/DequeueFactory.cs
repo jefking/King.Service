@@ -55,6 +55,35 @@
         /// Initializes the Queues, and Dequeuers
         /// </summary>
         /// <typeparam name="T">Model</typeparam>
+        /// <param name="queueName">Queue Name</param>
+        /// <param name="processor">Processor</param>
+        /// <param name="priority">Priority</param>
+        /// <returns>Tasks</returns>
+        public virtual IEnumerable<IRunnable> Tasks<T>(string queueName, Func<IProcessor<T>> processor, QueuePriority priority = QueuePriority.Low)
+        {
+            if (string.IsNullOrWhiteSpace(queueName))
+            {
+                throw new ArgumentException("queueName");
+            }
+            if (null == processor)
+            {
+                throw new ArgumentNullException("processor");
+            }
+
+            var setup = new QueueSetup<T>()
+            {
+                Processor = processor,
+                Priority = priority,
+                Name = queueName,
+            };
+
+            return this.Tasks<T>(setup);
+        }
+
+        /// <summary>
+        /// Initializes the Queues, and Dequeuers
+        /// </summary>
+        /// <typeparam name="T">Model</typeparam>
         /// <param name="setups">Setups</param>
         /// <returns>Tasks</returns>
         public virtual IEnumerable<IRunnable> Tasks<T>(IEnumerable<IQueueSetup<T>> setups)
@@ -85,7 +114,7 @@
             {
                 throw new ArgumentNullException("setup");
             }
-            
+
             yield return new InitializeStorageTask(new StorageQueue(setup.Name, this.connectionString));
             yield return this.Dequeue<T>(setup);
         }

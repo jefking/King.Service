@@ -130,6 +130,16 @@
         /// Initializes the Queues, and Dequeuers
         /// </summary>
         /// <typeparam name="T">Model</typeparam>
+        /// <param name="queueName">Queue Name</param>
+        /// <param name="processor">Processor</param>
+        /// <param name="priority">Priority</param>
+        /// <returns>Tasks</returns>
+        IEnumerable<IRunnable> Tasks<T>(string queueName, Func<IProcessor<T>> processor, QueuePriority priority = QueuePriority.Low);
+
+        /// <summary>
+        /// Initializes the Queues, and Dequeuers
+        /// </summary>
+        /// <typeparam name="T">Model</typeparam>
         /// <param name="setups">Setups</param>
         /// <returns>Tasks</returns>
         IEnumerable<IRunnable> Tasks<T>(IEnumerable<IQueueSetup<T>> setups);

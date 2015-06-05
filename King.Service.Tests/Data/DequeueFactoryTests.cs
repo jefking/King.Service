@@ -141,5 +141,46 @@
             var df = new DequeueFactory(ConnectionString);
             df.Dequeue<object>(null);
         }
+
+        [Test]
+        public void TasksSimple()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Tasks<object>("test", () => { return null; });
+
+            Assert.IsNotNull(tasks);
+            Assert.AreEqual(2, tasks.Count());
+
+            var t = (from n in tasks
+                     where n.GetType() == typeof(InitializeStorageTask)
+                     select true).FirstOrDefault();
+
+            Assert.IsTrue(t);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void TasksSimpleQueueNameNull()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Tasks<object>(null, () => { return null; });
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void TasksSimpleProcessorNull()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Tasks<object>("test", null);
+
+            Assert.IsNotNull(tasks);
+            Assert.AreEqual(2, tasks.Count());
+
+            var t = (from n in tasks
+                     where n.GetType() == typeof(InitializeStorageTask)
+                     select true).FirstOrDefault();
+
+            Assert.IsTrue(t);
+        }
     }
 }
