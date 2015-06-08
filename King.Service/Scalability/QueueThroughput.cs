@@ -23,7 +23,7 @@
             switch (priority)
             {
                 case QueuePriority.High:
-                    return 13000;
+                    return 9500;
                 case QueuePriority.Medium:
                     return 1400;
                 default:
@@ -32,7 +32,7 @@
         }
 
         /// <summary>
-        /// Minimum Frequency
+        /// Minimum Frequency to check Queue
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Minimum Frequency</returns>
@@ -50,7 +50,7 @@
         }
 
         /// <summary>
-        /// Maximum Frequency
+        /// Maximum Frequency to check Queue
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Maximum Frequency</returns>
@@ -68,7 +68,7 @@
         }
 
         /// <summary>
-        /// Minimum Scale
+        /// Minimum Scale (threads)
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Minimum Scale</returns>
@@ -84,7 +84,7 @@
         }
 
         /// <summary>
-        /// Maximum Scale
+        /// Maximum Scale (threads)
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Maximum Scale</returns>
@@ -104,6 +104,9 @@
         /// <summary>
         /// Check Scale every (in minutes)
         /// </summary>
+        /// <remarks>
+        /// Should be kept under 5 min, as Auto-Scale servers should be in place
+        /// </remarks>
         /// <param name="priority">Priority</param>
         /// <returns>Check Scale every (in minutes)</returns>
         public virtual byte CheckScaleEvery(QueuePriority priority)
@@ -113,9 +116,9 @@
                 case QueuePriority.High:
                     return 2;
                 case QueuePriority.Medium:
-                    return 4;
+                    return 3;
                 default:
-                    return 6;
+                    return 4;
             }
         }
 

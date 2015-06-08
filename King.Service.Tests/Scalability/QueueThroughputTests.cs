@@ -24,7 +24,7 @@
 
         [TestCase(QueuePriority.Low, (ushort)250)]
         [TestCase(QueuePriority.Medium, (ushort)1400)]
-        [TestCase(QueuePriority.High, (ushort)13000)]
+        [TestCase(QueuePriority.High, (ushort)9500)]
         public void MessagesPerScaleUnit(QueuePriority priority, ushort expected)
         {
             var s = new QueueThroughput();
@@ -77,8 +77,8 @@
             Assert.AreEqual(expected, data);
         }
 
-        [TestCase(QueuePriority.Low, 6)]
-        [TestCase(QueuePriority.Medium, 4)]
+        [TestCase(QueuePriority.Low, 4)]
+        [TestCase(QueuePriority.Medium, 3)]
         [TestCase(QueuePriority.High, 2)]
         public void CheckScaleEvery(QueuePriority priority, byte expected)
         {
