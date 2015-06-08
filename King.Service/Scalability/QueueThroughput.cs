@@ -43,7 +43,7 @@
                 case QueuePriority.High:
                     return 1;
                 case QueuePriority.Medium:
-                    return BaseTimes.MinimumStorageTiming / 2;
+                    return 5;
                 default:
                     return BaseTimes.MinimumStorageTiming;
             }
@@ -61,7 +61,7 @@
                 case QueuePriority.High:
                     return BaseTimes.MinimumStorageTiming;
                 case QueuePriority.Medium:
-                    return BaseTimes.MaximumStorageTiming / 2;
+                    return 60;
                 default:
                     return BaseTimes.MaximumStorageTiming;
             }
@@ -93,9 +93,9 @@
             switch (priority)
             {
                 case QueuePriority.High:
-                    return 7;
-                case QueuePriority.Medium:
                     return 5;
+                case QueuePriority.Medium:
+                    return 4;
                 default:
                     return 2;
             }
@@ -111,11 +111,11 @@
             switch (priority)
             {
                 case QueuePriority.High:
-                    return 1;
-                case QueuePriority.Medium:
                     return 2;
-                default:
+                case QueuePriority.Medium:
                     return 4;
+                default:
+                    return 6;
             }
         }
 
@@ -135,11 +135,10 @@
             switch (priority)
             {
                 case QueuePriority.High:
-                    return new BackoffRunner(runs, Strategy.Linear);
                 case QueuePriority.Medium:
-                    return new BackoffRunner(runs, Strategy.Exponential);
+                    return new BackoffRunner(runs, Strategy.Linear);
                 default:
-                    return new AdaptiveRunner(runs, Strategy.Linear);
+                    return new AdaptiveRunner(runs, Strategy.Exponential);
             }
         }
         #endregion

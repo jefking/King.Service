@@ -45,7 +45,7 @@
         }
 
         [TestCase(QueuePriority.Low, BaseTimes.MinimumStorageTiming)]
-        [TestCase(QueuePriority.Medium, BaseTimes.MinimumStorageTiming / 2)]
+        [TestCase(QueuePriority.Medium, 5)]
         [TestCase(QueuePriority.High, 1)]
         public void MinimumFrequency(QueuePriority priority, byte expected)
         {
@@ -56,7 +56,7 @@
         }
 
         [TestCase(QueuePriority.Low, BaseTimes.MaximumStorageTiming)]
-        [TestCase(QueuePriority.Medium, BaseTimes.MaximumStorageTiming / 2)]
+        [TestCase(QueuePriority.Medium, 60)]
         [TestCase(QueuePriority.High, BaseTimes.MinimumStorageTiming)]
         public void MaximumFrequency(QueuePriority priority, byte expected)
         {
@@ -67,8 +67,8 @@
         }
 
         [TestCase(QueuePriority.Low, 2)]
-        [TestCase(QueuePriority.Medium, 5)]
-        [TestCase(QueuePriority.High, 7)]
+        [TestCase(QueuePriority.Medium, 4)]
+        [TestCase(QueuePriority.High, 5)]
         public void MaximumScale(QueuePriority priority, byte expected)
         {
             var s = new QueueThroughput();
@@ -77,9 +77,9 @@
             Assert.AreEqual(expected, data);
         }
 
-        [TestCase(QueuePriority.Low, 4)]
-        [TestCase(QueuePriority.Medium, 2)]
-        [TestCase(QueuePriority.High, 1)]
+        [TestCase(QueuePriority.Low, 6)]
+        [TestCase(QueuePriority.Medium, 4)]
+        [TestCase(QueuePriority.High, 2)]
         public void CheckScaleEvery(QueuePriority priority, byte expected)
         {
             var s = new QueueThroughput();
