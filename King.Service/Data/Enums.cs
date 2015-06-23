@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Data
 {
     /// <summary>
-    /// Priority
+    /// Queue Priority
     /// </summary>
     public enum QueuePriority
     {

@@ -1,6 +1,5 @@
 ﻿namespace King.Service
 {
-    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -8,22 +7,23 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using King.Service.Timing;
 
     /// <summary>
-    /// Worker Role Service Manager
+    /// Worker Role Task Manager
     /// </summary>
     public class RoleTaskManager<T> : IRoleTaskManager<T>
     {
         #region Members
         /// <summary>
-        /// Services
+        /// Tasks
         /// </summary>
         protected IReadOnlyCollection<IRunnable> tasks = null;
 
         /// <summary>
-        /// Manager
+        /// Factory
         /// </summary>
-        protected readonly ITaskFactory<T> manager = null;
+        protected readonly ITaskFactory<T> factory = null;
 
         /// <summary>
         /// Lock object for Services
@@ -43,7 +43,7 @@
                 throw new ArgumentNullException("manager");
             }
 
-            this.manager = factory;
+            this.factory = factory;
         }
 
         /// <summary>
@@ -115,7 +115,7 @@
         /// <summary>
         /// On Start
         /// </summary>
-        /// <param name="passthrough">Passthrough</param>
+        /// <param name="passthrough">Pass through</param>
         /// <returns>Started</returns>
         public virtual bool OnStart(T passthrough = default(T))
         {
@@ -125,7 +125,7 @@
             {
                 if (null == this.tasks)
                 {
-                    var t = this.manager.Tasks(passthrough);
+                    var t = this.factory.Tasks(passthrough);
                     if (null != t && t.Any())
                     {
                         Trace.TraceInformation("Tasks loading");

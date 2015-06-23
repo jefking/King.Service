@@ -7,7 +7,7 @@
     using King.Service.Timing;
 
     /// <summary>
-    /// Storage Queue AutoScaler
+    /// Storage Queue Auto-Scaler
     /// </summary>
     /// <typeparam name="T">Processor Type</typeparam>
     public class StorageQueueAutoScaler<T> : QueueAutoScaler<IQueueConnection<T>>

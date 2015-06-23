@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Data.Model
 {
-    using Microsoft.WindowsAzure.Storage.Table;
     using System;
+    using Microsoft.WindowsAzure.Storage.Table;
 
     /// <summary>
     /// Scheduled Task Entry

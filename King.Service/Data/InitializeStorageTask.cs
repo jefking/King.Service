@@ -1,13 +1,13 @@
 ﻿namespace King.Service.Data
 {
-    using King.Azure.Data;
-    using King.Service;
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using King.Azure.Data;
+    using King.Service;
 
     /// <summary>
-    /// Initialize Storage
+    /// Initialize Storage Task
     /// </summary>
     public class InitializeStorageTask : InitializeTask
     {

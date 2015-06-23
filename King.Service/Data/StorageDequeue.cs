@@ -6,7 +6,7 @@
     /// <summary>
     /// Storage Dequeue
     /// </summary>
-    /// <typeparam name="T">Type</typeparam>
+    /// <typeparam name="T">Dequeue Type</typeparam>
     public class StorageDequeue<T> : Dequeue<T>
     {
         #region Constructors

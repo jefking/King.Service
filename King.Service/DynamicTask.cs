@@ -1,8 +1,8 @@
 ﻿namespace King.Service
 {
-    using King.Service.Timing;
     using System;
     using System.Diagnostics;
+    using King.Service.Timing;
 
     /// <summary>
     /// Dynamic Task, base class for Tasks which change their own timing based on quantity of work

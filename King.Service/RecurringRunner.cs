@@ -19,7 +19,6 @@
         /// Constructor
         /// </summary>
         /// <param name="run">Run</param>
-        /// <param name="strategy">Timing Strategy</param>
         public RecurringRunner(IRuns run)
             : base(BaseTimes.MinimumTiming, run.MinimumPeriodInSeconds)
         {

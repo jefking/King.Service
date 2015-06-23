@@ -1,10 +1,10 @@
 ﻿namespace King.Service.Data
 {
-    using King.Azure.Data;
-    using King.Service.Timing;
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using King.Azure.Data;
+    using King.Service.Timing;
 
     /// <summary>
     /// Dequeue Task for Queues

@@ -1,26 +1,26 @@
 ﻿namespace King.Service
 {
-    using King.Service.Data;
-    using King.Service.Timing;
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using King.Service.Data;
+    using King.Service.Timing;
 
     /// <summary>
-    /// Scheduled Manager
+    /// Coordinated Task
     /// </summary>
     public abstract class CoordinatedTask : RecurringTask
     {
         #region Members
         /// <summary>
-        /// Task Core
+        /// Coordinator
         /// </summary>
-        protected readonly ICoordinator taskCore;
+        protected readonly ICoordinator coordinator;
         #endregion
 
         #region Constructors
         /// <summary>
-        /// Scheduled Manager Constructor
+        /// Coordinated Task Constructor
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
@@ -36,17 +36,17 @@
         public CoordinatedTask(ICoordinator coordinator)
             : base(BaseTimes.MinimumStorageTiming, coordinator.PeriodInSeconds + 1)
         {
-            this.taskCore = coordinator;
+            this.coordinator = coordinator;
         }
         #endregion
 
         #region Methods
         /// <summary>
-        /// Initialize Table Task
+        /// Initialize Task (Table Storage)
         /// </summary>
         public virtual IRunnable InitializeTask()
         {
-            return this.taskCore.InitializeTask();
+            return this.coordinator.InitializeTask();
         }
 
         /// <summary>
@@ -73,14 +73,14 @@
 
             try
             {
-                var ready = await taskCore.Check(type);
+                var ready = await coordinator.Check(type);
                 if (ready)
                 {
                     Trace.TraceInformation("{0}: Task Starting.", base.ServiceName);
 
                     var identifier = Guid.NewGuid();
 
-                    await this.taskCore.Start(type, identifier, startTime);
+                    await this.coordinator.Start(type, identifier, startTime);
 
                     try
                     {
@@ -93,7 +93,7 @@
                         successful = false;
                     }
 
-                    await this.taskCore.Complete(type, identifier, startTime, DateTime.UtcNow, successful);
+                    await this.coordinator.Complete(type, identifier, startTime, DateTime.UtcNow, successful);
                 }
                 else
                 {
