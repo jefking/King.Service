@@ -69,14 +69,14 @@
             var startTime = DateTime.UtcNow;
             var successful = false;
 
-            Trace.TraceInformation("{0}: Task Checking.", base.ServiceName);
+            Trace.TraceInformation("{0}: Task Checking.", base.Name);
 
             try
             {
                 var ready = await coordinator.Check(type);
                 if (ready)
                 {
-                    Trace.TraceInformation("{0}: Task Starting.", base.ServiceName);
+                    Trace.TraceInformation("{0}: Task Starting.", base.Name);
 
                     var identifier = Guid.NewGuid();
 
@@ -89,7 +89,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Trace.TraceError("{0}: {1}", base.ServiceName, ex.ToString());
+                        Trace.TraceError("{0}: {1}", base.Name, ex.ToString());
                         successful = false;
                     }
 
@@ -97,12 +97,12 @@
                 }
                 else
                 {
-                    Trace.TraceInformation("{0}: Task not Started.", base.ServiceName);
+                    Trace.TraceInformation("{0}: Task not Started.", base.Name);
                 }
             }
             catch (Exception ex)
             {
-                Trace.TraceError("{0}: {1}", base.ServiceName, ex.ToString());
+                Trace.TraceError("{0}: {1}", base.Name, ex.ToString());
                 successful = false;
             }
             finally
@@ -110,7 +110,7 @@
                 timing.Stop();
             }
 
-            Trace.TraceInformation("{0}: Coordinated Task Completed (Duration: {1}).", base.ServiceName, timing.Elapsed);
+            Trace.TraceInformation("{0}: Coordinated Task Completed (Duration: {1}).", base.Name, timing.Elapsed);
         }
         #endregion
     }

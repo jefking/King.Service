@@ -25,7 +25,7 @@
         {
             this.run = run;
 
-            base.ServiceName = string.Format("{0}+{1}", this.GetType(), this.run.GetType());
+            base.Name = string.Format("{0}+{1}", this.GetType(), this.run.GetType());
         }
         #endregion
 

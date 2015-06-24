@@ -121,11 +121,11 @@
         /// </summary>
         public override void Run()
         {
-            Trace.TraceInformation("Checking for appropriate scale: '{0}'.", this.ServiceName);
+            Trace.TraceInformation("Checking for appropriate scale: '{0}'.", this.Name);
 
             if (this.scaler.IsFirstRun(this.minimum))
             {
-                this.scaler.Initialize(this.minimum, this, this.configuration, this.ServiceName);
+                this.scaler.Initialize(this.minimum, this, this.configuration, this.Name);
             }
             else
             {
@@ -134,15 +134,15 @@
                 {
                     if (scale.Value && this.scaler.CurrentUnits < this.maximum)
                     {
-                        this.scaler.ScaleUp(this, this.configuration, this.ServiceName);
+                        this.scaler.ScaleUp(this, this.configuration, this.Name);
                     }
                     else if (!scale.Value && this.scaler.CurrentUnits > this.minimum)
                     {
-                        this.scaler.ScaleDown(this.ServiceName);
+                        this.scaler.ScaleDown(this.Name);
                     }
                 }
 
-                Trace.TraceInformation("'{0}' is at optimal scale ({1} units).", this.ServiceName, this.scaler.CurrentUnits);
+                Trace.TraceInformation("'{0}' is at optimal scale ({1} units).", this.Name, this.scaler.CurrentUnits);
             }
         }
 

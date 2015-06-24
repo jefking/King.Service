@@ -58,7 +58,7 @@
 
             this.Run(out workWasDone);
 
-            Trace.TraceInformation("{0}: {1}Work done.", base.ServiceName, workWasDone ? string.Empty : "No ");
+            Trace.TraceInformation("{0}: {1}Work done.", base.Name, workWasDone ? string.Empty : "No ");
 
             var newTime = this.timing.Get(workWasDone);
 
@@ -68,7 +68,7 @@
                 
                 base.ChangeTiming(ts);
 
-                Trace.TraceInformation("{0}: Changed timing to: {1}.", base.ServiceName, ts);
+                Trace.TraceInformation("{0}: Changed timing to: {1}.", base.Name, ts);
             }
         }
 
