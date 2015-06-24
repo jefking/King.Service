@@ -27,7 +27,7 @@
             dueInSeconds = 0 > dueInSeconds ? BaseTimes.MinimumTiming : dueInSeconds;
 
             this.StartIn = TimeSpan.FromSeconds(dueInSeconds);
-            this.Every = 0 > periodInSeconds ? TimeSpan.Zero : TimeSpan.FromSeconds(periodInSeconds);
+            this.Frequency  = 0 > periodInSeconds ? TimeSpan.Zero : TimeSpan.FromSeconds(periodInSeconds);
             this.Name = this.GetType().ToString();
 
             Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.Name, dueInSeconds, periodInSeconds);
@@ -51,9 +51,9 @@
         {
             if (this.Stop())
             {
-                this.timer = (TimeSpan.Zero == this.Every)
+                this.timer = (TimeSpan.Zero == this.Frequency )
                     ? new Timer(this.Run, null, (int)this.StartIn.TotalSeconds, Timeout.Infinite)
-                    : new Timer(this.Run, null, this.StartIn, this.Every);
+                    : new Timer(this.Run, null, this.StartIn, this.Frequency );
             }
 
             return true;
@@ -109,7 +109,7 @@
                 throw new ArgumentException("newTime Zero.");
             }
 
-            this.StartIn = this.Every = newTime;
+            this.StartIn = this.Frequency  = newTime;
 
             this.Start();
         }
@@ -162,9 +162,9 @@
         }
 
         /// <summary>
-        /// Period of Timer
+        /// Frequency
         /// </summary>
-        public virtual TimeSpan Every
+        public virtual TimeSpan Frequency 
         {
             get;
             private set;

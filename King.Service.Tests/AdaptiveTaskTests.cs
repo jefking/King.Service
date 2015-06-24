@@ -28,7 +28,7 @@
         {
             using (var t = new AdaptiveHelper())
             {
-                Assert.AreEqual(BaseTimes.MinimumTiming, t.Every.TotalSeconds);
+                Assert.AreEqual(BaseTimes.MinimumTiming, t.Frequency.TotalSeconds);
             }
         }
     }

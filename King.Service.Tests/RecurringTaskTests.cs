@@ -22,7 +22,7 @@
         public void ConstructorPeriodNegative()
         {
             var rh = new RecurringHelper(100, -50);
-            Assert.AreEqual(TimeSpan.Zero, rh.Every);
+            Assert.AreEqual(TimeSpan.Zero, rh.Frequency);
         }
 
         [Test]
@@ -70,12 +70,12 @@
         }
 
         [Test]
-        public void Every()
+        public void Frequency()
         {
             var random = new Random();
             var expected = random.Next();
             var m = new RecurringHelper(100, expected);
-            Assert.AreEqual(expected, m.Every.TotalSeconds);
+            Assert.AreEqual(expected, m.Frequency.TotalSeconds);
         }
 
         [Test]

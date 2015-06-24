@@ -46,7 +46,7 @@
         {
             using (var t = new BackoffTest())
             {
-                Assert.AreEqual(BaseTimes.MinimumTiming, t.Every.TotalSeconds);
+                Assert.AreEqual(BaseTimes.MinimumTiming, t.Frequency.TotalSeconds);
             }
         }
     }

@@ -43,7 +43,7 @@
         {
             get
             {
-                return this.timing.Timing.MinimumPeriodInSeconds == base.Every.TotalSeconds;
+                return this.timing.Timing.MinimumPeriodInSeconds == base.Frequency .TotalSeconds;
             }
         }
         #endregion
@@ -62,7 +62,7 @@
 
             var newTime = this.timing.Get(workWasDone);
 
-            if (base.Every.TotalSeconds != newTime)
+            if (base.Frequency .TotalSeconds != newTime)
             {
                 var ts = TimeSpan.FromSeconds(newTime);
                 
