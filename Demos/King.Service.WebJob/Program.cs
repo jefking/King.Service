@@ -8,24 +8,24 @@
     {
         public static void Main()
         {
-            //var manager = new RoleTaskManager<Configuration>(new Factory());
-            //var config = new Configuration()
-            //{
-            //    ConnectionString = "UseDevelopmentStorage=true;",
-            //    TableName = "table",
-            //    QueueName = "queue",
-            //    ContainerName = "container",
-            //};
+            var manager = new RoleTaskManager<Configuration>(new Factory());
+            var config = new Configuration()
+            {
+                ConnectionString = "UseDevelopmentStorage=true;",
+                TableName = "table",
+                QueueName = "queue",
+                ContainerName = "container",
+            };
 
-            //if (manager.OnStart(config))
-            //{
-            //    manager.Run();
+            if (manager.OnStart(config))
+            {
+                manager.Run();
 
-            //    while (true)
-            //    {
-            //        Thread.Sleep(10000);
-            //    }
-            //}
+                while (true)
+                {
+                    Thread.Sleep(10000);
+                }
+            }
         }
     }
 }
