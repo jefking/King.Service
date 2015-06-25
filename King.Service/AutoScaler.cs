@@ -14,14 +14,9 @@
     {
         #region Members
         /// <summary>
-        /// Minimum Instance Count
+        /// Instance Count
         /// </summary>
-        protected readonly byte minimum = 1;
-
-        /// <summary>
-        /// Maximum Instance Count
-        /// </summary>
-        protected readonly byte maximum = 2;
+        protected readonly Range<byte> instanceCount = new Range<byte>(1, 2);
 
         /// <summary>
         /// Configuration
@@ -68,32 +63,21 @@
             }
 
             this.configuration = configuration;
-            this.minimum = 1 > minimum ? (byte)1 : minimum;
-            this.maximum = 2 > maximum ? (byte)2 : maximum;
+            this.instanceCount.Minimum = 1 > minimum ? (byte)1 : minimum;
+            this.instanceCount.Maximum = 2 > maximum ? (byte)2 : maximum;
             this.scaler = scaler;
         }
         #endregion
 
         #region Properties
         /// <summary>
-        /// Minimum Instance Count
+        /// Instance Count
         /// </summary>
-        public virtual byte Minimum
+        public virtual Range<byte> InstanceCount
         {
             get
             {
-                return this.minimum;
-            }
-        }
-
-        /// <summary>
-        /// Maximum Instance Count
-        /// </summary>
-        public virtual byte Maximum
-        {
-            get
-            {
-                return this.maximum;
+                return this.instanceCount;
             }
         }
         #endregion
@@ -123,20 +107,20 @@
         {
             Trace.TraceInformation("Checking for appropriate scale: '{0}'.", this.Name);
 
-            if (this.scaler.IsFirstRun(this.minimum))
+            if (this.scaler.IsFirstRun(this.instanceCount.Minimum))
             {
-                this.scaler.Initialize(this.minimum, this, this.configuration, this.Name);
+                this.scaler.Initialize(this.instanceCount.Minimum, this, this.configuration, this.Name);
             }
             else
             {
                 var scale = this.scaler.ShouldScale();
                 if (scale.HasValue)
                 {
-                    if (scale.Value && this.scaler.CurrentUnits < this.maximum)
+                    if (scale.Value && this.scaler.CurrentUnits < this.instanceCount.Maximum)
                     {
                         this.scaler.ScaleUp(this, this.configuration, this.Name);
                     }
-                    else if (!scale.Value && this.scaler.CurrentUnits > this.minimum)
+                    else if (!scale.Value && this.scaler.CurrentUnits > this.instanceCount.Minimum)
                     {
                         this.scaler.ScaleDown(this.Name);
                     }

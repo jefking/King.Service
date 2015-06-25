@@ -129,8 +129,8 @@
             Assert.IsNotNull(task);
             var scaler = task as StorageQueueAutoScaler<object>;
             Assert.IsNotNull(scaler);
-            Assert.AreEqual(scale.Minimum, scaler.Minimum);
-            Assert.AreEqual(scale.Maximum, scaler.Maximum);
+            Assert.AreEqual(scale.Minimum, scaler.InstanceCount.Minimum);
+            Assert.AreEqual(scale.Maximum, scaler.InstanceCount.Maximum);
 
             throughput.Received().Scale(setup.Priority);
             throughput.Received().CheckScaleEvery(setup.Priority);

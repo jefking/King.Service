@@ -93,28 +93,22 @@
         public void Minimum()
         {
             var scaler = new AutoScalerHelper(new object(), 1, 100);
-            Assert.AreEqual(1, scaler.Minimum);
+            Assert.AreEqual(1, scaler.InstanceCount.Minimum);
         }
 
         [Test]
         public void Maximum()
         {
             var scaler = new AutoScalerHelper(new object(), 100, 150);
-            Assert.AreEqual(150, scaler.Maximum);
+            Assert.AreEqual(150, scaler.InstanceCount.Maximum);
         }
 
         [Test]
-        public void MinimumDefault()
+        public void InstanceCountDefault()
         {
             var scaler = new AutoScalerHelper();
-            Assert.AreEqual(1, scaler.Minimum);
-        }
-
-        [Test]
-        public void MaximumDefault()
-        {
-            var scaler = new AutoScalerHelper();
-            Assert.AreEqual(2, scaler.Maximum);
+            Assert.AreEqual(1, scaler.InstanceCount.Minimum);
+            Assert.AreEqual(2, scaler.InstanceCount.Maximum);
         }
 
         [Test]
