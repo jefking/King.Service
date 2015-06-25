@@ -3,22 +3,17 @@
     using System;
 
     /// <summary>
-    /// Timing Maths
+    /// Calculate Timing
     /// </summary>
     public abstract class CalculateTiming : ICalculateTiming
     {
         #region Members
         /// <summary>
-        /// Minimum Timeframe (seconds) (starting timeframe)
+        /// Timeframe (seconds) (starting timeframe)
         /// </summary>
-        protected readonly int minimumPeriodInSeconds;
-
-        /// <summary>
-        /// Maximum Timeframe (seconds) to backoff too.
-        /// </summary>
-        protected readonly int maximumPeriodInSeconds;
+        protected readonly Range<int> periodInSeconds;
         #endregion
-        
+
         #region Constructors
         /// <summary>
         /// Default Constructor
@@ -27,8 +22,11 @@
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
         public CalculateTiming(int minimumPeriodInSeconds, int maximumPeriodInSeconds)
         {
-            this.minimumPeriodInSeconds = 0 >= minimumPeriodInSeconds ? 1 : minimumPeriodInSeconds;
-            this.maximumPeriodInSeconds = minimumPeriodInSeconds >= maximumPeriodInSeconds ? minimumPeriodInSeconds + 1 : maximumPeriodInSeconds;
+            this.periodInSeconds = new Range<int>
+            {
+                Minimum = 0 >= minimumPeriodInSeconds ? 1 : minimumPeriodInSeconds,
+                Maximum = minimumPeriodInSeconds >= maximumPeriodInSeconds ? minimumPeriodInSeconds + 1 : maximumPeriodInSeconds,
+            };
         }
         #endregion
 
@@ -40,7 +38,7 @@
         {
             get
             {
-                return this.minimumPeriodInSeconds;
+                return this.periodInSeconds.Minimum;
             }
         }
 
@@ -51,7 +49,7 @@
         {
             get
             {
-                return this.maximumPeriodInSeconds;
+                return this.periodInSeconds.Maximum;
             }
         }
         #endregion

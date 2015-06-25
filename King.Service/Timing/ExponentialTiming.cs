@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Expoential Timing
+    /// Exponential Timing
     /// </summary>
     public class ExponentialTiming : CalculateTiming
     {
@@ -29,11 +29,11 @@
         {
             if (0 == attempts)
             {
-                return this.minimumPeriodInSeconds;
+                return this.periodInSeconds.Minimum;
             }
 
-            var current = ((Math.Pow(2, attempts) * .1d) * this.minimumPeriodInSeconds) + this.minimumPeriodInSeconds;
-            return current < this.maximumPeriodInSeconds ? current : this.maximumPeriodInSeconds;
+            var current = ((Math.Pow(2, attempts) * .1d) * this.periodInSeconds.Minimum) + this.periodInSeconds.Minimum;
+            return current < this.periodInSeconds.Maximum ? current : this.periodInSeconds.Maximum;
         }
         #endregion
     }
