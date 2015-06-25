@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Tests
 {
-    using NUnit.Framework;
     using System;
+    using NUnit.Framework;
 
     [TestFixture]
     public class RecurringTaskTests
