@@ -4,8 +4,8 @@
 
     public class RecurringHelper : RecurringTask
     {
-        public RecurringHelper(int dueInSeconds, int periodInSeconds)
-            : base(dueInSeconds, periodInSeconds)
+        public RecurringHelper(int periodInSeconds)
+            : base(periodInSeconds)
         {
         }
         public bool Throw
@@ -25,9 +25,9 @@
             base.Dispose(true);
         }
 
-        public void Change(TimeSpan st)
+        public void Change(TimeSpan ts)
         {
-            base.ChangeTiming(st);
+            base.Change(ts);
         }
     }
 }

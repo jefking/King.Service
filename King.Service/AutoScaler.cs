@@ -56,7 +56,7 @@
         /// <param name="maximum">Maximmum Scale</param>
         /// <param name="checkScaleInMinutes">Check Scale Every</param>
         public AutoScaler(IScaler<T> scaler, T configuration = default(T), byte minimum = 1, byte maximum = 2, byte checkScaleInMinutes = BaseTimes.ScaleCheck)
-            : base(BaseTimes.MinimumTiming, (int)TimeSpan.FromMinutes(checkScaleInMinutes).TotalSeconds)
+            : base((int)TimeSpan.FromMinutes(checkScaleInMinutes).TotalSeconds)
         {
             if (minimum > maximum)
             {

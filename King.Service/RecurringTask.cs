@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics;
-    using System.Threading;
+    using System.Timers;
     using King.Service.Timing;
 
     /// <summary>
@@ -14,23 +14,31 @@
         /// <summary>
         /// Timer
         /// </summary>
-        private Timer timer = null;
+        protected Timer timer = null;
         #endregion
 
         #region Constructors
         /// <summary>
         /// Default Constructor
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        protected RecurringTask(int dueInSeconds = BaseTimes.MinimumTiming, int periodInSeconds = BaseTimes.MaximumTiming)
+        protected RecurringTask(int frequency = BaseTimes.MaximumTiming)
         {
-            dueInSeconds = 0 > dueInSeconds ? BaseTimes.MinimumTiming : dueInSeconds;
+            if (0 >= frequency)
+            {
+                throw new ArgumentException("Frequency must be greater than 0.");
+            }
 
-            this.StartIn = TimeSpan.FromSeconds(dueInSeconds);
-            this.Frequency  = 0 > periodInSeconds ? TimeSpan.Zero : TimeSpan.FromSeconds(periodInSeconds);
+            var ts = TimeSpan.FromSeconds(frequency);
+            this.timer = new Timer(ts.TotalMilliseconds)
+            {
+                AutoReset = true,
+                Enabled = false,
+            };
+            this.timer.Elapsed += this.Run;
+            
             this.Name = this.GetType().ToString();
 
-            Trace.TraceInformation("{0} is due: {1}s; Period: {2}s.", this.Name, dueInSeconds, periodInSeconds);
+            Trace.TraceInformation("{0} Frequency is: {1}s.", this.Name, ts);
         }
 
         /// <summary>
@@ -49,12 +57,7 @@
         /// <returns>Running</returns>
         public virtual bool Start()
         {
-            if (this.Stop())
-            {
-                this.timer = (TimeSpan.Zero == this.Frequency )
-                    ? new Timer(this.Run, null, (int)this.StartIn.TotalSeconds, Timeout.Infinite)
-                    : new Timer(this.Run, null, this.StartIn, this.Frequency );
-            }
+            this.timer.Start();
 
             return true;
         }
@@ -65,11 +68,7 @@
         /// <returns>Stopped</returns>
         public virtual bool Stop()
         {
-            if (null != this.timer)
-            {
-                this.timer.Dispose();
-                this.timer = null;
-            }
+            this.timer.Stop();
 
             return true;
         }
@@ -78,10 +77,13 @@
         /// Execute the action
         /// </summary>
         /// <param name="state">State of Timer</param>
-        public virtual void Run(object state)
+        /// <param name="e">Elapsed Event Args</param>
+        public virtual void Run(object state, ElapsedEventArgs e)
         {
-            var timing = Stopwatch.StartNew();
+            var signal = null == e ? DateTime.UtcNow : e.SignalTime;
 
+            var timing = Stopwatch.StartNew();
+            
             try
             {
                 this.Run();
@@ -95,23 +97,21 @@
                 timing.Stop();
             }
 
-            Trace.TraceInformation("{0}: Task Completed (Duration: {1}).", this.Name, timing.Elapsed);
+            Trace.TraceInformation("{0}: Task Completed, Duration: {1}, Signal Time: {2}", this.Name, timing.Elapsed, signal);
         }
 
         /// <summary>
         /// Change Timer to new interval
         /// </summary>
-        /// <param name="newTime">New Time</param>
-        protected virtual void ChangeTiming(TimeSpan newTime)
+        /// <param name="frequency">Frequency</param>
+        protected virtual void Change(TimeSpan frequency)
         {
-            if (TimeSpan.Zero == newTime)
+            if (TimeSpan.Zero >= frequency)
             {
                 throw new ArgumentException("newTime Zero.");
             }
 
-            this.StartIn = this.Frequency  = newTime;
-
-            this.Start();
+            this.timer.Interval = frequency.TotalMilliseconds;
         }
 
         /// <summary>
@@ -137,7 +137,11 @@
         {
             if (disposing)
             {
-                this.Stop();
+                if (null != timer)
+                {
+                    this.timer.Dispose();
+                    this.timer = null;
+                }
             }
         }
         #endregion
@@ -150,24 +154,6 @@
         {
             get;
             set;
-        }
-
-        /// <summary>
-        /// Due Time of Timer
-        /// </summary>
-        public virtual TimeSpan StartIn
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Frequency
-        /// </summary>
-        public virtual TimeSpan Frequency 
-        {
-            get;
-            private set;
         }
         #endregion
     }

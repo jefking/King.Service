@@ -60,20 +60,10 @@
             var coordinator = Substitute.For<ICoordinator>();
             using (var m = new TestManager(coordinator))
             {
-                m.Run(new object());
+                m.Run();
             }
         }
-
-        [Test]
-        public void RunObjNull()
-        {
-            var coordinator = Substitute.For<ICoordinator>();
-            using (var m = new TestManager(coordinator))
-            {
-                m.Run(null);
-            }
-        }
-
+        
         [Test]
         public async Task RunCheckFalse()
         {
@@ -93,7 +83,7 @@
         public async Task Run()
         {
             var coordinator = Substitute.For<ICoordinator>();
-            coordinator.PeriodInSeconds.Returns(100000000);
+            coordinator.PeriodInSeconds.Returns(100000);
             coordinator.Check(Arg.Any<Type>()).Returns(Task.FromResult(true));
             coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>()).Returns(Task.FromResult(0));
             coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), true).Returns(Task.FromResult(0));
@@ -112,7 +102,7 @@
         public async Task RunCheckThrows()
         {
             var coordinator = Substitute.For<ICoordinator>();
-            coordinator.PeriodInSeconds.Returns(100000000);
+            coordinator.PeriodInSeconds.Returns(100000);
             coordinator.Check(Arg.Any<Type>()).Returns(x => { throw new Exception(); });
             coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
             coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
@@ -131,7 +121,7 @@
         public async Task RunStartThrows()
         {
             var coordinator = Substitute.For<ICoordinator>();
-            coordinator.PeriodInSeconds.Returns(100000000);
+            coordinator.PeriodInSeconds.Returns(100000);
             coordinator.Check(Arg.Any<Type>()).Returns(Task.FromResult(true));
             coordinator.When(c => c.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>())).Do(x => { throw new Exception(); });
             coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
@@ -150,7 +140,7 @@
         public async Task RunThrows()
         {
             var coordinator = Substitute.For<ICoordinator>();
-            coordinator.PeriodInSeconds.Returns(100000000);
+            coordinator.PeriodInSeconds.Returns(100000);
             coordinator.Check(Arg.Any<Type>()).Returns(Task.FromResult(true));
             coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
             coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());

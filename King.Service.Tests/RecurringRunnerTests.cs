@@ -11,7 +11,11 @@
         public void Constructor()
         {
             var runs = Substitute.For<IRuns>();
+            runs.MinimumPeriodInSeconds.Returns(100);
+
             new RecurringRunner(runs);
+
+            var x = runs.Received().MinimumPeriodInSeconds;
         }
 
         [Test]
@@ -25,6 +29,7 @@
         public void Run()
         {
             var runs = Substitute.For<IRuns>();
+            runs.MinimumPeriodInSeconds.Returns(10);
             runs.Run();
 
             var t = new RecurringRunner(runs);

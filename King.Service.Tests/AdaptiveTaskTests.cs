@@ -13,23 +13,5 @@
             {
             }
         }
-
-        [Test]
-        public void StartIn()
-        {
-            using (var t = new AdaptiveHelper())
-            {
-                Assert.AreEqual(BaseTimes.MinimumTiming, t.StartIn.TotalSeconds);
-            }
-        }
-
-        [Test]
-        public void Every()
-        {
-            using (var t = new AdaptiveHelper())
-            {
-                Assert.AreEqual(BaseTimes.MinimumTiming, t.Frequency.TotalSeconds);
-            }
-        }
     }
 }

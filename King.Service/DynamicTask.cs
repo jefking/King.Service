@@ -24,7 +24,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
         public DynamicTask(IDynamicTiming timing, int minimumPeriodInSeconds = BaseTimes.MinimumTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
-            : base(minimumPeriodInSeconds, minimumPeriodInSeconds)
+            : base(minimumPeriodInSeconds)
         {
             if (null == timing)
             {
@@ -43,7 +43,7 @@
         {
             get
             {
-                return this.timing.Timing.MinimumPeriodInSeconds == base.Frequency .TotalSeconds;
+                return this.timing.Timing.MinimumPeriodInSeconds * 1000 == base.timer.Interval;
             }
         }
         #endregion
@@ -62,11 +62,11 @@
 
             var newTime = this.timing.Get(workWasDone);
 
-            if (base.Frequency .TotalSeconds != newTime)
+            if (base.timer.Interval != newTime)
             {
                 var ts = TimeSpan.FromSeconds(newTime);
                 
-                base.ChangeTiming(ts);
+                base.Change(ts);
 
                 Trace.TraceInformation("{0}: Changed timing to: {1}.", base.Name, ts);
             }

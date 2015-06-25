@@ -31,23 +31,5 @@
             {
             }
         }
-
-        [Test]
-        public void StartIn()
-        {
-            using (var t = new BackoffTest())
-            {
-                Assert.AreEqual(BaseTimes.MinimumTiming, t.StartIn.TotalSeconds);
-            }
-        }
-
-        [Test]
-        public void Every()
-        {
-            using (var t = new BackoffTest())
-            {
-                Assert.AreEqual(BaseTimes.MinimumTiming, t.Frequency.TotalSeconds);
-            }
-        }
     }
 }

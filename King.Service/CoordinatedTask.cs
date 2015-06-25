@@ -34,7 +34,7 @@
         /// </summary>
         /// <param name="coordinator">Coordinator</param>
         public CoordinatedTask(ICoordinator coordinator)
-            : base(BaseTimes.MinimumStorageTiming, coordinator.PeriodInSeconds + 1)
+            : base(coordinator.PeriodInSeconds + 1)
         {
             this.coordinator = coordinator;
         }
@@ -52,8 +52,7 @@
         /// <summary>
         /// Run
         /// </summary>
-        /// <param name="state">State</param>
-        public override void Run(object state)
+        public override void Run()
         {
             this.RunAsync().Wait();
         }

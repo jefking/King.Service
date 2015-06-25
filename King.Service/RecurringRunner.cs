@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="run">Run</param>
         public RecurringRunner(IRuns run)
-            : base(BaseTimes.MinimumTiming, run.MinimumPeriodInSeconds)
+            : base(run.MinimumPeriodInSeconds)
         {
             this.run = run;
 

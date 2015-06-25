@@ -72,28 +72,28 @@
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Number of messages per scale unit</returns>
-        ushort MessagesPerScaleUnit(QueuePriority priority);
+        ushort MessagesPerScaleUnit(QueuePriority priority = QueuePriority.Low);
 
         /// <summary>
         /// Minimum Scale
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Minimum Scale</returns>
-        byte MinimumScale(QueuePriority priority);
+        byte MinimumScale(QueuePriority priority = QueuePriority.Low);
 
         /// <summary>
         /// Maximum Scale
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Maximum Scale</returns>
-        byte MaximumScale(QueuePriority priority);
+        byte MaximumScale(QueuePriority priority = QueuePriority.Low);
 
         /// <summary>
         /// Check Scale every (in minutes)
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Check Scale every (in minutes)</returns>
-        byte CheckScaleEvery(QueuePriority priority);
+        byte CheckScaleEvery(QueuePriority priority = QueuePriority.Low);
 
         /// <summary>
         /// Runner
@@ -101,21 +101,21 @@
         /// <param name="runs">Runs</param>
         /// <param name="priority">Priority</param>
         /// <returns>Scalable</returns>
-        IScalable Runner(IDynamicRuns runs, QueuePriority priority);
+        IScalable Runner(IDynamicRuns runs, QueuePriority priority = QueuePriority.Low);
 
         /// <summary>
         /// Minimum Frequency
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Minimum Frequency</returns>
-        byte MinimumFrequency(QueuePriority priority);
+        byte MinimumFrequency(QueuePriority priority = QueuePriority.Low);
 
         /// <summary>
         /// Maximum Frequency
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Maximum Frequency</returns>
-        byte MaximumFrequency(QueuePriority priority);
+        byte MaximumFrequency(QueuePriority priority = QueuePriority.Low);
         #endregion
     }
     #endregion

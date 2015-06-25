@@ -18,7 +18,7 @@
         /// </remarks>
         /// <param name="priority">Priority</param>
         /// <returns>Number of messages per scale unit</returns>
-        public virtual ushort MessagesPerScaleUnit(QueuePriority priority)
+        public virtual ushort MessagesPerScaleUnit(QueuePriority priority = QueuePriority.Low)
         {
             switch (priority)
             {
@@ -36,7 +36,7 @@
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Minimum Frequency</returns>
-        public virtual byte MinimumFrequency(QueuePriority priority)
+        public virtual byte MinimumFrequency(QueuePriority priority = QueuePriority.Low)
         {
             switch (priority)
             {
@@ -54,7 +54,7 @@
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Maximum Frequency</returns>
-        public virtual byte MaximumFrequency(QueuePriority priority)
+        public virtual byte MaximumFrequency(QueuePriority priority = QueuePriority.Low)
         {
             switch (priority)
             {
@@ -72,7 +72,7 @@
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Minimum Scale</returns>
-        public virtual byte MinimumScale(QueuePriority priority)
+        public virtual byte MinimumScale(QueuePriority priority = QueuePriority.Low)
         {
             switch (priority)
             {
@@ -88,7 +88,7 @@
         /// </summary>
         /// <param name="priority">Priority</param>
         /// <returns>Maximum Scale</returns>
-        public virtual byte MaximumScale(QueuePriority priority)
+        public virtual byte MaximumScale(QueuePriority priority = QueuePriority.Low)
         {
             switch (priority)
             {
@@ -109,7 +109,7 @@
         /// </remarks>
         /// <param name="priority">Priority</param>
         /// <returns>Check Scale every (in minutes)</returns>
-        public virtual byte CheckScaleEvery(QueuePriority priority)
+        public virtual byte CheckScaleEvery(QueuePriority priority = QueuePriority.Low)
         {
             switch (priority)
             {
@@ -128,7 +128,7 @@
         /// <param name="runs">Runs</param>
         /// <param name="priority">Priority</param>
         /// <returns>Scalable</returns>
-        public virtual IScalable Runner(IDynamicRuns runs, QueuePriority priority)
+        public virtual IScalable Runner(IDynamicRuns runs, QueuePriority priority = QueuePriority.Low)
         {
             if (null == runs)
             {

@@ -12,7 +12,7 @@
 
         public override void Run(DateTime currentTime)
         {
-            Trace.TraceInformation("{0} run @ {1}", base.ServiceName, currentTime);
+            Trace.TraceInformation("{0} run @ {1}", base.Name, currentTime);
         }
     }
 }

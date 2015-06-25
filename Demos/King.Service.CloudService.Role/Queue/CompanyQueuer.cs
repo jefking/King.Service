@@ -15,7 +15,7 @@
         private readonly IStorageQueue queue = null;
 
         public CompanyQueuer(IStorageQueue queue)
-            :base(1, 10)
+            :base(10)
         {
             this.queue = queue;
         }

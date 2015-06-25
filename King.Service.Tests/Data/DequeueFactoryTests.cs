@@ -120,6 +120,7 @@
             var throughput = Substitute.For<IQueueThroughput>();
             throughput.MaximumScale(setup.Priority).Returns(max);
             throughput.MinimumScale(setup.Priority).Returns(min);
+            throughput.CheckScaleEvery(setup.Priority).Returns((byte)random.Next(1, 300));
 
             var f = new DequeueFactory(ConnectionString, throughput);
             var task = f.Dequeue<object>(setup);
@@ -132,6 +133,7 @@
 
             throughput.Received().MaximumScale(setup.Priority);
             throughput.Received().MinimumScale(setup.Priority);
+            throughput.Received().CheckScaleEvery(setup.Priority);
         }
     
         [Test]

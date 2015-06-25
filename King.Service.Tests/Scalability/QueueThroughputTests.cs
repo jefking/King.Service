@@ -92,6 +92,7 @@
         public void RunnerLow()
         {
             var runs = Substitute.For<IDynamicRuns>();
+            runs.MinimumPeriodInSeconds.Returns(10);
 
             var s = new QueueThroughput();
             var scalable = s.Runner(runs, QueuePriority.Low);
@@ -104,6 +105,7 @@
         public void RunnerMedium()
         {
             var runs = Substitute.For<IDynamicRuns>();
+            runs.MinimumPeriodInSeconds.Returns(10);
 
             var s = new QueueThroughput();
             var scalable = s.Runner(runs, QueuePriority.Medium);
@@ -116,6 +118,7 @@
         public void RunnerHigh()
         {
             var runs = Substitute.For<IDynamicRuns>();
+            runs.MinimumPeriodInSeconds.Returns(10);
 
             var s = new QueueThroughput();
             var scalable = s.Runner(runs, QueuePriority.High);
