@@ -114,12 +114,13 @@
             };
 
             var random = new Random();
-            var max = (byte)random.Next(byte.MinValue, byte.MaxValue);
-            var min = (byte)random.Next(byte.MinValue, max);
+            var scale = new Range<byte>();
+
+            scale.Maximum = (byte)random.Next(byte.MinValue, byte.MaxValue);
+            scale.Minimum = (byte)random.Next(byte.MinValue, scale.Maximum);
             
             var throughput = Substitute.For<IQueueThroughput>();
-            throughput.MaximumScale(setup.Priority).Returns(max);
-            throughput.MinimumScale(setup.Priority).Returns(min);
+            throughput.Scale(setup.Priority).Returns(scale);
             throughput.CheckScaleEvery(setup.Priority).Returns((byte)random.Next(1, 300));
 
             var f = new DequeueFactory(ConnectionString, throughput);
@@ -128,11 +129,10 @@
             Assert.IsNotNull(task);
             var scaler = task as StorageQueueAutoScaler<object>;
             Assert.IsNotNull(scaler);
-            Assert.AreEqual(min, scaler.Minimum);
-            Assert.AreEqual(max, scaler.Maximum);
+            Assert.AreEqual(scale.Minimum, scaler.Minimum);
+            Assert.AreEqual(scale.Maximum, scaler.Maximum);
 
-            throughput.Received().MaximumScale(setup.Priority);
-            throughput.Received().MinimumScale(setup.Priority);
+            throughput.Received().Scale(setup.Priority);
             throughput.Received().CheckScaleEvery(setup.Priority);
         }
     

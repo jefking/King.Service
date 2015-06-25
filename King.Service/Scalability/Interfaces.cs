@@ -75,19 +75,12 @@
         ushort MessagesPerScaleUnit(QueuePriority priority = QueuePriority.Low);
 
         /// <summary>
-        /// Minimum Scale
+        /// Scale
         /// </summary>
         /// <param name="priority">Priority</param>
-        /// <returns>Minimum Scale</returns>
-        byte MinimumScale(QueuePriority priority = QueuePriority.Low);
-
-        /// <summary>
-        /// Maximum Scale
-        /// </summary>
-        /// <param name="priority">Priority</param>
-        /// <returns>Maximum Scale</returns>
-        byte MaximumScale(QueuePriority priority = QueuePriority.Low);
-
+        /// <returns>Scale Range</returns>
+        Range<byte> Scale(QueuePriority priority = QueuePriority.Low);
+        
         /// <summary>
         /// Check Scale every (in minutes)
         /// </summary>
@@ -104,18 +97,11 @@
         IScalable Runner(IDynamicRuns runs, QueuePriority priority = QueuePriority.Low);
 
         /// <summary>
-        /// Minimum Frequency
+        /// Frequency
         /// </summary>
         /// <param name="priority">Priority</param>
-        /// <returns>Minimum Frequency</returns>
-        byte MinimumFrequency(QueuePriority priority = QueuePriority.Low);
-
-        /// <summary>
-        /// Maximum Frequency
-        /// </summary>
-        /// <param name="priority">Priority</param>
-        /// <returns>Maximum Frequency</returns>
-        byte MaximumFrequency(QueuePriority priority = QueuePriority.Low);
+        /// <returns>Frequency Range</returns>
+        Range<byte> Frequency(QueuePriority priority = QueuePriority.Low);
         #endregion
     }
     #endregion

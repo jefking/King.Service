@@ -34,8 +34,9 @@
         public void Runs()
         {
             var random = new Random();
-            var max = (byte)random.Next(byte.MinValue, byte.MaxValue);
-            var min = (byte)random.Next(byte.MinValue, max);
+            var frequency = new Range<byte>();
+            frequency.Maximum = (byte)random.Next(byte.MinValue, byte.MaxValue);
+            frequency.Minimum = (byte)random.Next(byte.MinValue, frequency.Maximum);
             var count = Substitute.For<IQueueCount>();
             var setup = new QueueSetup<object>()
             {
@@ -49,18 +50,16 @@
                 ConnectionString = ConnectionString,
             };
             var throughput = Substitute.For<IQueueThroughput>();
-            throughput.MinimumFrequency(setup.Priority).Returns(min);
-            throughput.MaximumFrequency(setup.Priority).Returns(max);
+            throughput.Frequency(setup.Priority).Returns(frequency);
 
             var s = new StorageQueueAutoScaler<object>(count, connection, throughput);
             var runs = s.Runs(connection);
 
             Assert.IsNotNull(runs);
-            Assert.AreEqual(min, runs.MinimumPeriodInSeconds);
-            Assert.AreEqual(max, runs.MaximumPeriodInSeconds);
+            Assert.AreEqual(frequency.Minimum, runs.MinimumPeriodInSeconds);
+            Assert.AreEqual(frequency.Maximum, runs.MaximumPeriodInSeconds);
 
-            throughput.Received().MinimumFrequency(setup.Priority);
-            throughput.Received().MaximumFrequency(setup.Priority);
+            throughput.Received().Frequency(setup.Priority);
         }
 
         [Test]

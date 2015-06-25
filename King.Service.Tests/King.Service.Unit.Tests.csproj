@@ -123,6 +123,7 @@
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
     <Compile Include="Data\DequeueFactoryTests.cs" />
     <Compile Include="Data\StorageQueueAutoScalerTests.cs" />
+    <Compile Include="RangeTests.cs" />
     <Compile Include="RecurringHelper.cs" />
     <Compile Include="RecurringRunnerTests.cs" />
     <Compile Include="RunAtTaskTests.cs" />

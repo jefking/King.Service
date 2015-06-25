@@ -32,75 +32,59 @@
         }
 
         /// <summary>
-        /// Minimum Frequency to check Queue
+        /// Frequency to check Queue
         /// </summary>
         /// <param name="priority">Priority</param>
-        /// <returns>Minimum Frequency</returns>
-        public virtual byte MinimumFrequency(QueuePriority priority = QueuePriority.Low)
+        /// <returns>Frequency Range</returns>
+        public virtual Range<byte> Frequency(QueuePriority priority = QueuePriority.Low)
         {
+            var r = new Range<byte>();
             switch (priority)
             {
                 case QueuePriority.High:
-                    return 1;
+                    r.Minimum = 1;
+                    r.Maximum = BaseTimes.MinimumStorageTiming;
+                    break;
                 case QueuePriority.Medium:
-                    return 5;
+                    r.Minimum = 5;
+                    r.Maximum = 60;
+                    break;
                 default:
-                    return BaseTimes.MinimumStorageTiming;
+                    r.Minimum = BaseTimes.MinimumStorageTiming;
+                    r.Maximum = BaseTimes.MaximumStorageTiming;
+                    break;
             }
+
+            return r;
         }
 
         /// <summary>
-        /// Maximum Frequency to check Queue
+        /// Scale (threads)
         /// </summary>
         /// <param name="priority">Priority</param>
-        /// <returns>Maximum Frequency</returns>
-        public virtual byte MaximumFrequency(QueuePriority priority = QueuePriority.Low)
+        /// <returns>Scale</returns>
+        public virtual Range<byte> Scale(QueuePriority priority = QueuePriority.Low)
         {
+            var r = new Range<byte>();
             switch (priority)
             {
                 case QueuePriority.High:
-                    return BaseTimes.MinimumStorageTiming;
+                    r.Minimum = 2;
+                    r.Maximum = 5;
+                    break;
                 case QueuePriority.Medium:
-                    return 60;
+                    r.Minimum = 1;
+                    r.Maximum = 4;
+                    break;
                 default:
-                    return BaseTimes.MaximumStorageTiming;
+                    r.Minimum = 1;
+                    r.Maximum = 2;
+                    break;
             }
-        }
 
-        /// <summary>
-        /// Minimum Scale (threads)
-        /// </summary>
-        /// <param name="priority">Priority</param>
-        /// <returns>Minimum Scale</returns>
-        public virtual byte MinimumScale(QueuePriority priority = QueuePriority.Low)
-        {
-            switch (priority)
-            {
-                case QueuePriority.High:
-                    return 2;
-                default:
-                    return 1;
-            }
+            return r;
         }
-
-        /// <summary>
-        /// Maximum Scale (threads)
-        /// </summary>
-        /// <param name="priority">Priority</param>
-        /// <returns>Maximum Scale</returns>
-        public virtual byte MaximumScale(QueuePriority priority = QueuePriority.Low)
-        {
-            switch (priority)
-            {
-                case QueuePriority.High:
-                    return 5;
-                case QueuePriority.Medium:
-                    return 4;
-                default:
-                    return 2;
-            }
-        }
-
+        
         /// <summary>
         /// Check Scale every (in minutes)
         /// </summary>

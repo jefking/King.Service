@@ -133,8 +133,7 @@
             }
 
             var messagesPerScaleUnit = this.throughput.MessagesPerScaleUnit(setup.Priority);
-            var minimum = this.throughput.MinimumScale(setup.Priority);
-            var maximum = this.throughput.MaximumScale(setup.Priority);
+            var scale = this.throughput.Scale(setup.Priority);
             var checkScaleInMinutes = this.throughput.CheckScaleEvery(setup.Priority);
             var connection = new QueueConnection<T>()
             {
@@ -143,7 +142,7 @@
             };
             var queue = new StorageQueue(connection.Setup.Name, connection.ConnectionString);
 
-            return new StorageQueueAutoScaler<T>(queue, connection, this.throughput, messagesPerScaleUnit, minimum, maximum, checkScaleInMinutes);
+            return new StorageQueueAutoScaler<T>(queue, connection, this.throughput, messagesPerScaleUnit, scale.Minimum, scale.Maximum, checkScaleInMinutes);
         }
         #endregion
     }

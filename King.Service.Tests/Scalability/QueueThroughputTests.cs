@@ -39,9 +39,9 @@
         public void MinimumScale(QueuePriority priority, byte expected)
         {
             var s = new QueueThroughput();
-            var data = s.MinimumScale(priority);
+            var data = s.Scale(priority);
 
-            Assert.AreEqual(expected, data);
+            Assert.AreEqual(expected, data.Minimum);
         }
 
         [TestCase(QueuePriority.Low, BaseTimes.MinimumStorageTiming)]
@@ -50,9 +50,9 @@
         public void MinimumFrequency(QueuePriority priority, byte expected)
         {
             var s = new QueueThroughput();
-            var data = s.MinimumFrequency(priority);
+            var data = s.Frequency(priority);
 
-            Assert.AreEqual(expected, data);
+            Assert.AreEqual(expected, data.Minimum);
         }
 
         [TestCase(QueuePriority.Low, BaseTimes.MaximumStorageTiming)]
@@ -61,9 +61,9 @@
         public void MaximumFrequency(QueuePriority priority, byte expected)
         {
             var s = new QueueThroughput();
-            var data = s.MaximumFrequency(priority);
+            var data = s.Frequency(priority);
 
-            Assert.AreEqual(expected, data);
+            Assert.AreEqual(expected, data.Maximum);
         }
 
         [TestCase(QueuePriority.Low, 2)]
@@ -72,9 +72,9 @@
         public void MaximumScale(QueuePriority priority, byte expected)
         {
             var s = new QueueThroughput();
-            var data = s.MaximumScale(priority);
+            var data = s.Scale(priority);
 
-            Assert.AreEqual(expected, data);
+            Assert.AreEqual(expected, data.Maximum);
         }
 
         [TestCase(QueuePriority.Low, 4)]

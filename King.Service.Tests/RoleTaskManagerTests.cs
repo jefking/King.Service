@@ -1,9 +1,9 @@
 ﻿namespace King.Service.Tests
 {
-    using NUnit.Framework;
-    using NSubstitute;
     using System;
     using System.Collections.Generic;
+    using NSubstitute;
+    using NUnit.Framework;
 
     [TestFixture]
     public class RoleTaskManagerTests
