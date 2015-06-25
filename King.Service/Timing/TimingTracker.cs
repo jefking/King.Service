@@ -15,7 +15,7 @@
         protected TimeSpan maxTime = TimeSpan.FromSeconds(45);
 
         /// <summary>
-        /// Maximum batch size
+        /// Maximum Timing
         /// </summary>
         protected readonly byte max = byte.MaxValue;
         #endregion
@@ -25,7 +25,7 @@
         /// Constructor
         /// </summary>
         /// <param name="maxTime">Maximum time until time-outs occur</param>
-        /// <param name="max">Maximum batch size</param>
+        /// <param name="max">Maximum Timing</param>
         public TimingTracker(TimeSpan maxTime, byte max = byte.MaxValue)
         {
             if (TimeSpan.Zero >= maxTime)
@@ -40,7 +40,7 @@
 
         #region Methods
         /// <summary>
-        /// Digest Duration
+        /// Calculate Duration
         /// </summary>
         /// <param name="duration">Duration</param>
         /// <returns>Size</returns>

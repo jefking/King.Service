@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Timing
 {
     /// <summary>
-    /// Timing Strategy
+    /// Timing Strategies
     /// </summary>
     public enum Strategy : byte
     {

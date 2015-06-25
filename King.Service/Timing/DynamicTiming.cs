@@ -14,7 +14,7 @@
         protected ulong noWorkCount = 0;
 
         /// <summary>
-        /// Timing Halper
+        /// Timing
         /// </summary>
         protected readonly ICalculateTiming timing = null;
         #endregion
@@ -37,7 +37,7 @@
 
         #region Properties
         /// <summary>
-        /// Timing Helper
+        /// Timing
         /// </summary>
         public virtual ICalculateTiming Timing
         {
