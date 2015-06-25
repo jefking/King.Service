@@ -13,6 +13,19 @@
         }
 
         [Test]
+        public void ConstructorValues()
+        {
+            var random = new Random();
+            var min = random.Next();
+            var max = random.Next();
+
+            var x = new Range<int>(min, max);
+
+            Assert.AreEqual(min, x.Minimum);
+            Assert.AreEqual(max, x.Maximum);
+        }
+
+        [Test]
         public void Minimum()
         {
             var random = new Random();

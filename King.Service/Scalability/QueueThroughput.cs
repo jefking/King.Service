@@ -38,24 +38,15 @@
         /// <returns>Frequency Range</returns>
         public virtual Range<byte> Frequency(QueuePriority priority = QueuePriority.Low)
         {
-            var r = new Range<byte>();
             switch (priority)
             {
                 case QueuePriority.High:
-                    r.Minimum = 1;
-                    r.Maximum = BaseTimes.MinimumStorageTiming;
-                    break;
+                    return new Range<byte>(1, BaseTimes.MinimumStorageTiming);
                 case QueuePriority.Medium:
-                    r.Minimum = 5;
-                    r.Maximum = 60;
-                    break;
+                    return new Range<byte>(5, 60);
                 default:
-                    r.Minimum = BaseTimes.MinimumStorageTiming;
-                    r.Maximum = BaseTimes.MaximumStorageTiming;
-                    break;
+                    return new Range<byte>(BaseTimes.MinimumStorageTiming, BaseTimes.MaximumStorageTiming);
             }
-
-            return r;
         }
 
         /// <summary>
@@ -65,24 +56,15 @@
         /// <returns>Scale</returns>
         public virtual Range<byte> Scale(QueuePriority priority = QueuePriority.Low)
         {
-            var r = new Range<byte>();
             switch (priority)
             {
                 case QueuePriority.High:
-                    r.Minimum = 2;
-                    r.Maximum = 5;
-                    break;
+                    return new Range<byte>(2, 5);
                 case QueuePriority.Medium:
-                    r.Minimum = 1;
-                    r.Maximum = 4;
-                    break;
+                    return new Range<byte>(1, 4);
                 default:
-                    r.Minimum = 1;
-                    r.Maximum = 2;
-                    break;
+                    return new Range<byte>(1, 2);
             }
-
-            return r;
         }
         
         /// <summary>
