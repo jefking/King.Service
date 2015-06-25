@@ -16,7 +16,7 @@
         /// <summary>
         /// Minute to execute on
         /// </summary>
-        protected readonly sbyte minute = 0;
+        protected readonly sbyte minute = -1;
         #endregion
 
         #region Constructors

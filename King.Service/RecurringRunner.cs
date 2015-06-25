@@ -9,7 +9,7 @@
     {
         #region Members
         /// <summary>
-        /// Backoff Runs
+        /// Runs
         /// </summary>
         protected readonly IRuns run = null;
         #endregion
