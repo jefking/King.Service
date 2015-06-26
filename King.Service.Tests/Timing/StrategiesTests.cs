@@ -19,7 +19,7 @@
             var max = random.Next(101, 1000);
             var t = Strategies.Get(Strategy.Exponential, min, max);
             Assert.IsNotNull(t as ExponentialTiming);
-            Assert.AreEqual(min, t.MinimumPeriodInSeconds);
+            Assert.AreEqual(min, t.FrequencyInSeconds.Minimum);
         }
 
         [Test]
@@ -30,7 +30,7 @@
             var max = random.Next(101, 1000);
             var t = Strategies.Get(Strategy.Linear, min, max);
             Assert.IsNotNull(t as LinearTiming);
-            Assert.AreEqual(min, t.MinimumPeriodInSeconds);
+            Assert.AreEqual(min, t.FrequencyInSeconds.Minimum);
         }
 
         [Test]

@@ -41,7 +41,7 @@
                     this.noWorkCount--;
                 }
             }
-            else if (this.timing.MaximumPeriodInSeconds > this.timing.Get(this.noWorkCount))
+            else if (this.timing.FrequencyInSeconds.Maximum > this.timing.Get(this.noWorkCount))
             {
                 this.noWorkCount++;
             }

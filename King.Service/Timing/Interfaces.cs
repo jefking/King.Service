@@ -10,17 +10,9 @@
     {
         #region Properties
         /// <summary>
-        /// Minimum Timeframe (seconds) (starting timeframe)
+        /// Timeframe (seconds) (starting timeframe)
         /// </summary>
-        int MinimumPeriodInSeconds
-        {
-            get;
-        }
-
-        /// <summary>
-        /// Maximum Timeframe (seconds)
-        /// </summary>
-        int MaximumPeriodInSeconds
+        Range<int> FrequencyInSeconds
         {
             get;
         }

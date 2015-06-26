@@ -85,7 +85,7 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.MaximumPeriodInSeconds.Returns(100000);
+            timing.FrequencyInSeconds.Returns(new Range<int>(1, 100000));
             timing.Get(6).Returns(expected);
 
             var t = new AdaptiveTiming(timing);
@@ -104,7 +104,7 @@
             timing.Received().Get(4);
             timing.Received().Get(5);
             timing.Received().Get(6);
-            var r = timing.Received().MaximumPeriodInSeconds;
+            var r = timing.Received().FrequencyInSeconds;
         }
 
         [Test]
@@ -113,7 +113,7 @@
             var random = new Random();
             var expected = random.NextDouble();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.MaximumPeriodInSeconds.Returns(100000);
+            timing.FrequencyInSeconds.Returns(new Range<int>(1, 100000));
             timing.Get(0).Returns(expected);
             timing.Get(1).Returns(expected);
             timing.Get(2).Returns(expected);
@@ -131,7 +131,7 @@
             timing.Received(4).Get(0);
             timing.Received(4).Get(1);
             timing.Received().Get(2);
-            var r = timing.Received().MaximumPeriodInSeconds;
+            var r = timing.Received().FrequencyInSeconds;
         }
 
         [Test]

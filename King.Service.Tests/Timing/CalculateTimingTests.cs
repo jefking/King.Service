@@ -43,7 +43,7 @@
             var min = random.Next(1, 99);
             var ct = new LinearTiming(min, random.Next(101, 1000));
 
-            Assert.AreEqual(min, ct.MinimumPeriodInSeconds);
+            Assert.AreEqual(min, ct.FrequencyInSeconds.Minimum);
         }
     }
 }

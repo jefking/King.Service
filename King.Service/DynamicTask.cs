@@ -43,7 +43,7 @@
         {
             get
             {
-                return this.timing.Timing.MinimumPeriodInSeconds * 1000 == base.timer.Interval;
+                return this.timing.Timing.FrequencyInSeconds.Minimum * 1000 == base.timer.Interval;
             }
         }
         #endregion

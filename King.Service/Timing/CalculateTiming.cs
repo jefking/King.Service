@@ -31,25 +31,13 @@
         #endregion
 
         #region Properties
-        /// <summary>
-        /// Minimum Timeframe (seconds) (starting timeframe)
+        /// Timeframe (seconds) (starting timeframe)
         /// </summary>
-        public virtual int MinimumPeriodInSeconds
+        public virtual Range<int> FrequencyInSeconds
         {
             get
             {
-                return this.periodInSeconds.Minimum;
-            }
-        }
-
-        /// <summary>
-        /// Maximum Timeframe (seconds)
-        /// </summary>
-        public virtual int MaximumPeriodInSeconds
-        {
-            get
-            {
-                return this.periodInSeconds.Maximum;
+                return this.periodInSeconds;
             }
         }
         #endregion

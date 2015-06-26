@@ -40,7 +40,7 @@
             {
                 this.noWorkCount = 0;
 
-                return this.timing.MinimumPeriodInSeconds;
+                return this.timing.FrequencyInSeconds.Minimum;
             }
             else
             {

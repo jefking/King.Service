@@ -51,7 +51,7 @@
         public void Scale()
         {
             var timing = Substitute.For<ICalculateTiming>();
-            timing.MinimumPeriodInSeconds.Returns(60);
+            timing.FrequencyInSeconds.Returns(new Range<int>(60, 90));
             var time = Substitute.For<IDynamicTiming>();
             time.Timing.Returns(timing);
 
@@ -61,14 +61,14 @@
             }
 
             var t = time.Received().Timing;
-            var mpins = timing.Received().MinimumPeriodInSeconds;
+            var mpins = timing.Received().FrequencyInSeconds;
         }
 
         [Test]
         public void ScaleNope()
         {
             var timing = Substitute.For<ICalculateTiming>();
-            timing.MinimumPeriodInSeconds.Returns(120);
+            timing.FrequencyInSeconds.Returns(new Range<int>(120, 150));
             var time = Substitute.For<IDynamicTiming>();
             time.Timing.Returns(timing);
 
@@ -78,7 +78,7 @@
             }
 
             var t = time.Received().Timing;
-            var mpins = timing.Received().MinimumPeriodInSeconds;
+            var mpins = timing.Received().FrequencyInSeconds;
         }
 
         [Test]

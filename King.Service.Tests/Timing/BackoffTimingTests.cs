@@ -21,14 +21,14 @@
             var random = new Random();
             var expected = random.Next();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.MinimumPeriodInSeconds.Returns(expected);
+            timing.FrequencyInSeconds.Returns(new Range<int>(expected, expected* 2));
 
             var t = new BackoffTiming(timing);
             var value = t.Get(true);
 
             Assert.AreEqual(expected, value);
 
-            var r = timing.Received().MinimumPeriodInSeconds;
+            var r = timing.Received().FrequencyInSeconds;
         }
 
         [Test]
@@ -53,7 +53,7 @@
             var random = new Random();
             var expected = random.Next();
             var timing = Substitute.For<ICalculateTiming>();
-            timing.MinimumPeriodInSeconds.Returns(expected);
+            timing.FrequencyInSeconds.Returns(new Range<int>(expected, expected * 2));
 
             var t = new BackoffTiming(timing);
             t.Get(true);
@@ -65,7 +65,7 @@
 
             Assert.AreEqual(expected, value);
 
-            var r = timing.Received(6).MinimumPeriodInSeconds;
+            var r = timing.Received(6).FrequencyInSeconds;
         }
 
         [Test]
