@@ -84,9 +84,9 @@
 
         #region Methods
         /// <summary>
-        /// Build Task Manifest
+        /// Tasks
         /// </summary>
-        /// <param name="passthrough">Configuration</param>
+        /// <param name="data">Data</param>
         /// <returns>Runnable Tasks</returns>
         public virtual IEnumerable<IRunnable> Tasks(T data = default(T))
         {
@@ -96,7 +96,7 @@
         /// <summary>
         /// Services which should be scaled as a group
         /// </summary>
-        /// <param name="data">Configuration</param>
+        /// <param name="data">Data</param>
         /// <returns>Scalable Tasks</returns>
         public abstract IEnumerable<IScalable> ScaleUnit(T data);
 

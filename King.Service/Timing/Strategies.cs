@@ -3,7 +3,7 @@
     using System;
 
     /// <summary>
-    /// Timing Strategy Factory
+    /// Timing Strategies
     /// </summary>
     public static class Strategies
     {

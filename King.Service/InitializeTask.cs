@@ -26,7 +26,7 @@
         }
 
         /// <summary>
-        /// Stops Service
+        /// Stop Task
         /// </summary>
         /// <returns>Stopped</returns>
         public virtual bool Stop()
@@ -35,7 +35,7 @@
         }
 
         /// <summary>
-        /// Runs Service
+        /// Start Task
         /// </summary>
         /// <returns>Running</returns>
         public virtual bool Start()

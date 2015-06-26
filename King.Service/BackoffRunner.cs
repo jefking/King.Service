@@ -19,7 +19,7 @@
         /// Constructor
         /// </summary>
         /// <param name="run">Run</param>
-        /// <param name="strategy">Timing Strategy</param>
+        /// <param name="strategy">Strategy</param>
         public BackoffRunner(IDynamicRuns run, Strategy strategy = Strategy.Exponential)
             : base(run.MinimumPeriodInSeconds, run.MaximumPeriodInSeconds, strategy)
         {

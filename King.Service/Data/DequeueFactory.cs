@@ -7,7 +7,7 @@
     using King.Service.Scalability;
 
     /// <summary>
-    ///  Dequeue Factory
+    /// Dequeue Factory
     /// </summary>
     public class DequeueFactory : IDequeueFactory
     {
@@ -18,7 +18,7 @@
         protected readonly string connectionString = null;
 
         /// <summary>
-        /// Throughput metrics
+        /// Throughput
         /// </summary>
         protected readonly IQueueThroughput throughput = null;
         #endregion
@@ -122,7 +122,7 @@
         /// <summary>
         /// Dequeue Task (Storage Queue Auto Scaler)
         /// </summary>
-        /// <typeparam name="T">Data Type</typeparam>
+        /// <typeparam name="T">Model</typeparam>
         /// <param name="setup">Setup</param>
         /// <returns>Storage Queue Auto Scaler</returns>
         public virtual IRunnable Dequeue<T>(IQueueSetup<T> setup)

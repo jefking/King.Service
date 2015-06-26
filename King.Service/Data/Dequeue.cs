@@ -77,7 +77,7 @@
         }
 
         /// <summary>
-        /// Process Mesage
+        /// Process Message
         /// </summary>
         /// <param name="message">Message</param>
         /// <returns>Task</returns>
