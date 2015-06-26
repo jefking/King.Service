@@ -1,7 +1,7 @@
 ﻿namespace King.Service.CloudService.Role.Scalable
 {
-    using King.Service;
     using System.Collections.Generic;
+    using King.Service;
 
     public class DynamicScaler : AutoScaler<Configuration>
     {

@@ -6,10 +6,7 @@
     using King.Service.CloudService.Role.Queue;
     using King.Service.CloudService.Role.Scalable;
     using King.Service.Data;
-
-    /// <summary>
-    /// Task Factory
-    /// </summary>
+    
     public class Factory : ITaskFactory<Configuration>
     {
         public IEnumerable<IRunnable> Tasks(Configuration config)

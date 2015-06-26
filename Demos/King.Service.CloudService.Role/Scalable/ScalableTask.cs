@@ -1,9 +1,9 @@
 ﻿namespace King.Service.CloudService.Role.Scalable
 {
-    using King.Service;
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
+    using King.Service;
 
     public class ScalableTask : IDynamicRuns
     {

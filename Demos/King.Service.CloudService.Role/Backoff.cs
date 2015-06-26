@@ -1,8 +1,8 @@
 ﻿namespace King.Service.CloudService.Role
 {
-    using King.Service;
     using System;
     using System.Diagnostics;
+    using King.Service;
 
     public class Backoff : BackoffTask
     {
