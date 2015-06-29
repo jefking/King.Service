@@ -108,7 +108,7 @@
         {
             if (TimeSpan.Zero >= frequency)
             {
-                throw new ArgumentException("newTime Zero.");
+                throw new ArgumentException("frequency less than or equal to zero");
             }
 
             this.timer.Interval = frequency.TotalMilliseconds;

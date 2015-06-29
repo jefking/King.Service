@@ -9,7 +9,7 @@
     {
         #region Members
         /// <summary>
-        /// Backoff Runs
+        /// Dynamic Runs
         /// </summary>
         protected readonly IDynamicRuns run = null;
         #endregion

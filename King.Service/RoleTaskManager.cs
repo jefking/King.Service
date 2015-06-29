@@ -10,7 +10,7 @@
     using King.Service.Timing;
 
     /// <summary>
-    /// Worker Role Task Manager
+    /// Role Task Manager
     /// </summary>
     public class RoleTaskManager<T> : IRoleTaskManager<T>
     {
@@ -26,14 +26,14 @@
         protected readonly ITaskFactory<T> factory = null;
 
         /// <summary>
-        /// Lock object for Services
+        /// Lock object for Tasks
         /// </summary>
-        protected readonly object servicesLock = new object();
+        protected readonly object tasksLock = new object();
         #endregion
 
         #region Constructors
         /// <summary>
-        /// Pass Factory to run services
+        /// Constructor
         /// </summary>
         /// <param name="factory">Task Factory</param>
         public RoleTaskManager(ITaskFactory<T> factory)
@@ -78,9 +78,9 @@
 
             if (null != tasks && tasks.Any())
             {
-                var serviceCount = tasks.Count();
+                var taskCount = tasks.Count();
 
-                Trace.TraceInformation("Starting {0} tasks", serviceCount);
+                Trace.TraceInformation("Starting {0} tasks", taskCount);
 
                 ushort successCount = 0;
 
@@ -102,7 +102,7 @@
                     Thread.Sleep(BaseTimes.ThreadingOffset);
                 }
 
-                Trace.TraceInformation("Finished starting tasks {0}/{1} successfully.", successCount, serviceCount);
+                Trace.TraceInformation("Finished starting tasks {0}/{1} successfully.", successCount, taskCount);
             }
             else
             {
@@ -121,7 +121,7 @@
         {
             Trace.TraceInformation("On start called");
 
-            lock (this.servicesLock)
+            lock (this.tasksLock)
             {
                 if (null == this.tasks)
                 {

@@ -11,7 +11,7 @@
     {
         #region Members
         /// <summary>
-        /// Timing Helper
+        /// Timing
         /// </summary>
         protected readonly IDynamicTiming timing = null;
         #endregion
