@@ -120,8 +120,8 @@
         public virtual bool OnStart(T passthrough = default(T))
         {
             Trace.TraceInformation("On start called");
-
-            lock (this.tasksLock)
+            
+            lock (this.tasksLock) //Deprecate lock, use Interlock
             {
                 if (null == this.tasks)
                 {
