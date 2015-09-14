@@ -101,7 +101,7 @@
         }
 
         /// <summary>
-        /// Change Timer to new interval
+        /// Change frequency to new interval
         /// </summary>
         /// <param name="frequency">Frequency</param>
         protected virtual void Change(TimeSpan frequency)

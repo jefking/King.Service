@@ -6,7 +6,7 @@
 
     #region IRunnable
     /// <summary>
-    /// Runnable interface for Tasks
+    /// Runnable Tasks Interface
     /// </summary>
     public interface IRunnable : IDisposable
     {
@@ -90,7 +90,7 @@
 
     #region ITaskFactory
     /// <summary>
-    /// Task Factory
+    /// Task Factory Interface
     /// </summary>
     /// <typeparam name="T">Passthrough</typeparam>
     public interface ITaskFactory<T>

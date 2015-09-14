@@ -20,7 +20,7 @@
 
         #region Constructors
         /// <summary>
-        /// Coordinated Task Constructor
+        /// Constructor
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>

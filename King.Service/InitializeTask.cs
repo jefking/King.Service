@@ -20,9 +20,9 @@
         /// Run Async
         /// </summary>
         /// <returns>Task</returns>
-        public virtual async Task RunAsync()
+        public virtual Task RunAsync()
         {
-            await new TaskFactory().StartNew(() => { } );
+           return new TaskFactory().StartNew(() => { } );
         }
 
         /// <summary>
