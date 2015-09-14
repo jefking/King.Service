@@ -24,11 +24,6 @@
         /// Factory
         /// </summary>
         protected readonly ITaskFactory<T> factory = null;
-
-        /// <summary>
-        /// Lock object for Tasks
-        /// </summary>
-        protected readonly object tasksLock = new object();
         #endregion
 
         #region Constructors
@@ -120,29 +115,26 @@
         public virtual bool OnStart(T passthrough = default(T))
         {
             Trace.TraceInformation("On start called");
-            
-            lock (this.tasksLock) //Deprecate lock, use Interlock
+
+            if (null == this.tasks)
             {
-                if (null == this.tasks)
+                var t = this.factory.Tasks(passthrough);
+                if (null != t && t.Any())
                 {
-                    var t = this.factory.Tasks(passthrough);
-                    if (null != t && t.Any())
-                    {
-                        Trace.TraceInformation("Tasks loading");
+                    Trace.TraceInformation("Tasks loading");
 
-                        this.tasks = new ReadOnlyCollection<IRunnable>(t.ToList());
+                    this.tasks = new ReadOnlyCollection<IRunnable>(t.ToList());
 
-                        Trace.TraceInformation("Tasks loaded");
-                    }
-                    else
-                    {
-                        Trace.TraceWarning("No tasks loaded from factory?");
-                    }
+                    Trace.TraceInformation("Tasks loaded");
                 }
                 else
                 {
-                    Trace.TraceInformation("Tasks previously loaded");
+                    Trace.TraceWarning("No tasks loaded from factory?");
                 }
+            }
+            else
+            {
+                Trace.TraceInformation("Tasks previously loaded");
             }
 
             Trace.TraceInformation("On start finished");
