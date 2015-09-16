@@ -37,7 +37,10 @@
             var task = new Coordinated(config.ConnectionString);
 
             // Add once to ensure that Table is created for Instances to communicate with
-            yield return task.InitializeTask();
+            foreach (var t in task.Tasks())
+            {
+                yield return t;
+            }
 
             // Add your coordinated task
             yield return task;
