@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Tests.Data
 {
     using System;
+    using System.Linq;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using King.Azure.Data;
@@ -143,7 +144,7 @@
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
-            var init = core.Tasks();
+            var init = core.Tasks().FirstOrDefault();
             Assert.IsNotNull(init);
             Assert.IsNotNull(init as InitializeStorageTask);
         }
@@ -153,7 +154,7 @@
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
-            var init = core.Tasks(null);
+            var init = core.Tasks(null).FirstOrDefault();
             Assert.IsNotNull(init);
             Assert.IsNotNull(init as InitializeStorageTask);
         }

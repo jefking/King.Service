@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Tests
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using King.Service.Data;
     using NSubstitute;
@@ -55,7 +56,7 @@
         public void InitializeTask()
         {
             var m = new TestManager();
-            var t = m.Tasks();
+            var t = m.Tasks().FirstOrDefault();
             Assert.IsNotNull(t);
             Assert.IsNotNull(t as InitializeStorageTask);
         }
@@ -64,7 +65,7 @@
         public void InitializeTaskPassthroughNull()
         {
             var m = new TestManager();
-            var t = m.Tasks(null);
+            var t = m.Tasks(null).FirstOrDefault();
             Assert.IsNotNull(t);
             Assert.IsNotNull(t as InitializeStorageTask);
         }
