@@ -9,14 +9,9 @@
     /// <summary>
     /// Scheduled Task Core for Mocking
     /// </summary>
-    public interface ICoordinator
+    public interface ICoordinator : ITaskFactory<object>
     {
         #region Methods
-        /// <summary>
-        /// Initialize Table
-        /// </summary>
-        IRunnable InitializeTask();
-
         /// <summary>
         /// Determine whether a new task needs to be executed
         /// </summary>
