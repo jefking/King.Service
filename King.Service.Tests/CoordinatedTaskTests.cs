@@ -1,10 +1,10 @@
 ﻿namespace King.Service.Tests
 {
-    using King.Service.Data;
-    using NUnit.Framework;
-    using NSubstitute;
     using System;
     using System.Threading.Tasks;
+    using King.Service.Data;
+    using NSubstitute;
+    using NUnit.Framework;
 
     [TestFixture]
     public class CoordinatedTaskTests
@@ -44,12 +44,27 @@
         {
             new TestManager(null);
         }
+        
+        [Test]
+        public void IsITaskFactory()
+        {
+            Assert.IsNotNull(new TestManager() as ITaskFactory<object>);
+        }
 
         [Test]
         public void InitializeTask()
         {
             var m = new TestManager();
-            var t = m.InitializeTask();
+            var t = m.Tasks();
+            Assert.IsNotNull(t);
+            Assert.IsNotNull(t as InitializeStorageTask);
+        }
+
+        [Test]
+        public void InitializeTaskPassthroughNull()
+        {
+            var m = new TestManager();
+            var t = m.Tasks(null);
             Assert.IsNotNull(t);
             Assert.IsNotNull(t as InitializeStorageTask);
         }

@@ -1,6 +1,7 @@
 ﻿namespace King.Service
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
     using King.Service.Data;
@@ -9,7 +10,7 @@
     /// <summary>
     /// Coordinated Task
     /// </summary>
-    public abstract class CoordinatedTask : RecurringTask
+    public abstract class CoordinatedTask : RecurringTask, ITaskFactory<object>
     {
         #region Members
         /// <summary>
@@ -42,11 +43,13 @@
 
         #region Methods
         /// <summary>
-        /// Initialize Task (Table Storage)
+        /// Initialize Table Task
         /// </summary>
-        public virtual IRunnable InitializeTask()
+        /// <param name="passthrough">Not Used</param>
+        /// <returns>Initialize Table Task</returns>
+        public IEnumerable<IRunnable> Tasks(object passthrough = null)
         {
-            return this.coordinator.InitializeTask();
+            return this.coordinator.Tasks(passthrough);
         }
 
         /// <summary>

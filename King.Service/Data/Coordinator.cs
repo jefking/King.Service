@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Data
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using King.Azure.Data;
@@ -70,9 +71,11 @@
         /// <summary>
         /// Initialize Table Task
         /// </summary>
-        public virtual IRunnable InitializeTask()
+        /// <param name="passthrough">Not Used</param>
+        /// <returns>Initialize Table Task</returns>
+        public IEnumerable<IRunnable> Tasks(object passthrough = null)
         {
-            return new InitializeStorageTask(this.storage);
+            yield return new InitializeStorageTask(this.storage);
         }
 
         /// <summary>

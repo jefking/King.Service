@@ -41,6 +41,13 @@
         }
 
         [Test]
+        public void IsITaskFactory()
+        {
+            var table = Substitute.For<ITableStorage>();
+            Assert.IsNotNull(new Coordinator(table, new TimeSpan(9000)) as ITaskFactory<object>);
+        }
+
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public async Task CheckTypeNull()
         {
@@ -136,7 +143,17 @@
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
-            var init = core.InitializeTask();
+            var init = core.Tasks();
+            Assert.IsNotNull(init);
+            Assert.IsNotNull(init as InitializeStorageTask);
+        }
+
+        [Test]
+        public void InitializeTaskPassthroughNull()
+        {
+            var table = Substitute.For<ITableStorage>();
+            var core = new Coordinator(table, new TimeSpan(9000));
+            var init = core.Tasks(null);
             Assert.IsNotNull(init);
             Assert.IsNotNull(init as InitializeStorageTask);
         }
