@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.22823.1
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3B6FC039-79A6-4CFC-8BF7-93638ACC0F31}"
 	ProjectSection(SolutionItems) = preProject
@@ -14,15 +14,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{8AFB4533
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testing", "Testing", "{E515B3A3-A852-4DF1-AFF2-5941FD203E48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service", "King.Service\King.Service.csproj", "{E72D36E9-0849-498E-AC4F-B97FB632E112}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Unit.Tests", "King.Service.Tests\King.Service.Unit.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C8675FBC-DC7E-4F13-AD15-E73F1E1862FF}"
 	ProjectSection(SolutionItems) = preProject
 		King.Service.nuspec = King.Service.nuspec
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service", "King.Service\King.Service.csproj", "{E72D36E9-0849-498E-AC4F-B97FB632E112}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Unit.Tests", "King.Service.Tests\King.Service.Unit.Tests.csproj", "{24B0BFED-62C1-48C3-AE4E-A503A007DE1A}"
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "King.Service.CloudService", "Demos\King.Service.CloudService\King.Service.CloudService.ccproj", "{69C64FB7-0F05-4C4C-BF4E-E5E19ABB89BC}"
 EndProject
