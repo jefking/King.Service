@@ -41,10 +41,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTimingNull()
         {
-            new DynamicTest(null);
+            Assert.That(() => new DynamicTest(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

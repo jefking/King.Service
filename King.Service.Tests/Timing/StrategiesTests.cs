@@ -34,10 +34,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void GetUnknown()
         {
-            Strategies.Get((Strategy)22, 100, 100);
+            Assert.That(() => Strategies.Get((Strategy)22, 100, 100), Throws.TypeOf<InvalidOperationException>());
         }
 
         [Test]

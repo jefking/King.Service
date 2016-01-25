@@ -25,10 +25,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTableNull()
         {
-            new InitializeStorageTask(null);
+            Assert.That(() => new InitializeStorageTask(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

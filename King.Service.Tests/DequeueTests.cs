@@ -20,19 +20,17 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorPollerNull()
         {
             var processor = Substitute.For<IProcessor<object>>();
-            new Dequeue<object>(null, processor);
+            Assert.That(() => new Dequeue<object>(null, processor), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorProcessorNull()
         {
             var poller = Substitute.For<IPoller<object>>();
-            new Dequeue<object>(poller, null);
+            Assert.That(() => new Dequeue<object>(poller, null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

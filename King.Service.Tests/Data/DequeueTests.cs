@@ -28,19 +28,17 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorPollerNull()
         {
             var processor = Substitute.For<IProcessor<object>>();
-            new Dequeue<object>(null, processor);
+            Assert.That(() => new Dequeue<object>(null, processor), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorProcessorNull()
         {
             var poller = Substitute.For<IPoller<object>>();
-            new Dequeue<object>(poller, null);
+            Assert.That(() => new Dequeue<object>(poller, null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -123,7 +121,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ApplicationException))]
         public async Task RunPollThrows()
         {
             var poller = Substitute.For<IPoller<object>>();
@@ -132,7 +129,8 @@
             var processor = Substitute.For<IProcessor<object>>();
 
             var d = new Dequeue<object>(poller, processor);
-            await d.Run();
+
+            Assert.That(async () => await d.Run(), Throws.TypeOf<ApplicationException>());
         }
 
         [Test]
@@ -155,7 +153,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ApplicationException))]
         public async Task RunDataThrows()
         {
             var message = Substitute.For<IQueued<object>>();
@@ -169,7 +166,7 @@
 
             var d = new Dequeue<object>(poller, processor);
 
-            await d.Run();
+            Assert.That(async () => await d.Run(), Throws.TypeOf<ApplicationException>());
         }
 
         [Test]
@@ -197,8 +194,7 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ApplicationException))]
-        public async Task RunProcessThrows()
+        public void RunProcessThrows()
         {
             var data = new object();
             var message = Substitute.For<IQueued<object>>();
@@ -212,7 +208,7 @@
 
             var d = new Dequeue<object>(poller, processor);
 
-            await d.Run();
+            Assert.That(async () => await d.Run(), Throws.TypeOf<ApplicationException>());
         }
     }
 }

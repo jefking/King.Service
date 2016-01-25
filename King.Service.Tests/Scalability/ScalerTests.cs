@@ -17,10 +17,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorUnitsNull()
         {
-            new Scaler<object>(null);
+            Assert.That(() => new Scaler<object>(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -62,23 +61,23 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ScaleUpFactoryNull()
         {
             var s = new Scaler<object>();
             s.ScaleUp(null, new object(), Guid.NewGuid().ToString());
 
             Assert.AreEqual(1, s.CurrentUnits);
+
+            Assert.That(() => s.CurrentUnits, Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ScaleUpServiceNameNull()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.ScaleUp(factory, new object(), null);
+            Assert.That(() => s.ScaleUp(factory, new object(), null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
@@ -100,39 +99,35 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ScaleDownServiceNameNull()
         {
             var s = new Scaler<object>();
-            s.ScaleDown(null);
+            Assert.That(() => s.ScaleDown(null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void InitializeMinimumZero()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.Initialize(0, factory, new object(), Guid.NewGuid().ToString());
+            Assert.That(() => s.Initialize(0, factory, new object(), Guid.NewGuid().ToString()), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void InitializeFactoryNull()
         {
             var s = new Scaler<object>();
-            s.Initialize(1, null, new object(), Guid.NewGuid().ToString());
+            Assert.That(() => s.Initialize(1, null, new object(), Guid.NewGuid().ToString()), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void InitializeServiceNameNull()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
 
             var s = new Scaler<object>();
-            s.Initialize(1, factory, new object(), null);
+            Assert.That(() => s.Initialize(1, factory, new object(), null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

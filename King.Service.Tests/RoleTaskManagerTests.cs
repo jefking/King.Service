@@ -16,10 +16,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorServiceFactoryNull()
         {
-            new RoleTaskManager<object>(null);
+            Assert.That(() => new RoleTaskManager<object>(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

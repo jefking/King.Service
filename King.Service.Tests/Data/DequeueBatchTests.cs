@@ -1,12 +1,12 @@
 ﻿namespace King.Service.Tests.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
     using King.Azure.Data;
     using King.Service.Data;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class DequeueBatchTests
@@ -87,7 +87,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ApplicationException))]
         public async Task RunPollThrows()
         {
             var poller = Substitute.For<IPoller<object>>();
@@ -96,7 +95,7 @@
             var processor = Substitute.For<IProcessor<object>>();
 
             var d = new DequeueBatch<object>(poller, processor);
-            await d.Run();
+            Assert.That(async () => await d.Run(), Throws.TypeOf<ApplicationException>());
         }
     }
 }

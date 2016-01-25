@@ -63,13 +63,12 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void RunsSetupNull()
         {
             var count = Substitute.For<IQueueCount>();
 
             var s = new StorageQueueAutoScaler<object>(count, new QueueConnection<object>());
-            s.Runs(null);
+            Assert.That(() => s.Runs(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -90,7 +89,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ScaleUnitSetupNull()
         {
             var count = Substitute.For<IQueueCount>();
@@ -101,6 +99,8 @@
 
             Assert.IsNotNull(unit);
             Assert.AreEqual(1, unit.Count());
+
+            Assert.That(() => unit.Count(), Throws.TypeOf<ArgumentNullException>());
         }
     }
 }

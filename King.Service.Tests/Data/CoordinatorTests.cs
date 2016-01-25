@@ -20,18 +20,16 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTableNull()
         {
-            var core = new Coordinator(null, new TimeSpan(9000));
+            Assert.That(() => new Coordinator(null, new TimeSpan(9000)), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorTimeSpanZero()
         {
             var table = Substitute.For<ITableStorage>();
-            var core = new Coordinator(table, TimeSpan.Zero);
+            Assert.That(() => new Coordinator(table, TimeSpan.Zero), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
@@ -49,12 +47,11 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public async Task CheckTypeNull()
+        public void CheckTypeNull()
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
-            await core.Check(null);
+            Assert.That(async () => await core.Check(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -160,21 +157,19 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public async Task StartTypeNull()
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
-            await core.Start(null, Guid.NewGuid(), DateTime.UtcNow);
+            Assert.That(async () => await core.Start(null, Guid.NewGuid(), DateTime.UtcNow), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public async Task StartIdentifierEmpty()
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
-            await core.Start(this.GetType(), Guid.Empty, DateTime.UtcNow);
+            Assert.That(async () => await core.Start(this.GetType(), Guid.Empty, DateTime.UtcNow), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
@@ -190,12 +185,11 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public async Task CompeleteTypeNull()
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
-            await core.Complete(null, Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow, true);
+            Assert.That(async () => await core.Complete(null, Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow, true), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

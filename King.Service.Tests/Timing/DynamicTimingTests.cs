@@ -16,10 +16,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTimingNull()
         {
-            new AdaptiveTiming(null);
+            Assert.That(() => new AdaptiveTiming(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

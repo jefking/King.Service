@@ -128,11 +128,10 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void RunnerRunsNull()
         {
             var s = new QueueThroughput();
-            s.Runner(null, QueuePriority.High);
+            Assert.That(() => s.Runner(null, QueuePriority.High), Throws.TypeOf<ArgumentNullException>());
         }
     }
 }

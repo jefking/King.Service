@@ -32,10 +32,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(NullReferenceException))]
         public void ConstructorRunsNull()
         {
-            new AdaptiveRunner(null);
+            Assert.That(() => new AdaptiveRunner(null), Throws.TypeOf<NullReferenceException>());
         }
 
         [Test]

@@ -25,10 +25,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorQueueNull()
         {
-            new QueueScaler<object>(null);
+            Assert.That(() => new QueueScaler<object>(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

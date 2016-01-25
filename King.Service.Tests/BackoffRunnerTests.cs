@@ -32,10 +32,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(NullReferenceException))]
         public void ConstructorRunsNull()
         {
-            new BackoffRunner(null);
+            Assert.That(() => new BackoffRunner(null), Throws.TypeOf<NullReferenceException>());
         }
 
         [Test]

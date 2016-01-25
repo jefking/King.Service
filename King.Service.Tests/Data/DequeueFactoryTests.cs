@@ -20,10 +20,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorConnectionStringNull()
         {
-            new DequeueFactory(null);
+            Assert.That(() => new DequeueFactory(null), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
@@ -83,7 +82,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void TasksSetupNull()
         {
             var f = new DequeueFactory(ConnectionString);
@@ -91,10 +89,11 @@
 
             Assert.IsNotNull(tasks);
             Assert.AreEqual(2, tasks.Count());
+
+            Assert.That(() => tasks.Count(), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void TasksSetupsNull()
         {
             var f = new DequeueFactory(ConnectionString);
@@ -102,6 +101,8 @@
 
             Assert.IsNotNull(tasks);
             Assert.AreEqual(2, tasks.Count());
+
+            Assert.That(() => tasks.Count(), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -137,11 +138,10 @@
         }
     
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void DequeueTaskSetupNull()
         {
             var df = new DequeueFactory(ConnectionString);
-            df.Dequeue<object>(null);
+            Assert.That(() => df.Dequeue<object>(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -161,15 +161,13 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void TasksSimpleQueueNameNull()
         {
             var f = new DequeueFactory(ConnectionString);
-            var tasks = f.Tasks<object>(null, () => { return null; });
+            Assert.That(() => f.Tasks<object>(null, () => { return null; }), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void TasksSimpleProcessorNull()
         {
             var f = new DequeueFactory(ConnectionString);
@@ -183,6 +181,8 @@
                      select true).FirstOrDefault();
 
             Assert.IsTrue(t);
+
+            Assert.That(() => t, Throws.TypeOf<ArgumentNullException>());
         }
     }
 }

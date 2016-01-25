@@ -22,12 +22,11 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorTrackerNull()
         {
             var poller = Substitute.For<IPoller<object>>();
             var processor = Substitute.For<IProcessor<object>>();
-            new DequeueBatchDynamic<object>(poller, processor, null);
+            Assert.That(() => new DequeueBatchDynamic<object>(poller, processor, null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

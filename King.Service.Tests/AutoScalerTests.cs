@@ -50,10 +50,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMinimumGreaterThanMaximum()
         {
-            new AutoScalerHelper(new object(), 100, 1);
+            Assert.That(() => new AutoScalerHelper(new object(), 100, 1), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
@@ -63,10 +62,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorScalerNull()
         {
-            new AutoScalerHelper(null, new object(), 1, 1, 1);
+            Assert.That(() => new AutoScalerHelper(null, new object(), 1, 1, 1), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

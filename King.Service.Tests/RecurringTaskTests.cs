@@ -13,10 +13,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorPeriodNegative()
         {
-            var rh = new RecurringHelper(-50);
+            Assert.That(() => new RecurringHelper(-50), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
@@ -106,7 +105,6 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void StartZeroStop()
         {
             var m = new RecurringHelper(0);
@@ -114,15 +112,16 @@
             Assert.IsTrue(success);
             success = m.Stop();
             Assert.IsTrue(success);
+
+            Assert.That(() => success, Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ChangeTimingZero()
         {
             using (var tm = new RecurringHelper(100))
             {
-                tm.Change(TimeSpan.Zero);
+                Assert.That(() => tm.Change(TimeSpan.Zero), Throws.TypeOf<ArgumentException>());
             }
         }
 

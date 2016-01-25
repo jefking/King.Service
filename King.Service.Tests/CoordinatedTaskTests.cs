@@ -40,10 +40,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(NullReferenceException))]
         public void ConstructorCoordinatorNull()
         {
-            new TestManager(null);
+            Assert.That(() => new TestManager(null), Throws.TypeOf<NullReferenceException>());
         }
         
         [Test]

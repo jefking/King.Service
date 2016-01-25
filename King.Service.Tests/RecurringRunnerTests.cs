@@ -19,10 +19,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(NullReferenceException))]
         public void ConstructorRunNull()
         {
-            new RecurringRunner(null);
+            Assert.That(() => new RecurringRunner(null), Throws.TypeOf<NullReferenceException>());
         }
 
         [Test]

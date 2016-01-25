@@ -21,10 +21,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
         public void ConstructorMaxZero()
         {
-            new TimingTracker(TimeSpan.Zero);
+            Assert.That(() => new TimingTracker(TimeSpan.Zero), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

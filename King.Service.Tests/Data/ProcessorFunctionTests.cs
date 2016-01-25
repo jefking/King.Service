@@ -22,10 +22,9 @@
         }
 
         [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
         public void ConstructorFunctionNull()
         {
-            new ProcessorFunction<object>(null);
+            Assert.That(() => new ProcessorFunction<object>(null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
