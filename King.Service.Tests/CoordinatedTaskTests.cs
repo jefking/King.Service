@@ -118,7 +118,7 @@
         {
             var coordinator = Substitute.For<ICoordinator>();
             coordinator.PeriodInSeconds.Returns(100000);
-            coordinator.Check(Arg.Any<Type>()).Returns(x => { throw new Exception(); });
+            coordinator.Check(Arg.Any<Type>()).ReturnsForAnyArgs<object>(x => { throw new Exception(); });
             coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
             coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
 

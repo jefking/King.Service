@@ -90,7 +90,7 @@
         public async Task RunPollThrows()
         {
             var poller = Substitute.For<IPoller<object>>();
-            poller.PollMany(5).Returns(x => { throw new ApplicationException(); });
+            poller.PollMany(5).ReturnsForAnyArgs<object>(x => { throw new ApplicationException(); });
 
             var processor = Substitute.For<IProcessor<object>>();
 

@@ -124,7 +124,7 @@
         public async Task RunPollThrows()
         {
             var poller = Substitute.For<IPoller<object>>();
-            poller.Poll().Returns(x => { throw new ApplicationException(); });
+            poller.Poll().ReturnsForAnyArgs<object>(x => { throw new ApplicationException(); });
 
             var processor = Substitute.For<IProcessor<object>>();
 
@@ -204,7 +204,7 @@
             poller.Poll().Returns(Task.FromResult(message));
 
             var processor = Substitute.For<IProcessor<object>>();
-            processor.Process(data).Returns(x => { throw new ApplicationException(); });
+            processor.Process(data).ReturnsForAnyArgs<object>(x => { throw new ApplicationException(); });
 
             var d = new Dequeue<object>(poller, processor);
 
