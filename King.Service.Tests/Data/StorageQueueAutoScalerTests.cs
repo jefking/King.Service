@@ -98,7 +98,6 @@
             var unit = s.ScaleUnit(null);
 
             Assert.IsNotNull(unit);
-            Assert.AreEqual(1, unit.Count());
 
             Assert.That(() => unit.Count(), Throws.TypeOf<ArgumentNullException>());
         }

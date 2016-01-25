@@ -107,13 +107,7 @@
         [Test]
         public void StartZeroStop()
         {
-            var m = new RecurringHelper(0);
-            var success = m.Start();
-            Assert.IsTrue(success);
-            success = m.Stop();
-            Assert.IsTrue(success);
-
-            Assert.That(() => success, Throws.TypeOf<ArgumentException>());
+            Assert.That(() => new RecurringHelper(0), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

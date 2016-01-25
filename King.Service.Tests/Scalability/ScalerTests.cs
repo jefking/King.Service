@@ -64,11 +64,8 @@
         public void ScaleUpFactoryNull()
         {
             var s = new Scaler<object>();
-            s.ScaleUp(null, new object(), Guid.NewGuid().ToString());
 
-            Assert.AreEqual(1, s.CurrentUnits);
-
-            Assert.That(() => s.CurrentUnits, Throws.TypeOf<ArgumentNullException>());
+            Assert.That(() => s.ScaleUp(null, new object(), Guid.NewGuid().ToString()), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]

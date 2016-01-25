@@ -88,7 +88,6 @@
             var tasks = f.Tasks<object>((QueueSetup<object>)null);
 
             Assert.IsNotNull(tasks);
-            Assert.AreEqual(2, tasks.Count());
 
             Assert.That(() => tasks.Count(), Throws.TypeOf<ArgumentNullException>());
         }
@@ -100,7 +99,6 @@
             var tasks = f.Tasks<object>((IEnumerable<QueueSetup<object>>)null);
 
             Assert.IsNotNull(tasks);
-            Assert.AreEqual(2, tasks.Count());
 
             Assert.That(() => tasks.Count(), Throws.TypeOf<ArgumentNullException>());
         }
@@ -171,18 +169,7 @@
         public void TasksSimpleProcessorNull()
         {
             var f = new DequeueFactory(ConnectionString);
-            var tasks = f.Tasks<object>("test", null);
-
-            Assert.IsNotNull(tasks);
-            Assert.AreEqual(2, tasks.Count());
-
-            var t = (from n in tasks
-                     where n.GetType() == typeof(InitializeStorageTask)
-                     select true).FirstOrDefault();
-
-            Assert.IsTrue(t);
-
-            Assert.That(() => t, Throws.TypeOf<ArgumentNullException>());
+            Assert.That(() => f.Tasks<object>("test", null), Throws.TypeOf<ArgumentNullException>());
         }
     }
 }
