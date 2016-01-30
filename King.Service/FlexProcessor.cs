@@ -35,11 +35,12 @@
             }
         }
     }
-    public class FlexSetup<T> : IQueueSetup<T>
+
+    public class QueueSetupAction<T> : QueueSetup<T>
     {
         private readonly ProcessorAction<T> action;
 
-        public FlexSetup(ProcessorAction<T> action)
+        public QueueSetupAction(ProcessorAction<T> action)
         {
             if (null == action)
             {
@@ -48,20 +49,8 @@
 
             this.action = action;
         }
-
-        public string Name
-        {
-            get;
-            set;
-        }
-
-        public QueuePriority Priority
-        {
-            get;
-            set;
-        }
-
-        public Func<IProcessor<T>> Processor
+        
+        public override Func<IProcessor<T>> Processor
         {
             get
             {
@@ -69,27 +58,24 @@
             }
         }
     }
-
-    //public class QueueBinding<T>
-    //{
-    //    public ProcessorAction<T> Action;
-    //    public string QueueName;
-    //}
-
-
-    public class Factory
+    
+    public class TaskFactory
     {
+        public IEnumerable<IRunnable> ALlTasks()
+        {
+            var df = new DequeueFactory("");
+            var qsa = new QueueSetupAction<object>(async (obj) => { return await Task.FromResult<bool>(true); })
+            {
+                Priority = QueuePriority.High,
+                Name = "happy",
+            };
+            yield return df.Tasks(qsa);
+        }
         public void Inline()
         {
             new FlexProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); } );
         }
-
-        public IEnumerable<IRunnable> Create<T>(IQueueSetup<T> setup)
-        {
-            var df = new DequeueFactory();
-            return df.Tasks<T>(setup.Name, setup.Processor, setup.Priority);
-        }
-
+        
         public IProcessor<T> Create<T>(ProcessorAction<T> action)
         {
             return new FlexProcessor<T>(action);
