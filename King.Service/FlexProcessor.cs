@@ -64,12 +64,14 @@
         public IEnumerable<IRunnable> ALlTasks()
         {
             var df = new DequeueFactory("");
+
             var qsa = new QueueSetupAction<object>(async (obj) => { return await Task.FromResult<bool>(true); })
             {
                 Priority = QueuePriority.High,
                 Name = "happy",
             };
-            yield return df.Tasks(qsa);
+
+            return df.Tasks(qsa);
         }
         public void Inline()
         {

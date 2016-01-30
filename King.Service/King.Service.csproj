@@ -94,6 +94,7 @@
     <Compile Include="Data\StorageDequeueBatchDynamic.cs" />
     <Compile Include="Data\DequeueFactory.cs" />
     <Compile Include="Data\StorageQueueAutoScaler.cs" />
+    <Compile Include="FlexProcessor.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Scalability\QueueThroughput.cs" />
     <Compile Include="Timing\TimingTracker.cs" />
