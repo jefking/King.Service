@@ -1,12 +1,12 @@
 ﻿namespace King.Service.CloudService.Role
 {
-    using System.Collections.Generic;
     using King.Azure.Data;
     using King.Service;
     using King.Service.CloudService.Role.Queue;
     using King.Service.CloudService.Role.Scalable;
     using King.Service.Data;
-    
+    using System.Collections.Generic;
+
     public class Factory : ITaskFactory<Configuration>
     {
         public IEnumerable<IRunnable> Tasks(Configuration config)
