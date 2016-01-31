@@ -57,25 +57,37 @@
         }
     }
 
-    public class QueueProcessor<T, Y> : QueueSetup<T>
+    public class QueueProcessor<T, Y> : QueueSetup<T>//Why Can't T be inferred from Y?
         where Y : IProcessor<T>, new()
     {
         public override Func<IProcessor<T>> Processor
         {
             get
             {
-                return () => { return new Y()};
+                return () => { return new Y(); };
             }
         }
     }
 
-    public class HappyProcessor : IProcessor<object> { }
+    public class HappyProcessor : IProcessor<object>
+    {
+        public Task<bool> Process(object data)
+        {
+            throw new NotImplementedException();
+        }
+    }
 
     public class TaskFactory
     {
         public IEnumerable<IRunnable> ALlTasks()
         {
             var df = new DequeueFactory("");
+
+            var qp = new QueueProcessor<object, HappyProcessor>() //Easiest to test.
+            {
+                Priority = QueuePriority.High,
+                Name = "Killer"
+            };
 
             var qa = new QueueAction<object>()
             {
@@ -88,14 +100,9 @@
             {
                 Name = "NewQueue",
                 Priority = QueuePriority.High,
-                Processor = () => { return  new FlexProcessor<object>(null); },
+                Processor = () => { return  new FlexProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); }); },
             };
-
-            var qp = new QueueProcessor<object, FlexProcessor<object>>()
-            {
-
-            };
-
+            
             return df.Tasks(qa);
         }
 
