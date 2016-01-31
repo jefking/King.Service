@@ -51,7 +51,7 @@
         }
     }
 
-    public class QueueProcessor<Y, T> : QueueSetup<T>
+    public class QueueSetupProcessor<Y, T> : QueueSetup<T>
         where Y : IProcessor<T>, new()
     {
         public override Func<IProcessor<T>> Processor
@@ -79,7 +79,7 @@
 
             //SHARD Queue; sender and reciever needs to be setup.
 
-            var qp = new QueueProcessor<HappyProcessor, object>() //Easiest to test.
+            var qp = new QueueSetupProcessor<HappyProcessor, object>() //Easiest to test.
             {
                 Priority = QueuePriority.High,
                 Name = "ProcessorInline"
