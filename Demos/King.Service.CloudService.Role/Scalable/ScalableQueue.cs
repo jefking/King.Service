@@ -15,7 +15,7 @@
 
         public override IEnumerable<IScalable> ScaleUnit(Configuration config)
         {
-            yield return new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.ScalableQueueName, config.ConnectionString)));
+            yield return new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.FastQueueName, config.ConnectionString)));
         }
     }
 }

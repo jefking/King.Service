@@ -13,7 +13,7 @@
             {
                 ConnectionString = "UseDevelopmentStorage=true;",
                 TableName = "table",
-                QueueName = "queue",
+                GenericQueueName = "queue",
                 ContainerName = "container",
             };
 
