@@ -18,14 +18,6 @@
             var table = new TableStorage(config.TableName, config.ConnectionString);
             yield return new InitializeStorageTask(table);
 
-            // Initialize Queue; creates queue if it doesn't already exist
-            var queue = new StorageQueue(config.QueueName, config.ConnectionString);
-            yield return new InitializeStorageTask(queue);
-            var scalableQueue = new StorageQueue(config.ScalableQueueName, config.ConnectionString);
-            yield return new InitializeStorageTask(scalableQueue);
-            var dynamicQueue = new StorageQueue(config.DynamicQueueName, config.ConnectionString);
-            yield return new InitializeStorageTask(dynamicQueue);
-
             // Initialize Container; creates container if it doesn't already exist
             var container = new Container(config.ContainerName, config.ConnectionString);
             yield return new InitializeStorageTask(container);
@@ -55,35 +47,43 @@
             yield return new Adaptive();
 
             //Dequeue task, Backoff behavior
-            yield return new BackoffRunner(new CompanyDequeuer(queue));
+            yield return new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.QueueName, config.ConnectionString)));
 
             //Dequeue task, Adaptive behavior
-            yield return new AdaptiveRunner(new CompanyDequeuer(queue));
+            yield return new AdaptiveRunner(new CompanyDequeuer(new StorageQueue(config.QueueName, config.ConnectionString)));
 
             //Dequeue task, Recurring behavior
-            yield return new RecurringRunner(new CompanyDequeuer(queue));
+            yield return new RecurringRunner(new CompanyDequeuer(new StorageQueue(config.QueueName, config.ConnectionString)));
 
             //Auto Scaling Task
             yield return new DynamicScaler(config);
 
-            //Auto Scaling Dequeue Task
-            yield return new ScalableQueue(scalableQueue, config);
-
-            //Auto Batch Size Dequeue Task
-            yield return new AdaptiveRunner(new StorageDequeueBatchDynamic<CompanyModel>(config.DynamicQueueName, config.ConnectionString, new CompanyProcessor()));
+            var scalableSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
+            {
+                Priority = QueuePriority.High,
+                Name = config.ScalableQueueName,
+            };
+            var dynamicSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
+            {
+                Priority = QueuePriority.Medium,
+                Name = config.DynamicQueueName,
+            };
+            var factSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
+            {
+                Name = config.FactoryQueueName,
+            };
 
             //Dynamic Batch Size, Frequency, Threads (and queue creation)
             var f = new DequeueFactory(config.ConnectionString);
-            
-            foreach (var t in f.Tasks(config.FactoryQueueName, () => { return new CompanyProcessor(); }, QueuePriority.Medium))
+            foreach (var t in f.Tasks(new [] { scalableSetup, dynamicSetup, factSetup } ))
             {
                 yield return t;
             }
 
             //Tasks for Queuing (Demo purposes)
-            yield return new CompanyQueuer(queue);
-            yield return new CompanyQueuer(scalableQueue);
-            yield return new CompanyQueuer(dynamicQueue);
+            yield return new CompanyQueuer(new StorageQueue(config.QueueName, config.ConnectionString));
+            yield return new CompanyQueuer(new StorageQueue(config.ScalableQueueName, config.ConnectionString));
+            yield return new CompanyQueuer(new StorageQueue(config.DynamicQueueName, config.ConnectionString));
             yield return new CompanyQueuer(new StorageQueue(config.FactoryQueueName, config.ConnectionString));
         }
     }
