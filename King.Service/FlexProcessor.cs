@@ -6,13 +6,13 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public delegate Task<bool> ProcessorAction<T>(T data);
+    public delegate Task<bool> QueueActivity<T>(T data);
 
-    public class FlexProcessor<T> : IProcessor<T>
+    public class ActionProcessor<T> : IProcessor<T>
     {
-        private readonly ProcessorAction<T> action;
+        private readonly QueueActivity<T> action;
 
-        public FlexProcessor(ProcessorAction<T> action)
+        public ActionProcessor(QueueActivity<T> action)
         {
             if (null == action)
             {
@@ -38,11 +38,7 @@
 
     public class QueueAction<T> : QueueSetup<T>
     {
-        public QueueAction()
-        {
-        }
-
-        public virtual ProcessorAction<T> Action
+        public virtual QueueActivity<T> Action
         {
             get;
             set;
@@ -52,12 +48,12 @@
         {
             get
             {
-                return () => { return new FlexProcessor<T>(this.Action); };
+                return () => { return new ActionProcessor<T>(this.Action); };
             }
         }
     }
 
-    public class QueueProcessor<T, Y> : QueueSetup<T>//Why Can't T be inferred from Y?
+    public class QueueProcessor<Y, T> : QueueSetup<T>
         where Y : IProcessor<T>, new()
     {
         public override Func<IProcessor<T>> Processor
@@ -83,38 +79,39 @@
         {
             var df = new DequeueFactory("");
 
-            var qp = new QueueProcessor<object, HappyProcessor>() //Easiest to test.
+            //SHARD Queue; sender and reciever needs to be setup.
+
+            var qp = new QueueProcessor<HappyProcessor, object>() //Easiest to test.
             {
                 Priority = QueuePriority.High,
-                Name = "Killer"
+                Name = "ProcessorInline"
             };
 
             var qa = new QueueAction<object>()
             {
                 Priority = QueuePriority.High,
-                Name = "OldQueue",
+                Name = "MethodPassed",
                 Action = async (obj) => { return await Task.FromResult<bool>(true); },
             };
 
             var qs = new QueueSetup<object>()
             {
-                Name = "NewQueue",
+                Name = "FlexPassed",
                 Priority = QueuePriority.High,
-                Processor = () => { return  new FlexProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); }); },
+                Processor = () => { return  new ActionProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); }); },
             };
             
             return df.Tasks(qa);
         }
 
-
         public void Inline()
         {
-            new FlexProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); } );
+            new ActionProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); } );
         }
         
-        public IProcessor<T> Create<T>(ProcessorAction<T> action)
+        public IProcessor<T> Create<T>(QueueActivity<T> action)
         {
-            return new FlexProcessor<T>(action);
+            return new ActionProcessor<T>(action);
         }
     }
 }
