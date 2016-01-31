@@ -1,9 +1,9 @@
 ﻿namespace King.Service.Tests.Data
 {
-    using System;
     using King.Azure.Data;
     using King.Service.Data;
     using NUnit.Framework;
+    using System;
     using System.Threading.Tasks;
 
     [TestFixture]
