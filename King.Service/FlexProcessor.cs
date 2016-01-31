@@ -5,35 +5,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    public class ActionProcessor<T> : IProcessor<T>
-    {
-        private readonly QueueActivity<T> action;
-
-        public ActionProcessor(QueueActivity<T> action)
-        {
-            if (null == action)
-            {
-                throw new ArgumentNullException();
-            }
-
-            this.action = action;
-        }
-
-        public virtual Task<bool> Process(T data)
-        {
-            var handle = this.action;
-            if (null != handle)
-            {
-                return handle(data);
-            }
-            else
-            {
-                throw new InvalidOperationException();
-            }
-        }
-    }
-
+    
     public class QueueAction<T> : QueueSetup<T>
     {
         public virtual QueueActivity<T> Action
@@ -71,7 +43,7 @@
         }
     }
 
-    public class TaskFactory
+    public class TaskFactoryTesting
     {
         public IEnumerable<IRunnable> ALlTasks()
         {
