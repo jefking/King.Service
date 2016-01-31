@@ -31,18 +31,16 @@
         [Test]
         public void Process()
         {
-            var random = new Random();
-            var id = random.Next();
-            var init = id;
+            var gotCalled = false;
             var ap = new ActionProcessor<int>(async (i) =>
             {
-                i++;
+                gotCalled = true;
                 return await Task.FromResult<bool>(true);
             });
 
-            ap.Process(id).Wait();
+            ap.Process(0).Wait();
 
-            Assert.AreEqual(init + 1, id);
+            Assert.IsTrue(gotCalled);
         }
     }
 }

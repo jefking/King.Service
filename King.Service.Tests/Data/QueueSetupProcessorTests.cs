@@ -28,7 +28,7 @@
         [Test]
         public void IsIQueueSetup()
         {
-            Assert.IsNotNull(new QueueSetupProcessor<TestProcessor, object>() as IProcessor<object>);
+            Assert.IsNotNull(new QueueSetupProcessor<TestProcessor, object>() as QueueSetup<object>);
         }
         
         [Test]
