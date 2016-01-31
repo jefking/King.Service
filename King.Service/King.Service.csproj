@@ -85,6 +85,7 @@
   <ItemGroup>
     <Compile Include="AdaptiveRunner.cs" />
     <Compile Include="AutoScaler.cs" />
+    <Compile Include="Data\Delegates.cs" />
     <Compile Include="Data\DequeueBatchDynamic.cs" />
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Data\Enums.cs" />

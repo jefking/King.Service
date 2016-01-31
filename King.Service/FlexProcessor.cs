@@ -6,8 +6,6 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public delegate Task<bool> QueueActivity<T>(T data);
-
     public class ActionProcessor<T> : IProcessor<T>
     {
         private readonly QueueActivity<T> action;
@@ -22,7 +20,7 @@
             this.action = action;
         }
 
-        public Task<bool> Process(T data)
+        public virtual Task<bool> Process(T data)
         {
             var handle = this.action;
             if (null != handle)
