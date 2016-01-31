@@ -5,23 +5,6 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    
-    public class QueueAction<T> : QueueSetup<T>
-    {
-        public virtual QueueActivity<T> Action
-        {
-            get;
-            set;
-        }
-
-        public override Func<IProcessor<T>> Processor
-        {
-            get
-            {
-                return () => { return new ActionProcessor<T>(this.Action); };
-            }
-        }
-    }
 
     public class QueueSetupProcessor<Y, T> : QueueSetup<T>
         where Y : IProcessor<T>, new()
@@ -61,7 +44,7 @@
             {
                 Priority = QueuePriority.High,
                 Name = "MethodPassed",
-                Action = async (obj) => { return await Task.FromResult<bool>(true); },
+                Activity = async (obj) => { return await Task.FromResult<bool>(true); },
             };
 
             var qs = new QueueSetup<object>()
