@@ -5,19 +5,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-
-    public class QueueSetupProcessor<Y, T> : QueueSetup<T>
-        where Y : IProcessor<T>, new()
-    {
-        public override Func<IProcessor<T>> Processor
-        {
-            get
-            {
-                return () => { return new Y(); };
-            }
-        }
-    }
-
+    
     public class HappyProcessor : IProcessor<object>
     {
         public Task<bool> Process(object data)
