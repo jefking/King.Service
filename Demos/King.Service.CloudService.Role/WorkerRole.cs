@@ -29,10 +29,10 @@ namespace King.Service.CloudService.Role
                 ConnectionString = "UseDevelopmentStorage=true;",
                 TableName = "table",
                 GenericQueueName = "queue",
-                ModerateQueueName = "batchsizing",
-                FastQueueName = "scalequeue",
                 ContainerName = "container",
-                SlowQueueName = "super",
+                FastQueueName = "fast",
+                ModerateQueueName = "moderate",
+                SlowQueueName = "slow",
             };
 
             return this.manager.OnStart(config);
