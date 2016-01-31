@@ -101,17 +101,7 @@
                 Processor = () => { return  new ActionProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); }); },
             };
             
-            return df.Tasks(qa);
-        }
-
-        public void Inline()
-        {
-            new ActionProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); } );
-        }
-        
-        public IProcessor<T> Create<T>(QueueActivity<T> action)
-        {
-            return new ActionProcessor<T>(action);
+            return df.Tasks(new[] { qp, qa, qs });
         }
     }
 }
