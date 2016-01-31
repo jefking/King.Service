@@ -1,9 +1,9 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
     using System;
     using System.Diagnostics;
     using System.Timers;
-    using King.Service.Timing;
 
     /// <summary>
     /// Recurring Task

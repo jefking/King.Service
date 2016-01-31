@@ -1,10 +1,10 @@
 ﻿namespace King.Service
 {
+    using King.Service.Scalability;
+    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using King.Service.Scalability;
-    using King.Service.Timing;
 
     /// <summary>
     /// Task Auto Scaler

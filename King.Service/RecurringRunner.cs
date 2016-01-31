@@ -1,7 +1,5 @@
 ﻿namespace King.Service
 {
-    using King.Service.Timing;
-
     /// <summary>
     /// Recurring Runner
     /// </summary>
