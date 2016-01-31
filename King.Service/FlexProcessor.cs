@@ -36,43 +36,70 @@
         }
     }
 
-    public class QueueSetupAction<T> : QueueSetup<T>
+    public class QueueAction<T> : QueueSetup<T>
     {
-        private readonly ProcessorAction<T> action;
-
-        public QueueSetupAction(ProcessorAction<T> action)
+        public QueueAction()
         {
-            if (null == action)
-            {
-                throw new ArgumentNullException();
-            }
-
-            this.action = action;
         }
-        
+
+        public virtual ProcessorAction<T> Action
+        {
+            get;
+            set;
+        }
+
         public override Func<IProcessor<T>> Processor
         {
             get
             {
-                return () => { return new FlexProcessor<T>(action); };
+                return () => { return new FlexProcessor<T>(this.Action); };
             }
         }
     }
-    
+
+    public class QueueProcessor<T, Y> : QueueSetup<T>
+        where Y : IProcessor<T>, new()
+    {
+        public override Func<IProcessor<T>> Processor
+        {
+            get
+            {
+                return () => { return new Y()};
+            }
+        }
+    }
+
+    public class HappyProcessor : IProcessor<object> { }
+
     public class TaskFactory
     {
         public IEnumerable<IRunnable> ALlTasks()
         {
             var df = new DequeueFactory("");
 
-            var qsa = new QueueSetupAction<object>(async (obj) => { return await Task.FromResult<bool>(true); })
+            var qa = new QueueAction<object>()
             {
                 Priority = QueuePriority.High,
-                Name = "happy",
+                Name = "OldQueue",
+                Action = async (obj) => { return await Task.FromResult<bool>(true); },
             };
 
-            return df.Tasks(qsa);
+            var qs = new QueueSetup<object>()
+            {
+                Name = "NewQueue",
+                Priority = QueuePriority.High,
+                Processor = () => { return  new FlexProcessor<object>(null); },
+            };
+
+            var qp = new QueueProcessor<object, FlexProcessor<object>>()
+            {
+
+            };
+
+            return df.Tasks(qa);
         }
+
+
         public void Inline()
         {
             new FlexProcessor<object>(async (obj) => { return await Task.FromResult<bool>(true); } );
