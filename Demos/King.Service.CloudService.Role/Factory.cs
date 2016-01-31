@@ -47,13 +47,13 @@
             yield return new Adaptive();
 
             //Dequeue task, Backoff behavior
-            yield return new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.QueueName, config.ConnectionString)));
+            yield return new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString)));
 
             //Dequeue task, Adaptive behavior
-            yield return new AdaptiveRunner(new CompanyDequeuer(new StorageQueue(config.QueueName, config.ConnectionString)));
+            yield return new AdaptiveRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString)));
 
             //Dequeue task, Recurring behavior
-            yield return new RecurringRunner(new CompanyDequeuer(new StorageQueue(config.QueueName, config.ConnectionString)));
+            yield return new RecurringRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString)));
 
             //Auto Scaling Task
             yield return new DynamicScaler(config);
@@ -61,19 +61,18 @@
             var scalableSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
             {
                 Priority = QueuePriority.High,
-                Name = config.ScalableQueueName,
+                Name = config.FastQueueName,
             };
             var dynamicSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
             {
                 Priority = QueuePriority.Medium,
-                Name = config.DynamicQueueName,
+                Name = config.ModerateQueueName,
             };
             var factSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
             {
-                Name = config.FactoryQueueName,
+                Name = config.SlowQueueName,
             };
-
-            //Dynamic Batch Size, Frequency, Threads (and queue creation)
+            
             var f = new DequeueFactory(config.ConnectionString);
             foreach (var t in f.Tasks(new [] { scalableSetup, dynamicSetup, factSetup } ))
             {
@@ -81,10 +80,10 @@
             }
 
             //Tasks for Queuing (Demo purposes)
-            yield return new CompanyQueuer(new StorageQueue(config.QueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.ScalableQueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.DynamicQueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.FactoryQueueName, config.ConnectionString));
+            yield return new CompanyQueuer(new StorageQueue(config.GenericQueueName, config.ConnectionString));
+            yield return new CompanyQueuer(new StorageQueue(config.FastQueueName, config.ConnectionString));
+            yield return new CompanyQueuer(new StorageQueue(config.ModerateQueueName, config.ConnectionString));
+            yield return new CompanyQueuer(new StorageQueue(config.SlowQueueName, config.ConnectionString));
         }
     }
 }
