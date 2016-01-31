@@ -1,7 +1,6 @@
 ﻿namespace King.Service.Data
 {
     using Azure.Data;
-    using Service.Data;
     using System;
 
     /// <summary>

@@ -125,6 +125,7 @@
     <Compile Include="Data\QueueActionTests.cs" />
     <Compile Include="Data\QueueAutoScalerTests.cs" />
     <Compile Include="Data\Model\QueueConnectionTests.cs" />
+    <Compile Include="Data\QueueSetupProcessorTests.cs" />
     <Compile Include="Data\QueueSetupTests.cs" />
     <Compile Include="Data\StorageDequeueBatchDynamicTests.cs" />
     <Compile Include="Data\StorageDequeueBatchTests.cs" />
