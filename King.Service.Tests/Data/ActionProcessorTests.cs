@@ -27,8 +27,7 @@
         {
             Assert.That(() => new ActionProcessor<object>(null), Throws.TypeOf<ArgumentNullException>());
         }
-
-
+        
         [Test]
         public void Process()
         {
