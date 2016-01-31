@@ -42,5 +42,17 @@
 
             Assert.IsNotNull(qc.Processor);
         }
+
+        [Test]
+        public void ProcessorValue()
+        {
+            var expected = new QueueActivity<object>(async (obj) => { return await Task.FromResult<bool>(true); });
+            var qc = new QueueAction<object>()
+            {
+                Activity = expected,
+            };
+
+            Assert.IsNotNull(qc.Processor() as ActionProcessor<object>);
+        }
     }
 }
