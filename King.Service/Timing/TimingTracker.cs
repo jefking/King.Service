@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Timing
 {
-    using System;
     using King.Service.Data;
+    using System;
 
     /// <summary>
     /// Timing Tracker
