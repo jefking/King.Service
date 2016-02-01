@@ -11,72 +11,63 @@
     {
         public IEnumerable<IRunnable> Tasks(Configuration config)
         {
+            var tasks = new List<IRunnable>();
+
             // Initialization task
-            yield return new InitTask();
+            tasks.Add(new InitTask());
 
             // Initialize Table; creates table if it doesn't already exist
-            var table = new TableStorage(config.TableName, config.ConnectionString);
-            yield return new InitializeStorageTask(table);
+            tasks.Add(new InitializeStorageTask(new TableStorage(config.TableName, config.ConnectionString)));
 
             // Initialize Container; creates container if it doesn't already exist
-            var container = new Container(config.ContainerName, config.ConnectionString);
-            yield return new InitializeStorageTask(container);
+            tasks.Add(new InitializeStorageTask(new Container(config.ContainerName, config.ConnectionString)));
 
             //basic task
-            yield return new Recurring();
+            tasks.Add(new Recurring());
 
             //Cordinated Tasks between Instances
             var task = new Coordinated(config.ConnectionString);
 
             // Add once to ensure that Table is created for Instances to communicate with
-            foreach (var t in task.Tasks())
-            {
-                yield return t;
-            }
+            tasks.AddRange(task.Tasks());
 
             // Add your coordinated task
-            yield return task;
+            tasks.Add(task);
 
             //Task once daily on the (specified/current) hour
-            yield return new OnceDaily(config.ConnectionString);
+            tasks.Add(new OnceDaily(config.ConnectionString));
 
             //Backoff task
-            yield return new Backoff();
+            tasks.Add(new Backoff());
 
             //Self governing task
-            yield return new Adaptive();
+            tasks.Add(new Adaptive());
 
             //Dequeue task, Backoff behavior
-            yield return new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString)));
+            tasks.Add(new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString))));
 
             //Dequeue task, Adaptive behavior
-            yield return new AdaptiveRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString)));
+            tasks.Add(new AdaptiveRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString))));
 
             //Dequeue task, Recurring behavior
-            yield return new RecurringRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString)));
+            tasks.Add(new RecurringRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString))));
 
             //Auto Scaling Task
-            yield return new DynamicScaler(config);
+            tasks.Add(new DynamicScaler(config));
             
+            ///Dequeue Tasks Example
             var f = new DequeueFactory(config.ConnectionString);
-            foreach (var t in f.Dequeue<CompanyProcessor, CompanyModel>(config.SlowQueueName))
-            {
-                yield return t;
-            }
-            foreach (var t in f.Dequeue<CompanyProcessor, CompanyModel>(config.ModerateQueueName, QueuePriority.Medium))
-            {
-                yield return t;
-            }
-            foreach (var t in f.Dequeue<CompanyProcessor, CompanyModel>(config.FastQueueName, QueuePriority.High))
-            {
-                yield return t;
-            }
+            tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.SlowQueueName));
+            tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.ModerateQueueName, QueuePriority.Medium));
+            tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.FastQueueName, QueuePriority.High));
 
             //Tasks for Queuing (Demo purposes)
-            yield return new CompanyQueuer(new StorageQueue(config.GenericQueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.FastQueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.ModerateQueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.SlowQueueName, config.ConnectionString));
+            tasks.Add(new CompanyQueuer(new StorageQueue(config.GenericQueueName, config.ConnectionString)));
+            tasks.Add(new CompanyQueuer(new StorageQueue(config.FastQueueName, config.ConnectionString)));
+            tasks.Add(new CompanyQueuer(new StorageQueue(config.ModerateQueueName, config.ConnectionString)));
+            tasks.Add(new CompanyQueuer(new StorageQueue(config.SlowQueueName, config.ConnectionString)));
+
+            return tasks;
         }
     }
 }
