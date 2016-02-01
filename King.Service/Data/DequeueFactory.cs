@@ -144,6 +144,31 @@
 
             return new StorageQueueAutoScaler<T>(queue, connection, this.throughput, messagesPerScaleUnit, scale.Minimum, scale.Maximum, checkScaleInMinutes);
         }
+
+        /// <summary>
+        /// Dequeue Task Set
+        /// </summary>
+        /// <typeparam name="Y">Processor</typeparam>
+        /// <typeparam name="T">Model</typeparam>
+        /// <param name="name">Name</param>
+        /// <param name="priority">Priority</param>
+        /// <returns></returns>
+        public IEnumerable<IRunnable> Dequeue<T, Y>(string name, QueuePriority priority = QueuePriority.Low)
+            where T : IProcessor<Y>, new()
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("name");
+            }
+
+            var setup = new QueueSetupProcessor<T, Y>()
+            {
+                Priority = QueuePriority.Medium,
+                Name = name,
+            };
+
+            return this.Tasks<Y>(setup);
+        }
         #endregion
     }
 }
