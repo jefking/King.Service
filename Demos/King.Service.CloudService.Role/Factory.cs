@@ -59,11 +59,11 @@
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.FastQueueName, QueuePriority.High));
             
             //Cordinated Tasks between Instances
-            var task = new Coordinated(config.ConnectionString);
+            var coordinated = new Coordinated(config.ConnectionString);
             // Add once to ensure that Table is created for Instances to communicate with
-            tasks.AddRange(task.Tasks());
+            tasks.AddRange(coordinated.Tasks());
             // Add your coordinated task
-            tasks.Add(task);
+            tasks.Add(coordinated);
 
             return tasks;
         }
