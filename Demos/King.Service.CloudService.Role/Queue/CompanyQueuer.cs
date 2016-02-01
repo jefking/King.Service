@@ -14,10 +14,10 @@
         private int id = 0;
         private readonly IStorageQueue queue = null;
 
-        public CompanyQueuer(IStorageQueue queue)
+        public CompanyQueuer(string name, string connection)
             :base(10)
         {
-            this.queue = queue;
+            this.queue = new StorageQueue(name, connection);
         }
 
         public override void Run()

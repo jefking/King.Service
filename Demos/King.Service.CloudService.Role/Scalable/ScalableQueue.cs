@@ -1,10 +1,10 @@
 ﻿namespace King.Service.CloudService.Role.Scalable
 {
-    using System.Collections.Generic;
     using King.Azure.Data;
     using King.Service;
     using King.Service.CloudService.Role.Queue;
     using King.Service.Data;
+    using System.Collections.Generic;
 
     public class ScalableQueue : QueueAutoScaler<Configuration>
     {
@@ -15,7 +15,7 @@
 
         public override IEnumerable<IScalable> ScaleUnit(Configuration config)
         {
-            yield return new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.FastQueueName, config.ConnectionString)));
+            yield return new BackoffRunner(new CompanyDequeuer(config.FastQueueName, config.ConnectionString));
         }
     }
 }

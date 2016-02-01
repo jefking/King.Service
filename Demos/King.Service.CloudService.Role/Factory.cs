@@ -34,22 +34,22 @@
                 new Adaptive(),
 
                 //Dequeue task, Backoff behavior
-                new BackoffRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString))),
+                new BackoffRunner(new CompanyDequeuer(config.GenericQueueName, config.ConnectionString)),
 
                 //Dequeue task, Adaptive behavior
-                new AdaptiveRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString))),
+                new AdaptiveRunner(new CompanyDequeuer(config.GenericQueueName, config.ConnectionString)),
 
                 //Dequeue task, Recurring behavior
-                new RecurringRunner(new CompanyDequeuer(new StorageQueue(config.GenericQueueName, config.ConnectionString))),
+                new RecurringRunner(new CompanyDequeuer(config.GenericQueueName, config.ConnectionString)),
 
                 //Auto Scaling Task
                 new DynamicScaler(config),
             
                 //Tasks for Queuing (Demo purposes)
-                new CompanyQueuer(new StorageQueue(config.GenericQueueName, config.ConnectionString)),
-                new CompanyQueuer(new StorageQueue(config.FastQueueName, config.ConnectionString)),
-                new CompanyQueuer(new StorageQueue(config.ModerateQueueName, config.ConnectionString)),
-                new CompanyQueuer(new StorageQueue(config.SlowQueueName, config.ConnectionString)),
+                new CompanyQueuer(config.GenericQueueName, config.ConnectionString),
+                new CompanyQueuer(config.FastQueueName, config.ConnectionString),
+                new CompanyQueuer(config.ModerateQueueName, config.ConnectionString),
+                new CompanyQueuer(config.SlowQueueName, config.ConnectionString),
             });
 
             ///Dequeue Tasks Example
