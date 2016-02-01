@@ -126,7 +126,9 @@
 
             if (null == this.tasks)
             {
-                var t = this.factory.Tasks(passthrough);
+                var t = (from f in this.factories
+                         select f.Tasks(passthrough)).SelectMany(f => f);
+                
                 if (null != t && t.Any())
                 {
                     Trace.TraceInformation("Tasks loading");
