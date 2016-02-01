@@ -19,11 +19,11 @@
         /// Tasks
         /// </summary>
         protected IReadOnlyCollection<IRunnable> tasks = null;
-
+       
         /// <summary>
-        /// Factory
+        /// Factories
         /// </summary>
-        protected readonly ITaskFactory<T> factory = null;
+        protected readonly IEnumerable<ITaskFactory<T>> factories = null;
         #endregion
 
         #region Constructors
@@ -32,13 +32,21 @@
         /// </summary>
         /// <param name="factory">Task Factory</param>
         public RoleTaskManager(ITaskFactory<T> factory)
+            : this(new[] { factory })
         {
-            if (null == factory)
+        }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="factory">Task Factories</param>
+        public RoleTaskManager(IEnumerable<ITaskFactory<T>> factories)
+        {
+            if (null == factories)
             {
-                throw new ArgumentNullException("manager");
+                throw new ArgumentNullException("factories");
             }
 
-            this.factory = factory;
+            this.factories = factories;
         }
 
         /// <summary>
