@@ -66,7 +66,7 @@
         /// <summary>
         /// Tasks
         /// </summary>
-        public IReadOnlyCollection<IRunnable> Tasks
+        public virtual IReadOnlyCollection<IRunnable> Tasks
         {
             get
             {
