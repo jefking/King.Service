@@ -57,24 +57,17 @@
 
             //Auto Scaling Task
             yield return new DynamicScaler(config);
-
-            var scalableSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
-            {
-                Priority = QueuePriority.High,
-                Name = config.FastQueueName,
-            };
-            var dynamicSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
-            {
-                Priority = QueuePriority.Medium,
-                Name = config.ModerateQueueName,
-            };
-            var factSetup = new QueueSetupProcessor<CompanyProcessor, CompanyModel>()
-            {
-                Name = config.SlowQueueName,
-            };
             
             var f = new DequeueFactory(config.ConnectionString);
-            foreach (var t in f.Tasks(new [] { scalableSetup, dynamicSetup, factSetup } ))
+            foreach (var t in f.Dequeue<CompanyProcessor, CompanyModel>(config.SlowQueueName))
+            {
+                yield return t;
+            }
+            foreach (var t in f.Dequeue<CompanyProcessor, CompanyModel>(config.ModerateQueueName, QueuePriority.Medium))
+            {
+                yield return t;
+            }
+            foreach (var t in f.Dequeue<CompanyProcessor, CompanyModel>(config.FastQueueName, QueuePriority.High))
             {
                 yield return t;
             }
