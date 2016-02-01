@@ -18,7 +18,13 @@
         [Test]
         public void ConstructorServiceFactoryNull()
         {
-            Assert.That(() => new RoleTaskManager<object>(null), Throws.TypeOf<ArgumentNullException>());
+            Assert.That(() => new RoleTaskManager<object>((ITaskFactory<object>)null), Throws.TypeOf<ArgumentNullException>());
+        }
+
+        [Test]
+        public void ConstructorServiceFactoriesNull()
+        {
+            Assert.That(() => new RoleTaskManager<object>((IEnumerable<ITaskFactory<object>>)null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
