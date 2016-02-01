@@ -43,6 +43,25 @@
         }
 
         [Test]
+        public void Factories()
+        {
+            var tasks = new List<IRunnable>();
+            var task = Substitute.For<IRunnable>();
+            tasks.Add(task);
+
+            var factory1 = Substitute.For<ITaskFactory<object>>();
+            factory1.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(tasks);
+            var factory2 = Substitute.For<ITaskFactory<object>>();
+            factory2.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(tasks);
+
+            var manager = new RoleTaskManager<object>(new[] { factory1, factory2 });
+            manager.OnStart();
+            manager.Run();
+
+            Assert.AreEqual(2, manager.Tasks.Count);
+        }
+
+        [Test]
         public void Tasks()
         {
             var tasks = new List<IRunnable>();

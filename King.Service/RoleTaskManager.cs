@@ -34,6 +34,10 @@
         public RoleTaskManager(ITaskFactory<T> factory)
             : this(new[] { factory })
         {
+            if (null == factory)
+            {
+                throw new ArgumentNullException("factory");
+            }
         }
         /// <summary>
         /// Constructor
@@ -127,7 +131,8 @@
             if (null == this.tasks)
             {
                 var t = (from f in this.factories
-                         select f.Tasks(passthrough)).SelectMany(f => f);
+                         where f != null
+                         select f.Tasks(passthrough)).Where(f => f != null).SelectMany(f => f);
                 
                 if (null != t && t.Any())
                 {
