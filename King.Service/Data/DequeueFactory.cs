@@ -153,7 +153,7 @@
         /// <param name="name">Name</param>
         /// <param name="priority">Priority</param>
         /// <returns></returns>
-        public IEnumerable<IRunnable> Dequeue<T, Y>(string name, QueuePriority priority = QueuePriority.Low)
+        public virtual IEnumerable<IRunnable> Dequeue<T, Y>(string name, QueuePriority priority = QueuePriority.Low)
             where T : IProcessor<Y>, new()
         {
             if (string.IsNullOrWhiteSpace(name))
