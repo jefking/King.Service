@@ -130,21 +130,21 @@
 
             if (null == this.tasks)
             {
-                var tsks = new List<IRunnable>();
+                var ts = new List<IRunnable>();
 
                 foreach (var t in from f in this.factories select f.Tasks(passthrough))
                 {
                     if (t != null)
                     {
-                        tsks.AddRange(t);
+                        ts.AddRange(t);
                     }
                 }
 
-                if (null != tsks && tsks.Any())
+                if (null != ts && ts.Any())
                 {
                     Trace.TraceInformation("Tasks loading");
 
-                    this.tasks = new ReadOnlyCollection<IRunnable>(tsks.ToList());
+                    this.tasks = new ReadOnlyCollection<IRunnable>(ts.ToList());
 
                     Trace.TraceInformation("Tasks loaded");
                 }
