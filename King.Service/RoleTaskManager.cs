@@ -130,15 +130,7 @@
 
             if (null == this.tasks)
             {
-                var ts = new List<IRunnable>();
-
-                foreach (var t in from f in this.factories select f.Tasks(passthrough))
-                {
-                    if (t != null)
-                    {
-                        ts.AddRange(t);
-                    }
-                }
+                var ts = (from f in this.factories select f.Tasks(passthrough)).Where(t => t != null).SelectMany(t => t);
 
                 if (null != ts && ts.Any())
                 {
