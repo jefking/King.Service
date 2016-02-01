@@ -19,7 +19,7 @@
         /// Tasks
         /// </summary>
         protected IReadOnlyCollection<IRunnable> tasks = null;
-       
+        
         /// <summary>
         /// Factories
         /// </summary>
@@ -142,7 +142,7 @@
                 }
                 else
                 {
-                    Trace.TraceWarning("No tasks loaded from factory?");
+                    Trace.TraceWarning("No tasks loaded from factories?");
                 }
             }
             else
