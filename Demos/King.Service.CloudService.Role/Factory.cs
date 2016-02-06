@@ -79,12 +79,6 @@
             {
                 yield return t;
             }
-
-            //Tasks for Queuing (Demo purposes)
-            yield return new CompanyQueuer(queue);
-            yield return new CompanyQueuer(scalableQueue);
-            yield return new CompanyQueuer(dynamicQueue);
-            yield return new CompanyQueuer(new StorageQueue(config.FactoryQueueName, config.ConnectionString));
         }
     }
 }

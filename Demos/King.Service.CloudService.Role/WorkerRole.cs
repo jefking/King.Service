@@ -1,5 +1,6 @@
 namespace King.Service.CloudService.Role
 {
+    using System.Collections.Generic;
     using Microsoft.WindowsAzure.ServiceRuntime;
 
     public class WorkerRole : RoleEntryPoint
@@ -7,7 +8,7 @@ namespace King.Service.CloudService.Role
         /// <summary>
         /// Role Service Manager
         /// </summary>
-        private readonly IRoleTaskManager<Configuration> manager = new RoleTaskManager<Configuration>(new Factory());
+        private readonly IRoleTaskManager<Configuration> manager = new RoleTaskManager<Configuration>(new ITaskFactory<Configuration>[] { new Factory(), new DataGenerationFactory() });
 
         /// <summary>
         /// Overloaded Role Entry Point Method
