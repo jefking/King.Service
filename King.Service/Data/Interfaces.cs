@@ -154,6 +154,17 @@
         /// <param name="setup">Setup</param>
         /// <returns>Storage Queue Auto Scaler</returns>
         IRunnable Dequeue<T>(IQueueSetup<T> setup);
+
+        /// <summary>
+        /// Dequeue Task Set
+        /// </summary>
+        /// <typeparam name="Y">Processor</typeparam>
+        /// <typeparam name="T">Model</typeparam>
+        /// <param name="name">Name</param>
+        /// <param name="priority">Priority</param>
+        /// <returns></returns>
+        IEnumerable<IRunnable> Dequeue<T, Y>(string name, QueuePriority priority = QueuePriority.Low)
+            where T : IProcessor<Y>, new();
         #endregion
     }
     #endregion

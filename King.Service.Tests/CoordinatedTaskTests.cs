@@ -108,9 +108,9 @@
                 await m.RunAsync();
             }
 
-            coordinator.Received().Check(Arg.Any<Type>());
-            coordinator.Received().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
-            coordinator.Received().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), true);
+            await coordinator.Received().Check(Arg.Any<Type>());
+            await coordinator.Received().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
+            await coordinator.Received().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), true);
         }
 
         [Test]

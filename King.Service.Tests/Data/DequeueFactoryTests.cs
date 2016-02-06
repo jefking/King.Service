@@ -1,12 +1,14 @@
 ﻿namespace King.Service.Tests.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using Azure.Data;
     using King.Service.Data;
     using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class DequeueFactoryTests
@@ -170,6 +172,37 @@
         {
             var f = new DequeueFactory(ConnectionString);
             Assert.That(() => f.Tasks<object>("test", null), Throws.TypeOf<ArgumentNullException>());
+        }
+
+        class HelpP : IProcessor<object>
+        {
+            public Task<bool> Process(object data)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        [Test]
+        public void DequeueCreationDefault()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Dequeue<HelpP, object>("testing");
+
+            Assert.IsNotNull(tasks);
+            Assert.AreEqual(2, tasks.Count());
+
+            var t = (from n in tasks
+                     where n.GetType() == typeof(InitializeStorageTask)
+                     select true).FirstOrDefault();
+
+            Assert.IsTrue(t);
+        }
+
+        [Test]
+        public void DequeueNameNull()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            Assert.That(() => f.Dequeue<HelpP, object>(null), Throws.TypeOf<ArgumentException>());
         }
     }
 }

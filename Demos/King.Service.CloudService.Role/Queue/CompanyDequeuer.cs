@@ -8,8 +8,8 @@
     /// </summary>
     public class CompanyDequeuer : StorageDequeue<CompanyModel>
     {
-        public CompanyDequeuer(IStorageQueue queue)
-            : base(queue, new CompanyProcessor())
+        public CompanyDequeuer(string name, string connection)
+            : base(new StorageQueue(name, connection), new CompanyProcessor())
         {
         }
     }

@@ -1,11 +1,11 @@
 ﻿namespace King.Service
 {
+    using King.Service.Data;
+    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using King.Service.Data;
-    using King.Service.Timing;
 
     /// <summary>
     /// Coordinated Task

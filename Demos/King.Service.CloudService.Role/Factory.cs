@@ -1,90 +1,71 @@
 ﻿namespace King.Service.CloudService.Role
 {
-    using System.Collections.Generic;
     using King.Azure.Data;
     using King.Service;
     using King.Service.CloudService.Role.Queue;
     using King.Service.CloudService.Role.Scalable;
     using King.Service.Data;
-    
+    using System.Collections.Generic;
+
     public class Factory : ITaskFactory<Configuration>
     {
         public IEnumerable<IRunnable> Tasks(Configuration config)
         {
-            // Initialization task
-            yield return new InitTask();
+            var tasks = new List<IRunnable>(new IRunnable[] {
+                // Initialization task
+                new InitTask(),
 
-            // Initialize Table; creates table if it doesn't already exist
-            var table = new TableStorage(config.TableName, config.ConnectionString);
-            yield return new InitializeStorageTask(table);
+                // Initialize Table; creates table if it doesn't already exist
+                new InitializeStorageTask(new TableStorage(config.TableName, config.ConnectionString)),
 
-            // Initialize Queue; creates queue if it doesn't already exist
-            var queue = new StorageQueue(config.QueueName, config.ConnectionString);
-            yield return new InitializeStorageTask(queue);
-            var scalableQueue = new StorageQueue(config.ScalableQueueName, config.ConnectionString);
-            yield return new InitializeStorageTask(scalableQueue);
-            var dynamicQueue = new StorageQueue(config.DynamicQueueName, config.ConnectionString);
-            yield return new InitializeStorageTask(dynamicQueue);
+                // Initialize Container; creates container if it doesn't already exist
+                new InitializeStorageTask(new Container(config.ContainerName, config.ConnectionString)),
 
-            // Initialize Container; creates container if it doesn't already exist
-            var container = new Container(config.ContainerName, config.ConnectionString);
-            yield return new InitializeStorageTask(container);
-
-            //basic task
-            yield return new Recurring();
-
-            //Cordinated Tasks between Instances
-            var task = new Coordinated(config.ConnectionString);
-
-            // Add once to ensure that Table is created for Instances to communicate with
-            foreach (var t in task.Tasks())
-            {
-                yield return t;
-            }
-
-            // Add your coordinated task
-            yield return task;
-
-            //Task once daily on the (specified/current) hour
-            yield return new OnceDaily(config.ConnectionString);
-
-            //Backoff task
-            yield return new Backoff();
-
-            //Self governing task
-            yield return new Adaptive();
-
-            //Dequeue task, Backoff behavior
-            yield return new BackoffRunner(new CompanyDequeuer(queue));
-
-            //Dequeue task, Adaptive behavior
-            yield return new AdaptiveRunner(new CompanyDequeuer(queue));
-
-            //Dequeue task, Recurring behavior
-            yield return new RecurringRunner(new CompanyDequeuer(queue));
-
-            //Auto Scaling Task
-            yield return new DynamicScaler(config);
-
-            //Auto Scaling Dequeue Task
-            yield return new ScalableQueue(scalableQueue, config);
-
-            //Auto Batch Size Dequeue Task
-            yield return new AdaptiveRunner(new StorageDequeueBatchDynamic<CompanyModel>(config.DynamicQueueName, config.ConnectionString, new CompanyProcessor()));
-
-            //Dynamic Batch Size, Frequency, Threads (and queue creation)
-            var f = new DequeueFactory(config.ConnectionString);
+                //basic task
+                new Recurring(),
             
-            foreach (var t in f.Tasks(config.FactoryQueueName, () => { return new CompanyProcessor(); }, QueuePriority.Medium))
-            {
-                yield return t;
-            }
+                //Task once daily on the (specified/current) hour
+                new OnceDaily(config.ConnectionString),
 
-            //Tasks for Queuing (Demo purposes)
-            yield return new CompanyQueuer(queue);
-            yield return new CompanyQueuer(scalableQueue);
-            yield return new CompanyQueuer(dynamicQueue);
-            yield return new CompanyQueuer(new StorageQueue(config.FactoryQueueName, config.ConnectionString));
+                //Backoff task
+                new Backoff(),
+
+                //Self governing task
+                new Adaptive(),
+
+                //Dequeue task, Backoff behavior
+                new BackoffRunner(new CompanyDequeuer(config.GenericQueueName, config.ConnectionString)),
+
+                //Dequeue task, Adaptive behavior
+                new AdaptiveRunner(new CompanyDequeuer(config.GenericQueueName, config.ConnectionString)),
+
+                //Dequeue task, Recurring behavior
+                new RecurringRunner(new CompanyDequeuer(config.GenericQueueName, config.ConnectionString)),
+
+                //Auto Scaling Task
+                new DynamicScaler(config),
+            
+                //Tasks for Queuing (Demo purposes)
+                new CompanyQueuer(config.GenericQueueName, config.ConnectionString),
+                new CompanyQueuer(config.FastQueueName, config.ConnectionString),
+                new CompanyQueuer(config.ModerateQueueName, config.ConnectionString),
+                new CompanyQueuer(config.SlowQueueName, config.ConnectionString),
+            });
+
+            ///Dequeue Tasks Example
+            var f = new DequeueFactory(config.ConnectionString);
+            tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.SlowQueueName));
+            tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.ModerateQueueName, QueuePriority.Medium));
+            tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.FastQueueName, QueuePriority.High));
+            
+            //Cordinated Tasks between Instances
+            var coordinated = new Coordinated(config.ConnectionString);
+            // Add once to ensure that Table is created for Instances to communicate with
+            tasks.AddRange(coordinated.Tasks());
+            // Add your coordinated task
+            tasks.Add(coordinated);
+
+            return tasks;
         }
     }
 }

@@ -65,7 +65,7 @@
 
             Assert.IsTrue(perform);
 
-            table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
+            await table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
         }
 
         [Test]

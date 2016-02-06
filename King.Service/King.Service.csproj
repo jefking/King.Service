@@ -85,12 +85,16 @@
   <ItemGroup>
     <Compile Include="AdaptiveRunner.cs" />
     <Compile Include="AutoScaler.cs" />
+    <Compile Include="Data\ActionProcessor.cs" />
+    <Compile Include="Data\Delegates.cs" />
     <Compile Include="Data\DequeueBatchDynamic.cs" />
     <Compile Include="Data\DequeueBatch.cs" />
     <Compile Include="Data\Enums.cs" />
     <Compile Include="Data\Model\QueueConnection.cs" />
     <Compile Include="Data\ProcessorFunction.cs" />
+    <Compile Include="Data\QueueAction.cs" />
     <Compile Include="Data\QueueSetup.cs" />
+    <Compile Include="Data\QueueSetupProcessor.cs" />
     <Compile Include="Data\StorageDequeueBatchDynamic.cs" />
     <Compile Include="Data\DequeueFactory.cs" />
     <Compile Include="Data\StorageQueueAutoScaler.cs" />

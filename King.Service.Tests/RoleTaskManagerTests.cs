@@ -18,7 +18,13 @@
         [Test]
         public void ConstructorServiceFactoryNull()
         {
-            Assert.That(() => new RoleTaskManager<object>(null), Throws.TypeOf<ArgumentNullException>());
+            Assert.That(() => new RoleTaskManager<object>((ITaskFactory<object>)null), Throws.TypeOf<ArgumentNullException>());
+        }
+
+        [Test]
+        public void ConstructorServiceFactoriesNull()
+        {
+            Assert.That(() => new RoleTaskManager<object>((IEnumerable<ITaskFactory<object>>)null), Throws.TypeOf<ArgumentNullException>());
         }
 
         [Test]
@@ -34,6 +40,25 @@
             var factory = Substitute.For<ITaskFactory<object>>();
             var rtm = new RoleTaskManager<object>(factory);
             Assert.IsNull(rtm.Tasks);
+        }
+
+        [Test]
+        public void Factories()
+        {
+            var tasks = new List<IRunnable>();
+            var task = Substitute.For<IRunnable>();
+            tasks.Add(task);
+
+            var factory1 = Substitute.For<ITaskFactory<object>>();
+            factory1.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(tasks);
+            var factory2 = Substitute.For<ITaskFactory<object>>();
+            factory2.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(tasks);
+
+            var manager = new RoleTaskManager<object>(new[] { factory1, factory2 });
+            manager.OnStart();
+            manager.Run();
+
+            Assert.AreEqual(2, manager.Tasks.Count);
         }
 
         [Test]

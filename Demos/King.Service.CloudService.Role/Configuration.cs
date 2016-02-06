@@ -13,22 +13,22 @@
             get;
             set;
         }
-        public string QueueName
+        public string GenericQueueName
         {
             get;
             set;
         }
-        public string ScalableQueueName
+        public string FastQueueName
         {
             get;
             set;
         }
-        public string DynamicQueueName
+        public string ModerateQueueName
         {
             get;
             set;
         }
-        public string FactoryQueueName
+        public string SlowQueueName
         {
             get;
             set;

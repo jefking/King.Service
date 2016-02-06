@@ -1,5 +1,6 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -7,7 +8,6 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using King.Service.Timing;
 
     /// <summary>
     /// Role Task Manager
@@ -19,11 +19,11 @@
         /// Tasks
         /// </summary>
         protected IReadOnlyCollection<IRunnable> tasks = null;
-
+        
         /// <summary>
-        /// Factory
+        /// Factories
         /// </summary>
-        protected readonly ITaskFactory<T> factory = null;
+        protected readonly IEnumerable<ITaskFactory<T>> factories = null;
         #endregion
 
         #region Constructors
@@ -32,13 +32,25 @@
         /// </summary>
         /// <param name="factory">Task Factory</param>
         public RoleTaskManager(ITaskFactory<T> factory)
+            : this(new[] { factory })
         {
             if (null == factory)
             {
-                throw new ArgumentNullException("manager");
+                throw new ArgumentNullException("factory");
+            }
+        }
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="factory">Task Factories</param>
+        public RoleTaskManager(IEnumerable<ITaskFactory<T>> factories)
+        {
+            if (null == factories)
+            {
+                throw new ArgumentNullException("factories");
             }
 
-            this.factory = factory;
+            this.factories = factories;
         }
 
         /// <summary>
@@ -54,7 +66,7 @@
         /// <summary>
         /// Tasks
         /// </summary>
-        public IReadOnlyCollection<IRunnable> Tasks
+        public virtual IReadOnlyCollection<IRunnable> Tasks
         {
             get
             {
@@ -118,18 +130,19 @@
 
             if (null == this.tasks)
             {
-                var t = this.factory.Tasks(passthrough);
-                if (null != t && t.Any())
+                var ts = (from f in this.factories select f.Tasks(passthrough)).Where(t => t != null).SelectMany(t => t);
+
+                if (null != ts && ts.Any())
                 {
                     Trace.TraceInformation("Tasks loading");
 
-                    this.tasks = new ReadOnlyCollection<IRunnable>(t.ToList());
+                    this.tasks = new ReadOnlyCollection<IRunnable>(ts.ToList());
 
                     Trace.TraceInformation("Tasks loaded");
                 }
                 else
                 {
-                    Trace.TraceWarning("No tasks loaded from factory?");
+                    Trace.TraceWarning("No tasks loaded from factories?");
                 }
             }
             else
