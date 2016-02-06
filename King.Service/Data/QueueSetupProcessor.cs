@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Data
 {
-    using Azure.Data;
     using System;
+    using Azure.Data;
 
     /// <summary>
     /// Queue Setup Processor

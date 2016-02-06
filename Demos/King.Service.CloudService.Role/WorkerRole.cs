@@ -33,6 +33,7 @@ namespace King.Service.CloudService.Role
                 FastQueueName = "fast",
                 ModerateQueueName = "moderate",
                 SlowQueueName = "slow",
+                ShardQueueName = "shard"
             };
 
             return this.manager.OnStart(config);

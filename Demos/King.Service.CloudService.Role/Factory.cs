@@ -51,7 +51,8 @@
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.SlowQueueName));
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.ModerateQueueName, QueuePriority.Medium));
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.FastQueueName, QueuePriority.High));
-            
+            tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.ShardQueueName, QueuePriority.High));
+
             //Cordinated Tasks between Instances
             var coordinated = new Coordinated(config.ConnectionString);
             // Add once to ensure that Table is created for Instances to communicate with
