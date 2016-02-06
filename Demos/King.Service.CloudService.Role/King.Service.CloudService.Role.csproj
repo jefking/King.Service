@@ -101,6 +101,7 @@
     <Compile Include="Queue\CompanyModel.cs" />
     <Compile Include="Queue\CompanyProcessor.cs" />
     <Compile Include="Queue\CompanyQueuer.cs" />
+    <Compile Include="Queue\CompanyQueuerSharded.cs" />
     <Compile Include="Recurring.cs" />
     <Compile Include="Scalable\DynamicScaler.cs" />
     <Compile Include="Scalable\ScalableQueue.cs" />

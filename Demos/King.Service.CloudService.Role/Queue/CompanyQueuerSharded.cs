@@ -3,21 +3,16 @@
     using System;
     using King.Azure.Data;
     using King.Service;
-    using Microsoft.WindowsAzure.Storage.Queue;
-    using Newtonsoft.Json;
 
-    /// <summary>
-    /// Example of Task class which adds a company to a queue
-    /// </summary>
-    public class CompanyQueuer : RecurringTask
+    class CompanyQueuerSharded : RecurringTask
     {
         private int id = 0;
-        private readonly IStorageQueue queue = null;
+        private readonly IQueueShardSender<IStorageQueue> queue = null;
 
-        public CompanyQueuer(string name, string connection)
-            :base(5)
+        public CompanyQueuerSharded(string name, string connection)
+            :base(10)
         {
-            this.queue = new StorageQueue(name, connection);
+            this.queue = new StorageQueueShards(name, connection);
         }
 
         public override void Run()
