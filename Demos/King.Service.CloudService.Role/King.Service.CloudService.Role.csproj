@@ -92,6 +92,7 @@
     <Compile Include="Backoff.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Coordinated.cs" />
+    <Compile Include="DataGenerationFactory.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="InitTask.cs" />
     <Compile Include="OnceDaily.cs" />

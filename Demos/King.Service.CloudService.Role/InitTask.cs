@@ -1,7 +1,7 @@
 ﻿namespace King.Service.CloudService.Role
 {
-    using King.Service;
     using System.Diagnostics;
+    using King.Service;
 
     public class InitTask : InitializeTask
     {

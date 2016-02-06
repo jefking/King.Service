@@ -11,10 +11,12 @@
         public IEnumerable<IRunnable> Tasks(Configuration config)
         {
             //Tasks for Queuing (Demo purposes)
-            yield return new CompanyQueuer(new StorageQueue(config.QueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.ScalableQueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.DynamicQueueName, config.ConnectionString));
-            yield return new CompanyQueuer(new StorageQueue(config.FactoryQueueName, config.ConnectionString));
+            return new IRunnable[] {
+                new CompanyQueuer(config.GenericQueueName, config.ConnectionString),
+                new CompanyQueuer(config.FastQueueName, config.ConnectionString),
+                new CompanyQueuer(config.ModerateQueueName, config.ConnectionString),
+                new CompanyQueuer(config.SlowQueueName, config.ConnectionString)
+            };
         }
     }
 }
