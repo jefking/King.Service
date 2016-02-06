@@ -44,12 +44,6 @@
 
                 //Auto Scaling Task
                 new DynamicScaler(config),
-            
-                //Tasks for Queuing (Demo purposes)
-                new CompanyQueuer(config.GenericQueueName, config.ConnectionString),
-                new CompanyQueuer(config.FastQueueName, config.ConnectionString),
-                new CompanyQueuer(config.ModerateQueueName, config.ConnectionString),
-                new CompanyQueuer(config.SlowQueueName, config.ConnectionString),
             });
 
             ///Dequeue Tasks Example
