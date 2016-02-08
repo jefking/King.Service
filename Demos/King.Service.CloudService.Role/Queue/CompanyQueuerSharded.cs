@@ -10,7 +10,7 @@
         private readonly IQueueShardSender<IStorageQueue> queue = null;
 
         public CompanyQueuerSharded(string name, string connection)
-            :base(10)
+            :base(1)
         {
             this.queue = new StorageQueueShards(name, connection);
         }
