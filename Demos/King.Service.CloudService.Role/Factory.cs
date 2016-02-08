@@ -44,7 +44,6 @@
 
                 //Auto Scaling Task
                 new DynamicScaler(config),
-
             });
 
             ///Dequeue Tasks Example
@@ -52,7 +51,7 @@
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.SlowQueueName));
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.ModerateQueueName, QueuePriority.Medium));
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.FastQueueName, QueuePriority.High));
-            tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.ShardQueueName, QueuePriority.High));
+            tasks.AddRange(f.Shards<CompanyProcessor, CompanyModel>(config.ShardQueueName, 10));
 
             //Cordinated Tasks between Instances
             var coordinated = new Coordinated(config.ConnectionString);
