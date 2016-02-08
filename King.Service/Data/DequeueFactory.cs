@@ -150,9 +150,9 @@
         /// </summary>
         /// <typeparam name="Y">Processor</typeparam>
         /// <typeparam name="T">Model</typeparam>
-        /// <param name="name">Name</param>
+        /// <param name="name">Queue Name</param>
         /// <param name="priority">Priority</param>
-        /// <returns></returns>
+        /// <returns>Dequeue Tasks</returns>
         public virtual IEnumerable<IRunnable> Dequeue<T, Y>(string name, QueuePriority priority = QueuePriority.Low)
             where T : IProcessor<Y>, new()
         {
@@ -168,6 +168,40 @@
             };
 
             return this.Tasks<Y>(setup);
+        }
+
+        /// <summary>
+        /// Dequeue, from shards
+        /// </summary>
+        /// <remarks>
+        /// This should only be used when you need to pass high volumes of data.
+        /// Less than 2,000 per shard per second
+        /// </remarks>
+        /// <typeparam name="Y">Processor</typeparam>
+        /// <typeparam name="T">Model</typeparam>
+        /// <param name="name">Queue Name</param>
+        /// <param name="shardCount">Shard Count</param>
+        /// <param name="priority">Priority</param>
+        /// <returns>Dequeue Tasks</returns>
+        public virtual IEnumerable<IRunnable> Shards<T, Y>(string name, byte shardCount = 2, QueuePriority priority = QueuePriority.High)
+            where T : IProcessor<Y>, new()
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("name");
+            }
+
+            shardCount = shardCount > 0 ? shardCount : (byte)2;
+
+            var qs = new List<IRunnable>();
+            for (var i = 0; i < shardCount; i++)
+            {
+                var n = string.Format("{0}{1}", name, i);
+                var ts = this.Dequeue<T, Y>(n, priority);
+                qs.AddRange(ts);
+            }
+
+            return qs;
         }
         #endregion
     }

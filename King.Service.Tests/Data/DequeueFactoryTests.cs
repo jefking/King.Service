@@ -1,14 +1,14 @@
 ﻿namespace King.Service.Tests.Data
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     using Azure.Data;
     using King.Service.Data;
     using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class DequeueFactoryTests
@@ -203,6 +203,45 @@
         {
             var f = new DequeueFactory(ConnectionString);
             Assert.That(() => f.Dequeue<HelpP, object>(null), Throws.TypeOf<ArgumentException>());
+        }
+
+        [Test]
+        public void ShardsNameNull()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            Assert.That(() => f.Shards<HelpP, object>(null), Throws.TypeOf<ArgumentException>());
+        }
+
+        [Test]
+        public void ShardsCreationDefault()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Shards<HelpP, object>("testing");
+
+            Assert.IsNotNull(tasks);
+            Assert.AreEqual(2 * 2, tasks.Count());
+
+            var t = (from n in tasks
+                     where n.GetType() == typeof(InitializeStorageTask)
+                     select true).FirstOrDefault();
+
+            Assert.IsTrue(t);
+        }
+
+        [Test]
+        public void ShardsZeroCount()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Shards<HelpP, object>("testing", 0);
+
+            Assert.IsNotNull(tasks);
+            Assert.AreEqual(2 * 2, tasks.Count());
+
+            var t = (from n in tasks
+                     where n.GetType() == typeof(InitializeStorageTask)
+                     select true).FirstOrDefault();
+
+            Assert.IsTrue(t);
         }
     }
 }
