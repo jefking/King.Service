@@ -20,6 +20,9 @@
 
                 // Initialize Container; creates container if it doesn't already exist
                 new InitializeStorageTask(new Container(config.ContainerName, config.ConnectionString)),
+
+                // Initialize Container; creates container if it doesn't already exist
+                new InitializeStorageTask(new StorageQueue(config.GenericQueueName, config.ConnectionString)),
                 
                 //basic task
                 new Recurring(),
