@@ -10,7 +10,10 @@
  + That determines the needed rate via frequency of processing tasks
  + Once, even with multiple servers
  + Runs at a specified time (resolution to the hour, or the minute) on one server
-+ Dequeue messages or batches of messages for Azure Storage Queues
++ Dequeue from Azure Storage Queues
+ + Batches of messages
+ + Shards for high throughput
+ + Variable timing for cost saving
 + And much more! [View Wiki](https://github.com/jefking/King.Service/wiki)
 + [Cloud Service](https://github.com/jefking/King.Service/tree/master/Demos/King.Service.CloudService.Role)
 + [Service Bus](https://github.com/jefking/King.Service.ServiceBus)

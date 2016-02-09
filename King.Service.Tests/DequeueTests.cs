@@ -1,12 +1,12 @@
 ﻿namespace King.Service.Tests
 {
+    using System;
+    using System.Threading.Tasks;
     using King.Azure.Data;
     using King.Service.Data;
     using King.Service.Timing;
     using NSubstitute;
     using NUnit.Framework;
-    using System;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class DequeueTests
