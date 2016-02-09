@@ -1,10 +1,8 @@
 ﻿namespace King.Service.CloudService.Role.Queue
 {
-    using System;
     using King.Azure.Data;
     using King.Service;
-    using Microsoft.WindowsAzure.Storage.Queue;
-    using Newtonsoft.Json;
+    using System;
 
     /// <summary>
     /// Example of Task class which adds a company to a queue
