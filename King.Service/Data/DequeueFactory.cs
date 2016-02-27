@@ -5,6 +5,7 @@
     using King.Azure.Data;
     using King.Service.Data.Model;
     using King.Service.Scalability;
+    using System.Linq;
 
     /// <summary>
     /// Dequeue Factory
@@ -52,6 +53,39 @@
 
         #region Methods
         /// <summary>
+        /// Create Multiple Queues
+        /// </summary>
+        /// <param name="names">Names</param>
+        /// <returns>Initialization Tasks</returns>
+        public virtual IEnumerable<IRunnable> Initialize(params string[] names)
+        {
+            if (null == names)
+            {
+                throw new ArgumentNullException("names");
+            }
+
+            foreach (var name in names.Where(n => !string.IsNullOrWhiteSpace(n)))
+            {
+                yield return this.Initialize(name);
+            }
+        }
+
+        /// <summary>
+        /// Create Queue
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <returns>Initialization Tasks</returns>
+        public virtual IRunnable Initialize(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentException("name");
+            }
+
+            return new InitializeStorageTask(new StorageQueue(name, this.connectionString));
+        }
+
+        /// <summary>
         /// Initializes the Queues, and Dequeuers
         /// </summary>
         /// <typeparam name="T">Model</typeparam>
@@ -69,15 +103,13 @@
             {
                 throw new ArgumentNullException("processor");
             }
-
-            var setup = new QueueSetup<T>()
+            
+            return this.Tasks<T>(new QueueSetup<T>
             {
                 Processor = processor,
                 Priority = priority,
                 Name = queueName,
-            };
-
-            return this.Tasks<T>(setup);
+            });
         }
 
         /// <summary>
@@ -115,7 +147,7 @@
                 throw new ArgumentNullException("setup");
             }
 
-            yield return new InitializeStorageTask(new StorageQueue(setup.Name, this.connectionString));
+            yield return this.Initialize(setup.Name);
             yield return this.Dequeue<T>(setup);
         }
 
@@ -140,9 +172,14 @@
                 ConnectionString = this.connectionString,
                 Setup = setup,
             };
-            var queue = new StorageQueue(connection.Setup.Name, connection.ConnectionString);
-
-            return new StorageQueueAutoScaler<T>(queue, connection, this.throughput, messagesPerScaleUnit, scale.Minimum, scale.Maximum, checkScaleInMinutes);
+            
+            return new StorageQueueAutoScaler<T>(new StorageQueue(connection.Setup.Name, connection.ConnectionString)
+                , connection
+                , this.throughput
+                , messagesPerScaleUnit
+                , scale.Minimum
+                , scale.Maximum
+                , checkScaleInMinutes);
         }
 
         /// <summary>
@@ -160,14 +197,12 @@
             {
                 throw new ArgumentException("name");
             }
-
-            var setup = new QueueSetupProcessor<T, Y>()
+            
+            return this.Tasks<Y>(new QueueSetupProcessor<T, Y>
             {
-                Priority = QueuePriority.Medium,
+                Priority = priority,
                 Name = name,
-            };
-
-            return this.Tasks<Y>(setup);
+            });
         }
 
         /// <summary>
@@ -197,8 +232,7 @@
             for (var i = 0; i < shardCount; i++)
             {
                 var n = string.Format("{0}{1}", name, i);
-                var ts = this.Dequeue<T, Y>(n, priority);
-                qs.AddRange(ts);
+                qs.AddRange(this.Dequeue<T, Y>(n, priority));
             }
 
             return qs;

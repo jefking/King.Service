@@ -122,6 +122,20 @@
     {
         #region Methods
         /// <summary>
+        /// Create Multiple Queues
+        /// </summary>
+        /// <param name="names">Names</param>
+        /// <returns>Initialization Tasks</returns>
+        IEnumerable<IRunnable> Initialize(params string[] names);
+
+        /// <summary>
+        /// Create Queue
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <returns>Initialization Tasks</returns>
+        IRunnable Initialize(string name);
+
+        /// <summary>
         /// Initializes the Queues, and Dequeuers
         /// </summary>
         /// <typeparam name="T">Model</typeparam>

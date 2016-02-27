@@ -40,6 +40,44 @@
         }
 
         [Test]
+        public void InitializeNamesNull()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Initialize((string[])null);
+
+            Assert.IsNotNull(tasks);
+
+            Assert.That(() => tasks.Count(), Throws.TypeOf<ArgumentNullException>());
+        }
+
+        [Test]
+        public void InitializeNames()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var tasks = f.Initialize(Guid.NewGuid().ToString(), Guid.NewGuid().ToString(), Guid.NewGuid().ToString());
+
+            Assert.IsNotNull(tasks);
+            Assert.AreEqual(3, tasks.Count());
+        }
+
+        [Test]
+        public void InitializeNameNull()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            Assert.That(() => f.Initialize((string)null), Throws.TypeOf<ArgumentException>());
+        }
+
+        [Test]
+        public void InitializeName()
+        {
+            var f = new DequeueFactory(ConnectionString);
+            var task = f.Initialize(Guid.NewGuid().ToString());
+
+            Assert.IsNotNull(task);
+            Assert.IsNotNull(task as InitializeStorageTask);
+        }
+
+        [Test]
         public void Tasks()
         {
             var setup = new QueueSetup<object>()
