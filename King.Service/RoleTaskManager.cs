@@ -1,6 +1,5 @@
 ﻿namespace King.Service
 {
-    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -8,6 +7,7 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
+    using King.Service.Timing;
 
     /// <summary>
     /// Role Task Manager
@@ -19,7 +19,7 @@
         /// Tasks
         /// </summary>
         protected IReadOnlyCollection<IRunnable> tasks = null;
-        
+
         /// <summary>
         /// Factories
         /// </summary>
@@ -56,7 +56,7 @@
         /// <summary>
         /// Finalizer
         /// </summary>
-        ~RoleTaskManager() 
+        ~RoleTaskManager()
         {
             Dispose(false);
         }
@@ -96,7 +96,7 @@
                     try
                     {
                         task.Start();
-                        
+
                         successCount++;
 
                         Trace.TraceInformation("{0} started.", task.GetType().ToString());
