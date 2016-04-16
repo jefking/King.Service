@@ -21,7 +21,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        protected RecurringTask(int frequency = BaseTimes.MaximumTiming)
+        protected RecurringTask(int frequency = BaseTimes.MaximumStorageTiming)
         {
             if (0 >= frequency)
             {

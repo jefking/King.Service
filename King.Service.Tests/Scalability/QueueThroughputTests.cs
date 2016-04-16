@@ -56,8 +56,8 @@
         }
 
         [TestCase(QueuePriority.Low, BaseTimes.MaximumStorageTiming)]
-        [TestCase(QueuePriority.Medium, 60)]
-        [TestCase(QueuePriority.High, BaseTimes.MinimumStorageTiming)]
+        [TestCase(QueuePriority.Medium, 15)]
+        [TestCase(QueuePriority.High, 5)]
         public void MaximumFrequency(QueuePriority priority, byte expected)
         {
             var s = new QueueThroughput();

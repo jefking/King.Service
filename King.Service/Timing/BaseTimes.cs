@@ -12,24 +12,14 @@
         public const sbyte NoRepeat = -1;
 
         /// <summary>
-        /// Minimum Timing. (Seconds)
-        /// </summary>
-        public const byte MinimumTiming = 10;
-
-        /// <summary>
-        /// Maxium Timing. (Seconds)
-        /// </summary>
-        public const byte MaximumTiming = 180;
-
-        /// <summary>
         /// Minimum Storage Timing. (Seconds)
         /// </summary>
-        public const byte MinimumStorageTiming = 15;
+        public const byte MinimumStorageTiming = 10;
 
         /// <summary>
         /// Maximum Storage Timing. (Seconds)
         /// </summary>
-        public const byte MaximumStorageTiming = 180;
+        public const byte MaximumStorageTiming = 45;
 
         /// <summary>
         /// Slightly stager tasks, so they don't compete. (Milliseconds)

@@ -66,7 +66,7 @@
             var poller = Substitute.For<IPoller<object>>();
             var processor = Substitute.For<IProcessor<object>>();
             var d = new Dequeue<object>(poller, processor);
-            Assert.AreEqual(15, d.MinimumPeriodInSeconds);
+            Assert.AreEqual(10, d.MinimumPeriodInSeconds);
         }
 
         [Test]

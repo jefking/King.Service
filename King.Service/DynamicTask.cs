@@ -23,7 +23,7 @@
         /// <param name="timing">Timing</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public DynamicTask(IDynamicTiming timing, int minimumPeriodInSeconds = BaseTimes.MinimumTiming, int maximumPeriodInSeconds = BaseTimes.MaximumTiming)
+        public DynamicTask(IDynamicTiming timing, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
             : base(minimumPeriodInSeconds)
         {
             if (null == timing)

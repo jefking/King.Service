@@ -41,9 +41,9 @@
             switch (priority)
             {
                 case QueuePriority.High:
-                    return new Range<byte>(1, BaseTimes.MinimumStorageTiming);
+                    return new Range<byte>(1, 5);
                 case QueuePriority.Medium:
-                    return new Range<byte>(5, 60);
+                    return new Range<byte>(5, 15);
                 default:
                     return new Range<byte>(BaseTimes.MinimumStorageTiming, BaseTimes.MaximumStorageTiming);
             }
