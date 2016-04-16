@@ -37,8 +37,8 @@
       <HintPath>..\..\packages\King.Azure.1.1.25\lib\net45\King.Azure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="King.Service, Version=1.5.6.6, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\King.Service.1.12.6\lib\net45\King.Service.dll</HintPath>
+    <Reference Include="King.Service, Version=1.5.6.7, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\King.Service.1.12.7\lib\net45\King.Service.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
