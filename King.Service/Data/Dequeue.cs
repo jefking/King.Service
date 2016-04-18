@@ -1,10 +1,10 @@
 ﻿namespace King.Service.Data
 {
+    using King.Azure.Data;
+    using King.Service.Timing;
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using King.Azure.Data;
-    using King.Service.Timing;
 
     /// <summary>
     /// Dequeue Task for Queues
@@ -60,7 +60,7 @@
         public virtual async Task<bool> Run()
         {
             var worked = false;
-            
+
             var message = await this.poller.Poll();
             if (null != message)
             {
@@ -106,7 +106,7 @@
             catch
             {
                 message.Abandon().Wait();
-                
+
                 throw;
             }
         }
