@@ -1,10 +1,11 @@
 ﻿namespace King.Service.Data
 {
+    using King.Azure.Data;
+    using King.Service.Timing;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
-    using King.Azure.Data;
-    using King.Service.Timing;
 
     /// <summary>
     /// Dequeue Batch Task for Queues
@@ -67,10 +68,7 @@
 
                 Trace.TraceInformation("{0} messages dequeued for processing by: {1}.", messages.Count(), base.processor.GetType());
 
-                foreach (var msg in messages.Where(m => m != null))
-                {
-                    await this.Process(msg);
-                }
+                await this.Process(messages);
             }
             else
             {
@@ -79,6 +77,19 @@
             }
 
             return workDone;
+        }
+
+        /// <summary>
+        /// Process Messages
+        /// </summary>
+        /// <param name="msgs">Messages</param>
+        /// <returns>Task</returns>
+        protected virtual async Task Process(IEnumerable<IQueued<T>> msgs)
+        {
+            foreach (var msg in msgs.Where(m => m != null))
+            {
+                await this.Process(msg);
+            }
         }
         #endregion
     }
