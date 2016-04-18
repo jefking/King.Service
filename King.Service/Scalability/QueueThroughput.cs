@@ -1,8 +1,8 @@
 ﻿namespace King.Service.Scalability
 {
-    using System;
     using King.Service.Data;
     using King.Service.Timing;
+    using System;
 
     /// <summary>
     /// Queue Throughput
@@ -38,6 +38,7 @@
         /// <returns>Frequency Range</returns>
         public virtual Range<byte> Frequency(QueuePriority priority = QueuePriority.Low)
         {
+            ///CHECK THIS
             switch (priority)
             {
                 case QueuePriority.High:
@@ -66,7 +67,7 @@
                     return new Range<byte>(1, 2);
             }
         }
-        
+
         /// <summary>
         /// Check Scale every (in minutes)
         /// </summary>
