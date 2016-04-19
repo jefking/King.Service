@@ -7,11 +7,6 @@
     {
         #region Members
         /// <summary>
-        /// Causes Threading Time to run Once. (Seconds)
-        /// </summary>
-        public const sbyte NoRepeat = -1;
-
-        /// <summary>
         /// Minimum Storage Timing. (Seconds)
         /// </summary>
         public const byte MinimumStorageTiming = 10;

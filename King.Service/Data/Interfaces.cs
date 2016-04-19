@@ -1,9 +1,9 @@
 ﻿namespace King.Service.Data
 {
+    using King.Azure.Data;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using King.Azure.Data;
 
     #region ICoordinator
     /// <summary>
