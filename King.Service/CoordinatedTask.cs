@@ -64,7 +64,7 @@
         /// Run Async
         /// </summary>
         /// <returns>Task</returns>
-        public async Task RunAsync()
+        public virtual async Task RunAsync()
         {
             var timing = Stopwatch.StartNew();
             var type = this.GetType();

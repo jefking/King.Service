@@ -10,7 +10,7 @@
         /// <summary>
         /// Connection String
         /// </summary>
-        public string ConnectionString
+        public virtual string ConnectionString
         {
             get;
             set;

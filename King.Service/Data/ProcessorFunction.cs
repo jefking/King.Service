@@ -1,8 +1,8 @@
 ﻿namespace King.Service.Data
 {
+    using Azure.Data;
     using System;
     using System.Threading.Tasks;
-    using Azure.Data;
 
     /// <summary>
     /// Processor Function
@@ -39,7 +39,7 @@
         /// </summary>
         /// <param name="data">Data</param>
         /// <returns>Task, bool result</returns>
-        public async Task<bool> Process(T data)
+        public virtual async Task<bool> Process(T data)
         {
             var factory = new TaskFactory();
             return await factory.StartNew(this.func, data);

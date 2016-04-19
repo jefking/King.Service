@@ -1,5 +1,6 @@
 ﻿namespace King.Service
 {
+    using King.Service.Timing;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -7,7 +8,6 @@
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
-    using King.Service.Timing;
 
     /// <summary>
     /// Role Task Manager
@@ -196,7 +196,7 @@
         /// <summary>
         /// Dispose
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             this.Dispose(true);
 

@@ -73,7 +73,7 @@
         /// </summary>
         /// <param name="passthrough">Not Used</param>
         /// <returns>Initialize Table Task</returns>
-        public IEnumerable<IRunnable> Tasks(object passthrough = null)
+        public virtual IEnumerable<IRunnable> Tasks(object passthrough = null)
         {
             yield return new InitializeStorageTask(this.storage);
         }

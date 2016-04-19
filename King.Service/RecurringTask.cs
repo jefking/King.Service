@@ -35,7 +35,7 @@
                 Enabled = false,
             };
             this.timer.Elapsed += this.Run;
-            
+
             this.Name = this.GetType().ToString();
 
             Trace.TraceInformation("{0} Frequency is: {1}s.", this.Name, ts);
@@ -44,7 +44,7 @@
         /// <summary>
         /// Finalizer
         /// </summary>
-        ~RecurringTask() 
+        ~RecurringTask()
         {
             Dispose(false);
         }
@@ -83,7 +83,7 @@
             var signal = null == e ? DateTime.UtcNow : e.SignalTime;
 
             var timing = Stopwatch.StartNew();
-            
+
             try
             {
                 this.Run();
@@ -122,7 +122,7 @@
         /// <summary>
         /// Dispose
         /// </summary>
-        public void Dispose()
+        public virtual void Dispose()
         {
             this.Dispose(true);
 
