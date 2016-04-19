@@ -10,8 +10,8 @@
         <projectUrl>https://github.com/jefking/King.Service</projectUrl>
         <iconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Task scheduling for Azure on Windows.</description>
-        <summary>Task scheduling for Azure on Windows.</summary>
+        <description>Task scheduling for Windows on Azure.</description>
+        <summary>Task scheduling for Windows on Azure.</summary>
         <releaseNotes>Changed timings as costs have come down in queue transactions.</releaseNotes>
         <copyright>Jef King</copyright>
         <tags>King.Service Azure Queue Service Bus WebJob scale scaling linear exponential timing auto-scale dynamic-scale dynamic Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure run task service services tasks scheduling worker-role</tags>
