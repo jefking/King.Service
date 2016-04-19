@@ -1,4 +1,6 @@
-﻿namespace King.Service
+﻿using System.Threading.Tasks;
+
+namespace King.Service
 {
     /// <summary>
     /// Recurring Runner
@@ -32,7 +34,9 @@
         /// </summary>
         public override void Run()
         {
-            this.run.Run().Wait();
+            var t = this.run.Run();
+
+            Task.WaitAll(t);
         }
         #endregion
     }

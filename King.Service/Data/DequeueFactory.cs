@@ -1,10 +1,10 @@
 ﻿namespace King.Service.Data
 {
-    using System;
-    using System.Collections.Generic;
     using King.Azure.Data;
     using King.Service.Data.Model;
     using King.Service.Scalability;
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -103,7 +103,7 @@
             {
                 throw new ArgumentNullException("processor");
             }
-            
+
             return this.Tasks<T>(new QueueSetup<T>
             {
                 Processor = processor,
@@ -172,7 +172,7 @@
                 ConnectionString = this.connectionString,
                 Setup = setup,
             };
-            
+
             return new StorageQueueAutoScaler<T>(new StorageQueue(connection.Setup.Name, connection.ConnectionString)
                 , connection
                 , this.throughput
@@ -197,7 +197,7 @@
             {
                 throw new ArgumentException("name");
             }
-            
+
             return this.Tasks<Y>(new QueueSetupProcessor<T, Y>
             {
                 Priority = priority,
@@ -209,8 +209,7 @@
         /// Dequeue, from shards
         /// </summary>
         /// <remarks>
-        /// This should only be used when you need to pass high volumes of data.
-        /// Less than 2,000 per shard per second
+        /// This should only be used when you need to pass high volumes of data. Less than 2,000 per shard per second
         /// </remarks>
         /// <typeparam name="Y">Processor</typeparam>
         /// <typeparam name="T">Model</typeparam>
