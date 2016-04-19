@@ -16,7 +16,7 @@
         <copyright>Jef King</copyright>
         <tags>King.Service Azure Queue Service Bus WebJob scale scaling linear exponential timing auto-scale dynamic-scale dynamic Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure run task service services tasks scheduling worker-role</tags>
         <dependencies>
-          <dependency id="King.Azure" version="1.1.25" />
+          <dependency id="King.Azure" version="1.1.26" />
         </dependencies>
         <frameworkAssemblies>
             <frameworkAssembly assemblyName="System" targetFramework="net45" />
