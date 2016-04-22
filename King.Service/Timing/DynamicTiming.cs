@@ -18,7 +18,7 @@
         /// </summary>
         protected readonly ICalculateTiming timing = null;
         #endregion
-        
+
         #region Constructors
         /// <summary>
         /// Mockable Constructor
