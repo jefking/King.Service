@@ -1,10 +1,11 @@
-﻿namespace King.Service.Data
+﻿namespace King.Service.Azure
 {
-    using System;
-    using System.Collections.Generic;
+    using Data;
     using King.Azure.Data;
     using King.Service.Scalability;
     using King.Service.Timing;
+    using System;
+    using System.Collections.Generic;
 
     /// <summary>
     /// Storage Queue Auto-Scaler

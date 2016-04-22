@@ -1,6 +1,6 @@
 ﻿namespace King.Service.Data
 {
-    using Azure.Data;
+    using King.Azure.Data;
     using System;
     using System.Threading.Tasks;
 

@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Data
 {
+    using Azure.Model;
     using King.Azure.Data;
     using King.Service.Data.Model;
     using System;
@@ -8,7 +9,7 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Scheduled Task Core
+    /// Coordinator, happens once per cluster
     /// </summary>
     public class Coordinator : ICoordinator
     {

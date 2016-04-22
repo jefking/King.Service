@@ -1,5 +1,6 @@
-﻿namespace King.Service.Data
+﻿namespace King.Service.Azure
 {
+    using Data;
     using King.Azure.Data;
     using King.Service.Timing;
 

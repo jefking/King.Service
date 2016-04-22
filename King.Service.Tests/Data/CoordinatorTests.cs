@@ -1,15 +1,15 @@
 ﻿namespace King.Service.Tests.Data
 {
-    using System;
-    using System.Linq;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
+    using Azure.Model;
     using King.Azure.Data;
     using King.Service.Data;
     using King.Service.Data.Model;
     using NSubstitute;
     using NUnit.Framework;
-
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     [TestFixture]
     public class CoordinatorTests
     {

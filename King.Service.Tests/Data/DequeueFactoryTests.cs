@@ -1,20 +1,21 @@
 ﻿namespace King.Service.Tests.Data
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Azure.Data;
+    using Azure;
+    using King.Azure.Data;
     using King.Service.Data;
     using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class DequeueFactoryTests
     {
         const string ConnectionString = "UseDevelopmentStorage=true";
-        
+
         [Test]
         public void Constructor()
         {
@@ -157,7 +158,7 @@
 
             scale.Maximum = (byte)random.Next(byte.MinValue, byte.MaxValue);
             scale.Minimum = (byte)random.Next(byte.MinValue, scale.Maximum);
-            
+
             var throughput = Substitute.For<IQueueThroughput>();
             throughput.Scale(setup.Priority).Returns(scale);
             throughput.CheckScaleEvery(setup.Priority).Returns((byte)random.Next(1, 300));
@@ -174,7 +175,7 @@
             throughput.Received().Scale(setup.Priority);
             throughput.Received().CheckScaleEvery(setup.Priority);
         }
-    
+
         [Test]
         public void DequeueTaskSetupNull()
         {

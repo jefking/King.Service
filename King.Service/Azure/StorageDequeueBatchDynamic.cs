@@ -1,8 +1,9 @@
-﻿namespace King.Service.Data
+﻿namespace King.Service.Azure
 {
-    using System;
+    using Data;
     using King.Azure.Data;
     using King.Service.Timing;
+    using System;
 
     /// <summary>
     /// Storage Dequeue Batch Dynamic

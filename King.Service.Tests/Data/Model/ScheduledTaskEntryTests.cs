@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Tests.Data.Model
 {
+    using Azure.Model;
     using King.Service.Data.Model;
     using Microsoft.WindowsAzure.Storage.Table;
     using NUnit.Framework;

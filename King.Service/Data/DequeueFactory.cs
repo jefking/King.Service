@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Data
 {
+    using Azure;
     using King.Azure.Data;
     using King.Service.Data.Model;
     using King.Service.Scalability;

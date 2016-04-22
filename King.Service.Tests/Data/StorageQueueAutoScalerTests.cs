@@ -8,7 +8,7 @@
     using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;
-
+    using Azure;
     [TestFixture]
     public class StorageQueueAutoScalerTests
     {
