@@ -44,7 +44,7 @@
             Assert.AreEqual(expected, data.Minimum);
         }
 
-        [TestCase(QueuePriority.Low, BaseTimes.MinimumStorageTiming)]
+        [TestCase(QueuePriority.Low, BaseTimes.DefaultMinimumTiming)]
         [TestCase(QueuePriority.Medium, 5)]
         [TestCase(QueuePriority.High, 1)]
         public void MinimumFrequency(QueuePriority priority, byte expected)
@@ -55,7 +55,7 @@
             Assert.AreEqual(expected, data.Minimum);
         }
 
-        [TestCase(QueuePriority.Low, BaseTimes.MaximumStorageTiming)]
+        [TestCase(QueuePriority.Low, BaseTimes.DefaultMaximumTiming)]
         [TestCase(QueuePriority.Medium, 15)]
         [TestCase(QueuePriority.High, 5)]
         public void MaximumFrequency(QueuePriority priority, byte expected)

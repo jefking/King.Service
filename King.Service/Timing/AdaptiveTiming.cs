@@ -11,7 +11,7 @@
         /// </summary>
         /// <param name="minimumPeriodInSeconds">Minimum Period in Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period in Seconds</param>
-        public AdaptiveTiming(int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+        public AdaptiveTiming(int minimumPeriodInSeconds = BaseTimes.DefaultMinimumTiming, int maximumPeriodInSeconds = BaseTimes.DefaultMaximumTiming)
             : base(new ExponentialTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
         {
         }

@@ -17,7 +17,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
         /// <param name="strategy">Timing Strategy</param>
-        public AdaptiveTask(int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming, Strategy strategy = Strategy.Exponential)
+        public AdaptiveTask(int minimumPeriodInSeconds = BaseTimes.DefaultMinimumTiming, int maximumPeriodInSeconds = BaseTimes.DefaultMaximumTiming, Strategy strategy = Strategy.Exponential)
             : base(Strategies.Adaptive(strategy, minimumPeriodInSeconds, maximumPeriodInSeconds), minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }

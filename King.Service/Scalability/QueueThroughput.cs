@@ -46,7 +46,7 @@
                 case QueuePriority.Medium:
                     return new Range<byte>(5, 15);
                 default:
-                    return new Range<byte>(BaseTimes.MinimumStorageTiming, BaseTimes.MaximumStorageTiming);
+                    return new Range<byte>(BaseTimes.DefaultMinimumTiming, BaseTimes.DefaultMaximumTiming);
             }
         }
 

@@ -34,7 +34,7 @@
         /// <param name="poller">Poller</param>
         /// <param name="minimumPeriodInSeconds">Minimum, time in seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
-        public Dequeue(IPoller<T> poller, IProcessor<T> processor, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+        public Dequeue(IPoller<T> poller, IProcessor<T> processor, int minimumPeriodInSeconds = BaseTimes.DefaultMinimumTiming, int maximumPeriodInSeconds = BaseTimes.DefaultMaximumTiming)
         {
             if (null == poller)
             {
@@ -47,8 +47,8 @@
 
             this.poller = poller;
             this.processor = processor;
-            this.MinimumPeriodInSeconds = 0 >= minimumPeriodInSeconds ? BaseTimes.MinimumStorageTiming : minimumPeriodInSeconds;
-            this.MaximumPeriodInSeconds = minimumPeriodInSeconds >= maximumPeriodInSeconds ? BaseTimes.MaximumStorageTiming : maximumPeriodInSeconds;
+            this.MinimumPeriodInSeconds = 0 >= minimumPeriodInSeconds ? BaseTimes.DefaultMinimumTiming : minimumPeriodInSeconds;
+            this.MaximumPeriodInSeconds = minimumPeriodInSeconds >= maximumPeriodInSeconds ? BaseTimes.DefaultMaximumTiming : maximumPeriodInSeconds;
         }
         #endregion
 

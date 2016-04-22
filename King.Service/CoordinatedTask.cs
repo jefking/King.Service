@@ -25,7 +25,7 @@
         /// </summary>
         /// <param name="connectionString">Connection String</param>
         /// <param name="periodInSeconds">Period In Seconds</param>
-        protected CoordinatedTask(string connectionString, double periodInSeconds = BaseTimes.MaximumStorageTiming)
+        protected CoordinatedTask(string connectionString, double periodInSeconds = BaseTimes.DefaultMaximumTiming)
             : this(new Coordinator(TimeSpan.FromSeconds(periodInSeconds), connectionString))
         {
         }

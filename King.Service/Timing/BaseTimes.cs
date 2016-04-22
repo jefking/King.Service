@@ -7,14 +7,14 @@
     {
         #region Members
         /// <summary>
-        /// Minimum Storage Timing. (Seconds)
+        /// Default Minimum Timing. (Seconds)
         /// </summary>
-        public const byte MinimumStorageTiming = 10;
+        public const byte DefaultMinimumTiming = 10;
 
         /// <summary>
-        /// Maximum Storage Timing. (Seconds)
+        /// Default Maximum Timing. (Seconds)
         /// </summary>
-        public const byte MaximumStorageTiming = 45;
+        public const byte DefaultMaximumTiming = 60;
 
         /// <summary>
         /// Slightly stager tasks, so they don't compete. (Milliseconds)

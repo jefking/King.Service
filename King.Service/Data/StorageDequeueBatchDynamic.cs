@@ -32,7 +32,7 @@
         /// <param name="batchCount">Batch Count</param>
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
-        public StorageDequeueBatchDynamic(string name, string connectionString, IProcessor<T> processor, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+        public StorageDequeueBatchDynamic(string name, string connectionString, IProcessor<T> processor, int minimumPeriodInSeconds = BaseTimes.DefaultMinimumTiming, int maximumPeriodInSeconds = BaseTimes.DefaultMaximumTiming)
             : this(new StorageQueue(name, connectionString, VisibilityDuration), processor, new TimingTracker(VisibilityDuration, MaxBatchSize), minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }
@@ -45,7 +45,7 @@
         /// <param name="batchCount">Batch Count</param>
         /// <param name="minimumPeriodInSeconds">Minimum Period In Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period In Seconds</param>
-        public StorageDequeueBatchDynamic(IStorageQueue queue, IProcessor<T> processor, ITimingTracker tracker, int minimumPeriodInSeconds = BaseTimes.MinimumStorageTiming, int maximumPeriodInSeconds = BaseTimes.MaximumStorageTiming)
+        public StorageDequeueBatchDynamic(IStorageQueue queue, IProcessor<T> processor, ITimingTracker tracker, int minimumPeriodInSeconds = BaseTimes.DefaultMinimumTiming, int maximumPeriodInSeconds = BaseTimes.DefaultMaximumTiming)
             : base(new StorageQueuePoller<T>(queue), processor, tracker, minimumPeriodInSeconds, maximumPeriodInSeconds)
         {
         }

@@ -15,13 +15,13 @@
         [Test]
         public void MinimumStorageTiming()
         {
-            Assert.AreEqual(10, BaseTimes.MinimumStorageTiming);
+            Assert.AreEqual(10, BaseTimes.DefaultMinimumTiming);
         }
         
         [Test]
         public void MaximumStorageTiming()
         {
-            Assert.AreEqual(45, BaseTimes.MaximumStorageTiming);
+            Assert.AreEqual(45, BaseTimes.DefaultMaximumTiming);
         }
     }
 }

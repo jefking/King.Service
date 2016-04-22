@@ -87,7 +87,7 @@
             var processor = Substitute.For<IProcessor<object>>();
 
             var d = new Dequeue<object>(poller, processor);
-            Assert.AreEqual(BaseTimes.MinimumStorageTiming, d.MinimumPeriodInSeconds);
+            Assert.AreEqual(BaseTimes.DefaultMinimumTiming, d.MinimumPeriodInSeconds);
         }
 
         [Test]
@@ -97,7 +97,7 @@
             var processor = Substitute.For<IProcessor<object>>();
 
             var d = new Dequeue<object>(poller, processor);
-            Assert.AreEqual(BaseTimes.MaximumStorageTiming, d.MaximumPeriodInSeconds);
+            Assert.AreEqual(BaseTimes.DefaultMaximumTiming, d.MaximumPeriodInSeconds);
         }
     }
 }
