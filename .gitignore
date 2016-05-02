@@ -175,3 +175,7 @@ FakesAssemblies/
 
 NuGet Packages
 *.nupkg
+
+# New VS, New Projects
+*.lock.json
+.vs
