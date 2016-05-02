@@ -1,16 +1,18 @@
 ﻿{
-  "version": "1.0.0-*",
-  "description": "King.Service.Unit.Tests Console Application",
-  "authors": [ "jefkin" ],
-  "tags": [ "" ],
-  "projectUrl": "",
-  "licenseUrl": "",
-
+  "version": "2.0.0",
+  "authors": [ "Jef King" ],
+  "owners": [ "Jef King" ],
+  "copyright": "Jef King",
+  "projectUrl": "https://github.com/jefking/King.Service",
+  "licenseUrl": "https://github.com/jefking/King.Service/blob/master/LICENSE",
+  "iconUrl": "https://raw.githubusercontent.com/jefking/King.Service/master/icon.png",
+  
   "compilationOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
+    "King.Service": "2.0.0-preview"
   },
 
   "commands": {
@@ -18,14 +20,28 @@
   },
 
   "frameworks": {
-    "dnx451": { },
-    "dnxcore50": {
-      "dependencies": {
-        "Microsoft.CSharp": "4.0.1-beta-23516",
-        "System.Collections": "4.0.11-beta-23516",
-        "System.Console": "4.0.0-beta-23516",
-        "System.Linq": "4.0.1-beta-23516",
-        "System.Threading": "4.0.11-beta-23516"
+    "net451": {
+      "frameworkAssemblies": {
+        "System.Diagnostics.Tracing": { },
+        "System.Threading": { }
+      }
+    },
+    "net45": {
+      "frameworkAssemblies": {
+        "System.Diagnostics.Tracing": { },
+        "System.Threading": { }
+      }
+    },
+    "net461": {
+      "frameworkAssemblies": {
+        "System.Diagnostics.Tracing": { },
+        "System.Threading": { }
+      }
+    },
+    "net46": {
+      "frameworkAssemblies": {
+        "System.Diagnostics.Tracing": { },
+        "System.Threading": { }
       }
     }
   }
