@@ -12,7 +12,7 @@
         /// <summary>
         /// Max Time
         /// </summary>
-        protected readonly TimeSpan maxTime = TimeSpan.FromSeconds(45);
+        protected TimeSpan maxTime = TimeSpan.FromSeconds(45);
 
         /// <summary>
         /// Maximum Timing
