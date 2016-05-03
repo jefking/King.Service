@@ -40,6 +40,12 @@
         "System.Diagnostics.Tracing": { },
         "System.Threading": { }
       }
+    },
+    "dotnet5.4": {
+      "frameworkAssemblies": {
+        "System.Diagnostics.Tracing": { },
+        "System.Threading": { }
+      }
     }
   }
 }
