@@ -11,17 +11,17 @@
         {
             Assert.AreEqual(2, BaseTimes.ScaleCheck);
         }
-        
+
         [Test]
-        public void MinimumStorageTiming()
+        public void DefaultMinimumTiming()
         {
             Assert.AreEqual(10, BaseTimes.DefaultMinimumTiming);
         }
-        
+
         [Test]
-        public void MaximumStorageTiming()
+        public void DefaultMaximumTiming()
         {
-            Assert.AreEqual(45, BaseTimes.DefaultMaximumTiming);
+            Assert.AreEqual(60, BaseTimes.DefaultMaximumTiming);
         }
     }
 }
