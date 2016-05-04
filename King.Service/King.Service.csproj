@@ -99,6 +99,7 @@
     <Compile Include="Azure\StorageDequeueBatchDynamic.cs" />
     <Compile Include="Data\DequeueFactory.cs" />
     <Compile Include="Azure\StorageQueueAutoScaler.cs" />
+    <Compile Include="FreshProcessor.cs" />
     <Compile Include="Range.cs" />
     <Compile Include="Scalability\QueueThroughput.cs" />
     <Compile Include="Timing\TimingTracker.cs" />

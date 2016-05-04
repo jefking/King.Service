@@ -7,15 +7,15 @@
     /// Queue Setup Processor
     /// </summary>
     /// <typeparam name="Y">Processor</typeparam>
-    /// <typeparam name="T">Model</typeparam>
-    public class QueueSetupProcessor<Y, T> : QueueSetup<T>
-        where Y : IProcessor<T>, new()
+    /// <typeparam name="X">Model</typeparam>
+    public class QueueSetupProcessor<Y, X> : QueueSetup<X>
+        where Y : IProcessor<X>, new()
     {
         #region Properties
         /// <summary>
         /// Processor
         /// </summary>
-        public override Func<IProcessor<T>> Processor
+        public override Func<IProcessor<X>> Processor
         {
             get
             {
