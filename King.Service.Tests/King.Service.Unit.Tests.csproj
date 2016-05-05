@@ -137,6 +137,7 @@
     <Compile Include="RecurringHelper.cs" />
     <Compile Include="RecurringRunnerTests.cs" />
     <Compile Include="RunAtTaskTests.cs" />
+    <Compile Include="SafeProcessorTests.cs" />
     <Compile Include="Scalability\QueueScalerTests.cs" />
     <Compile Include="Scalability\QueueThroughputTests.cs" />
     <Compile Include="Scalability\ScalerTests.cs" />
