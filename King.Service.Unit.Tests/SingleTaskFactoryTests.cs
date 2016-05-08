@@ -7,6 +7,7 @@
     using System.Linq;
 
     [TestFixture]
+    public class SingleTaskFactoryTests
     {
         [Test]
         public void Constructor()
