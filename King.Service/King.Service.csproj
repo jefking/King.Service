@@ -103,6 +103,7 @@
     <Compile Include="Range.cs" />
     <Compile Include="SafeProcessor.cs" />
     <Compile Include="Scalability\QueueThroughput.cs" />
+    <Compile Include="SingleTaskFactory.cs" />
     <Compile Include="Timing\TimingTracker.cs" />
     <Compile Include="Data\QueueAutoScaler.cs" />
     <Compile Include="Scalability\QueueScaler.cs" />
