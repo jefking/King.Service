@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Timing
 {
-    using King.Service.Data;
     using System;
+    using King.Service.Data;
 
     /// <summary>
     /// Timing Tracker
@@ -12,7 +12,7 @@
         /// <summary>
         /// Max Time
         /// </summary>
-        protected readonly TimeSpan maxTime = TimeSpan.FromSeconds(45);
+        protected TimeSpan maxTime = TimeSpan.FromSeconds(45);
 
         /// <summary>
         /// Maximum Timing
