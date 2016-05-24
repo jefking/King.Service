@@ -1,5 +1,6 @@
 ﻿namespace King.Service.CloudService.Role.Queue
 {
+    using Azure;
     using King.Azure.Data;
     using King.Service.Data;
 
