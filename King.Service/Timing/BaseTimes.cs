@@ -14,7 +14,7 @@
         /// <summary>
         /// Default Maximum Timing. (Seconds)
         /// </summary>
-        public const byte DefaultMaximumTiming = 60;
+        public const byte DefaultMaximumTiming = 45;
 
         /// <summary>
         /// Slightly stager tasks, so they don't compete. (Milliseconds)
