@@ -25,7 +25,7 @@
             base.Dispose(true);
         }
 
-        public void Change(TimeSpan ts)
+        public void ChangeTiming(TimeSpan ts)
         {
             base.Change(ts);
         }

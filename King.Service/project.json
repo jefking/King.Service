@@ -1,0 +1,42 @@
+﻿{
+  "version": "2.0.3",
+  "title": "King.Service",
+  "description": "Task scheduling.",
+  "authors": [ "Jef King" ],
+  "packOptions": {
+    "summary": "Task scheduling.",
+    "releaseNotes": ".NET Standard 1.3",
+    "tags": [ "King.Service Azure Queue Service Bus WebJob scale scaling linear exponential timing auto-scale dynamic-scale dynamic Queuing Background Worker Work Data Processing Table Environment Initialize Task Tasks Dequeue Dequeuing King.Azure run task service services tasks scheduling worker-role" ],
+    "projectUrl": "https://github.com/jefking/King.Service",
+    "licenseUrl": "https://github.com/jefking/King.Service/blob/master/LICENSE",
+    "iconUrl": "https://raw.githubusercontent.com/jefking/King.Service/master/icon.png",
+    "authors": [ "Jef King" ],
+    "copyright": "Jef King",
+    "language": "en-US",
+    "owners": [ "Jef King" ]
+  },
+
+  "configurations": {
+    "Release": {
+      "buildOptions": {
+        "optimize": true
+      }
+    }
+  },
+
+  "frameworks": {
+    "netstandard1.3": {
+      "imports": [
+        "dnxcore50",
+        "portable-net451+win8"
+      ]
+    }
+  },
+
+  "dependencies": {
+    "King.Azure": "2.0.5",
+    "System.Threading.Thread": "4.0.0",
+    "System.Threading.Tasks.Parallel": "4.0.1",
+    "System.Threading.Timer": "4.0.1"
+  }
+}

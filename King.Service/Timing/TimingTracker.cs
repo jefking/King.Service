@@ -17,7 +17,7 @@
         /// <summary>
         /// Maximum Timing
         /// </summary>
-        protected readonly byte max = byte.MaxValue;
+        protected byte max = byte.MaxValue;
         #endregion
 
         #region Constructors

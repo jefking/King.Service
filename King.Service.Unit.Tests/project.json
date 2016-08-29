@@ -1,0 +1,18 @@
+﻿{
+  "version": "2.1.0-*",
+  "description": "King.Service.Test Console Application",
+
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "King.Service": "2.0.3",
+    "NUnitLite": "3.4.1",
+    "NSubstitute": "2.0.0-rc"
+  },
+
+  "frameworks": {
+    "net462": {}
+  }
+}
