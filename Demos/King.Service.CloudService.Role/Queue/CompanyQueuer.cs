@@ -26,7 +26,7 @@
                 Name = string.Format("company-{0}", id),
             };
 
-            var task = this.queue.Save(company);
+            var task = this.queue.Send(company);
             task.Wait();
 
             id++;
