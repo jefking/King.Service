@@ -64,7 +64,7 @@
         public void RunStateNull()
         {
             var m = new RecurringHelper(100);
-            m.Run(null, null);
+            m.Run(null);
         }
 
         [Test]
@@ -75,7 +75,7 @@
                 Throw = true,
             };
 
-            m.Run(new object(), null);
+            m.Run(new object());
         }
 
         [Test]
@@ -115,7 +115,7 @@
         {
             using (var tm = new RecurringHelper(100))
             {
-                Assert.That(() => tm.Change(TimeSpan.Zero), Throws.TypeOf<ArgumentException>());
+                Assert.That(() => tm.ChangeTiming(TimeSpan.Zero), Throws.TypeOf<ArgumentException>());
             }
         }
 
@@ -124,7 +124,7 @@
         {
             using (var tm = new RecurringHelper(100))
             {
-                tm.Change(TimeSpan.FromSeconds(100));
+                tm.ChangeTiming(TimeSpan.FromSeconds(100));
             }
         }
 
@@ -134,7 +134,7 @@
             using (var tm = new RecurringHelper(100))
             {
                 tm.Start();
-                tm.Change(TimeSpan.FromSeconds(100));
+                tm.ChangeTiming(TimeSpan.FromSeconds(100));
             }
         }
     }

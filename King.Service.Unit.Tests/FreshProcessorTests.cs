@@ -6,6 +6,7 @@
     using NSubstitute;
     using NUnit.Framework;
     using System;
+    using Unit.Tests;
 
     [TestFixture]
     public class FreshProcessorTests

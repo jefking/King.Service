@@ -1,48 +1,18 @@
 ﻿{
-  "version": "2.0.0",
-  "authors": [ "Jef King" ],
-  "owners": [ "Jef King" ],
-  "copyright": "Jef King",
-  "projectUrl": "https://github.com/jefking/King.Service",
-  "licenseUrl": "https://github.com/jefking/King.Service/blob/master/LICENSE",
-  "iconUrl": "https://raw.githubusercontent.com/jefking/King.Service/master/icon.png",
-  
-  "compilationOptions": {
+  "version": "2.1.0-*",
+  "description": "King.Service.Test Console Application",
+
+  "buildOptions": {
     "emitEntryPoint": true
   },
 
   "dependencies": {
-    "King.Service": "2.0.0-preview"
-  },
-
-  "commands": {
-    "King.Service.Unit.Tests": "King.Service.Unit.Tests"
+    "King.Service": "2.0.3",
+    "NUnitLite": "3.4.1",
+    "NSubstitute": "2.0.0-rc"
   },
 
   "frameworks": {
-    "net451": {
-      "frameworkAssemblies": {
-        "System.Diagnostics.Tracing": { },
-        "System.Threading": { }
-      }
-    },
-    "net45": {
-      "frameworkAssemblies": {
-        "System.Diagnostics.Tracing": { },
-        "System.Threading": { }
-      }
-    },
-    "net461": {
-      "frameworkAssemblies": {
-        "System.Diagnostics.Tracing": { },
-        "System.Threading": { }
-      }
-    },
-    "net46": {
-      "frameworkAssemblies": {
-        "System.Diagnostics.Tracing": { },
-        "System.Threading": { }
-      }
-    }
+    "net462": {}
   }
 }

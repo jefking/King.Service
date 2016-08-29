@@ -62,10 +62,10 @@
 
             var newTime = this.timing.Get(workWasDone);
 
-            if (base.timer.Interval != newTime)
+            var ts = TimeSpan.FromSeconds(newTime);
+
+            if (base.frequency.TotalMilliseconds != ts.TotalMilliseconds)
             {
-                var ts = TimeSpan.FromSeconds(newTime);
-                
                 base.Change(ts);
 
                 Trace.TraceInformation("{0}: Changed timing to: {1}.", base.Name, ts);
