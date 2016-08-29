@@ -21,7 +21,7 @@
         [Test]
         public void DefaultMaximumTiming()
         {
-            Assert.AreEqual(60, BaseTimes.DefaultMaximumTiming);
+            Assert.AreEqual(45, BaseTimes.DefaultMaximumTiming);
         }
     }
 }
