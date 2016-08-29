@@ -1,4 +1,4 @@
-﻿namespace King.Service.Unit.Tests
+﻿namespace King.Service.Tests
 {
     using King.Azure.Data;
     using System;
