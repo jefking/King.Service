@@ -34,7 +34,7 @@
             }
 
             this.frequency = TimeSpan.FromSeconds(frequency);
-            this.timer = new Timer(this.Run, this, TimeSpan.Zero, this.frequency);
+            this.timer = new Timer(this.Run, this, Timeout.Infinite, Timeout.Infinite);
 
             this.Name = this.GetType().ToString();
 
@@ -66,8 +66,6 @@
         /// <returns>Stopped</returns>
         public virtual bool Stop()
         {
-            
-
             return this.timer.Change(0, 0);
         }
 
