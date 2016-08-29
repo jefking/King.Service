@@ -3,7 +3,7 @@
     using King.Service.Timing;
     using System;
     using System.Diagnostics;
-    using System.Timers;
+    using System.Threading;
 
     /// <summary>
     /// Recurring Task
@@ -15,6 +15,11 @@
         /// Timer
         /// </summary>
         protected Timer timer = null;
+
+        /// <summary>
+        /// Frequency
+        /// </summary>
+        protected TimeSpan frequency;
         #endregion
 
         #region Constructors
@@ -28,17 +33,12 @@
                 throw new ArgumentException("Frequency must be greater than 0.");
             }
 
-            var ts = TimeSpan.FromSeconds(frequency);
-            this.timer = new Timer(ts.TotalMilliseconds)
-            {
-                AutoReset = true,
-                Enabled = false,
-            };
-            this.timer.Elapsed += this.Run;
+            this.frequency = TimeSpan.FromSeconds(frequency);
+            this.timer = new Timer(this.Run, this, TimeSpan.Zero, this.frequency);
 
             this.Name = this.GetType().ToString();
 
-            Trace.TraceInformation("{0} Frequency is: {1}s.", this.Name, ts);
+            Trace.TraceInformation("{0} Frequency is: {1}s.", this.Name, this.frequency);
         }
 
         /// <summary>
@@ -57,9 +57,7 @@
         /// <returns>Running</returns>
         public virtual bool Start()
         {
-            this.timer.Start();
-
-            return true;
+            return timer.Change(TimeSpan.FromMilliseconds(1), frequency);
         }
 
         /// <summary>
@@ -68,20 +66,17 @@
         /// <returns>Stopped</returns>
         public virtual bool Stop()
         {
-            this.timer.Stop();
+            
 
-            return true;
+            return this.timer.Change(0, 0);
         }
 
         /// <summary>
         /// Execute the action
         /// </summary>
         /// <param name="state">State of Timer</param>
-        /// <param name="e">Elapsed Event Args</param>
-        public virtual void Run(object state, ElapsedEventArgs e)
+        public virtual void Run(object state)
         {
-            var signal = null == e ? DateTime.UtcNow : e.SignalTime;
-
             var timing = Stopwatch.StartNew();
 
             try
@@ -97,7 +92,7 @@
                 timing.Stop();
             }
 
-            Trace.TraceInformation("{0}: Task Completed, Duration: {1}, Signal Time: {2}", this.Name, timing.Elapsed, signal);
+            Trace.TraceInformation("{0}: Task Completed, Duration: {1}", this.Name, timing.Elapsed);
         }
 
         /// <summary>
@@ -111,7 +106,9 @@
                 throw new ArgumentException("frequency less than or equal to zero");
             }
 
-            this.timer.Interval = frequency.TotalMilliseconds;
+            this.frequency = frequency;
+
+            this.timer.Change(TimeSpan.FromMilliseconds(1), this.frequency);
         }
 
         /// <summary>
