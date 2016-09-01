@@ -9,12 +9,17 @@
         public static void Main()
         {
             var manager = new RoleTaskManager<Configuration>(new Factory());
+
             var config = new Configuration()
             {
                 ConnectionString = "UseDevelopmentStorage=true;",
                 TableName = "table",
                 GenericQueueName = "queue",
                 ContainerName = "container",
+                FastQueueName = "fast",
+                ModerateQueueName = "moderate",
+                SlowQueueName = "slow",
+                ShardQueueName = "shard"
             };
 
             if (manager.OnStart(config))
