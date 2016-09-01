@@ -18,7 +18,22 @@
         [Test]
         public void ConstructorServiceFactoryNull()
         {
-            Assert.That(() => new RoleTaskManager<object>((ITaskFactory<object>)null), Throws.TypeOf<ArgumentNullException>());
+            Assert.That(() => new RoleTaskManager<object>((ITaskFactory<object>)null), Throws.TypeOf<ArgumentException>());
+        }
+
+        [Test]
+        public void ConstructorAllFactoriesNull()
+        {
+            var random = new Random();
+            var c = random.Next(2, 20);
+            var factories = new List<ITaskFactory<object>>();
+
+            for (var i = 0; i < c; i++)
+            {
+                factories.Add(null);
+            }
+
+            Assert.That(() => new RoleTaskManager<object>(factories), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]

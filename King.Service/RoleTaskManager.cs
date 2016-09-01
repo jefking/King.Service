@@ -34,11 +34,8 @@
         public RoleTaskManager(ITaskFactory<T> factory)
             : this(new[] { factory })
         {
-            if (null == factory)
-            {
-                throw new ArgumentNullException("factory");
-            }
         }
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -50,7 +47,12 @@
                 throw new ArgumentNullException("factories");
             }
 
-            this.factories = factories;
+            this.factories = factories.Where(f => f != null);
+
+            if (this.factories.Count() == 0)
+            {
+                throw new ArgumentException("No valid factories available.");
+            }
         }
 
         /// <summary>
