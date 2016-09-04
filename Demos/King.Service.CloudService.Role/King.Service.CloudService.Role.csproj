@@ -33,12 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="King.Azure, Version=2.0.0.5, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\King.Azure.2.0.8\lib\netstandard1.3\King.Azure.dll</HintPath>
+    <Reference Include="King.Azure, Version=2.0.0.10, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\King.Azure.2.0.14\lib\net461\King.Azure.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="King.Service, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\King.Service.2.0.4\lib\netstandard1.3\King.Service.dll</HintPath>
+    <Reference Include="King.Service, Version=2.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\King.Service.2.0.6\lib\net461\King.Service.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Azure.KeyVault.Core, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
