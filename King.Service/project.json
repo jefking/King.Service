@@ -1,11 +1,11 @@
 {
-  "version": "2.0.4",
+  "version": "2.0.5",
   "title": "King.Service",
   "description": "Task scheduling for .NET",
   "authors": [ "Jef King" ],
   "packOptions": {
     "summary": "Task scheduling for .NET",
-    "releaseNotes": ".NET Core 1.0",
+    "releaseNotes": ".NET versions",
     "tags": [ "King.Service", "Azure", "Queue", "Service", "Bus", "WebJob", "scale", "scaling", "linear", "exponential", "timing", "auto-scale", "dynamic-scale", "dynamic", "Queuing", "Background", "Worker", "Work", "Data", "Processing", "Table", "Environment", "Initialize", "Task", "Tasks", "Dequeue", "Dequeuing", "King.Azure", "run", "task", "service", "services", "tasks", "scheduling", "worker-role" ],
     "projectUrl": "https://github.com/jefking/King.Service",
     "licenseUrl": "https://github.com/jefking/King.Service/blob/master/LICENSE",
@@ -27,20 +27,27 @@
   "frameworks": {
     "netstandard1.3": {
       "imports": [
-        "dnxcore50",
         "portable-net451+win8"
-      ]
+      ],
+      "dependencies": {
+        "System.Diagnostics.TraceSource": "4.0.0"
+      }
     },
     "netcoreapp1.0": {
       "imports": [
-        "dnxcore50",
         "portable-net451+win8"
-      ]
-    }
+      ],
+      "dependencies": {
+        "System.Diagnostics.TraceSource": "4.0.0"
+      }
+    },
+    "net46": {},
+    "net461": {},
+    "net462": {}
   },
 
   "dependencies": {
-    "King.Azure": "2.0.8",
+    "King.Azure": "2.0.14",
     "System.Threading.Thread": "4.0.0",
     "System.Threading.Tasks.Parallel": "4.0.1",
     "System.Threading.Timer": "4.0.1"
