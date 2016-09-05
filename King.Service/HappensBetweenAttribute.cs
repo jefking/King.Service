@@ -45,8 +45,7 @@
             {
                 throw new ArgumentException("Minimum frequency must be greater than 0.");
             }
-
-            if (minimumPeriodInSeconds > maximumPeriodInSeconds)
+            if (minimumPeriodInSeconds < maximumPeriodInSeconds)
             {
                 throw new ArgumentException("Maximum frequency must be greater than minimum.");
             }
