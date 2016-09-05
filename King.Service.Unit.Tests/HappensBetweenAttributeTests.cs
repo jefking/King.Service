@@ -9,8 +9,7 @@
         [Test]
         public void Constructor()
         {
-            var random = new Random();
-            new HappensBetweenAttribute(random.Next(1, 1000));
+            new HappensBetweenAttribute();
         }
 
         [Test]
@@ -28,8 +27,7 @@
         [Test]
         public void IsAttribute()
         {
-            var random = new Random();
-            Assert.IsNotNull(new HappensBetweenAttribute(random.Next(1, 1000)) as Attribute);
+            Assert.IsNotNull(new HappensBetweenAttribute() as Attribute);
         }
 
         [Test]
@@ -37,7 +35,7 @@
         {
             var random = new Random();
             var f = random.Next(1, 1000);
-            var attr = new HappensBetweenAttribute(f);
+            var attr = new HappensBetweenAttribute(f, random.Next(1001, 2000));
             Assert.AreEqual(f, attr.Frequency.Minimum);
         }
 
