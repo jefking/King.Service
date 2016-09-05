@@ -1,11 +1,11 @@
 ﻿namespace King.Service.Tests
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
     using King.Service.Data;
     using NSubstitute;
     using NUnit.Framework;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class CoordinatedTaskTests
