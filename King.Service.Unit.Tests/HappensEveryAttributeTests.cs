@@ -20,6 +20,13 @@
         }
 
         [Test]
+        public void IsAttribute()
+        {
+            var random = new Random();
+            Assert.IsNotNull(new HappensEveryAttribute(random.Next(1, 1000)) as Attribute);
+        }
+
+        [Test]
         public void Frequency()
         {
             var random = new Random();

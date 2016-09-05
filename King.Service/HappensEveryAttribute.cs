@@ -18,7 +18,7 @@
         public int Frequency
         {
             get;
-            private set;
+            protected set;
         }
         #endregion
 
