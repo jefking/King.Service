@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-
-namespace King.Service
+﻿namespace King.Service
 {
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Recurring Runner
     /// </summary>
