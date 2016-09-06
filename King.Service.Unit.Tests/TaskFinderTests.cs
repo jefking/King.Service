@@ -25,6 +25,12 @@
         }
 
         [Test]
+        public void IsITaskFactory()
+        {
+            Assert.IsNotNull(new TaskFinder<object>() as ITaskFactory<object>);
+        }
+
+        [Test]
         public void None()
         {
             var tf = new TaskFinder<object>();
