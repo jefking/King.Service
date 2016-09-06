@@ -30,7 +30,7 @@
                 {
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
                     {
-                        Trace.TraceInformation("Initialization found: {0}.{1}", type.DeclaringType, method);
+                        Trace.TraceInformation("Initialization found: {0}.{1}", type.FullName, method);
 
                         var instance = Activator.CreateInstance(type.AsType());
                         var recurring = new InitializeRunner(instance, method);
@@ -39,7 +39,7 @@
 
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(RunsEveryAttribute), false))
                     {
-                        Trace.TraceInformation("Runs Every found: {0}.{1}", type.DeclaringType, method);
+                        Trace.TraceInformation("Runs Every found: {0}.{1}", type.FullName, method);
                         
                         var every = everyAttr as RunsEveryAttribute;
                         var instance = Activator.CreateInstance(type.AsType());
@@ -50,7 +50,7 @@
 
                     foreach (var betweenAttr in method.GetCustomAttributes(typeof(RunsBetweenAttribute), false))
                     {
-                        Trace.TraceInformation("Runs between found: {0}.{1}", type.DeclaringType, method);
+                        Trace.TraceInformation("Runs between found: {0}.{1}", type.FullName, method);
 
                         var between = betweenAttr as RunsBetweenAttribute;
                         var instance = Activator.CreateInstance(type.AsType());
