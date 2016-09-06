@@ -1,11 +1,11 @@
 {
-  "version": "2.0.6",
+  "version": "2.0.7",
   "title": "King.Service",
   "description": "Task scheduling for .NET",
   "authors": [ "Jef King" ],
   "packOptions": {
     "summary": "Task scheduling for .NET",
-    "releaseNotes": ".NET versions",
+    "releaseNotes": "Bind to attribute based recurring methods.",
     "tags": [ "King.Service", "Azure", "Queue", "Service", "Bus", "WebJob", "scale", "scaling", "linear", "exponential", "timing", "auto-scale", "dynamic-scale", "dynamic", "Queuing", "Background", "Worker", "Work", "Data", "Processing", "Table", "Environment", "Initialize", "Task", "Tasks", "Dequeue", "Dequeuing", "King.Azure", "run", "task", "service", "services", "tasks", "scheduling", "worker-role" ],
     "projectUrl": "https://github.com/jefking/King.Service",
     "licenseUrl": "https://github.com/jefking/King.Service/blob/master/LICENSE",
