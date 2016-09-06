@@ -1,8 +1,8 @@
 ﻿namespace King.Service.CloudService.Role
 {
-    using System.Collections.Generic;
     using King.Service;
     using King.Service.CloudService.Role.Queue;
+    using System.Collections.Generic;
 
     //Tasks for Queuing (Demo purposes)
     public class DataGenerationFactory : ITaskFactory<Configuration>
