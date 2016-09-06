@@ -35,6 +35,13 @@
                         runnables.Add(recurring);
                     }
 
+                    foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
+                    {
+                        var instance = Activator.CreateInstance(type.DeclaringType);
+                        var recurring = new InitializeRunner(instance, method);
+                        runnables.Add(recurring);
+                    }
+
                     foreach (var betweenAttr in method.GetCustomAttributes(typeof(RunsBetweenAttribute), false))
                     {
                         var between = betweenAttr as RunsBetweenAttribute;

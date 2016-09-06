@@ -15,6 +15,9 @@
 
             [RunsBetween(1, 100, Strategy.Linear)]
             public bool ActionDynamic() { return true; }
+
+            [Initialize]
+            public void InitDataSet() { }
         }
         #endregion
 
@@ -43,7 +46,7 @@
         {
             var tf = new TaskFinder<ExampleTest>();
             var tasks = tf.Tasks(new ExampleTest());
-            Assert.AreEqual(2, tasks.Count());
+            Assert.AreEqual(3, tasks.Count());
         }
 
         [Test]
@@ -69,6 +72,21 @@
 
             var runners = from t in tasks
                           where t.GetType() == typeof(AdaptiveRunner)
+                          select t;
+
+            Assert.AreEqual(1, runners.Count());
+            var every = runners.First();
+            Assert.IsNotNull(every);
+        }
+
+        [Test]
+        public void InitializeExample()
+        {
+            var tf = new TaskFinder<ExampleTest>();
+            var tasks = tf.Tasks(new ExampleTest());
+
+            var runners = from t in tasks
+                          where t.GetType() == typeof(InitializeRunner)
                           select t;
 
             Assert.AreEqual(1, runners.Count());
