@@ -3,7 +3,6 @@
     using NSubstitute;
     using NUnit.Framework;
     using System;
-    using System.Threading.Tasks;
 
     [TestFixture]
     public class InitializeRunnerTests
