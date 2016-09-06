@@ -7,7 +7,7 @@ namespace King.Service.CloudService.Role
         /// <summary>
         /// Role Service Manager
         /// </summary>
-        private readonly IRoleTaskManager<Configuration> manager = new RoleTaskManager<Configuration>(new ITaskFactory<Configuration>[] { new Factory(), new DataGenerationFactory() });
+        private readonly IRoleTaskManager<Configuration> manager = new RoleTaskManager<Configuration>(new ITaskFactory<Configuration>[] { new Factory(), new DataGenerationFactory(), TaskFinderFactory<Configuration>() });
 
         /// <summary>
         /// Overloaded Role Entry Point Method
