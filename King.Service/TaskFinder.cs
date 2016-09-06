@@ -26,18 +26,18 @@
             {
                 foreach (var method in type.DeclaredMethods)
                 {
-                    foreach (var everyAttr in method.GetCustomAttributes(typeof(HappensEveryAttribute), false))
+                    foreach (var everyAttr in method.GetCustomAttributes(typeof(RunsEveryAttribute), false))
                     {
-                        var every = everyAttr as HappensEveryAttribute;
+                        var every = everyAttr as RunsEveryAttribute;
                         var instance = Activator.CreateInstance(type.DeclaringType);
                         var run = new EveryRuns(instance, method, every.Frequency);
                         var recurring = new RecurringRunner(run);
                         runnables.Add(recurring);
                     }
 
-                    foreach (var betweenAttr in method.GetCustomAttributes(typeof(HappensBetweenAttribute), false))
+                    foreach (var betweenAttr in method.GetCustomAttributes(typeof(RunsBetweenAttribute), false))
                     {
-                        var between = betweenAttr as HappensBetweenAttribute;
+                        var between = betweenAttr as RunsBetweenAttribute;
                         var instance = Activator.CreateInstance(type.DeclaringType);
                         var run = new BetweenRuns(instance, method, between.Frequency.Minimum, between.Frequency.Maximum);
                         var recurring = new AdaptiveRunner(run, between.Strategy);//Choice, Adaptive/Backoff

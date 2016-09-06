@@ -4,30 +4,30 @@
     using System;
 
     [TestFixture]
-    public class HappensBetweenAttributeTests
+    public class RunsBetweenAttributeTests
     {
         [Test]
         public void Constructor()
         {
-            new HappensBetweenAttribute();
+            new RunsBetweenAttribute();
         }
 
         [Test]
         public void ConstructorFrequencyLow()
         {
-            Assert.That(() => new HappensBetweenAttribute(-1), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => new RunsBetweenAttribute(-1), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
         public void ConstructorFrequencyMaxLessMin()
         {
-            Assert.That(() => new HappensBetweenAttribute(2, 1), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => new RunsBetweenAttribute(2, 1), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
         public void IsAttribute()
         {
-            Assert.IsNotNull(new HappensBetweenAttribute() as Attribute);
+            Assert.IsNotNull(new RunsBetweenAttribute() as Attribute);
         }
 
         [Test]
@@ -35,7 +35,7 @@
         {
             var random = new Random();
             var f = random.Next(1, 1000);
-            var attr = new HappensBetweenAttribute(f, random.Next(1001, 2000));
+            var attr = new RunsBetweenAttribute(f, random.Next(1001, 2000));
             Assert.AreEqual(f, attr.Frequency.Minimum);
         }
 
@@ -44,14 +44,14 @@
         {
             var random = new Random();
             var f = random.Next(2, 1000);
-            var attr = new HappensBetweenAttribute(1, f);
+            var attr = new RunsBetweenAttribute(1, f);
             Assert.AreEqual(f, attr.Frequency.Maximum);
         }
 
         [Test]
         public void Strategy()
         {
-            var attr = new HappensBetweenAttribute(1, 2, Timing.Strategy.Linear);
+            var attr = new RunsBetweenAttribute(1, 2, Timing.Strategy.Linear);
             Assert.AreEqual(Timing.Strategy.Linear, attr.Strategy);
         }
     }

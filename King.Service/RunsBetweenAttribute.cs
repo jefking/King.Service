@@ -10,7 +10,7 @@
     /// Must be placed on method that returns bool (work was done)
     /// </summary>
     [AttributeUsage(AttributeTargets.Method)]
-    public class HappensBetweenAttribute : Attribute
+    public class RunsBetweenAttribute : Attribute
     {
         #region Members
         /// <summary>
@@ -39,7 +39,7 @@
         /// <param name="minimumPeriodInSeconds">Minimum Period in Seconds</param>
         /// <param name="maximumPeriodInSeconds">Maximum Period in Seconds</param>
         /// <param name="strategy">Timing Strategy</param>
-        public HappensBetweenAttribute(int minimumPeriodInSeconds = BaseTimes.DefaultMinimumTiming, int maximumPeriodInSeconds = BaseTimes.DefaultMaximumTiming, Strategy strategy = Strategy.Exponential)
+        public RunsBetweenAttribute(int minimumPeriodInSeconds = BaseTimes.DefaultMinimumTiming, int maximumPeriodInSeconds = BaseTimes.DefaultMaximumTiming, Strategy strategy = Strategy.Exponential)
         {
             if (0 >= minimumPeriodInSeconds)
             {

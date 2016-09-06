@@ -10,10 +10,10 @@
         #region Helper
         public class ExampleTest
         {
-            [HappensEvery(100)]
+            [RunsEvery(100)]
             public void ActionRecurring() { }
 
-            [HappensBetween(1, 100, Strategy.Linear)]
+            [RunsBetween(1, 100, Strategy.Linear)]
             public bool ActionDynamic() { return true; }
         }
         #endregion

@@ -4,26 +4,26 @@
     using System;
 
     [TestFixture]
-    public class HappensEveryAttributeTests
+    public class RunsEveryAttributeTests
     {
         [Test]
         public void Constructor()
         {
             var random = new Random();
-            new HappensEveryAttribute(random.Next(1, 1000));
+            new RunsEveryAttribute(random.Next(1, 1000));
         }
 
         [Test]
         public void ConstructorFrequencyLow()
         {
-            Assert.That(() => new HappensEveryAttribute(-1), Throws.TypeOf<ArgumentException>());
+            Assert.That(() => new RunsEveryAttribute(-1), Throws.TypeOf<ArgumentException>());
         }
 
         [Test]
         public void IsAttribute()
         {
             var random = new Random();
-            Assert.IsNotNull(new HappensEveryAttribute(random.Next(1, 1000)) as Attribute);
+            Assert.IsNotNull(new RunsEveryAttribute(random.Next(1, 1000)) as Attribute);
         }
 
         [Test]
@@ -31,7 +31,7 @@
         {
             var random = new Random();
             var f = random.Next(1, 1000);
-            var attr = new HappensEveryAttribute(f);
+            var attr = new RunsEveryAttribute(f);
             Assert.AreEqual(f, attr.Frequency);
         }
     }
