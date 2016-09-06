@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
     using System.Threading.Tasks;
     using Timing;
@@ -29,6 +30,8 @@
                 {
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
                     {
+                        Trace.TraceInformation("Initialization found: {0}.{1}", type.DeclaringType, method);
+
                         var instance = Activator.CreateInstance(type.DeclaringType);
                         var recurring = new InitializeRunner(instance, method);
                         runnables.Add(recurring);
@@ -36,6 +39,8 @@
 
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(RunsEveryAttribute), false))
                     {
+                        Trace.TraceInformation("Runs Every found: {0}.{1}", type.DeclaringType, method);
+                        
                         var every = everyAttr as RunsEveryAttribute;
                         var instance = Activator.CreateInstance(type.DeclaringType);
                         var run = new EveryRuns(instance, method, every.Frequency);
@@ -45,6 +50,8 @@
 
                     foreach (var betweenAttr in method.GetCustomAttributes(typeof(RunsBetweenAttribute), false))
                     {
+                        Trace.TraceInformation("Runs between found: {0}.{1}", type.DeclaringType, method);
+
                         var between = betweenAttr as RunsBetweenAttribute;
                         var instance = Activator.CreateInstance(type.DeclaringType);
                         var run = new BetweenRuns(instance, method, between.Frequency.Minimum, between.Frequency.Maximum);
