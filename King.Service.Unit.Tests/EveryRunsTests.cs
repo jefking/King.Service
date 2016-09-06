@@ -61,7 +61,7 @@
             var instance = Substitute.For<object>();
 
             var method = instance.GetType().GetMethod("ToString");
-            var runs = new EveryRuns(new object(), method);
+            var runs = new EveryRuns(instance, method);
 
             var result = await runs.Run();
             Assert.IsTrue(result);
