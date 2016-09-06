@@ -17,7 +17,7 @@
         /// </summary>
         /// <param name="passthrough">Configuration</param>
         /// <returns>Runnable Tasks</returns>
-        public IEnumerable<IRunnable> Tasks(T passthrough)
+        public virtual IEnumerable<IRunnable> Tasks(T passthrough)
         {
             var assembly = typeof(T).GetTypeInfo().Assembly;
 

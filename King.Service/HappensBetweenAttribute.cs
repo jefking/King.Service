@@ -16,7 +16,7 @@
         /// <summary>
         /// Frequency Range
         /// </summary>
-        public Range<int> Frequency
+        public virtual Range<int> Frequency
         {
             get;
             protected set;
@@ -25,7 +25,7 @@
         /// <summary>
         /// Timing Strategy
         /// </summary>
-        public Strategy Strategy
+        public virtual Strategy Strategy
         {
             get;
             protected set;

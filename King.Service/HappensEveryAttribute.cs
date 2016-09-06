@@ -15,7 +15,7 @@
         /// <summary>
         /// Frequency in Seconds
         /// </summary>
-        public int Frequency
+        public virtual int Frequency
         {
             get;
             protected set;
