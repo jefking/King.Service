@@ -11,7 +11,7 @@
         #region Helper
         public class ExampleBetween
         {
-            public bool TestMethod()
+            public virtual bool TestMethod()
             {
                 return true;
             }
@@ -103,7 +103,7 @@
         public async Task RunFalse()
         {
             var instance = Substitute.For<ExampleBetween>();
-            instance.TestMethod().Returns(true);
+            instance.TestMethod().Returns(false);
 
             var method = instance.GetType().GetMethod("TestMethod");
             var runs = new BetweenRuns(instance, method);
