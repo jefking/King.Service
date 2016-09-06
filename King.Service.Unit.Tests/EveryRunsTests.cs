@@ -59,7 +59,6 @@
         public async Task Run()
         {
             var instance = Substitute.For<object>();
-            instance.ToString().Returns(Guid.NewGuid().ToString());
 
             var method = instance.GetType().GetMethod("ToString");
             var runs = new EveryRuns(new object(), method);
@@ -67,7 +66,7 @@
             var result = await runs.Run();
             Assert.IsTrue(result);
 
-            instance.Received().ToString();
+            instance.Received(1).ToString();
         }
     }
 }
