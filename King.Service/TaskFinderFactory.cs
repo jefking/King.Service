@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Reflection;
     using System.Threading.Tasks;
+    using Timing;
 
     /// <summary>
     /// Task Finder, searches assembly for attribute based tasks.
@@ -26,6 +27,13 @@
             {
                 foreach (var method in type.DeclaredMethods)
                 {
+                    foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
+                    {
+                        var instance = Activator.CreateInstance(type.DeclaringType);
+                        var recurring = new InitializeRunner(instance, method);
+                        runnables.Add(recurring);
+                    }
+
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(RunsEveryAttribute), false))
                     {
                         var every = everyAttr as RunsEveryAttribute;
@@ -35,20 +43,21 @@
                         runnables.Add(recurring);
                     }
 
-                    foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
-                    {
-                        var instance = Activator.CreateInstance(type.DeclaringType);
-                        var recurring = new InitializeRunner(instance, method);
-                        runnables.Add(recurring);
-                    }
-
                     foreach (var betweenAttr in method.GetCustomAttributes(typeof(RunsBetweenAttribute), false))
                     {
                         var between = betweenAttr as RunsBetweenAttribute;
                         var instance = Activator.CreateInstance(type.DeclaringType);
                         var run = new BetweenRuns(instance, method, between.Frequency.Minimum, between.Frequency.Maximum);
-                        var recurring = new AdaptiveRunner(run, between.Strategy);//Choice, Adaptive/Backoff
-                        runnables.Add(recurring);
+                        switch (between.Strategy)
+                        {
+                            case Strategy.Exponential:
+                                runnables.Add(new BackoffRunner(run, between.Strategy));
+                                break;
+                            case Strategy.Linear:
+                            default:
+                                runnables.Add(new AdaptiveRunner(run, between.Strategy));
+                                break;
+                        }
                     }
                 }
             });

@@ -23,7 +23,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        /// <param name="connectionString">Coordinated Task Connection String</param>
+        /// <param name="connectionString">Coordinated Task Connection String (Table Storage)</param>
         /// <param name="hour">Hour to run</param>
         /// <param name="minute">Minute to run (-1 for on the hour)</param>
         public RunAtTask(string connectionString, byte hour = 0, sbyte minute = -1)

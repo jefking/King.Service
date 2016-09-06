@@ -5,7 +5,7 @@
     using System.Linq;
 
     [TestFixture]
-    public class TaskFinderTests
+    public class TaskFinderFactoryTests
     {
         #region Helper
         public class ExampleTest

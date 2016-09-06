@@ -14,7 +14,6 @@
  + Batches of messages
  + Shards for high throughput
  + Variable timing for cost saving
-+ And much more! [View Wiki](https://github.com/jefking/King.Service/wiki)
 + [Cloud Service](https://github.com/jefking/King.Service/tree/master/Demos/King.Service.CloudService.Role)
 + [Service Bus](https://github.com/jefking/King.Service.ServiceBus)
 + [WebJob](https://github.com/jefking/King.Service/tree/master/Demos/King.Service.WebJob)
