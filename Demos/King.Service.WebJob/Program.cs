@@ -8,7 +8,11 @@
     {
         public static void Main()
         {
-            var manager = new RoleTaskManager<Configuration>(new Factory(), TaskFinderFactory<Configuration>());
+            var manager = new RoleTaskManager<Configuration>(
+                new ITaskFactory<Configuration>[] {
+                    new Factory()
+                    , new TaskFinderFactory<Configuration>()
+                });
 
             var config = new Configuration()
             {
