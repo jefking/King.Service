@@ -97,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adaptive.cs" />
+    <Compile Include="AttributeBasedTasks.cs" />
     <Compile Include="Backoff.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Coordinated.cs" />

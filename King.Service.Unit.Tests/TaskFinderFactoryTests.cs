@@ -24,19 +24,19 @@
         [Test]
         public void Constructor()
         {
-            new TaskFinder<object>();
+            new TaskFinderFactory<object>();
         }
 
         [Test]
         public void IsITaskFactory()
         {
-            Assert.IsNotNull(new TaskFinder<object>() as ITaskFactory<object>);
+            Assert.IsNotNull(new TaskFinderFactory<object>() as ITaskFactory<object>);
         }
 
         [Test]
         public void None()
         {
-            var tf = new TaskFinder<object>();
+            var tf = new TaskFinderFactory<object>();
             var tasks = tf.Tasks(new object());
             Assert.AreEqual(0, tasks.Count());
         }
@@ -44,7 +44,7 @@
         [Test]
         public void Examples()
         {
-            var tf = new TaskFinder<ExampleTest>();
+            var tf = new TaskFinderFactory<ExampleTest>();
             var tasks = tf.Tasks(new ExampleTest());
             Assert.AreEqual(3, tasks.Count());
         }
@@ -52,7 +52,7 @@
         [Test]
         public void HappensEveryExample()
         {
-            var tf = new TaskFinder<ExampleTest>();
+            var tf = new TaskFinderFactory<ExampleTest>();
             var tasks = tf.Tasks(new ExampleTest());
 
             var runners = from t in tasks
@@ -67,7 +67,7 @@
         [Test]
         public void HappensBetweenExample()
         {
-            var tf = new TaskFinder<ExampleTest>();
+            var tf = new TaskFinderFactory<ExampleTest>();
             var tasks = tf.Tasks(new ExampleTest());
 
             var runners = from t in tasks
@@ -82,7 +82,7 @@
         [Test]
         public void InitializeExample()
         {
-            var tf = new TaskFinder<ExampleTest>();
+            var tf = new TaskFinderFactory<ExampleTest>();
             var tasks = tf.Tasks(new ExampleTest());
 
             var runners = from t in tasks

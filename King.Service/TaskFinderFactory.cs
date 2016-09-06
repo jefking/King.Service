@@ -10,7 +10,7 @@
     /// Task Finder, searches assembly for attribute based tasks.
     /// </summary>
     /// <typeparam name="T">Object in Assembly to look for tasks.</typeparam>
-    public class TaskFinder<T> : ITaskFactory<T>
+    public class TaskFinderFactory<T> : ITaskFactory<T>
     {
         #region Methods
         /// <summary>
