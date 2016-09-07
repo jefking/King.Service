@@ -31,7 +31,11 @@
 
             Parallel.ForEach(types, type =>
             {
-                foreach (var method in type.DeclaredMethods)
+                var methods = from m in type.DeclaredMethods
+                              where m.IsPublic
+                              select m;
+
+                foreach (var method in methods)
                 {
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
                     {
