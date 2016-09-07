@@ -3,10 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
     using Timing;
-    using System.Linq;
 
     /// <summary>
     /// Task Finder, searches assembly for attribute based tasks.
@@ -40,9 +40,8 @@
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
                     {
                         Trace.TraceInformation("Initialization task found: {0}.{1}", type.FullName, method.Name);
-
-                        var instance = Activator.CreateInstance(type.AsType());
-                        runnables.Add(new InitializeRunner(instance, method));
+                        
+                        runnables.Add(new InitializeRunner(Activator.CreateInstance(type.AsType()), method));
                     }
 
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(RunsEveryAttribute), false))
@@ -50,8 +49,7 @@
                         Trace.TraceInformation("Runs Every task found: {0}.{1}", type.FullName, method.Name);
 
                         var every = everyAttr as RunsEveryAttribute;
-                        var instance = Activator.CreateInstance(type.AsType());
-                        var run = new EveryRuns(instance, method, every.Frequency);
+                        var run = new EveryRuns(Activator.CreateInstance(type.AsType()), method, every.Frequency);
                         runnables.Add(new RecurringRunner(run));
                     }
 
@@ -60,8 +58,7 @@
                         Trace.TraceInformation("Runs between task found: {0}.{1}", type.FullName, method.Name);
 
                         var between = betweenAttr as RunsBetweenAttribute;
-                        var instance = Activator.CreateInstance(type.AsType());
-                        var run = new BetweenRuns(instance, method, between.Frequency.Minimum, between.Frequency.Maximum);
+                        var run = new BetweenRuns(Activator.CreateInstance(type.AsType()), method, between.Frequency.Minimum, between.Frequency.Maximum);
                         switch (between.Strategy)
                         {
                             case Strategy.Exponential:

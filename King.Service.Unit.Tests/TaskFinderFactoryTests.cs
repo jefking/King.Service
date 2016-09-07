@@ -108,7 +108,7 @@
         public void InitDataSet() { }
 
         [Initialize]
-        private void NotFound() { }
+        private void NotFound() { }//Private
     }
 
     public struct ExampleStruct
