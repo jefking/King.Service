@@ -18,7 +18,7 @@
         /// <param name="maximumPeriodInSeconds">Maximum, time in seconds</param>
         /// <param name="strategy">Timing Strategy</param>
         public AdaptiveTask(int minimumPeriodInSeconds = BaseTimes.DefaultMinimumTiming, int maximumPeriodInSeconds = BaseTimes.DefaultMaximumTiming, Strategy strategy = Strategy.Exponential)
-            : base(Strategies.Adaptive(strategy, minimumPeriodInSeconds, maximumPeriodInSeconds), minimumPeriodInSeconds, maximumPeriodInSeconds)
+            : base(Strategies.Adaptive(strategy, minimumPeriodInSeconds, maximumPeriodInSeconds))
         {
         }
         #endregion
