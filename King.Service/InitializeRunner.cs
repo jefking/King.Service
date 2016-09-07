@@ -48,7 +48,7 @@
         /// </summary>
         public override void Run()
         {
-            var result = this.method.Invoke(instance, null);
+            this.method.Invoke(instance, null);
         }
         #endregion
     }
