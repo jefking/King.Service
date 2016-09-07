@@ -17,7 +17,7 @@
             {
             }
             public DynamicTest(IDynamicTiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
-                : base(timing, minimumPeriodInSeconds, maximumPeriodInSeconds)
+                : base(timing)
             {
             }
             public bool Work
