@@ -26,42 +26,45 @@
             var runnables = new List<IRunnable>();
             Parallel.ForEach(assembly.DefinedTypes, type =>
             {
-                foreach (var method in type.DeclaredMethods)
+                if (type.IsClass && type.IsPublic)
                 {
-                    foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
+                    foreach (var method in type.DeclaredMethods)
                     {
-                        Trace.TraceInformation("Initialization task found: {0}.{1}", type.FullName, method.Name);
-
-                        var instance = Activator.CreateInstance(type.AsType());
-                        runnables.Add(new InitializeRunner(instance, method));
-                    }
-
-                    foreach (var everyAttr in method.GetCustomAttributes(typeof(RunsEveryAttribute), false))
-                    {
-                        Trace.TraceInformation("Runs Every task found: {0}.{1}", type.FullName, method.Name);
-                        
-                        var every = everyAttr as RunsEveryAttribute;
-                        var instance = Activator.CreateInstance(type.AsType());
-                        var run = new EveryRuns(instance, method, every.Frequency);
-                        runnables.Add(new RecurringRunner(run));
-                    }
-
-                    foreach (var betweenAttr in method.GetCustomAttributes(typeof(RunsBetweenAttribute), false))
-                    {
-                        Trace.TraceInformation("Runs between task found: {0}.{1}", type.FullName, method.Name);
-
-                        var between = betweenAttr as RunsBetweenAttribute;
-                        var instance = Activator.CreateInstance(type.AsType());
-                        var run = new BetweenRuns(instance, method, between.Frequency.Minimum, between.Frequency.Maximum);
-                        switch (between.Strategy)
+                        foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
                         {
-                            case Strategy.Exponential:
-                                runnables.Add(new BackoffRunner(run, between.Strategy));
-                                break;
-                            case Strategy.Linear:
-                            default:
-                                runnables.Add(new AdaptiveRunner(run, between.Strategy));
-                                break;
+                            Trace.TraceInformation("Initialization task found: {0}.{1}", type.FullName, method.Name);
+
+                            var instance = Activator.CreateInstance(type.AsType());
+                            runnables.Add(new InitializeRunner(instance, method));
+                        }
+
+                        foreach (var everyAttr in method.GetCustomAttributes(typeof(RunsEveryAttribute), false))
+                        {
+                            Trace.TraceInformation("Runs Every task found: {0}.{1}", type.FullName, method.Name);
+
+                            var every = everyAttr as RunsEveryAttribute;
+                            var instance = Activator.CreateInstance(type.AsType());
+                            var run = new EveryRuns(instance, method, every.Frequency);
+                            runnables.Add(new RecurringRunner(run));
+                        }
+
+                        foreach (var betweenAttr in method.GetCustomAttributes(typeof(RunsBetweenAttribute), false))
+                        {
+                            Trace.TraceInformation("Runs between task found: {0}.{1}", type.FullName, method.Name);
+
+                            var between = betweenAttr as RunsBetweenAttribute;
+                            var instance = Activator.CreateInstance(type.AsType());
+                            var run = new BetweenRuns(instance, method, between.Frequency.Minimum, between.Frequency.Maximum);
+                            switch (between.Strategy)
+                            {
+                                case Strategy.Exponential:
+                                    runnables.Add(new BackoffRunner(run, between.Strategy));
+                                    break;
+                                case Strategy.Linear:
+                                default:
+                                    runnables.Add(new AdaptiveRunner(run, between.Strategy));
+                                    break;
+                            }
                         }
                     }
                 }
