@@ -8,19 +8,7 @@
     public class TaskFinderFactoryTests
     {
         #region Helper
-        
         private class ExamplePrivate
-        {
-            [RunsEvery(100)]
-            public void ActionRecurring() { }
-
-            [RunsBetween(1, 100, Strategy.Linear)]
-            public bool ActionDynamic() { return true; }
-
-            [Initialize]
-            public void InitDataSet() { }
-        }
-        public struct ExampleStruct
         {
             [RunsEvery(100)]
             public void ActionRecurring() { }
@@ -109,6 +97,18 @@
 
     #region Helper
     public class ExampleTest
+    {
+        [RunsEvery(100)]
+        public void ActionRecurring() { }
+
+        [RunsBetween(1, 100, Strategy.Linear)]
+        public bool ActionDynamic() { return true; }
+
+        [Initialize]
+        public void InitDataSet() { }
+    }
+
+    public struct ExampleStruct
     {
         [RunsEvery(100)]
         public void ActionRecurring() { }
