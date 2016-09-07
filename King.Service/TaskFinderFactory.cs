@@ -33,8 +33,7 @@
                         Trace.TraceInformation("Initialization task found: {0}.{1}", type.FullName, method.Name);
 
                         var instance = Activator.CreateInstance(type.AsType());
-                        var recurring = new InitializeRunner(instance, method);
-                        runnables.Add(recurring);
+                        runnables.Add(new InitializeRunner(instance, method));
                     }
 
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(RunsEveryAttribute), false))
@@ -44,8 +43,7 @@
                         var every = everyAttr as RunsEveryAttribute;
                         var instance = Activator.CreateInstance(type.AsType());
                         var run = new EveryRuns(instance, method, every.Frequency);
-                        var recurring = new RecurringRunner(run);
-                        runnables.Add(recurring);
+                        runnables.Add(new RecurringRunner(run));
                     }
 
                     foreach (var betweenAttr in method.GetCustomAttributes(typeof(RunsBetweenAttribute), false))

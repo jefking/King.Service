@@ -11,13 +11,13 @@
             Trace.TraceInformation("Initialize.");
         }
 
-        [RunsEvery()]
+        [RunsEvery]
         public void Recurring()
         {
             Trace.TraceInformation("Working.");
         }
 
-        [RunsBetween()]
+        [RunsBetween]
         public bool Dynamic()
         {
             var random = new Random();
@@ -26,6 +26,13 @@
             Trace.TraceInformation("Work was done: {0}", workWasDone);
 
             return workWasDone;
+        }
+
+        [RunsEvery]
+        [Initialize]
+        public void WhyWouldYouDoThis()
+        {
+            Trace.TraceInformation("I don't know.");
         }
     }
 }
