@@ -26,7 +26,7 @@
         {
             if (null == action)
             {
-                throw new ArgumentNullException();
+                throw new ArgumentNullException("action");
             }
 
             this.action = action;

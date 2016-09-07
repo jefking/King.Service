@@ -41,7 +41,7 @@
         {
             get
             {
-                return this.timing.Timing.FrequencyInSeconds.Minimum * 1000 == base.frequency.TotalMilliseconds;
+                return this.timing.Timing.FrequencyInSeconds.Minimum * 1000 < base.frequency.TotalMilliseconds;
             }
         }
         #endregion

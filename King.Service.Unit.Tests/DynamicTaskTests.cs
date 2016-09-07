@@ -13,10 +13,10 @@
         public class DynamicTest : DynamicTask
         {
             public DynamicTest(int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
-                : this(new BackoffTiming(minimumPeriodInSeconds, maximumPeriodInSeconds), minimumPeriodInSeconds, maximumPeriodInSeconds)
+                : this(new BackoffTiming(minimumPeriodInSeconds, maximumPeriodInSeconds))
             {
             }
-            public DynamicTest(IDynamicTiming timing, int minimumPeriodInSeconds = 60, int maximumPeriodInSeconds = 300)
+            public DynamicTest(IDynamicTiming timing)
                 : base(timing)
             {
             }
@@ -43,7 +43,7 @@
         [Test]
         public void ConstructorTimingNull()
         {
-            Assert.That(() => new DynamicTest(null), Throws.TypeOf<ArgumentNullException>());
+            Assert.That(() => new DynamicTest(null), Throws.TypeOf<NullReferenceException>());
         }
 
         [Test]
@@ -53,9 +53,11 @@
             timing.FrequencyInSeconds.Returns(new Range<int>(60, 90));
             var time = Substitute.For<IDynamicTiming>();
             time.Timing.Returns(timing);
+            time.Get(false).Returns(65);
 
             using (var task = new DynamicTest(time))
             {
+                task.Run();
                 Assert.IsTrue(task.Scale);
             }
 
@@ -67,7 +69,7 @@
         public void ScaleNope()
         {
             var timing = Substitute.For<ICalculateTiming>();
-            timing.FrequencyInSeconds.Returns(new Range<int>(120, 150));
+            timing.FrequencyInSeconds.Returns(new Range<int>(60, 300));
             var time = Substitute.For<IDynamicTiming>();
             time.Timing.Returns(timing);
 
@@ -85,6 +87,9 @@
         {
             var random = new Random();
             var time = Substitute.For<IDynamicTiming>();
+            var timing = Substitute.For<ICalculateTiming>();
+            timing.FrequencyInSeconds.Returns(new Range<int>(1, 2));
+            time.Timing.Returns(timing);
             time.Get(false).Returns(4);
 
             using (var task = new DynamicTest(time))
@@ -100,6 +105,9 @@
         {
             var random = new Random();
             var time = Substitute.For<IDynamicTiming>();
+            var timing = Substitute.For<ICalculateTiming>();
+            timing.FrequencyInSeconds.Returns(new Range<int>(1, 2));
+            time.Timing.Returns(timing);
             time.Get(false).Returns(99);
             time.Get(false).Returns(99);
             time.Get(false).Returns(99);
@@ -119,13 +127,13 @@
         [Test]
         public void RunWorkDone()
         {
-            var random = new Random();
-            var min = random.Next(1, 30);
-            var max = random.Next(90, 1024);
             var time = Substitute.For<IDynamicTiming>();
+            var timing = Substitute.For<ICalculateTiming>();
+            timing.FrequencyInSeconds.Returns(new Range<int>(1, 2));
+            time.Timing.Returns(timing);
             time.Get(true).Returns(99);
 
-            using (var task = new DynamicTest(time, min, max))
+            using (var task = new DynamicTest(time))
             {
                 task.Work = true;
                 task.Run();
@@ -141,6 +149,9 @@
             var min = random.Next(1, 30);
             var max = random.Next(90, 1024);
             var time = Substitute.For<IDynamicTiming>();
+            var timing = Substitute.For<ICalculateTiming>();
+            timing.FrequencyInSeconds.Returns(new Range<int>(1, 2));
+            time.Timing.Returns(timing);
             time.Get(true).Returns(99);
             
             using (var task = new DynamicTest(time))

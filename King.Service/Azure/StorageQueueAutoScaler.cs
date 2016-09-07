@@ -68,7 +68,7 @@
         {
             if (null == queue)
             {
-                throw new ArgumentNullException("setup");
+                throw new ArgumentNullException("queue");
             }
 
             yield return this.throughput.Runner(this.Runs(queue), queue.Setup.Priority);

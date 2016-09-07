@@ -59,7 +59,7 @@
             }
             if (null == scaler)
             {
-                throw new ArgumentNullException("Scaler");
+                throw new ArgumentNullException("scaler");
             }
 
             this.configuration = configuration;
