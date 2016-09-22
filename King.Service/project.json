@@ -1,5 +1,5 @@
 {
-  "version": "2.1.5",
+  "version": "2.1.6",
   "title": "King.Service",
   "description": "Task scheduling for .NET",
   "authors": [ "Jef King" ],
@@ -19,9 +19,9 @@
   "configurations": {
     "Release": {
       "buildOptions": {
-        "optimize": true
-      },
-      "compilationOptions": {"define": ["TRACE"]}
+        "optimize": true,
+        "define": ["TRACE"]
+      }
     }
   },
 
