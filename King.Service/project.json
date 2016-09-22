@@ -1,11 +1,11 @@
 {
-  "version": "2.1.4",
+  "version": "2.1.5",
   "title": "King.Service",
   "description": "Task scheduling for .NET",
   "authors": [ "Jef King" ],
   "packOptions": {
     "summary": "Task scheduling for .NET",
-    "releaseNotes": "Bind to attribute based methods.",
+    "releaseNotes": "Enabling Tracing.",
     "tags": [ "King.Service", "Azure", "Queue", "Service", "Bus", "WebJob", "scale", "scaling", "linear", "exponential", "timing", "auto-scale", "dynamic-scale", "dynamic", "Queuing", "Background", "Worker", "Work", "Data", "Processing", "Table", "Environment", "Initialize", "Task", "Tasks", "Dequeue", "Dequeuing", "King.Azure", "run", "task", "service", "services", "tasks", "scheduling", "worker-role" ],
     "projectUrl": "https://github.com/jefking/King.Service",
     "licenseUrl": "https://github.com/jefking/King.Service/blob/master/LICENSE",
@@ -19,9 +19,9 @@
   "configurations": {
     "Release": {
       "buildOptions": {
-        "optimize": true,
-        "define": ["TRACE"]
-      }
+        "optimize": true
+      },
+      "compilationOptions": {"define": ["TRACE"]}
     }
   },
 
