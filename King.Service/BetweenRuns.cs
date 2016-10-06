@@ -79,7 +79,7 @@
         /// Run
         /// </summary>
         /// <returns>Work was done</returns>
-        public Task<bool> Run()
+        public virtual Task<bool> Run()
         {
             var result = this.method.Invoke(instance, null);
             return Task.FromResult<bool>((bool)result);

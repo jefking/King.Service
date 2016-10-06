@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Scalability
 {
-    using System;
     using King.Service.Data;
+    using System;
 
     #region IScaler
     /// <summary>

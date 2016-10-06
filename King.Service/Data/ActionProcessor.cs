@@ -14,7 +14,7 @@
         /// <summary>
         /// Action to take on model
         /// </summary>
-        private readonly QueueActivity<T> action;
+        protected readonly QueueActivity<T> action;
         #endregion
 
         #region Constructor

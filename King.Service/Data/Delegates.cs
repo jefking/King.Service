@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
 
+    #region Delegates
     /// <summary>
     /// Queue Activity
     /// </summary>
@@ -9,4 +10,5 @@
     /// <param name="data">Payload</param>
     /// <returns>Async Task</returns>
     public delegate Task<bool> QueueActivity<T>(T data);
+    #endregion
 }

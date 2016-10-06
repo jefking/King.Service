@@ -1,8 +1,8 @@
 ﻿namespace King.Service.Scalability
 {
+    using King.Azure.Data;
     using System;
     using System.Diagnostics;
-    using King.Azure.Data;
 
     /// <summary>
     /// Queue Scaler

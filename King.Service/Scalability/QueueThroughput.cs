@@ -38,7 +38,6 @@
         /// <returns>Frequency Range</returns>
         public virtual Range<byte> Frequency(QueuePriority priority = QueuePriority.Low)
         {
-            ///CHECK THIS
             switch (priority)
             {
                 case QueuePriority.High:

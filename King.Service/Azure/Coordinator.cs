@@ -2,7 +2,6 @@
 {
     using Azure.Model;
     using King.Azure.Data;
-    using King.Service.Data.Model;
     using System;
     using System.Collections.Generic;
     using System.Linq;

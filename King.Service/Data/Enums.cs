@@ -9,6 +9,7 @@
     /// - Concurrency
     /// - Cost
     /// - Throughput
+    /// Default = Low
     /// </remarks>
     public enum QueuePriority
     {

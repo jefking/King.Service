@@ -20,7 +20,7 @@
         /// <summary>
         /// Default Constructor
         /// </summary>
-        /// <param name="create">Create</param>
+        /// <param name="create">Function for Creation</param>
         public SingleTaskFactory(Func<T, IRunnable> create)
         {
             if (null == create)

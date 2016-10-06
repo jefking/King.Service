@@ -6,6 +6,9 @@
     /// <summary>
     /// Initializes Your Processor for every Process call, and aquires lock for thread safety
     /// </summary>
+    /// <remarks>
+    /// This was developed as Entity Framework required single-threaded access; while we were porting code onto King.Service
+    /// </remarks>
     /// <typeparam name="Y">Processor</typeparam>
     /// <typeparam name="X">Model</typeparam>
     public class SafeProcessor<Y, X> : IProcessor<X>

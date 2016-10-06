@@ -1,7 +1,5 @@
 ﻿namespace King.Service.Timing
 {
-    using System;
-
     /// <summary>
     /// Calculate Timing
     /// </summary>

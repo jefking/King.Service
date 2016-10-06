@@ -14,7 +14,7 @@
         /// <summary>
         /// Function
         /// </summary>
-        private readonly Func<object, bool> func;
+        protected readonly Func<object, bool> func;
         #endregion
 
         #region Constructors

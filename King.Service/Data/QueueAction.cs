@@ -18,7 +18,7 @@
             get;
             set;
         }
-
+        
         /// <summary>
         /// Initializes new Processor
         /// </summary>
