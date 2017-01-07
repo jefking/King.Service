@@ -7,8 +7,8 @@
   },
 
   "dependencies": {
-    "King.Service": "2.1.4",
-    "NSubstitute": "2.0.0-rc",
+    "King.Service": "2.1.7",
+    "NSubstitute": "2.0.1-rc",
     "NUnitLite": "3.5.0"
   },
 

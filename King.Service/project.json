@@ -1,5 +1,5 @@
 {
-  "version": "2.1.6",
+  "version": "2.1.7",
   "title": "King.Service",
   "description": "Task scheduling for .NET",
   "authors": [ "Jef King" ],
