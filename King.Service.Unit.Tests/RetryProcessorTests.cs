@@ -7,6 +7,7 @@
     using NUnit.Framework;
     using Service.Tests;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class RetryProcessorTests
@@ -33,6 +34,45 @@
         public void IsIProcessor()
         {
             Assert.IsNotNull(new RetryProcessor<int>(new ProcHelper()) as IProcessor<int>);
+        }
+
+        [Test]
+        public async Task Process()
+        {
+            var processor = Substitute.For<IProcessor<int>>();
+            processor.Process(1).Returns(true);
+
+            var rp = new RetryProcessor<int>(processor);
+            var result = await rp.Process(1);
+
+            Assert.IsTrue(result);
+            processor.Received().Process(1);
+        }
+
+        [Test]
+        public async Task ProcessSingleFailure()
+        {
+            var processor = Substitute.For<IProcessor<int>>();
+            processor.Process(1).Returns(false, true);
+
+            var rp = new RetryProcessor<int>(processor);
+            var result = await rp.Process(1);
+
+            Assert.IsTrue(result);
+            processor.Received(2).Process(1);
+        }
+
+        [Test]
+        public async Task ProcessFullFailure()
+        {
+            var processor = Substitute.For<IProcessor<int>>();
+            processor.Process(1).Returns(false);
+
+            var rp = new RetryProcessor<int>(processor);
+            var result = await rp.Process(1);
+
+            Assert.IsFalse(result);
+            processor.Received(3).Process(1);
         }
     }
 }
