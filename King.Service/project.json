@@ -31,7 +31,6 @@
         "portable-net451+win8"
       ],
       "dependencies": {
-        "System.Diagnostics.TraceSource": "4.0.0",
         "System.Threading.Thread": "4.0.0",
         "System.Threading.Tasks.Parallel": "4.0.1",
         "System.Threading.Timer": "4.0.1"
@@ -42,15 +41,26 @@
         "portable-net451+win8"
       ],
       "dependencies": {
-        "System.Diagnostics.TraceSource": "4.0.0",
         "System.Threading.Thread": "4.0.0",
         "System.Threading.Tasks.Parallel": "4.0.1",
         "System.Threading.Timer": "4.0.1"
       }
     },
-    "net46": {},
-    "net461": {},
-    "net462": {}
+    "net46": {
+      "dependencies": {
+        "System.Diagnostics.TraceSource": "4.3.0"
+      }
+    },
+    "net461": {
+      "dependencies": {
+        "System.Diagnostics.TraceSource": "4.3.0"
+      }
+    },
+    "net462": {
+      "dependencies": {
+        "System.Diagnostics.TraceSource": "4.3.0"
+      }
+    }
   },
 
   "dependencies": {

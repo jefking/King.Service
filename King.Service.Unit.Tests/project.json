@@ -8,8 +8,8 @@
 
   "dependencies": {
     "King.Service": "2.1.4",
-    "NUnitLite": "3.4.1",
-    "NSubstitute": "2.0.0-rc"
+    "NSubstitute": "2.0.0-rc",
+    "NUnitLite": "3.5.0"
   },
 
   "frameworks": {
