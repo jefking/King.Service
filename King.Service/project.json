@@ -31,9 +31,6 @@
         "portable-net451+win8"
       ],
       "dependencies": {
-        "System.Threading.Thread": "4.0.0",
-        "System.Threading.Tasks.Parallel": "4.0.1",
-        "System.Threading.Timer": "4.0.1"
       }
     },
     "netcoreapp1.0": {
@@ -41,29 +38,31 @@
         "portable-net451+win8"
       ],
       "dependencies": {
-        "System.Threading.Thread": "4.0.0",
-        "System.Threading.Tasks.Parallel": "4.0.1",
-        "System.Threading.Timer": "4.0.1"
       }
     },
     "net46": {
       "dependencies": {
-        "System.Diagnostics.TraceSource": "4.3.0"
+        "System.Diagnostics.TraceSource": "4.3.0",
+        "System.Threading.Timer": "4.0.1"
       }
     },
     "net461": {
       "dependencies": {
-        "System.Diagnostics.TraceSource": "4.3.0"
+        "System.Diagnostics.TraceSource": "4.3.0",
+        "System.Threading.Timer": "4.0.1"
       }
     },
     "net462": {
       "dependencies": {
-        "System.Diagnostics.TraceSource": "4.3.0"
+        "System.Diagnostics.TraceSource": "4.3.0",
+        "System.Threading.Timer": "4.0.1"
       }
     }
   },
 
   "dependencies": {
-    "King.Azure": "2.0.17"
+    "King.Azure": "2.0.17",
+    "System.Threading.Tasks.Parallel": "4.3.0",
+    "System.Threading.Thread": "4.0.0"
   }
 }
