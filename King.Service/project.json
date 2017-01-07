@@ -5,7 +5,7 @@
   "authors": [ "Jef King" ],
   "packOptions": {
     "summary": "Task scheduling for .NET",
-    "releaseNotes": "Enabling Tracing.",
+    "releaseNotes": "Retry Processor",
     "tags": [ "King.Service", "Azure", "Queue", "Service", "Bus", "WebJob", "scale", "scaling", "linear", "exponential", "timing", "auto-scale", "dynamic-scale", "dynamic", "Queuing", "Background", "Worker", "Work", "Data", "Processing", "Table", "Environment", "Initialize", "Task", "Tasks", "Dequeue", "Dequeuing", "King.Azure", "run", "task", "service", "services", "tasks", "scheduling", "worker-role" ],
     "projectUrl": "https://github.com/jefking/King.Service",
     "licenseUrl": "https://github.com/jefking/King.Service/blob/master/LICENSE",
@@ -29,16 +29,12 @@
     "netstandard1.3": {
       "imports": [
         "portable-net451+win8"
-      ],
-      "dependencies": {
-      }
+      ]
     },
     "netcoreapp1.0": {
       "imports": [
         "portable-net451+win8"
-      ],
-      "dependencies": {
-      }
+      ]
     },
     "net46": {
       "dependencies": {
