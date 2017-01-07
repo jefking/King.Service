@@ -54,6 +54,6 @@
   },
 
   "dependencies": {
-    "King.Azure": "2.0.14"
+    "King.Azure": "2.0.17"
   }
 }
