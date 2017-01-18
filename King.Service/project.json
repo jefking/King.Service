@@ -54,9 +54,9 @@
   },
 
   "dependencies": {
-    "King.Azure": "2.0.17",
     "System.Threading.Tasks.Parallel": "4.3.0",
     "System.Diagnostics.TraceSource": "4.3.0",
-    "System.Threading.Thread": "4.3.0"
+    "System.Threading.Thread": "4.3.0",
+    "King.Azure": "2.0.18"
   }
 }

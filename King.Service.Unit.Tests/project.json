@@ -9,7 +9,7 @@
   "dependencies": {
     "King.Service": "2.1.7",
     "NSubstitute": "2.0.1-rc",
-    "NUnitLite": "3.5.0"
+    "NUnitLite": "3.6.0"
   },
 
   "frameworks": {
