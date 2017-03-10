@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26228.4
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demos", "Demos", "{8AFB4533-33DF-4DCB-8541-82B7BC13F4FE}"
 EndProject
@@ -14,9 +14,9 @@ Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "King.Service.CloudService",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.CloudService.Role", "Demos\King.Service.CloudService.Role\King.Service.CloudService.Role.csproj", "{F60A2DC7-1BFC-4536-8DC2-78CC29BC4694}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "King.Service", "King.Service\King.Service.xproj", "{EA0FE0BA-52AF-44DD-9552-8FFCB88E5B75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service", "King.Service\King.Service.csproj", "{EA0FE0BA-52AF-44DD-9552-8FFCB88E5B75}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "King.Service.Unit.Tests", "King.Service.Unit.Tests\King.Service.Unit.Tests.xproj", "{617F7664-1289-4762-A1C8-F236E1ACF37C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service.Unit.Tests", "King.Service.Unit.Tests\King.Service.Unit.Tests.csproj", "{617F7664-1289-4762-A1C8-F236E1ACF37C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.WebJob", "Demos\King.Service.WebJob\King.Service.WebJob.csproj", "{09AF1B36-BBD0-4FE1-9CF0-A53C0AEC7A89}"
 EndProject
