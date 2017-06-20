@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Data
 {
     using Azure.Model;
-    using King.Azure.Data;
+    using global::Azure.Data.Wrappers;
     using System;
     using System.Collections.Generic;
     using System.Linq;
