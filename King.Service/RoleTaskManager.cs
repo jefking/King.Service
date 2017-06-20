@@ -108,7 +108,7 @@
                         Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
                     }
 
-                    Thread.Sleep(BaseTimes.ThreadingOffset);
+                    //Thread.Sleep(BaseTimes.ThreadingOffset);
                 }
 
                 Trace.TraceInformation("Finished starting tasks {0}/{1} successfully.", successCount, taskCount);

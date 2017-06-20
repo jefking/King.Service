@@ -19,7 +19,7 @@
         /// <summary>
         /// Slightly stager tasks, so they don't compete. (Milliseconds)
         /// </summary>
-        public const byte ThreadingOffset = byte.MaxValue;
+        //public const byte ThreadingOffset = byte.MaxValue;
 
         /// <summary>
         /// Scale Check (Minutes)
