@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-    using King.Azure.Data;
+    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using King.Service.Timing;
     using NSubstitute;

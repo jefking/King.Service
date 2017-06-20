@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using King.Azure.Data;
+    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using NSubstitute;
     using NUnit.Framework;

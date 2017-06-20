@@ -1,6 +1,6 @@
 ﻿namespace King.Service.Unit.Tests
 {
-    using King.Azure.Data;
+    using global::Azure.Data.Wrappers;
     using King.Service;
     using King.Service.Timing;
     using NSubstitute;

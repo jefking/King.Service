@@ -2,7 +2,7 @@
 {
     using System;
     using System.Linq;
-    using King.Azure.Data;
+    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using King.Service.Data.Model;
     using King.Service.Scalability;
