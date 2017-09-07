@@ -91,26 +91,31 @@
 
                 Trace.TraceInformation("Starting {0} tasks", taskCount);
 
-                ushort successCount = 0;
+                var successCount = ushort.MinValue;
 
-                foreach (var task in tasks)
-                {
-                    try
-                    {
-                        task.Start();
+                var taskStack = new Stack<IRunnable>(tasks);
 
-                        successCount++;
+                var timer = new Timer(
+                    (tasks) => {
+                        var stack = tasks as Stack<IRunnable>;
+                        var task = stack.Pop();
 
-                        Trace.TraceInformation("{0} started.", task.GetType().ToString());
+                        try
+                        {
+                            task.Start();
+
+                            successCount++;
+
+                            Trace.TraceInformation("{0} started.", task.GetType().ToString());
+                        }
+                        catch (Exception ex)
+                        {
+                            Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
+                        }
                     }
-                    catch (Exception ex)
-                    {
-                        Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
-                    }
-
-                    //Thread.Sleep(BaseTimes.ThreadingOffset);
-                }
-
+                    , taskStack, BaseTimes.ThreadingOffset, BaseTimes.ThreadingOffset
+                );
+                
                 Trace.TraceInformation("Finished starting tasks {0}/{1} successfully.", successCount, taskCount);
             }
             else
