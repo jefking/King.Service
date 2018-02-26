@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Description>King.Service.Test Console Application</Description>
     <VersionPrefix>2.1.0</VersionPrefix>
-    <TargetFramework>net462</TargetFramework>
+    <TargetFramework>net471</TargetFramework>
     <AssemblyName>King.Service.Unit.Tests</AssemblyName>
     <OutputType>Exe</OutputType>
     <PackageId>King.Service.Unit.Tests</PackageId>
