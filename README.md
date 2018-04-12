@@ -1,6 +1,6 @@
 ### Task scheduling for .NET
 + Auto-Scale workloads within your server
-+ Tasks to initialize your environment
++ Tasks to initialize your resources
  + Create Azure Storage: Queues, Tables and Containers
  + Load WCF services
 + Create Tasks that Occur:
