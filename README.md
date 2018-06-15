@@ -1,7 +1,6 @@
-### Task scheduling for Azure on Windows
-+ Plugs into Azure compute services
-+ Auto-Scale workloads within your server
-+ Tasks to initialize your environment
+### Task scheduling for .NET
++ Auto-Scale microservices within your compute
++ Tasks to initialize your resources
  + Create Azure Storage: Queues, Tables and Containers
  + Load WCF services
 + Create Tasks that Occur:
