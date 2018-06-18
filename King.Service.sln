@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service", "King.Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service.Unit.Tests", "King.Service.Unit.Tests\King.Service.Unit.Tests.csproj", "{617F7664-1289-4762-A1C8-F236E1ACF37C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{1D937510-4CC5-4520-B60A-F74E29A38B35}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Demo", "King.Service.Demo\King.Service.Demo.csproj", "{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +31,16 @@ Global
 		{617F7664-1289-4762-A1C8-F236E1ACF37C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{617F7664-1289-4762-A1C8-F236E1ACF37C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{617F7664-1289-4762-A1C8-F236E1ACF37C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE} = {1D937510-4CC5-4520-B60A-F74E29A38B35}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DAF3C446-B460-4C22-8DBF-E2F9C1E80630}
