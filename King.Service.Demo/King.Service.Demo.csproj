@@ -3,10 +3,12 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <StartupObject>King.Service.Demo.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Runtime" Version="4.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -14,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="App.config">
+    <None Update="appsettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

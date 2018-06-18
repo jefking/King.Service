@@ -2,11 +2,15 @@
 {
     using System;
     using System.Threading;
+    using Microsoft.
 
     public class Program
     {
         public static void Main(string[] args)
         {
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
             var config = new AppConfig()
             {
                 ConnectionString = "UseDevelopmentStorage=true;",
