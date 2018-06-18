@@ -8,17 +8,10 @@
 
   <ItemGroup>
     <PackageReference Include="System.Runtime" Version="4.3.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\King.Service\King.Service.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
