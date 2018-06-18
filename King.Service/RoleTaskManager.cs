@@ -145,7 +145,7 @@
 
             if (null == this.tasks)
             {
-                var ts = (from f in this.factories select f.Tasks(passthrough)).SelectMany(t => t).Where(t => t != null);
+                var ts = (from f in this.factories select f.Tasks(passthrough)).Where(f => f != null).SelectMany(t => t).Where(t => t != null);
 
                 if (null != ts && ts.Any())
                 {

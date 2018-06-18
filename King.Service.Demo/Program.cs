@@ -7,11 +7,19 @@
     {
         public static void Main(string[] args)
         {
-            var config = new Configuration();
+            var config = new AppConfig()
             {
+                ConnectionString = "UseDevelopmentStorage=true;",
+                TableName = "table",
+                GenericQueueName = "queue",
+                ContainerName = "container",
+                FastQueueName = "fast",
+                ModerateQueueName = "moderate",
+                SlowQueueName = "slow",
+                ShardQueueName = "shard"
             };
 
-            using (var manager = new RoleTaskManager<Configuration>(new TaskFactory()))
+            using (var manager = new RoleTaskManager<AppConfig>(new TaskFactory()))
             {
                 manager.OnStart(config);
 
@@ -22,8 +30,6 @@
                     Thread.Sleep(1500);
                 }
             }
-
-            Console.WriteLine("Hello World!");
         }
     }
 }

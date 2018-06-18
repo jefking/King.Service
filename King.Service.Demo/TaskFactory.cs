@@ -2,9 +2,9 @@
 {
     using System.Collections.Generic;
 
-    public class TaskFactory : ITaskFactory<Configuration>
+    public class TaskFactory : ITaskFactory<AppConfig>
     {
-        public IEnumerable<IRunnable> Tasks(Configuration passthrough)
+        public IEnumerable<IRunnable> Tasks(AppConfig passthrough)
         {
             yield return null;
         }
