@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Demo
 {
     using System;
+    using System.Threading;
 
     public class Program
     {
@@ -18,9 +19,10 @@
 
                 while (true)
                 {
-                    //Thread.
+                    Thread.Sleep(1500);
                 }
             }
+
             Console.WriteLine("Hello World!");
         }
     }

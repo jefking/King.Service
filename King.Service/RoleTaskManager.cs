@@ -21,6 +21,11 @@
         protected IReadOnlyCollection<IRunnable> tasks = null;
 
         /// <summary>
+        /// Tasks
+        /// </summary>
+        protected IList<Timer> startingTimers = null;
+
+        /// <summary>
         /// Factories
         /// </summary>
         protected readonly IEnumerable<ITaskFactory<T>> factories = null;
@@ -93,28 +98,31 @@
 
                 var successCount = ushort.MinValue;
 
-                var taskStack = new Stack<IRunnable>(tasks);
-
-                var timer = new Timer(
-                    (tasks) => {
-                        var stack = tasks as Stack<IRunnable>;
-                        var task = stack.Pop();
-
-                        try
+                this.startingTimers = new List<Timer>(tasks.Count);
+                for (var i = 0; i < tasks.Count; i++)
+                {
+                    var t = new Timer((index) =>
                         {
-                            task.Start();
+                            var task = tasks.ElementAt((int)index);
 
-                            successCount++;
+                            try
+                            {
+                                task.Start();
 
-                            Trace.TraceInformation("{0} started.", task.GetType().ToString());
+                                successCount++;
+
+                                Trace.TraceInformation("{0} started.", task.GetType().ToString());
+                            }
+                            catch (Exception ex)
+                            {
+                                Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
+                            }
                         }
-                        catch (Exception ex)
-                        {
-                            Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
-                        }
-                    }
-                    , taskStack, BaseTimes.ThreadingOffset, BaseTimes.ThreadingOffset
-                );
+                            , i, BaseTimes.ThreadingOffset * i, BaseTimes.ThreadingOffset * i
+                    );
+
+                    startingTimers.Add(t);
+                }
                 
                 Trace.TraceInformation("Finished starting tasks {0}/{1} successfully.", successCount, taskCount);
             }
@@ -137,7 +145,7 @@
 
             if (null == this.tasks)
             {
-                var ts = (from f in this.factories select f.Tasks(passthrough)).Where(t => t != null).SelectMany(t => t);
+                var ts = (from f in this.factories select f.Tasks(passthrough)).SelectMany(t => t).Where(t => t != null);
 
                 if (null != ts && ts.Any())
                 {

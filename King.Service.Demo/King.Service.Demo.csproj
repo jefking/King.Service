@@ -6,8 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="King.Service" Version="2.2.2" />
     <PackageReference Include="System.Runtime" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\King.Service\King.Service.csproj" />
   </ItemGroup>
 
 </Project>

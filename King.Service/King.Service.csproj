@@ -27,7 +27,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>2.2.2</Version>
+    <Version>2.2.3</Version>
     <FileUpgradeFlags>40</FileUpgradeFlags>
     <UpgradeBackupLocation>C:\Users\jefkin\Documents\GitHub\King.Service\Backup6\</UpgradeBackupLocation>
     <OldToolsVersion>2.0</OldToolsVersion>
