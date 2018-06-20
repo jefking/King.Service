@@ -16,6 +16,7 @@
             yield return new Coordinated(config.ConnectionString);
             yield return new OnceDaily(config.ConnectionString);
 
+            yield return new CompanyQueuerSharded(config.GenericQueueName, config.ConnectionString);
             yield return new CompanyQueuer(config.GenericQueueName, config.ConnectionString);
         }
     }
