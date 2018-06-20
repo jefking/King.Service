@@ -45,6 +45,15 @@
         /// Constructor
         /// </summary>
         /// <param name="factory">Task Factories</param>
+        public RoleTaskManager(params ITaskFactory<T>[] factories)
+            : this(factories as IEnumerable<ITaskFactory<T>>)
+        {
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="factory">Task Factories</param>
         public RoleTaskManager(IEnumerable<ITaskFactory<T>> factories)
         {
             if (null == factories)

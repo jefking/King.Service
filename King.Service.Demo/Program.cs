@@ -18,7 +18,7 @@
                 ShardQueueName = "shard"
             };
 
-            using (var manager = new RoleTaskManager<AppConfig>(new TaskFactory()))
+            using (var manager = new RoleTaskManager<AppConfig>(new TaskFactory(), new TaskFinderFactory<AppConfig>()))
             {
                 manager.OnStart(config);
 

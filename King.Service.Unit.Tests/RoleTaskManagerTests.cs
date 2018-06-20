@@ -1,9 +1,9 @@
 ﻿namespace King.Service.Tests
 {
-    using System;
-    using System.Collections.Generic;
     using NSubstitute;
     using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
 
     [TestFixture]
     public class RoleTaskManagerTests
@@ -13,6 +13,28 @@
         {
             var factory = Substitute.For<ITaskFactory<object>>();
             new RoleTaskManager<object>(factory);
+        }
+
+        [Test]
+        public void ConstructorFactoriesParams()
+        {
+            var factoryA = Substitute.For<ITaskFactory<object>>();
+            var factoryB = Substitute.For<ITaskFactory<object>>();
+            new RoleTaskManager<object>(factoryA, factoryB);
+        }
+
+        [Test]
+        public void ConstructorFactoriesEnumerable()
+        {
+            var r = new Random();
+            var max = r.Next(1, 100);
+            var factories = new List<ITaskFactory<object>>(max);
+            for (var i = 0; i < max; i++)
+            {
+                factories.Add(Substitute.For<ITaskFactory<object>>());
+            }
+
+            new RoleTaskManager<object>(factories);
         }
 
         [Test]
