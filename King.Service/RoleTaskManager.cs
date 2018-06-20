@@ -35,6 +35,14 @@
         /// <summary>
         /// Constructor
         /// </summary>
+        public RoleTaskManager()
+            : this(new TaskFinderFactory<T>())
+        {
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
         /// <param name="factory">Task Factory</param>
         public RoleTaskManager(ITaskFactory<T> factory)
             : this(new[] { factory })

@@ -11,6 +11,12 @@
         [Test]
         public void Constructor()
         {
+            new RoleTaskManager<object>();
+        }
+
+        [Test]
+        public void ConstructorFactory()
+        {
             var factory = Substitute.For<ITaskFactory<object>>();
             new RoleTaskManager<object>(factory);
         }
