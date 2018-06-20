@@ -13,8 +13,6 @@
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
     <PackageLicenseUrl>https://github.com/jefking/King.Service/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netstandard1.6' ">$(PackageTargetFallback);portable-net451+win8</PackageTargetFallback>
-    <PackageTargetFallback Condition=" '$(TargetFramework)' == 'netcoreapp1.0' ">$(PackageTargetFallback);portable-net451+win8</PackageTargetFallback>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
