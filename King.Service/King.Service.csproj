@@ -28,19 +28,7 @@
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <Version>2.2.4</Version>
-    <FileUpgradeFlags>40</FileUpgradeFlags>
-    <UpgradeBackupLocation>C:\Users\jefkin\Documents\GitHub\King.Service\Backup6\</UpgradeBackupLocation>
-    <OldToolsVersion>2.0</OldToolsVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard1.3|AnyCPU'">
-    <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
-    <TreatSpecificWarningsAsErrors />
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net462' ">
-    <PackageReference Include="System.Threading.Timer" Version="4.0.1" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Data.Wrappers" Version="3.0.9" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
