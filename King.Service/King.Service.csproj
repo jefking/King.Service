@@ -25,7 +25,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <Version>2.2.4</Version>
+    <Version>2.2.5</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Azure.Data.Wrappers" Version="3.0.9" />

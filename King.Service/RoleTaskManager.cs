@@ -35,6 +35,9 @@
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <remarks>
+        /// Default Task Finder Factory searches for all Attribute based services
+        /// </remarks>
         public RoleTaskManager()
             : this(new TaskFinderFactory<T>())
         {
