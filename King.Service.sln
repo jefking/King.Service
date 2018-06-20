@@ -11,11 +11,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service", "King.Service\King.Service.csproj", "{EA0FE0BA-52AF-44DD-9552-8FFCB88E5B75}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{1D937510-4CC5-4520-B60A-F74E29A38B35}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service.Demo", "King.Service.Demo\King.Service.Demo.csproj", "{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Unit.Tests", "King.Service.Unit.Tests\King.Service.Unit.Tests.csproj", "{76B03EA8-D12C-4990-ABEB-BB88ABC737C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service.Unit.Tests", "King.Service.Unit.Tests\King.Service.Unit.Tests.csproj", "{76B03EA8-D12C-4990-ABEB-BB88ABC737C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,9 +36,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE} = {1D937510-4CC5-4520-B60A-F74E29A38B35}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DAF3C446-B460-4C22-8DBF-E2F9C1E80630}
