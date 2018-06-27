@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Demo
 {
+    using King.Service.Demo.Factories;
     using System.Threading;
 
     public class Program
@@ -20,7 +21,7 @@
             };
 
             // Construct runtime
-            using (var manager = new RoleTaskManager<AppConfig>(new TaskFactory(), new TaskFinderFactory<AppConfig>()))
+            using (var manager = new RoleTaskManager<AppConfig>(new Factory(), new DataGenerationFactory(), new TaskFinderFactory<AppConfig>()))
             {
                 // Start runtime
                 manager.OnStart(config);
