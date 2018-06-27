@@ -1,11 +1,11 @@
 ﻿namespace King.Service.Demo.Tasks
 {
-    using System;
     using global::Azure.Data.Wrappers;
     using King.Service;
     using King.Service.Demo.Models;
+    using System;
 
-    class CompanyQueuerSharded : RecurringTask
+    public class CompanyQueuerSharded : RecurringTask
     {
         private int id = 0;
         private readonly IQueueShardSender<IStorageQueue> queue = null;

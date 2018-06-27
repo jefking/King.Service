@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Demo.Models
 {
-
     using System;
 
     /// <summary>

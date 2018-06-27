@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Demo.Tasks
 {
-    using System.Collections.Generic;
     using King.Service;
+    using System.Collections.Generic;
 
     public class DynamicScaler : AutoScaler<AppConfig>
     {

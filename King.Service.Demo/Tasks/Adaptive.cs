@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Demo.Tasks
 {
-
     using King.Service;
     using System;
     using System.Diagnostics;
