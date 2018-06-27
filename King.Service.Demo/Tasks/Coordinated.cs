@@ -3,6 +3,9 @@
     using King.Service;
     using System.Diagnostics;
 
+    /// <summary>
+    /// Occurs in regular interval across compute nodes
+    /// </summary>
     public class Coordinated : CoordinatedTask
     {
         public Coordinated(string connectionString)

@@ -4,7 +4,9 @@
     using King.Service.Demo.Tasks;
     using System.Collections.Generic;
 
-    //Tasks for Queuing (Demo purposes)
+    /// <summary>
+    /// Tasks for Queuing (Demo purposes)
+    /// </summary>
     public class DataGenerationFactory : ITaskFactory<AppConfig>
     {
         public IEnumerable<IRunnable> Tasks(AppConfig config)

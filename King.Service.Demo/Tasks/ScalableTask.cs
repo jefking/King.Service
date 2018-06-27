@@ -5,6 +5,9 @@
     using System.Diagnostics;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// Task that scales in and out depending on load
+    /// </summary>
     public class ScalableTask : IDynamicRuns
     {
         public int MaximumPeriodInSeconds

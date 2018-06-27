@@ -5,6 +5,9 @@
     using King.Service.Demo.Models;
     using System;
 
+    /// <summary>
+    /// Task submits data to the sharded queue
+    /// </summary>
     public class CompanyQueuerSharded : RecurringTask
     {
         private int id = 0;

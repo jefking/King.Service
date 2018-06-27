@@ -4,6 +4,9 @@
     using System;
     using System.Diagnostics;
 
+    /// <summary>
+    /// Task that changes frequency depending on load
+    /// </summary>
     public class Adaptive : AdaptiveTask
     {
         public override void Run(out bool workWasDone)

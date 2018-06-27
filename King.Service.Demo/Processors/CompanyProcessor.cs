@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
 
     /// <summary>
-    /// Company Processor, post dequeue action
+    /// Company Processor, occurs post dequeue action
     /// </summary>
     public class CompanyProcessor : IProcessor<CompanyModel>
     {

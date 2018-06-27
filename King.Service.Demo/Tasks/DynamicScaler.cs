@@ -3,6 +3,9 @@
     using King.Service;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Scales tasks dynamically based on load
+    /// </summary>
     public class DynamicScaler : AutoScaler<AppConfig>
     {
         public DynamicScaler(AppConfig config)

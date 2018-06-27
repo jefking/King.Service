@@ -6,6 +6,7 @@
     {
         public static void Main(string[] args)
         {
+            // Load Config
             var config = new AppConfig()
             {
                 ConnectionString = "UseDevelopmentStorage=true;",
@@ -18,12 +19,16 @@
                 ShardQueueName = "shard"
             };
 
+            // Construct runtime
             using (var manager = new RoleTaskManager<AppConfig>(new TaskFactory(), new TaskFinderFactory<AppConfig>()))
             {
+                // Start runtime
                 manager.OnStart(config);
 
+                // Run
                 manager.Run();
 
+                // Hang on loaded thread
                 while (true)
                 {
                     Thread.Sleep(1500);

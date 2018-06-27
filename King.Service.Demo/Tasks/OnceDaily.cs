@@ -3,6 +3,9 @@
     using System;
     using System.Diagnostics;
 
+    /// <summary>
+    /// Task that occurs Once Daily, across compute nodes
+    /// </summary>
     public class OnceDaily : RunAtTask
     {
         public OnceDaily(string connectionString)

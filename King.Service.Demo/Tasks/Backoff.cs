@@ -4,6 +4,9 @@
     using System;
     using System.Diagnostics;
 
+    /// <summary>
+    /// Task that slows down, or speeds up dependant on load
+    /// </summary>
     public class Backoff : BackoffTask
     {
         public override void Run(out bool workWasDone)

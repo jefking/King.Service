@@ -8,10 +8,14 @@
     using King.Service.Demo.Tasks;
     using System.Collections.Generic;
 
+    /// <summary>
+    /// Builds manifest of tasks to run
+    /// </summary>
     public class Factory : ITaskFactory<AppConfig>
     {
         public IEnumerable<IRunnable> Tasks(AppConfig config)
         {
+            // List of tasks to run
             var tasks = new List<IRunnable>(new IRunnable[] {
                 // Initialization task
                 new InitTask(),
@@ -50,7 +54,7 @@
                 new DynamicScaler(config),
             });
 
-            ///Dequeue Tasks Example
+            ///Dequeue examples
             var f = new DequeueFactory(config.ConnectionString);
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.SlowQueueName));
             tasks.AddRange(f.Dequeue<CompanyProcessor, CompanyModel>(config.ModerateQueueName, QueuePriority.Medium));
