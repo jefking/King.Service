@@ -35,7 +35,7 @@
                               where m.IsPublic
                               select m;
 
-                foreach (var method in methods)
+                Parallel.ForEach(methods, methods =>
                 {
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
                     {
@@ -70,7 +70,7 @@
                                 break;
                         }
                     }
-                }
+                });
             });
 
             return runnables;
