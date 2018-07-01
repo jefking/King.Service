@@ -35,7 +35,7 @@
                               where m.IsPublic
                               select m;
 
-                Parallel.ForEach(methods, methods =>
+                Parallel.ForEach(methods, method =>
                 {
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
                     {
