@@ -13,7 +13,7 @@
  + Batches of messages
  + Shards for high throughput
  + Variable timing for cost saving
-5. [Service Bus](https://github.com/jefking/King.Service.ServiceBus)
+5. Extension for working with: [Service Bus](https://github.com/jefking/King.Service.ServiceBus)
 
 ### [NuGet](https://www.nuget.org/packages/King.Service)
 ```
