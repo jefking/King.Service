@@ -77,7 +77,7 @@
 
             Assert.IsFalse(result);
 
-            poller.Received().Poll();
+            await poller.Received().Poll();
         }
 
         [Test]

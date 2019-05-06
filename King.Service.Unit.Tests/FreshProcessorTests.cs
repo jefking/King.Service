@@ -6,6 +6,7 @@
     using NSubstitute;
     using NUnit.Framework;
     using System;
+    using System.Threading.Tasks;
 
     [TestFixture]
     public class FreshProcessorTests
@@ -23,14 +24,14 @@
         }
 
         [Test]
-        public void Process()
+        public async Task Process()
         {
             var random = new Random();
             var start = random.Next();
             var set = random.Next();
             ProcHelper.Testing = start;
             var p = new FreshProcessor<ProcHelper, int>();
-            p.Process(set);
+            await p.Process(set);
 
             Assert.AreEqual(set, ProcHelper.Testing);
         }

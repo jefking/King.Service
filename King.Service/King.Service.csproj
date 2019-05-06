@@ -27,6 +27,11 @@
     <RepositoryType>git</RepositoryType>
     <Version>2.2.5</Version>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+  
   <ItemGroup>
     <PackageReference Include="Azure.Data.Wrappers" Version="3.0.9" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />

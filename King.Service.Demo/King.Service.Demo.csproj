@@ -16,6 +16,10 @@
     <PackageReference Include="System.Runtime" Version="4.3.0" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\King.Service\King.Service.csproj" />
   </ItemGroup>

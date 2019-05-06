@@ -46,7 +46,7 @@
             var result = await rp.Process(1);
 
             Assert.IsTrue(result);
-            processor.Received().Process(1);
+            await processor.Received().Process(1);
         }
 
         [Test]
@@ -59,7 +59,7 @@
             var result = await rp.Process(1);
 
             Assert.IsTrue(result);
-            processor.Received(2).Process(1);
+            await processor.Received(2).Process(1);
         }
 
         [Test]
@@ -72,7 +72,7 @@
             var result = await rp.Process(1);
 
             Assert.IsFalse(result);
-            processor.Received(3).Process(1);
+            await processor.Received(3).Process(1);
         }
     }
 }

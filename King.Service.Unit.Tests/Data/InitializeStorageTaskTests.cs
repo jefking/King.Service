@@ -58,12 +58,12 @@
         public async Task RunAsync()
         {
             var table = Substitute.For<ITableStorage>();
-            table.CreateIfNotExists();
+            await table.CreateIfNotExists();
 
             var task = new InitializeStorageTask(table);
             await task.RunAsync();
 
-            table.Received().CreateIfNotExists();
+            await table.Received().CreateIfNotExists();
         }
     }
 }

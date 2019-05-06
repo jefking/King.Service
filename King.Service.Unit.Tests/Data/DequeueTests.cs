@@ -85,7 +85,7 @@
 
             var message = Substitute.For<IQueued<object>>();
             message.Data().Returns(Task.FromResult(data));
-            message.Complete();
+            await message.Complete();
 
             var poller = Substitute.For<IPoller<object>>();
             poller.Poll().Returns(Task.FromResult(message));
@@ -187,10 +187,10 @@
             var result = await d.Run();
             Assert.IsTrue(result);
 
-            message.Received().Data();
-            message.Received().Abandon();
-            poller.Received().Poll();
-            processor.Received().Process(data);
+            await message.Received().Data();
+            await message.Received().Abandon();
+            await poller.Received().Poll();
+            await processor.Received().Process(data);
         }
 
         [Test]
