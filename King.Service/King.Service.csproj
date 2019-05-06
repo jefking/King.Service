@@ -4,7 +4,8 @@
     <AssemblyTitle>King.Service</AssemblyTitle>
     <VersionPrefix>2.1.9</VersionPrefix>
     <Authors>Jef King</Authors>
-    <TargetFrameworks>netstandard1.3;netcoreapp1.0;net471</TargetFrameworks>
+    <Copyright>Copyright © Jef King 2019</Copyright>
+    <TargetFrameworks>netstandard1.3;netcoreapp1.0;netcoreapp2.0;netcoreapp2.2</TargetFrameworks>
     <AssemblyName>King.Service</AssemblyName>
     <PackageId>King.Service</PackageId>
     <PackageTags>King.Service;Azure;Queue;Service;Bus;WebJob;scale;scaling;linear;exponential;timing;auto-scale;dynamic-scale;dynamic;Queuing;Background;Worker;Work;Data;Processing;Table;Environment;Initialize;Task;Tasks;Dequeue;Dequeuing;King.Azure;run;task;service;services;tasks;scheduling;worker-role</PackageTags>
@@ -12,7 +13,6 @@
     </PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
-    <PackageLicenseUrl>https://github.com/jefking/King.Service/blob/master/LICENSE</PackageLicenseUrl>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>

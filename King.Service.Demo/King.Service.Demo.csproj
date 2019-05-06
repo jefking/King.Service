@@ -2,20 +2,14 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <Authors>Jef King</Authors>
-    <Copyright>Copyright © Jef King 2018</Copyright>
-    <PackageLicenseUrl>https://github.com/jefking/King.Service/blob/master/LICENSE</PackageLicenseUrl>
+    <Copyright>Copyright © Jef King 2019</Copyright>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <PackageTags></PackageTags>
     <RepositoryType>git</RepositoryType>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <PlatformTarget>x64</PlatformTarget>
-    <StartupObject>King.Service.Demo.Program</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
