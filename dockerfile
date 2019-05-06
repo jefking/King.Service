@@ -8,7 +8,3 @@ COPY ./King.Service ./King.Service
 COPY ./King.Service.Unit.Tests ./King.Service.Unit.Tests
 COPY ./King.Service.Demo ./King.Service.Demo
 RUN dotnet restore
-
-# Copy everything else and build
-COPY . ./
-RUN dotnet publish -c release -o out
