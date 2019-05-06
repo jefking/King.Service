@@ -18,7 +18,7 @@ RUN dotnet publish King.Service.Demo/King.Service.Demo.csproj -c release
 FROM microsoft/dotnet:runtime
 WORKDIR /app
 
-COPY --from=build-env /app/King.Service.ServiceBus.Demo/bin/release/netcoreapp2.2/ .
+COPY --from=build-env /app/King.Service.Demo/bin/release/netcoreapp2.2/ .
 
 # Temp Entry
-ENTRYPOINT [ "dotnet",  "King.Service.ServiceBus.Demo.dll"]
+ENTRYPOINT [ "dotnet",  "King.Service.Demo.dll"]
