@@ -11,7 +11,7 @@
             // Load Config
             var config = new AppConfig
             {
-                ConnectionString = Environment.GetEnvironmentVariable("conString"),
+                ConnectionString = Environment.GetEnvironmentVariable("connection"),
                 TableName = "table",
                 GenericQueueName = "queue",
                 ContainerName = "container",
