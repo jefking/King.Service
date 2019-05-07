@@ -139,16 +139,16 @@
             coordinator.PeriodInSeconds.Returns(100000);
             coordinator.Check(Arg.Any<Type>()).Returns(Task.FromResult(true));
             coordinator.When(c => c.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>())).Do(x => { throw new Exception(); });
-            coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
+            await coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
 
             using (var m = new TestManager(coordinator))
             {
                 await m.RunAsync();
             }
 
-            coordinator.Received().Check(Arg.Any<Type>());
-            coordinator.Received().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
-            coordinator.DidNotReceive().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
+            await coordinator.Received().Check(Arg.Any<Type>());
+            await coordinator.Received().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
+            await coordinator.DidNotReceive().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
         }
 
         [Test]
@@ -157,8 +157,8 @@
             var coordinator = Substitute.For<ICoordinator>();
             coordinator.PeriodInSeconds.Returns(100000);
             coordinator.Check(Arg.Any<Type>()).Returns(Task.FromResult(true));
-            coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
-            coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
+            await coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
+            await coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
 
             using (var m = new TestManager(coordinator))
             {
@@ -166,9 +166,9 @@
                 await m.RunAsync();
             }
 
-            coordinator.Received().Check(Arg.Any<Type>());
-            coordinator.Received().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
-            coordinator.Received().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
+            await coordinator.Received().Check(Arg.Any<Type>());
+            await coordinator.Received().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
+            await coordinator.Received().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
         }
     }
 }
