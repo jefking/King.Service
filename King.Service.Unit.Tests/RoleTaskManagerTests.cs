@@ -151,6 +151,7 @@
             service.When(s => s.Start()).Do(x => { throw new Exception(); });
 
             services.Add(service);
+            services.Add(service);
 
             var factory = Substitute.For<ITaskFactory<object>>();
             factory.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(services);
