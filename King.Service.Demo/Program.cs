@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Demo
 {
     using King.Service.Demo.Factories;
+    using System;
     using System.Threading;
 
     public class Program
@@ -8,9 +9,9 @@
         public static void Main(string[] args)
         {
             // Load Config
-            var config = new AppConfig()
+            var config = new AppConfig
             {
-                ConnectionString = "UseDevelopmentStorage=true;",
+                ConnectionString = Environment.GetEnvironmentVariable("conString"),
                 TableName = "table",
                 GenericQueueName = "queue",
                 ContainerName = "container",
