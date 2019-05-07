@@ -4,6 +4,8 @@
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
     <Version>2.3.1</Version>
+    <AssemblyVersion>2.3.1</AssemblyVersion>
+    <FileVersion>2.3.1</FileVersion>
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2019</Copyright>
     <TargetFrameworks>netstandard1.3;netcoreapp1.0</TargetFrameworks>
@@ -21,12 +23,12 @@
     <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
     <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
     <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://raw.githubusercontent.com/jefking/King.Service/master/LICENSE</PackageLicenseUrl>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>

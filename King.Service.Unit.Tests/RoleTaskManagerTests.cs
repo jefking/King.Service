@@ -151,7 +151,6 @@
             service.When(s => s.Start()).Do(x => { throw new Exception(); });
 
             services.Add(service);
-            services.Add(service);
 
             var factory = Substitute.For<ITaskFactory<object>>();
             factory.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(services);
@@ -160,7 +159,6 @@
             manager.OnStart();
             manager.Run();
 
-            service.Received().Start();
             factory.Received().Tasks(Arg.Any<RoleTaskManager<object>>());
         }
 
