@@ -3,10 +3,10 @@
     <Title>King.Service</Title>
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
-    <Version>2.3.0</Version>
+    <Version>2.3.1</Version>
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2019</Copyright>
-    <TargetFrameworks>netstandard1.3;netstandard2.0;netcoreapp1.0;netcoreapp2.0;netcoreapp2.2</TargetFrameworks>
+    <TargetFrameworks>netstandard1.3;netcoreapp1.0</TargetFrameworks>
     <AssemblyName>King.Service</AssemblyName>
     <PackageId>King.Service</PackageId>
     <PackageTags>King.Service;Azure;Queue;Service;Bus;WebJob;scale;scaling;linear;exponential;timing;auto-scale;dynamic-scale;dynamic;Queuing;Background;Worker;Work;Data;Processing;Table;Environment;Initialize;Task;Tasks;Dequeue;Dequeuing;King.Azure;run;task;service;services;tasks;scheduling;worker-role</PackageTags>
@@ -26,12 +26,9 @@
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://raw.githubusercontent.com/jefking/King.Service/master/LICENSE</PackageLicenseUrl>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="Azure.Data.Wrappers" Version="3.0.9" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
