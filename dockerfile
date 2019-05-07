@@ -16,8 +16,5 @@ WORKDIR /app
 # Copy Demo
 COPY --from=build-env /app/Demo/bin/release/netcoreapp2.2/publish/. .
 
-# Temp
-RUN ls
-
 # Temp Entry
 ENTRYPOINT [ "dotnet",  "King.Service.Demo.dll"]
