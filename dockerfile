@@ -1,24 +1,23 @@
-FROM microsoft/dotnet:2.1-sdk AS build-env
+FROM microsoft/dotnet:2.2-sdk AS build-env
 
 WORKDIR /app
 
-# Copy csproj and restore as distinct layers
-COPY *.sln ./
-COPY ./King.Service ./King.Service
-COPY ./King.Service.Unit.Tests ./King.Service.Unit.Tests
-COPY ./King.Service.Demo ./King.Service.Demo
+# Copy and build
+COPY . ./
+
+#Restore Packages
 RUN dotnet restore
 
 # Build Projects
-RUN dotnet publish King.Service/King.Service.csproj -c release
-RUN dotnet publish King.Service.Tests/King.Service.Tests.csproj -c release
-RUN dotnet publish King.Service.Demo/King.Service.Demo.csproj -c release
+RUN dotnet build -c release
 
 #Create Output Container Image
 FROM microsoft/dotnet:runtime
 WORKDIR /app
 
 COPY --from=build-env /app/King.Service.Demo/bin/release/netcoreapp2.2/ .
+
+RUN ls
 
 # Temp Entry
 ENTRYPOINT [ "dotnet",  "King.Service.Demo.dll"]
