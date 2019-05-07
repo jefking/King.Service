@@ -15,9 +15,9 @@ RUN dotnet build -c release
 FROM microsoft/dotnet:runtime
 WORKDIR /app
 
-COPY --from=build-env /app/King.Service.Demo/bin/release/netcoreapp2.2/ .
-
 RUN ls
+
+COPY --from=build-env /app/King.Service.Demo/bin/release/netcoreapp2.2/ .
 
 # Temp Entry
 ENTRYPOINT [ "dotnet",  "King.Service.Demo.dll"]
