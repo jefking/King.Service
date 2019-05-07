@@ -20,8 +20,8 @@
 PM> Install-Package King.Service
 ```
 
-### [Wiki](https://github.com/jefking/King.Service/wiki)
-View the wiki to learn how to use this.
-
 ### CI
 [![Build status](https://dev.azure.com/jefkin/oss/_apis/build/status/King.Service)](https://dev.azure.com/jefkin/oss/_build/latest?definitionId=12)
+
+### [Wiki](https://github.com/jefking/King.Service/wiki)
+View the wiki to learn how to use this.
