@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
+    <Title>King.Service</Title>
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
     <Version>2.3.0</Version>
     <Authors>Jef King</Authors>
-    <Copyright>Copyright © Jef King 2019</Copyright>
+    <Copyright>© Jef King 2019</Copyright>
     <TargetFrameworks>netstandard1.3;netstandard2.0;netcoreapp1.0;netcoreapp2.0;netcoreapp2.2</TargetFrameworks>
     <AssemblyName>King.Service</AssemblyName>
     <PackageId>King.Service</PackageId>
@@ -24,7 +25,10 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/jefking/King.Service/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   

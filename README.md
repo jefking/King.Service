@@ -24,4 +24,4 @@ PM> Install-Package King.Service
 View the wiki to learn how to use this.
 
 ### CI
-![Build Status](https://threadmaster.visualstudio.com/f68f61db-3709-453e-9eb8-8297d793734b/_apis/build/status/8)
+[![Build status](https://dev.azure.com/jefkin/oss/_apis/build/status/King.Service)](https://dev.azure.com/jefkin/oss/_build/latest?definitionId=12)
