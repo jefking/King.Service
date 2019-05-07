@@ -3,21 +3,21 @@ FROM microsoft/dotnet:2.2-sdk AS build-env
 WORKDIR /app
 
 # Copy and build
-COPY . ./
+COPY ./King.Service ./King.Service
+COPY ./King.Service.Demo ./Demo
 
-#Restore Packages
-RUN dotnet restore
+# Public Project
+RUN dotnet publish Demo/King.Service.Demo.csproj -c release
 
-# Build Projects
-RUN dotnet build -c release
-
-#Create Output Container Image
+# Create Output Container Image
 FROM microsoft/dotnet:runtime
 WORKDIR /app
 
-RUN ls
+# Copy Demo
+COPY --from=build-env /app/Demo/bin/release/netcoreapp2.2/publish/. .
 
-COPY --from=build-env /app/King.Service.Demo/bin/Release/netcoreapp2.2/. .
+# Temp
+RUN ls
 
 # Temp Entry
 ENTRYPOINT [ "dotnet",  "King.Service.Demo.dll"]
