@@ -98,10 +98,10 @@
             var result = await d.Run();
             Assert.IsTrue(result);
 
-            message.Received().Data();
-            message.Received().Complete();
-            poller.Received().Poll();
-            processor.Received().Process(data);
+            await message.Received().Data();
+            await message.Received().Complete();
+            await poller.Received().Poll();
+            await processor.Received().Process(data);
         }
 
         [Test]
@@ -117,11 +117,11 @@
             var result = await d.Run();
             Assert.IsFalse(result);
 
-            poller.Received().Poll();
+            await poller.Received().Poll();
         }
 
         [Test]
-        public async Task RunPollThrows()
+        public void RunPollThrows()
         {
             var poller = Substitute.For<IPoller<object>>();
             poller.Poll().ReturnsForAnyArgs<object>(x => { throw new ApplicationException(); });
@@ -149,7 +149,7 @@
             var result = await d.Run();
             Assert.IsTrue(result);
 
-            poller.Received().Poll();
+            await poller.Received().Poll();
         }
 
         [Test]
@@ -157,7 +157,7 @@
         {
             var message = Substitute.For<IQueued<object>>();
             message.Data().Returns(x => { throw new ApplicationException(); });
-            message.Complete();
+            await message.Complete();
 
             var poller = Substitute.For<IPoller<object>>();
             poller.Poll().Returns(Task.FromResult(message));

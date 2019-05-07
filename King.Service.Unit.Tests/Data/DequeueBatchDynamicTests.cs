@@ -55,7 +55,7 @@
 
             var message = Substitute.For<IQueued<object>>();
             message.Data().Returns(Task.FromResult(data));
-            message.Complete();
+            await message.Complete();
 
             var msgs = new List<IQueued<object>>();
             msgs.Add(message);
@@ -75,10 +75,10 @@
             Assert.IsTrue(result);
 
             tracker.Received().Calculate(Arg.Any<TimeSpan>(), 1);
-            message.Received().Data();
-            message.Received().Complete();
-            poller.Received().PollMany(1);
-            processor.Received().Process(data);
+            await message.Received().Data();
+            await message.Received().Complete();
+            await poller.Received().PollMany(1);
+            await processor.Received().Process(data);
         }
 
         [Test]
@@ -95,7 +95,7 @@
 
             Assert.IsFalse(result);
 
-            poller.Received().PollMany(1);
+            await poller.Received().PollMany(1);
         }
 
         [Test]

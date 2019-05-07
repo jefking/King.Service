@@ -88,7 +88,7 @@
 
             Assert.IsTrue(perform);
 
-            table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
+            await table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
         }
 
         [Test]
@@ -111,7 +111,7 @@
 
             Assert.IsFalse(perform);
 
-            table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
+            await table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
         }
 
         [Test]
@@ -133,7 +133,7 @@
 
             Assert.IsTrue(perform);
 
-            table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
+            await table.Received().QueryByPartition<ScheduledTaskEntry>(Arg.Any<string>());
         }
 
         [Test]
@@ -157,7 +157,7 @@
         }
 
         [Test]
-        public async Task StartTypeNull()
+        public void StartTypeNull()
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
@@ -165,7 +165,7 @@
         }
 
         [Test]
-        public async Task StartIdentifierEmpty()
+        public void StartIdentifierEmpty()
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
@@ -176,16 +176,16 @@
         public async Task Start()
         {
             var table = Substitute.For<ITableStorage>();
-            table.InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
+            await table.InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
 
             var core = new Coordinator(table, new TimeSpan(9000));
             await core.Start(this.GetType(), Guid.NewGuid(), DateTime.UtcNow);
 
-            table.Received().InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
+            await table.Received().InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
         }
 
         [Test]
-        public async Task CompeleteTypeNull()
+        public void CompeleteTypeNull()
         {
             var table = Substitute.For<ITableStorage>();
             var core = new Coordinator(table, new TimeSpan(9000));
@@ -204,12 +204,12 @@
         public async Task Compelete()
         {
             var table = Substitute.For<ITableStorage>();
-            table.InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
+            await table.InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
 
             var core = new Coordinator(table, new TimeSpan(9000));
             await core.Complete(this.GetType(), Guid.NewGuid(), DateTime.UtcNow, DateTime.UtcNow, true);
 
-            table.Received().InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
+            await table.Received().InsertOrReplace(Arg.Any<ScheduledTaskEntry>());
         }
     }
 }

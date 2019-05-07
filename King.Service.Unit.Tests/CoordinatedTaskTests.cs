@@ -91,7 +91,7 @@
                 await m.RunAsync();
             }
 
-            coordinator.Received().Check(Arg.Any<Type>());
+            await coordinator.Received().Check(Arg.Any<Type>());
         }
 
         [Test]
@@ -119,17 +119,17 @@
             var coordinator = Substitute.For<ICoordinator>();
             coordinator.PeriodInSeconds.Returns(100000);
             coordinator.Check(Arg.Any<Type>()).ReturnsForAnyArgs<object>(x => { throw new Exception(); });
-            coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
-            coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
+            await coordinator.Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
+            await coordinator.Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
 
             using (var m = new TestManager(coordinator))
             {
                 await m.RunAsync();
             }
 
-            coordinator.Received().Check(Arg.Any<Type>());
-            coordinator.DidNotReceive().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
-            coordinator.DidNotReceive().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
+            await coordinator.Received().Check(Arg.Any<Type>());
+            await coordinator.DidNotReceive().Start(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>());
+            await coordinator.DidNotReceive().Complete(Arg.Any<Type>(), Arg.Any<Guid>(), Arg.Any<DateTime>(), Arg.Any<DateTime>(), Arg.Any<bool>());
         }
 
         [Test]

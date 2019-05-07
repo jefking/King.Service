@@ -48,7 +48,7 @@
 
             var message = Substitute.For<IQueued<object>>();
             message.Data().Returns(Task.FromResult(data));
-            message.Complete();
+            await message.Complete();
 
             var msgs = new List<IQueued<object>>();
             msgs.Add(message);
@@ -64,10 +64,10 @@
             var result = await d.Run();
             Assert.IsTrue(result);
 
-            message.Received().Data();
-            message.Received().Complete();
-            poller.Received().PollMany(5);
-            processor.Received().Process(data);
+            await message.Received().Data();
+            await message.Received().Complete();
+            await poller.Received().PollMany(5);
+            await processor.Received().Process(data);
         }
 
         [Test]
@@ -83,11 +83,11 @@
             var result = await d.Run();
             Assert.IsFalse(result);
 
-            poller.Received().PollMany(5);
+            await poller.Received().PollMany(5);
         }
 
         [Test]
-        public async Task RunPollThrows()
+        public void RunPollThrows()
         {
             var poller = Substitute.For<IPoller<object>>();
             poller.PollMany(5).ReturnsForAnyArgs<object>(x => { throw new ApplicationException(); });
