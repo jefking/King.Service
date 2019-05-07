@@ -23,14 +23,14 @@
         }
 
         [Test]
-        public async void Process()
+        public void Process()
         {
             var random = new Random();
             var start = random.Next();
             var set = random.Next();
             ProcHelper.Testing = start;
             var p = new SafeProcessor<ProcHelper, int>();
-            await p.Process(set);
+            p.Process(set).Wait();
 
             Assert.AreEqual(set, ProcHelper.Testing);
         }
