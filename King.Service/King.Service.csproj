@@ -24,9 +24,7 @@
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-  </PropertyGroup>
-
-  <PropertyGroup>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   
