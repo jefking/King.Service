@@ -31,7 +31,7 @@ docker pull jefking/king.service.demo
 
 ### Run
 ```
-docker run -it jefking/king.service.demo
+docker run -it jefking/king.service.demo -e connection=<YOUR STORAGE ACCOUNT CONNECTION>
 ```
 
 ## CI
