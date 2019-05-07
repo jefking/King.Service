@@ -3,9 +3,9 @@
     <Title>King.Service</Title>
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
-    <Version>2.3.1</Version>
-    <AssemblyVersion>2.3.1</AssemblyVersion>
-    <FileVersion>2.3.1</FileVersion>
+    <Version>2.3.2</Version>
+    <AssemblyVersion>2.3.2</AssemblyVersion>
+    <FileVersion>2.3.2</FileVersion>
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2019</Copyright>
     <TargetFrameworks>netstandard1.3;netcoreapp1.0</TargetFrameworks>
@@ -32,7 +32,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Data.Wrappers" Version="3.0.9" />
+    <PackageReference Include="Azure.Data.Wrappers" Version="3.0.10" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks.Parallel" Version="4.3.0" />
     <PackageReference Include="System.Threading.Timer" Version="4.3.0" />

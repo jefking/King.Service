@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\King.Service\King.Service.csproj" />
+    <PackageReference Include="Azure.Data.Wrappers" Version="3.0.10" />
     <PackageReference Include="System.Runtime" Version="4.3.0" />
   </ItemGroup>
 </Project>
