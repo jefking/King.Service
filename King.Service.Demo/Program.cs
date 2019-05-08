@@ -28,8 +28,6 @@
                 ShardQueueName = "shard"
             };
 
-            Trace.TraceInformation("Connection String: {0}", config.ConnectionString);
-
             // Construct runtime
             using (var manager = new RoleTaskManager<AppConfig>(new Factory(), new DataGenerationFactory(), new TaskFinderFactory<AppConfig>()))
             {

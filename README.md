@@ -21,7 +21,7 @@
 PM> Install-Package King.Service
 ```
 
-## [(Demo Container)](https://hub.docker.com/r/jefking/king.service.demo)
+## [Demo Container](https://hub.docker.com/r/jefking/king.service.demo)
 Create Azure Storage Account; Blob + Queue
 
 ### Pull
