@@ -4,6 +4,21 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    #region IStarter
+    /// <summary>
+    /// Runnable Tasks Interface
+    /// </summary>
+    public interface IStarter : IDisposable
+    {
+        #region Methods
+        /// <summary>
+        /// Runs Service
+        /// </summary>
+        void Start(IEnumerable<IRunnable> tasks);
+        #endregion
+    }
+    #endregion
+
     #region IRunnable
     /// <summary>
     /// Runnable Tasks Interface

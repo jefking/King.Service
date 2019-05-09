@@ -71,6 +71,21 @@
         }
 
         [Test]
+        public void ConstructorStarterNull()
+        {
+            var r = new Random();
+            var max = r.Next(1, 100);
+            var factories = new List<ITaskFactory<object>>(max);
+            for (var i = 0; i < max; i++)
+            {
+                factories.Add(Substitute.For<ITaskFactory<object>>());
+            }
+
+            new RoleTaskManager<object>(factories);
+            Assert.That(() => new RoleTaskManager<object>(factories, null), Throws.TypeOf<ArgumentNullException>());
+        }
+
+        [Test]
         public void IsIRoleServiceManager()
         {
             var factory = Substitute.For<ITaskFactory<object>>();
@@ -132,15 +147,19 @@
 
             tasks.Add(task);
 
+            var starter = Substitute.For<IStarter>();
+
             var factory = Substitute.For<ITaskFactory<object>>();
             factory.Tasks(Arg.Any<RoleTaskManager<object>>()).Returns(tasks);
 
-            var manager = new RoleTaskManager<object>(factory);
+            var manager = new RoleTaskManager<object>(new []{factory}, starter);
             manager.OnStart();
             manager.Run();
 
             task.Received().Start();
             factory.Received().Tasks(Arg.Any<RoleTaskManager<object>>());
+
+            starter.Received().Start(Arg.Any<IReadOnlyCollection<IRunnable>>());
         }
 
         [Test]

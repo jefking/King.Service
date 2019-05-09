@@ -23,7 +23,7 @@
         /// <summary>
         /// Task Starter
         /// </summary>
-        protected Timer starter = null;
+        protected readonly IStarter starter = null;
 
         /// <summary>
         /// Factories
@@ -57,7 +57,7 @@
         /// </summary>
         /// <param name="factory">Task Factories</param>
         public RoleTaskManager(params ITaskFactory<T>[] factories)
-            : this(factories as IEnumerable<ITaskFactory<T>>)
+            : this(factories as IEnumerable<ITaskFactory<T>>, new Starter())
         {
         }
 
@@ -66,6 +66,16 @@
         /// </summary>
         /// <param name="factory">Task Factories</param>
         public RoleTaskManager(IEnumerable<ITaskFactory<T>> factories)
+            : this(factories, new Starter())
+        {
+        }
+
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="factory">Task Factories</param>
+        /// <param name="starter">Task Starter</param>
+        public RoleTaskManager(IEnumerable<ITaskFactory<T>> factories, IStarter starter)
         {
             if (null == factories)
             {
@@ -78,6 +88,12 @@
             {
                 throw new ArgumentException("No valid factories available.");
             }
+
+            if (null == starter)
+            {
+                throw new ArgumentNullException("starter");
+            }
+            this.starter = starter;
         }
 
         /// <summary>
@@ -112,12 +128,9 @@
 
             if (null != tasks && tasks.Any())
             {
-                var taskCount = tasks.Count();
+                Trace.TraceInformation("Starting {0} tasks", tasks.Count());
 
-                Trace.TraceInformation("Starting {0} tasks", taskCount);
-
-                var toStart = new Stack<IRunnable>(tasks);
-                this.starter = new Timer(StartTaskTimer, toStart, BaseTimes.ThreadingOffset, BaseTimes.ThreadingOffset);
+                this.starter.Start(tasks);
             }
             else
             {
@@ -127,27 +140,6 @@
             Trace.TraceInformation("Run finished");
         }
 
-        protected void StartTaskTimer(object state)
-        {
-            var stack = state as Stack<IRunnable>;
-            if (null != stack && 0 < stack.Count)
-            {
-                var task = stack.Pop();
-                if (task != null)
-                {
-                    try
-                    {
-                        var success = task.Start();
-
-                        Trace.TraceInformation("{0} started: {1}.", task.GetType().ToString(), success);
-                    }
-                    catch (Exception ex)
-                    {
-                        Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
-                    }
-                }
-            }
-        }
 
         /// <summary>
         /// On Start
@@ -241,11 +233,8 @@
         {
             if (disposing)
             {
-                if (null != this.starter)
-                {
-                    this.starter.Dispose();
-                    this.starter = null;
-                }
+                this.starter.Dispose();
+
                 if (null != this.tasks)
                 {
                     Parallel.ForEach(tasks, task =>
