@@ -130,7 +130,7 @@
         protected void StartTaskTimer(object state)
         {
             var stack = state as Stack<IRunnable>;
-            if (null != stack)
+            if (null != stack && 0 < stack.Count)
             {
                 var task = stack.Pop();
                 if (task != null)
