@@ -3,9 +3,9 @@
     <Title>King.Service</Title>
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
-    <Version>2.3.4</Version>
-    <AssemblyVersion>2.3.4</AssemblyVersion>
-    <FileVersion>2.3.4</FileVersion>
+    <Version>2.3.5</Version>
+    <AssemblyVersion>2.3.5</AssemblyVersion>
+    <FileVersion>2.3.5</FileVersion>
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2019</Copyright>
     <TargetFrameworks>netstandard1.3;netcoreapp1.0</TargetFrameworks>

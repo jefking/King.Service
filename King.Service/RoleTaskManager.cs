@@ -21,9 +21,9 @@
         protected IReadOnlyCollection<IRunnable> tasks = null;
 
         /// <summary>
-        /// Tasks
+        /// Task Starter
         /// </summary>
-        protected IList<Timer> startingTimers = null;
+        protected Timer starter = null;
 
         /// <summary>
         /// Factories
@@ -116,29 +116,8 @@
 
                 Trace.TraceInformation("Starting {0} tasks", taskCount);
 
-                this.startingTimers = new List<Timer>(tasks.Count);
-                for (var i = 0; i < tasks.Count; i++)
-                {
-                    var t = new Timer((index) =>
-                        {
-                            var task = tasks.ElementAt((int)index);
-
-                            try
-                            {
-                                var success = task.Start();
-
-                                Trace.TraceInformation("{0} started: {1}.", task.GetType().ToString(), success);
-                            }
-                            catch (Exception ex)
-                            {
-                                Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
-                            }
-                        }
-                            , i, BaseTimes.ThreadingOffset * i, Timeout.Infinite
-                    );
-
-                    startingTimers.Add(t);
-                }
+                var toStart = new Stack<IRunnable>(tasks);
+                this.starter = new Timer(StartTaskTimer, toStart, BaseTimes.ThreadingOffset, BaseTimes.ThreadingOffset);
             }
             else
             {
@@ -146,6 +125,28 @@
             }
 
             Trace.TraceInformation("Run finished");
+        }
+
+        protected void StartTaskTimer(object state)
+        {
+            var stack = state as Stack<IRunnable>;
+            if (null != stack)
+            {
+                var task = stack.Pop();
+                if (task != null)
+                {
+                    try
+                    {
+                        var success = task.Start();
+
+                        Trace.TraceInformation("{0} started: {1}.", task.GetType().ToString(), success);
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -240,6 +241,11 @@
         {
             if (disposing)
             {
+                if (null != this.starter)
+                {
+                    this.starter.Dispose();
+                    this.starter = null;
+                }
                 if (null != this.tasks)
                 {
                     Parallel.ForEach(tasks, task =>
