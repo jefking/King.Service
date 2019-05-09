@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service", "King.Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "King.Service.Demo", "King.Service.Demo\King.Service.Demo.csproj", "{AEAAECAB-E24A-4CAE-911E-C3F9A247CBEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Unit.Tests", "King.Service.Unit.Tests\King.Service.Unit.Tests.csproj", "{9234F8CE-2C13-4D90-A13B-384BE50A1A54}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "King.Service.Tests", "King.Service.Tests\King.Service.Tests.csproj", "{9234F8CE-2C13-4D90-A13B-384BE50A1A54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
