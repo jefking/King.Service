@@ -5,8 +5,8 @@
     <TargetFrameworks>netcoreapp2.2</TargetFrameworks>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <IsPackable>false</IsPackable>
-    <Version>3.0.1</Version>
-    <AssemblyVersion>3.0.1</AssemblyVersion>
+    <Version>3.0.2</Version>
+    <AssemblyVersion>3.0.2</AssemblyVersion>
     <FileVersion>3.0.1</FileVersion>
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2019</Copyright>
