@@ -134,7 +134,7 @@
                                 Trace.TraceError("Failed to start {0}: {1}", task.GetType().ToString(), ex.ToString());
                             }
                         }
-                            , i, BaseTimes.ThreadingOffset * i, BaseTimes.ThreadingOffset * i
+                            , i, BaseTimes.ThreadingOffset * i, Timeout.Infinite
                     );
 
                     startingTimers.Add(t);
