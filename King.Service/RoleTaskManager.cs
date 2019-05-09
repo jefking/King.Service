@@ -116,8 +116,6 @@
 
                 Trace.TraceInformation("Starting {0} tasks", taskCount);
 
-                var successCount = ushort.MinValue;
-
                 this.startingTimers = new List<Timer>(tasks.Count);
                 for (var i = 0; i < tasks.Count; i++)
                 {
@@ -127,11 +125,9 @@
 
                             try
                             {
-                                task.Start();
+                                var success = task.Start();
 
-                                successCount++;
-
-                                Trace.TraceInformation("{0} started.", task.GetType().ToString());
+                                Trace.TraceInformation("{0} started: {1}.", task.GetType().ToString(), success);
                             }
                             catch (Exception ex)
                             {
@@ -143,8 +139,6 @@
 
                     startingTimers.Add(t);
                 }
-                
-                Trace.TraceInformation("Finished starting tasks {0}/{1} successfully.", successCount, taskCount);
             }
             else
             {
