@@ -8,7 +8,7 @@ namespace King.Service
     using System.Threading;
 
     /// <summary>
-    /// Starter
+    /// Task Starter
     /// </summary>
     public class Starter : IStarter
     {
@@ -20,6 +20,10 @@ namespace King.Service
         #endregion
 
         #region Methods
+        /// <summary>
+        /// Start
+        /// </summary>
+        /// <param name="tasks">Tasks</param>
         public void Start(IEnumerable<IRunnable> tasks)
         {
             if (null == tasks || 0 == tasks.Count())
@@ -36,6 +40,10 @@ namespace King.Service
             }
         }
 
+        /// <summary>
+        /// Start Task
+        /// </summary>
+        /// <param name="state">Remaining Stack</param>
         public void StartTask(object state)
         {
             var stack = state as Stack<IRunnable>;
