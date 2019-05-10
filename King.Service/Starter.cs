@@ -34,7 +34,7 @@ namespace King.Service
             if (null == this.starter)
             {
                 this.starter = new Timer(StartTask
-                                        , new Stack<IRunnable>(tasks)
+                                        , new Stack<IRunnable>(tasks.Reverse())
                                         , BaseTimes.ThreadingOffset
                                         , BaseTimes.ThreadingOffset);
             }
