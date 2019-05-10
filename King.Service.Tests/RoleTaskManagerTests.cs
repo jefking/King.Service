@@ -4,6 +4,7 @@
     using NUnit.Framework;
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     [TestFixture]
     public class RoleTaskManagerTests
@@ -327,6 +328,32 @@
 
             task.Received().Dispose();
             factory.Received().Tasks(Arg.Any<RoleTaskManager<object>>());
+        }
+
+        [Test]
+        public void MaintainOrder()
+        {
+            var factory = new TaskOrderFactory();
+            var manager = new RoleTaskManager<object>(factory);
+            manager.OnStart();
+
+            var tasks = manager.Tasks as ReadOnlyCollection<IRunnable>;
+            var init = tasks[0];
+            Assert.IsNotNull(init as InitializeTask);
+            var rr = tasks[1];
+            Assert.IsNotNull(rr as RecurringRunner);
+        }
+        private class TaskOrderFactory : ITaskFactory<object>
+        {
+            public IEnumerable<IRunnable> Tasks(object config)
+            {
+                yield return new InitializeTask();
+
+                var runs = Substitute.For<IRuns>();
+                runs.MinimumPeriodInSeconds.Returns(1);
+                
+                yield return new RecurringRunner(runs);
+            }
         }
     }
 }
