@@ -93,6 +93,7 @@
             {
                 throw new ArgumentNullException("starter");
             }
+            
             this.starter = starter;
         }
 
@@ -237,7 +238,7 @@
 
                 if (null != this.tasks)
                 {
-                    Parallel.ForEach(tasks, task =>
+                    foreach (var task in tasks)
                     {
                         try
                         {
@@ -247,8 +248,8 @@
                         {
                             Trace.TraceError("Error while disposing of task ({0}): {1}", task.GetType(), ex.ToString());
                         }
-                    });
-
+                    }
+                    
                     this.tasks = null;
                 }
             }
