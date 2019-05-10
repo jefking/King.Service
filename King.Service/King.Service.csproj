@@ -3,9 +3,9 @@
     <Title>King.Service</Title>
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
-    <Version>2.3.6</Version>
-    <AssemblyVersion>2.3.6</AssemblyVersion>
-    <FileVersion>2.3.6</FileVersion>
+    <Version>2.3.7</Version>
+    <AssemblyVersion>2.3.7</AssemblyVersion>
+    <FileVersion>2.3.7</FileVersion>
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2019</Copyright>
     <TargetFrameworks>netstandard1.3;netcoreapp1.0</TargetFrameworks>
@@ -15,6 +15,8 @@
     <PackageReleaseNotes>Supported versions</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
+    <license>https://raw.githubusercontent.com/jefking/King.Service/master/LICENSE</license>
     <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
     <GenerateAssemblyDescriptionAttribute>false</GenerateAssemblyDescriptionAttribute>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
@@ -26,9 +28,7 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <ApplicationIcon>icon.ico</ApplicationIcon>
-    <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <license>https://raw.githubusercontent.com/jefking/King.Service/master/LICENSE</license>
   </PropertyGroup>
 
   <ItemGroup>
