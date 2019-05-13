@@ -11,7 +11,7 @@
     /// - Throughput
     /// Default = Low
     /// </remarks>
-    public enum QueuePriority
+    public enum QueuePriority : byte
     {
         Low = 0,
         Medium = 1,
