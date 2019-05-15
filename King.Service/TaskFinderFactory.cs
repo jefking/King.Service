@@ -40,7 +40,7 @@
                     foreach (var everyAttr in method.GetCustomAttributes(typeof(InitializeAttribute), false))
                     {
                         Trace.TraceInformation("Initialization task found: {0}.{1}", type.FullName, method.Name);
-                        
+
                         runnables.Add(new InitializeRunner(Activator.CreateInstance(type.AsType()), method));
                     }
 
