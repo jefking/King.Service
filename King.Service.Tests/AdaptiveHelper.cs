@@ -1,4 +1,4 @@
-﻿namespace King.Service.Tests
+﻿namespace King.Service.Tests.Unit
 {
 
     public class AdaptiveHelper : AdaptiveTask

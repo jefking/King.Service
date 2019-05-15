@@ -1,4 +1,4 @@
-﻿namespace King.Service.Tests.Data.Model
+﻿namespace King.Service.Tests.Unit.Data.Model
 {
     using Azure.Model;
     using King.Service.Data.Model;

@@ -1,4 +1,4 @@
-﻿namespace King.Service.Unit.Tests
+﻿namespace King.Service.Tests.Unit
 {
     using global::Azure.Data.Wrappers;
     using King.Service;

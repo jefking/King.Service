@@ -1,4 +1,4 @@
-﻿namespace King.Service.Tests.Timing
+﻿namespace King.Service.Tests.Unit.Timing
 {
     using King.Service;
     using King.Service.Timing;

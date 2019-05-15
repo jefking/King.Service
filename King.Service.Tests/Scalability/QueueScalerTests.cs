@@ -1,4 +1,4 @@
-﻿namespace King.Service.Tests.Scalability
+﻿namespace King.Service.Tests.Unit.Scalability
 {
     using global::Azure.Data.Wrappers;
     using King.Service.Scalability;

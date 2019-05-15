@@ -1,4 +1,4 @@
-﻿namespace King.Service.Tests
+﻿namespace King.Service.Tests.Unit
 {
     using King.Service;
     using King.Service.Scalability;

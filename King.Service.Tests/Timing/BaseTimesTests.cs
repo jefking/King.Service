@@ -1,4 +1,4 @@
-﻿namespace King.Azure.BackgroundWorker.Tests.Timing
+﻿namespace King.Service.Tests.Unit.Timing
 {
     using King.Service.Timing;
     using NUnit.Framework;

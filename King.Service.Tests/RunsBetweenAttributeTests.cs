@@ -1,4 +1,4 @@
-﻿namespace King.Service.Unit.Tests
+﻿namespace King.Service.Tests.Unit
 {
     using NUnit.Framework;
     using System;
@@ -51,8 +51,8 @@
         [Test]
         public void Strategy()
         {
-            var attr = new RunsBetweenAttribute(1, 2, Timing.Strategy.Linear);
-            Assert.AreEqual(Timing.Strategy.Linear, attr.Strategy);
+            var attr = new RunsBetweenAttribute(1, 2, King.Service.Timing.Strategy.Linear);
+            Assert.AreEqual(King.Service.Timing.Strategy.Linear, attr.Strategy);
         }
     }
 }
