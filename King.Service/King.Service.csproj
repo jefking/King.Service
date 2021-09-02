@@ -3,12 +3,12 @@
     <Title>King.Service</Title>
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
-    <Version>2.3.7</Version>
-    <AssemblyVersion>2.3.7</AssemblyVersion>
-    <FileVersion>2.3.7</FileVersion>
+    <Version>2.4.0</Version>
+    <AssemblyVersion>2.4.0</AssemblyVersion>
+    <FileVersion>2.4.0</FileVersion>
     <Authors>Jef King</Authors>
-    <Copyright>© Jef King 2019</Copyright>
-    <TargetFrameworks>netstandard1.3;netcoreapp1.0</TargetFrameworks>
+    <Copyright>© Jef King 2021</Copyright>
+    <TargetFrameworks>netcoreapp5.0</TargetFrameworks>
     <AssemblyName>King.Service</AssemblyName>
     <PackageId>King.Service</PackageId>
     <PackageTags>King.Service;Azure;Queue;Service;Bus;WebJob;scale;scaling;linear;exponential;timing;auto-scale;dynamic-scale;dynamic;Queuing;Background;Worker;Work;Data;Processing;Table;Environment;Initialize;Task;Tasks;Dequeue;Dequeuing;King.Azure;run;task;service;services;tasks;scheduling;worker-role</PackageTags>

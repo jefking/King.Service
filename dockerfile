@@ -14,7 +14,7 @@ FROM mcr.microsoft.com/dotnet/runtime
 WORKDIR /app
 
 # Copy Demo
-COPY --from=build-env /app/Demo/bin/release/netcoreapp2.2/publish/. .
+COPY --from=build-env /app/Demo/bin/release/netcoreapp5.0/publish/. .
 
 # Temp Entry
 ENTRYPOINT [ "dotnet",  "King.Service.Demo.dll"]
