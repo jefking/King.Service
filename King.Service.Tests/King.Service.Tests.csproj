@@ -5,11 +5,11 @@
     <TargetFrameworks>netcoreapp5.0</TargetFrameworks>
     <ApplicationIcon>icon.ico</ApplicationIcon>
     <IsPackable>false</IsPackable>
-    <Version>3.0.2</Version>
-    <AssemblyVersion>3.0.2</AssemblyVersion>
-    <FileVersion>3.0.2</FileVersion>
+    <Version>3.1.0</Version>
+    <AssemblyVersion>3.1.0</AssemblyVersion>
+    <FileVersion>3.1.0</FileVersion>
     <Authors>Jef King</Authors>
-    <Copyright>© Jef King 2019</Copyright>
+    <Copyright>© Jef King 2021</Copyright>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
