@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.2-sdk AS build-env
+FROM mcr.microsoft.com/dotnet/sdk AS build-env
 
 WORKDIR /app
 
@@ -10,7 +10,7 @@ COPY ./King.Service.Demo ./Demo
 RUN dotnet publish Demo/King.Service.Demo.csproj -c release
 
 # Create Output Container Image
-FROM microsoft/dotnet:runtime
+FROM mcr.microsoft.com/dotnet/runtime
 WORKDIR /app
 
 # Copy Demo
