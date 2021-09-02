@@ -1,5 +1,4 @@
 FROM mcr.microsoft.com/dotnet/sdk AS build-env
-
 WORKDIR /app
 
 # Copy and build
