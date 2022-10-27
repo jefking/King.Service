@@ -9,7 +9,7 @@
     <AssemblyVersion>3.1.0</AssemblyVersion>
     <FileVersion>3.1.0</FileVersion>
     <Authors>Jef King</Authors>
-    <Copyright>© Jef King 2021</Copyright>
+    <Copyright>© Jef King 2022</Copyright>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
     <RepositoryType>git</RepositoryType>
