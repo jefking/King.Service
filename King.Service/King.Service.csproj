@@ -7,7 +7,7 @@
     <AssemblyVersion>2.4.0</AssemblyVersion>
     <FileVersion>2.4.0</FileVersion>
     <Authors>Jef King</Authors>
-    <Copyright>© Jef King 2021</Copyright>
+    <Copyright>© Jef King 2022</Copyright>
     <TargetFrameworks>netcoreapp5.0</TargetFrameworks>
     <AssemblyName>King.Service</AssemblyName>
     <PackageId>King.Service</PackageId>
