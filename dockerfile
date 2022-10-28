@@ -3,8 +3,8 @@ WORKDIR /app
 
 # Copy and build
 COPY ./King.Service ./King.Service
-COPY ./King.Service.Azure ./King.Service.Azure
 COPY ./King.Service.Tests ./King.Service.Tests
+COPY ./King.Service.Azure ./King.Service.Azure
 COPY ./King.Service.Azure.Tests ./King.Service.Azure.Tests
 COPY ./King.Service.Demo ./Demo
 

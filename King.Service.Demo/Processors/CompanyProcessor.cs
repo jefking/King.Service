@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Demo.Processors
 {
+    using global::Azure.Data.Wrappers;
     using King.Service.Demo.Models;
     using System.Diagnostics;
     using System.Threading.Tasks;

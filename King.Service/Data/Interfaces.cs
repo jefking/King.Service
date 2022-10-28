@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Data
 {
+    using global::Azure.Data.Wrappers;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;

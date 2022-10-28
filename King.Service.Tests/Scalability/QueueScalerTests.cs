@@ -1,5 +1,6 @@
 ﻿namespace King.Service.Tests.Unit.Scalability
 {
+    using global::Azure.Data.Wrappers;
     using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;

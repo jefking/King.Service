@@ -1,6 +1,7 @@
 ﻿namespace King.Service.Tests.Unit.Data
 {
-    using Model;
+    using global::Azure.Data.Wrappers;
+    using King.Service.Azure.Model;
     using King.Service.Data;
     using King.Service.Data.Model;
     using NSubstitute;
