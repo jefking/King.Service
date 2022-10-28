@@ -33,7 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Data.Wrappers" Version="3.0.10" />
-    <ProjectReference Include="..\King.Service.Azure\King.Service.Azure.csproj" />
+    <ProjectReference Include="..\King.Service\King.Service.csproj" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks.Parallel" Version="4.3.0" />
     <PackageReference Include="System.Threading.Timer" Version="4.3.0" />
