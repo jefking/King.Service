@@ -1,7 +1,6 @@
 ﻿namespace King.Service.Data
 {
     using Azure;
-    using global::Azure.Data.Wrappers;
     using King.Service.Data.Model;
     using King.Service.Scalability;
     using System;

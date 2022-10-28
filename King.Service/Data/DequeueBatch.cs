@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Data
 {
-    using global::Azure.Data.Wrappers;
     using King.Service.Timing;
     using System.Collections.Generic;
     using System.Diagnostics;
