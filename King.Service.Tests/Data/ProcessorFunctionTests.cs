@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using NUnit.Framework;
 

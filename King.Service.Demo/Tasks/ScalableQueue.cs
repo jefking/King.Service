@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Demo.Tasks
 {
-    using global::Azure.Data.Wrappers;
     using King.Service;
     using King.Service.Data;
     using System.Collections.Generic;

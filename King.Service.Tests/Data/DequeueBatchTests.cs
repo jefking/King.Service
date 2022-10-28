@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using NSubstitute;
     using NUnit.Framework;

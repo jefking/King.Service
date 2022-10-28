@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Demo.Factories
 {
-    using global::Azure.Data.Wrappers;
     using King.Service;
     using King.Service.Data;
     using King.Service.Demo.Models;

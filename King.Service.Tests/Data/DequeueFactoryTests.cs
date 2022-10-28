@@ -1,7 +1,6 @@
 ﻿namespace King.Service.Tests.Unit.Data
 {
     using Azure;
-    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using King.Service.Scalability;
     using NSubstitute;

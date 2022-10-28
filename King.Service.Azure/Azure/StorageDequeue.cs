@@ -1,7 +1,6 @@
 ﻿namespace King.Service.Azure
 {
     using Data;
-    using global::Azure.Data.Wrappers;
     using King.Service.Timing;
 
     /// <summary>

@@ -1,6 +1,5 @@
 ﻿namespace King.Service
 {
-    using global::Azure.Data.Wrappers;
     using System;
     using System.Diagnostics;
     using System.Threading.Tasks;

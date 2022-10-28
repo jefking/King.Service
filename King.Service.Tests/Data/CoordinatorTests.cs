@@ -1,7 +1,6 @@
 ﻿namespace King.Service.Tests.Unit.Data
 {
     using Azure.Model;
-    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using King.Service.Data.Model;
     using NSubstitute;
@@ -10,6 +9,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    
     [TestFixture]
     public class CoordinatorTests
     {

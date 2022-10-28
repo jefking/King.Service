@@ -157,4 +157,121 @@
         #endregion
     }
     #endregion
+
+    #region IQueued
+    /// <summary>
+    /// IQueued
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IQueued<T>
+    {
+        #region Methods
+        /// <summary>
+        /// Delete Message
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Complete();
+
+        /// <summary>
+        /// Abandon Message
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Abandon();
+
+        /// <summary>
+        /// Data
+        /// </summary>
+        /// <returns>Data</returns>
+        Task<T> Data();
+        #endregion
+    }
+    #endregion
+
+    #region IProcessor
+    /// <summary>
+    /// IProcessor
+    /// </summary>
+    public interface IProcessor<T>
+    {
+        #region Methods
+        /// <summary>
+        /// Process Data
+        /// </summary>
+        /// <param name="data">Data to Process</param>
+        /// <returns>Successful</returns>
+        Task<bool> Process(T data);
+        #endregion
+    }
+    #endregion
+
+    #region IPoller
+    /// <summary>
+    /// Store Poller Interface
+    /// </summary>
+    /// <typeparam name="T">Dequeue Type</typeparam>
+    public interface IPoller<T>
+    {
+        #region Methods
+        /// <summary>
+        /// Poll for Queued Message
+        /// </summary>
+        /// <returns>Queued Item</returns>
+        Task<IQueued<T>> Poll();
+
+        /// <summary>
+        /// Poll for Queued Message
+        /// </summary>
+        /// <returns>Queued Item</returns>
+        Task<IEnumerable<IQueued<T>>> PollMany(int messageCount = 5);
+        #endregion
+    }
+    #endregion
+
+    #region IAzureStorage
+    /// <summary>
+    /// Azure Storage
+    /// </summary>
+    public interface IAzureStorage
+    {
+        #region Properties
+        /// <summary>
+        /// Name
+        /// </summary>
+        string Name
+        {
+            get;
+        }
+        #endregion
+
+        #region Methods
+        /// <summary>
+        /// Create If Not Exists
+        /// </summary>
+        /// <returns></returns>
+        Task<bool> CreateIfNotExists();
+
+        /// <summary>
+        /// Delete Item
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Delete();
+        #endregion
+    }
+    #endregion
+
+    #region IQueueCount
+    /// <summary>
+    /// Queue Count
+    /// </summary>
+    public interface IQueueCount
+    {
+        #region Methods
+        /// <summary>
+        /// Approixmate Message Count
+        /// </summary>
+        /// <returns>Message Count</returns>
+        Task<long?> ApproixmateMessageCount();
+        #endregion
+    }
+    #endregion
 }
