@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 WORKDIR /app
 
 # Copy and build
@@ -16,11 +16,11 @@ RUN dotnet test King.Service.Azure.Tests/King.Service.Azure.Tests.csproj
 RUN dotnet publish Demo/King.Service.Demo.csproj -c release
 
 # Create Output Container Image
-FROM mcr.microsoft.com/dotnet/runtime
+FROM mcr.microsoft.com/dotnet/runtime:6.0
 WORKDIR /app
 
 # Copy Demo
-COPY --from=build-env /app/Demo/bin/release/netcoreapp5.0/publish/. .
+COPY --from=build-env /app/Demo/bin/release/net6.0/publish/. .
 
 # Temp Entry
 ENTRYPOINT [ "dotnet",  "King.Service.Demo.dll"]
