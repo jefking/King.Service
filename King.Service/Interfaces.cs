@@ -157,33 +157,4 @@
         #endregion
     }
     #endregion
-
-    #region IQueued
-    /// <summary>
-    /// IQueued
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public interface IQueued<T>
-    {
-        #region Methods
-        /// <summary>
-        /// Delete Message
-        /// </summary>
-        /// <returns>Task</returns>
-        Task Complete();
-
-        /// <summary>
-        /// Abandon Message
-        /// </summary>
-        /// <returns>Task</returns>
-        Task Abandon();
-
-        /// <summary>
-        /// Data
-        /// </summary>
-        /// <returns>Data</returns>
-        Task<T> Data();
-        #endregion
-    }
-    #endregion
 }
