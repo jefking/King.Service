@@ -1,14 +1,14 @@
 ﻿namespace King.Service.Tests.Unit.Data
 {
+    using global::Azure.Data.Wrappers;
+    using King.Service.Azure;
     using System;
     using System.Linq;
-    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using King.Service.Data.Model;
     using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;
-    using Azure;
 
     [TestFixture]
     public class StorageQueueAutoScalerTests

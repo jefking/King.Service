@@ -1,8 +1,8 @@
 ﻿namespace King.Service.Tests.Unit
 {
+    using global::Azure.Data.Wrappers;
     using System;
     using System.Threading.Tasks;
-    using global::Azure.Data.Wrappers;
     using King.Service.Data;
     using King.Service.Timing;
     using NSubstitute;

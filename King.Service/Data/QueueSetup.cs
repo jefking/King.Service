@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Data
 {
-    using System;
     using global::Azure.Data.Wrappers;
+    using System;
 
     /// <summary>
     /// Queue Setup

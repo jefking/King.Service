@@ -2,6 +2,7 @@
 {
     using global::Azure.Data.Wrappers;
     using King.Service;
+    using King.Service.Azure;
     using King.Service.Data;
     using King.Service.Demo.Models;
     using King.Service.Demo.Processors;

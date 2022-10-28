@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <Title>King.Service</Title>
+    <Title>King.Service.Azure</Title>
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
-    <Version>3.0.0</Version>
-    <AssemblyVersion>3.0.0</AssemblyVersion>
-    <FileVersion>3.0.0</FileVersion>
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2022</Copyright>
     <TargetFrameworks>net6.0</TargetFrameworks>
-    <AssemblyName>King.Service</AssemblyName>
-    <PackageId>King.Service</PackageId>
-    <PackageTags>King.Service;Azure;Queue;Service;Bus;WebJob;scale;scaling;linear;exponential;timing;auto-scale;dynamic-scale;dynamic;Queuing;Background;Worker;Work;Data;Processing;Table;Environment;Initialize;Task;Tasks;Dequeue;Dequeuing;King.Azure;run;task;service;services;tasks;scheduling;worker-role</PackageTags>
+    <AssemblyName>King.Service.Azure</AssemblyName>
+    <PackageId>King.Service.Azure</PackageId>
+    <PackageTags>King.Service;King.Service.Azure;Azure;Queue;Service;Bus;WebJob;scale;scaling;linear;exponential;timing;auto-scale;dynamic-scale;dynamic;Queuing;Background;Worker;Work;Data;Processing;Table;Environment;Initialize;Task;Tasks;Dequeue;Dequeuing;King.Azure;run;task;service;services;tasks;scheduling;worker-role</PackageTags>
     <PackageReleaseNotes>Supported versions</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
@@ -33,6 +33,7 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Data.Wrappers" Version="3.0.10" />
+    <ProjectReference Include="..\King.Service\King.Service.csproj" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks.Parallel" Version="4.3.0" />
     <PackageReference Include="System.Threading.Timer" Version="4.3.0" />

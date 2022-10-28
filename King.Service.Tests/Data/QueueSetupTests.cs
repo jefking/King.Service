@@ -1,7 +1,7 @@
 ﻿namespace King.Service.Tests.Unit.Data
 {
-    using System;
     using global::Azure.Data.Wrappers;
+    using System;
     using King.Service.Data;
     using NUnit.Framework;
 
