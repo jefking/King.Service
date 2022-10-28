@@ -24,6 +24,8 @@ jobs:
       run: dotnet restore King.Service/King.Service.csproj
     - name: Restore King.Service.Azure dependencies
       run: dotnet restore King.Service.Azure/King.Service.Azure.csproj
+    - name: Restore Demo dependencies
+      run: dotnet restore King.Service.Demo/King.Service.Demo.csproj
     - name: Build King.Service
       run: dotnet build --no-restore King.Service/King.Service.csproj
     - name: Build King.Service.Azure
