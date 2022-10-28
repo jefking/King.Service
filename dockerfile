@@ -3,6 +3,7 @@ WORKDIR /app
 
 # Copy and build
 COPY ./King.Service ./King.Service
+COPY ./King.Service.Azure ./King.Service.Azure
 COPY ./King.Service.Demo ./Demo
 
 # Public Project
