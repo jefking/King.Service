@@ -35,7 +35,7 @@ docker run -it jefking/king.service.demo <YOUR STORAGE ACCOUNT CONNECTION>
 ```
 
 ## CI
-[![Build status](https://github.com/jefking/King.Service/actions)
+[![Build status](https://github.com/jefking/King.Service/actions)]
 
 ## [Docs](https://github.com/jefking/King.Service/wiki)
 View the wiki to learn how to use this.
