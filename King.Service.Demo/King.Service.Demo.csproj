@@ -11,7 +11,7 @@
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2022</Copyright>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
-    <PackageIconUrl>icon.png</PackageIconUrl>
+    <PackageIconUrl>icon.ico</PackageIconUrl>
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>

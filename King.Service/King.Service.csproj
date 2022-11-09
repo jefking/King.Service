@@ -13,7 +13,7 @@
     <PackageId>King.Service</PackageId>
     <PackageTags>King.Service;Azure;Queue;Service;Bus;WebJob;scale;scaling;linear;exponential;timing;auto-scale;dynamic-scale;dynamic;Queuing;Background;Worker;Work;Data;Processing;Table;Environment;Initialize;Task;Tasks;Dequeue;Dequeuing;King.Azure;run;task;service;services;tasks;scheduling;worker-role</PackageTags>
     <PackageReleaseNotes>Removing Azure dependancies from base King.Service</PackageReleaseNotes>
-    <PackageIconUrl>icon.png</PackageIconUrl>
+    <PackageIconUrl>icon.ico</PackageIconUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/jefking/King.Service</PackageProjectUrl>
     <RepositoryUrl>https://github.com/jefking/King.Service</RepositoryUrl>
