@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <Title>King.Service</Title>
+    <Title>King.Service.Azure</Title>
     <Description>Task scheduling for .NET</Description>
-    <AssemblyTitle>King.Service</AssemblyTitle>
+    <AssemblyTitle>King.Service.Azure</AssemblyTitle>
     <Version>3.0.0</Version>
     <AssemblyVersion>3.0.0</AssemblyVersion>
     <FileVersion>3.0.0</FileVersion>
