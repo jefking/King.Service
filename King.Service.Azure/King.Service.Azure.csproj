@@ -10,7 +10,7 @@
     <Copyright>© Jef King 2022</Copyright>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <AssemblyName>King.Service.Azure</AssemblyName>
-    <PackageId>King.Service</PackageId>
+    <PackageId>King.Service.Azure</PackageId>
     <PackageTags>King.Service;King.Service.Azure;Azure;Queue;Service;Bus;WebJob;scale;scaling;linear;exponential;timing;auto-scale;dynamic-scale;dynamic;Queuing;Background;Worker;Work;Data;Processing;Table;Environment;Initialize;Task;Tasks;Dequeue;Dequeuing;King.Azure;run;task;service;services;tasks;scheduling;worker-role</PackageTags>
     <PackageReleaseNotes>Supported versions</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
