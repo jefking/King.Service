@@ -1,16 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
-    <Title>King.Service.Azure</Title>
+    <Title>King.Service</Title>
     <Description>Task scheduling for .NET</Description>
     <AssemblyTitle>King.Service</AssemblyTitle>
-    <Version>1.0.0</Version>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
+    <Version>3.0.0</Version>
+    <AssemblyVersion>3.0.0</AssemblyVersion>
+    <FileVersion>3.0.0</FileVersion>
     <Authors>Jef King</Authors>
     <Copyright>© Jef King 2022</Copyright>
     <TargetFrameworks>net6.0</TargetFrameworks>
     <AssemblyName>King.Service.Azure</AssemblyName>
-    <PackageId>King.Service.Azure</PackageId>
+    <PackageId>King.Service</PackageId>
     <PackageTags>King.Service;King.Service.Azure;Azure;Queue;Service;Bus;WebJob;scale;scaling;linear;exponential;timing;auto-scale;dynamic-scale;dynamic;Queuing;Background;Worker;Work;Data;Processing;Table;Environment;Initialize;Task;Tasks;Dequeue;Dequeuing;King.Azure;run;task;service;services;tasks;scheduling;worker-role</PackageTags>
     <PackageReleaseNotes>Supported versions</PackageReleaseNotes>
     <PackageIconUrl>https://raw.githubusercontent.com/jefking/King.Service/master/icon.png</PackageIconUrl>
