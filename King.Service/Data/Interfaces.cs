@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Data
 {
-    using global::Azure.Data.Wrappers;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -179,6 +178,58 @@
         /// <returns></returns>
         IEnumerable<IRunnable> Dequeue<T, Y>(string name, QueuePriority priority = QueuePriority.Low)
             where T : IProcessor<Y>, new();
+        #endregion
+    }
+    #endregion
+
+    #region IQueued
+    /// <summary>
+    /// IQueued
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IQueued<T>
+    {
+        #region Methods
+        /// <summary>
+        /// Delete Message
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Complete();
+
+        /// <summary>
+        /// Abandon Message
+        /// </summary>
+        /// <returns>Task</returns>
+        Task Abandon();
+
+        /// <summary>
+        /// Data
+        /// </summary>
+        /// <returns>Data</returns>
+        Task<T> Data();
+        #endregion
+    }
+    #endregion
+
+    #region IPoller
+    /// <summary>
+    /// Store Poller Interface
+    /// </summary>
+    /// <typeparam name="T">Dequeue Type</typeparam>
+    public interface IPoller<T>
+    {
+        #region Methods
+        /// <summary>
+        /// Poll for Queued Message
+        /// </summary>
+        /// <returns>Queued Item</returns>
+        Task<IQueued<T>> Poll();
+
+        /// <summary>
+        /// Poll for Queued Message
+        /// </summary>
+        /// <returns>Queued Item</returns>
+        Task<IEnumerable<IQueued<T>>> PollMany(int messageCount = 5);
         #endregion
     }
     #endregion

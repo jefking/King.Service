@@ -2,6 +2,24 @@
 {
     using King.Service.Data;
     using System;
+    using System.Threading.Tasks;
+
+
+    #region IQueueCount
+    /// <summary>
+    /// Queue Count
+    /// </summary>
+    public interface IQueueCount
+    {
+        #region Methods
+        /// <summary>
+        /// Approixmate Message Count
+        /// </summary>
+        /// <returns>Message Count</returns>
+        Task<long?> ApproixmateMessageCount();
+        #endregion
+    }
+    #endregion
 
     #region IScaler
     /// <summary>

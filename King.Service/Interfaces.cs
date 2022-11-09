@@ -157,4 +157,21 @@
         #endregion
     }
     #endregion
+
+    #region IProcessor
+    /// <summary>
+    /// IProcessor
+    /// </summary>
+    public interface IProcessor<T>
+    {
+        #region Methods
+        /// <summary>
+        /// Process Data
+        /// </summary>
+        /// <param name="data">Data to Process</param>
+        /// <returns>Successful</returns>
+        Task<bool> Process(T data);
+        #endregion
+    }
+    #endregion
 }

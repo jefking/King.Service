@@ -36,7 +36,6 @@
     <None Include="../README.md" Pack="true" PackagePath="" />
     <None Include="../icon.png" Pack="true" PackagePath="" />
     <None Include="../LICENSE" Pack="true" PackagePath="" />
-    <PackageReference Include="Azure.Data.Wrappers" Version="3.0.10" />
     <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3.0" />
     <PackageReference Include="System.Threading.Tasks.Parallel" Version="4.3.0" />
     <PackageReference Include="System.Threading.Timer" Version="4.3.0" />

@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Scalability
 {
-    using global::Azure.Data.Wrappers;
     using System;
     using System.Diagnostics;
 

@@ -1,6 +1,5 @@
 ﻿namespace King.Service.Tests.Unit.Data
 {
-    using global::Azure.Data.Wrappers;
     using System;
     using System.Collections.Generic;
     using King.Service.Data;
