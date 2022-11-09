@@ -20,6 +20,3 @@ PM> Install-Package King.Service
 
 ## [Docs](https://github.com/jefking/King.Service/wiki)
 View the wiki to learn how to use this.
-
-## Nuget Push
-dotnet nuget push ./King.Service/bin/release/King.Service.<version>.nupkg --api-key <Key>  --source https://api.nuget.org/v3/index.json
