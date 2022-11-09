@@ -19,4 +19,4 @@ PM> Install-Package King.Service
 ```
 
 ## [Docs](https://github.com/jefking/King.Service/wiki)
-View the wiki to learn how to use this.
+View the [wiki](https://github.com/jefking/King.Service/wiki) to learn how to use this.
