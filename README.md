@@ -1,4 +1,4 @@
-# Task scheduling for .NET
+# Task scheduling for .NET core
 [![.NET](https://github.com/jefking/King.Service/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jefking/King.Service/actions/workflows/dotnet.yml)
 1. Auto-Scale microservices within your compute
 2. Tasks to initialize your resources
