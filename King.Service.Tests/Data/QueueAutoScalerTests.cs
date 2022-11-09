@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using King.Service.Data;
+    using King.Service.Scalability;
     using NSubstitute;
     using NUnit.Framework;
 
