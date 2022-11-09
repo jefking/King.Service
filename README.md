@@ -1,4 +1,5 @@
 # Task scheduling for .NET
+[![.NET](https://github.com/jefking/King.Service/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jefking/King.Service/actions/workflows/dotnet.yml)
 1. Auto-Scale microservices within your compute
 2. Tasks to initialize your resources
  + Create Azure Storage: Queues, Tables and Containers
@@ -33,9 +34,6 @@ docker pull jefking/king.service.demo
 ```
 docker run -it jefking/king.service.demo <YOUR STORAGE ACCOUNT CONNECTION>
 ```
-
-## CI
-[![.NET](https://github.com/jefking/King.Service/actions/workflows/dotnet.yml/badge.svg)](https://github.com/jefking/King.Service/actions/workflows/dotnet.yml)
 
 ## [Docs](https://github.com/jefking/King.Service/wiki)
 View the wiki to learn how to use this.
